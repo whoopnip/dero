@@ -1,0 +1,453 @@
+
+from context import dero
+
+import pandas as pd
+from pandas.util.testing import assert_frame_equal
+from pandas import Timestamp
+from numpy import nan
+
+class DataFrameTest:
+    
+    df = pd.DataFrame([
+                                (10516, 'a', '1/1/2000', 1.01),
+                                (10516, 'a', '1/2/2000', 1.02),
+                                (10516, 'a', '1/3/2000', 1.03),
+                                (10516, 'a', '1/4/2000', 1.04),
+                                (10516, 'b', '1/1/2000', 1.05),
+                                (10516, 'b', '1/2/2000', 1.06),
+                                (10516, 'b', '1/3/2000', 1.07),
+                                (10516, 'b', '1/4/2000', 1.08),
+                                (10517, 'a', '1/1/2000', 1.09),
+                                (10517, 'a', '1/2/2000', 1.10),
+                                (10517, 'a', '1/3/2000', 1.11),
+                                (10517, 'a', '1/4/2000', 1.12),
+                               ], columns = ['PERMNO','byvar','Date', 'RET'])   
+    
+    df_duplicate_row = pd.DataFrame([
+                                (10516, 'a', '1/1/2000', 1.01),
+                                (10516, 'a', '1/2/2000', 1.02),
+                                (10516, 'a', '1/3/2000', 1.03),
+                                (10516, 'a', '1/3/2000', 1.03), #this is a duplicated row
+                                (10516, 'a', '1/4/2000', 1.04),
+                                (10516, 'b', '1/1/2000', 1.05),
+                                (10516, 'b', '1/2/2000', 1.06),
+                                (10516, 'b', '1/3/2000', 1.07),
+                                (10516, 'b', '1/4/2000', 1.08),
+                                (10517, 'a', '1/1/2000', 1.09),
+                                (10517, 'a', '1/2/2000', 1.10),
+                                (10517, 'a', '1/3/2000', 1.11),
+                                (10517, 'a', '1/4/2000', 1.12),
+                               ], columns = ['PERMNO','byvar','Date', 'RET'])  
+    
+    df_weight = pd.DataFrame(data = [
+                                (10516, 'a', '1/1/2000', 1.01, 0),
+                                (10516, 'a', '1/2/2000', 1.02, 1),
+                                (10516, 'a', '1/3/2000', 1.03, 1),
+                                (10516, 'a', '1/4/2000', 1.04, 0),
+                                (10516, 'b', '1/1/2000', 1.05, 1),
+                                (10516, 'b', '1/2/2000', 1.06, 1),
+                                (10516, 'b', '1/3/2000', 1.07, 1),
+                                (10516, 'b', '1/4/2000', 1.08, 1),
+                                (10517, 'a', '1/1/2000', 1.09, 0),
+                                (10517, 'a', '1/2/2000', 1.1, 0),
+                                (10517, 'a', '1/3/2000', 1.11, 0),
+                                (10517, 'a', '1/4/2000', 1.12, 1),
+                                ], columns = ['PERMNO', 'byvar', 'Date', 'RET', 'weight'])
+    
+    df_datetime = df.copy()
+    df_datetime['Date'] = pd.to_datetime(df_datetime['Date'])
+    
+    df_datetime_no_ret = df_datetime.copy()
+    df_datetime_no_ret.drop('RET', axis=1, inplace=True)
+
+class TestCumulate(DataFrameTest):
+    
+    
+    expect_between_1_3 = pd.DataFrame([
+                                (10516, 'a', '1/1/2000', 1.01, 1.01),
+                                (10516, 'a', '1/2/2000', 1.02, 1.02),
+                                (10516, 'a', '1/3/2000', 1.03, 1.03),
+                                (10516, 'a', '1/4/2000', 1.04, 1.0712),
+                                (10516, 'b', '1/1/2000', 1.05, 1.05),
+                                (10516, 'b', '1/2/2000', 1.06, 1.06),
+                                (10516, 'b', '1/3/2000', 1.07, 1.07),
+                                (10516, 'b', '1/4/2000', 1.08, 1.1556),
+                                (10517, 'a', '1/1/2000', 1.09, 1.09),
+                                (10517, 'a', '1/2/2000', 1.10, 1.10),
+                                (10517, 'a', '1/3/2000', 1.11, 1.11),
+                                (10517, 'a', '1/4/2000', 1.12, 1.2432),
+                                ], columns = ['PERMNO','byvar','Date', 'RET', 'cum_RET'])
+    
+    expect_first = pd.DataFrame([
+                                (10516, 'a', '1/1/2000', 1.01, 1.01),
+                                (10516, 'a', '1/2/2000', 1.02, 1.02),
+                                (10516, 'a', '1/3/2000', 1.03, 1.0506),
+                                (10516, 'a', '1/4/2000', 1.04, 1.092624),
+                                (10516, 'b', '1/1/2000', 1.05, 1.05),
+                                (10516, 'b', '1/2/2000', 1.06, 1.06),
+                                (10516, 'b', '1/3/2000', 1.07, 1.1342),
+                                (10516, 'b', '1/4/2000', 1.08, 1.224936),
+                                (10517, 'a', '1/1/2000', 1.09, 1.09),
+                                (10517, 'a', '1/2/2000', 1.10, 1.10),
+                                (10517, 'a', '1/3/2000', 1.11, 1.221),
+                                (10517, 'a', '1/4/2000', 1.12, 1.36752),
+                                ], columns = ['PERMNO','byvar','Date', 'RET', 'cum_RET'])
+        
+    def test_method_between(self):
+        cum_df = dero.pandas.cumulate(self.df, 'RET', 'between', periodvar='Date', 
+                                      byvars=['PERMNO','byvar'], time=[1,3])
+        
+        assert_frame_equal(self.expect_between_1_3, cum_df, check_dtype=False)
+        
+    def test_method_first(self):
+        cum_df = dero.pandas.cumulate(self.df, 'RET', 'first', periodvar='Date', 
+                                      byvars=['PERMNO','byvar'])
+        
+        assert_frame_equal(self.expect_first, cum_df, check_dtype=False)
+        
+    def test_grossify(self):
+        df = self.df.copy() #don't overwrite original
+        df['RET'] -= 1 #ungrossify
+        expect_first_grossify = self.expect_first.copy()
+        expect_first_grossify['cum_RET'] -= 1
+        expect_first_grossify['RET'] -= 1
+        cum_df = dero.pandas.cumulate(df, 'RET', 'first', periodvar='Date', 
+                                      byvars=['PERMNO','byvar'], grossify=True)
+    
+        assert_frame_equal(expect_first_grossify, cum_df, check_dtype=False)
+
+class TestGroupbyMerge(DataFrameTest):
+
+    
+    def test_subset(self):
+        byvars = ['PERMNO','byvar']
+        out = dero.pandas.groupby_merge(self.df, byvars, 'max', subset='RET')
+        expect_df = pd.DataFrame(
+                                [(10516, 'a', '1/1/2000', 1.01, 1.04),
+                                 (10516, 'a', '1/2/2000', 1.02, 1.04),
+                                 (10516, 'a', '1/3/2000', 1.03, 1.04),
+                                 (10516, 'a', '1/4/2000', 1.04, 1.04),
+                                 (10516, 'b', '1/1/2000', 1.05, 1.08),
+                                 (10516, 'b', '1/2/2000', 1.06, 1.08),
+                                 (10516, 'b', '1/3/2000', 1.07, 1.08),
+                                 (10516, 'b', '1/4/2000', 1.08, 1.08),
+                                 (10517, 'a', '1/1/2000', 1.09, 1.12),
+                                 (10517, 'a', '1/2/2000', 1.10, 1.12),
+                                 (10517, 'a', '1/3/2000', 1.11, 1.12),
+                                 (10517, 'a', '1/4/2000', 1.12, 1.12)],
+         columns = ['PERMNO','byvar','Date', 'RET', 'RET_max'])
+        
+        assert_frame_equal(expect_df, out)
+        
+class TestLongToWide:
+    
+    expect_df_with_colindex = pd.DataFrame(data = [
+                                (10516, 'a', 1.01, 1.02, 1.03, 1.04),
+                                (10516, 'b', 1.05, 1.06, 1.07, 1.08),
+                                (10517, 'a', 1.09, 1.1, 1.11, 1.12),
+                                ], columns = ['PERMNO', 'byvar', 
+                                              'RET1/1/2000', 'RET1/2/2000', 
+                                              'RET1/3/2000', 'RET1/4/2000'])
+    
+    expect_df_no_colindex = pd.DataFrame(data = [
+                            (10516, 'a', '1/1/2000', 1.01, 1.02, 1.03, 1.04),
+                            (10516, 'a', '1/2/2000', 1.01, 1.02, 1.03, 1.04),
+                            (10516, 'a', '1/3/2000', 1.01, 1.02, 1.03, 1.04),
+                            (10516, 'a', '1/4/2000', 1.01, 1.02, 1.03, 1.04),
+                            (10516, 'b', '1/1/2000', 1.05, 1.06, 1.07, 1.08),
+                            (10516, 'b', '1/2/2000', 1.05, 1.06, 1.07, 1.08),
+                            (10516, 'b', '1/3/2000', 1.05, 1.06, 1.07, 1.08),
+                            (10516, 'b', '1/4/2000', 1.05, 1.06, 1.07, 1.08),
+                            (10517, 'a', '1/1/2000', 1.09, 1.1, 1.11, 1.12),
+                            (10517, 'a', '1/2/2000', 1.09, 1.1, 1.11, 1.12),
+                            (10517, 'a', '1/3/2000', 1.09, 1.1, 1.11, 1.12),
+                            (10517, 'a', '1/4/2000', 1.09, 1.1, 1.11, 1.12),
+                            ], columns = ['PERMNO', 'byvar', 'Date', 'RET0', 
+                                          'RET1', 'RET2', 'RET3'])
+    input_data = DataFrameTest()
+
+    ltw_no_dup_colindex    = dero.pandas.long_to_wide(input_data.df,
+                                                     ['PERMNO', 'byvar'], 'RET', colindex='Date')
+    ltw_dup_colindex       = dero.pandas.long_to_wide(input_data.df_duplicate_row,
+                                                     ['PERMNO', 'byvar'], 'RET', colindex='Date')
+    ltw_no_dup_no_colindex = dero.pandas.long_to_wide(input_data.df,
+                                                     ['PERMNO', 'byvar'], 'RET')
+    ltw_dup_no_colindex    = dero.pandas.long_to_wide(input_data.df_duplicate_row,
+                                                     ['PERMNO', 'byvar'], 'RET')
+    df_list = [ltw_no_dup_colindex, ltw_dup_colindex, 
+               ltw_no_dup_no_colindex, ltw_dup_no_colindex]
+
+    def test_no_duplicates_with_colindex(self):
+        assert_frame_equal(self.expect_df_with_colindex, self.ltw_no_dup_colindex)
+        
+    def test_duplicates_with_colindex(self):
+        assert_frame_equal(self.expect_df_with_colindex, self.ltw_dup_colindex)
+        
+    def test_no_duplicates_no_colindex(self):        
+        assert_frame_equal(self.expect_df_no_colindex, self.ltw_no_dup_no_colindex)
+        
+    def test_duplicates_no_colindex(self):        
+        assert_frame_equal(self.expect_df_no_colindex, self.ltw_dup_no_colindex)
+        
+    def test_no_extra_vars(self):
+        for df in self.df_list:
+            assert ('__idx__','__key__') not in df.columns
+            
+class TestGetCRSP:
+    
+    input_data = DataFrameTest()
+    
+    expect_df_prc_shrout_m = pd.DataFrame(data = [
+        (10516, 'a', Timestamp('2000-01-01 00:00:00'), 1.01, 2000, 1, 11.75, 608360.0),
+        (10516, 'a', Timestamp('2000-01-02 00:00:00'), 1.02, 2000, 1, 11.75, 608360.0),
+        (10516, 'a', Timestamp('2000-01-03 00:00:00'), 1.03, 2000, 1, 11.75, 608360.0),
+        (10516, 'a', Timestamp('2000-01-04 00:00:00'), 1.04, 2000, 1, 11.75, 608360.0),
+        (10516, 'b', Timestamp('2000-01-01 00:00:00'), 1.05, 2000, 1, 11.75, 608360.0),
+        (10516, 'b', Timestamp('2000-01-02 00:00:00'), 1.06, 2000, 1, 11.75, 608360.0),
+        (10516, 'b', Timestamp('2000-01-03 00:00:00'), 1.07, 2000, 1, 11.75, 608360.0),
+        (10516, 'b', Timestamp('2000-01-04 00:00:00'), 1.08, 2000, 1, 11.75, 608360.0),
+        (10517, 'a', Timestamp('2000-01-01 00:00:00'), 1.09, 2000, 1, -16.8125, 3830.0),
+        (10517, 'a', Timestamp('2000-01-02 00:00:00'), 1.1, 2000, 1, -16.8125, 3830.0),
+        (10517, 'a', Timestamp('2000-01-03 00:00:00'), 1.11, 2000, 1, -16.8125, 3830.0),
+        (10517, 'a', Timestamp('2000-01-04 00:00:00'), 1.12, 2000, 1, -16.8125, 3830.0),
+        ], columns = ['PERMNO', 'byvar', 'Date', 'RET', 'Year', 'Month', 'PRC', 'SHROUT'])
+    
+    expect_df_prc_shrout_d = pd.DataFrame(data = [
+        (10516, 'a', Timestamp('2000-01-01 00:00:00'), 1.01, nan, nan),
+        (10516, 'a', Timestamp('2000-01-02 00:00:00'), 1.02, nan, nan),
+        (10516, 'a', Timestamp('2000-01-03 00:00:00'), 1.03, 12.0, 608360.0),
+        (10516, 'a', Timestamp('2000-01-04 00:00:00'), 1.04, 11.875, 608360.0),
+        (10516, 'b', Timestamp('2000-01-01 00:00:00'), 1.05, nan, nan),
+        (10516, 'b', Timestamp('2000-01-02 00:00:00'), 1.06, nan, nan),
+        (10516, 'b', Timestamp('2000-01-03 00:00:00'), 1.07, 12.0, 608360.0),
+        (10516, 'b', Timestamp('2000-01-04 00:00:00'), 1.08, 11.875, 608360.0),
+        (10517, 'a', Timestamp('2000-01-01 00:00:00'), 1.09, nan, nan),
+        (10517, 'a', Timestamp('2000-01-02 00:00:00'), 1.1, nan, nan),
+        (10517, 'a', Timestamp('2000-01-03 00:00:00'), 1.11, 17.625, 3830.0),
+        (10517, 'a', Timestamp('2000-01-04 00:00:00'), 1.12, 17.5625, 3830.0),
+        ], columns = ['PERMNO', 'byvar', 'Date', 'RET', 'PRC', 'SHROUT'])
+    
+    expect_df_ret_0_3_m = pd.DataFrame(data = [
+        (10516, 'a', Timestamp('2000-01-01 00:00:00'), 1.01, -0.03092783503234386, -0.036363635212183),
+        (10516, 'a', Timestamp('2000-01-02 00:00:00'), 1.02, -0.03092783503234386, -0.036363635212183),
+        (10516, 'a', Timestamp('2000-01-03 00:00:00'), 1.03, -0.03092783503234386, -0.036363635212183),
+        (10516, 'a', Timestamp('2000-01-04 00:00:00'), 1.04, -0.03092783503234386, -0.036363635212183),
+        (10516, 'b', Timestamp('2000-01-01 00:00:00'), 1.05, -0.03092783503234386, -0.036363635212183),
+        (10516, 'b', Timestamp('2000-01-02 00:00:00'), 1.06, -0.03092783503234386, -0.036363635212183),
+        (10516, 'b', Timestamp('2000-01-03 00:00:00'), 1.07, -0.03092783503234386, -0.036363635212183),
+        (10516, 'b', Timestamp('2000-01-04 00:00:00'), 1.08, -0.03092783503234386, -0.036363635212183),
+        (10517, 'a', Timestamp('2000-01-01 00:00:00'), 1.09, -0.07876712083816527, -0.09854014962911606),
+        (10517, 'a', Timestamp('2000-01-02 00:00:00'), 1.1, -0.07876712083816527, -0.09854014962911606),
+        (10517, 'a', Timestamp('2000-01-03 00:00:00'), 1.11, -0.07876712083816527, -0.09854014962911606),
+        (10517, 'a', Timestamp('2000-01-04 00:00:00'), 1.12, -0.07876712083816527, -0.09854014962911606),
+        ], columns = ['PERMNO', 'byvar', 'Date', 'RET_old', 'RET', 'RET3'])
+    
+    expect_df_ret_0_3_d = pd.DataFrame(data = [
+        (10516, 'a', Timestamp('2000-01-01 00:00:00'), 1.01, -0.010309278033673763, -0.015789473429322243),
+        (10516, 'a', Timestamp('2000-01-02 00:00:00'), 1.02, -0.010309278033673763, -0.015789473429322243),
+        (10516, 'a', Timestamp('2000-01-03 00:00:00'), 1.03, -0.010309278033673763, 0.0053475936874747285),
+        (10516, 'a', Timestamp('2000-01-04 00:00:00'), 1.04, -0.010416666977107523, 0.01595744676887989),
+        (10516, 'b', Timestamp('2000-01-01 00:00:00'), 1.05, -0.010309278033673763, -0.015789473429322243),
+        (10516, 'b', Timestamp('2000-01-02 00:00:00'), 1.06, -0.010309278033673763, -0.015789473429322243),
+        (10516, 'b', Timestamp('2000-01-03 00:00:00'), 1.07, -0.010309278033673763, 0.0053475936874747285),
+        (10516, 'b', Timestamp('2000-01-04 00:00:00'), 1.08, -0.010416666977107523, 0.01595744676887989),
+        (10517, 'a', Timestamp('2000-01-01 00:00:00'), 1.09, -0.034246575087308884, -0.007117437664419413),
+        (10517, 'a', Timestamp('2000-01-02 00:00:00'), 1.1, -0.034246575087308884, -0.007117437664419413),
+        (10517, 'a', Timestamp('2000-01-03 00:00:00'), 1.11, -0.034246575087308884, 0.00358422938734293),
+        (10517, 'a', Timestamp('2000-01-04 00:00:00'), 1.12, -0.0035460991784930225, 0.0),
+        ], columns = ['PERMNO', 'byvar', 'Date', 'RET_old', 'RET', 'RET3'])
+    
+    expect_df_abret1w30_d = pd.DataFrame(data = [
+        (10516, 'a', Timestamp('2000-01-03 00:00:00'), 1.03, -0.010309278033673763, -0.012285126340356065),
+        (10516, 'a', Timestamp('2000-01-04 00:00:00'), 1.04, -0.010416666977107523, -0.007801230013417298),
+        (10516, 'b', Timestamp('2000-01-03 00:00:00'), 1.07, -0.010309278033673763, -0.012285126340356065),
+        (10516, 'b', Timestamp('2000-01-04 00:00:00'), 1.08, -0.010416666977107523, -0.007801230013417298),
+        (10517, 'a', Timestamp('2000-01-03 00:00:00'), 1.11, -0.034246575087308884, -0.02509168647789871),
+        (10517, 'a', Timestamp('2000-01-04 00:00:00'), 1.12, -0.0035460991784930225, 0.021666938795087725),
+        ], columns = ['PERMNO', 'byvar', 'Date', 'RET_old', 'RET', 'ABRET'])
+    
+    expect_df_abret3w30_d = pd.DataFrame(data = [
+        (10516, 'a', Timestamp('2000-01-03 00:00:00'), 1.03, -0.010309278033673763, -0.01055692781280036),
+        (10516, 'a', Timestamp('2000-01-04 00:00:00'), 1.04, -0.010416666977107523, -0.0077047719177691576),
+        (10516, 'b', Timestamp('2000-01-03 00:00:00'), 1.07, -0.010309278033673763, -0.01055692781280036),
+        (10516, 'b', Timestamp('2000-01-04 00:00:00'), 1.08, -0.010416666977107523, -0.0077047719177691576),
+        (10517, 'a', Timestamp('2000-01-03 00:00:00'), 1.11, -0.034246575087308884, -0.020972399224135227),
+        (10517, 'a', Timestamp('2000-01-04 00:00:00'), 1.12, -0.0035460991784930225, 0.02104350627179233),
+        ], columns = ['PERMNO', 'byvar', 'Date', 'RET_old', 'RET', 'ABRET'])
+    
+    expect_df_abret4w30_d = pd.DataFrame(data = [
+        (10516, 'a', Timestamp('2000-01-03 00:00:00'), 1.03, -0.010309278033673763, -0.011494126544304772),
+        (10516, 'a', Timestamp('2000-01-04 00:00:00'), 1.04, -0.010416666977107523, -0.007513964392254513),
+        (10516, 'b', Timestamp('2000-01-03 00:00:00'), 1.07, -0.010309278033673763, -0.011494126544304772),
+        (10516, 'b', Timestamp('2000-01-04 00:00:00'), 1.08, -0.010416666977107523, -0.007513964392254513),
+        (10517, 'a', Timestamp('2000-01-03 00:00:00'), 1.11, -0.034246575087308884, -0.023090339877834667),
+        (10517, 'a', Timestamp('2000-01-04 00:00:00'), 1.12, -0.0035460991784930225, 0.02132127648168718),
+        ], columns = ['PERMNO', 'byvar', 'Date', 'RET_old', 'RET', 'ABRET'])
+    
+    expect_df_abret1w30ific_d = pd.DataFrame(data = [
+        (10516, 'a', Timestamp('2000-01-03 00:00:00'), 1.03, -0.010309278033673763, -0.012285126340356065,
+         -0.0071, -0.27828849389891563),
+        (10516, 'a', Timestamp('2000-01-04 00:00:00'), 1.04, -0.010416666977107523, -0.007801230013417298,
+         -0.0406, 0.06441962964754251),
+        (10516, 'b', Timestamp('2000-01-03 00:00:00'), 1.07, -0.010309278033673763, -0.012285126340356065,
+         -0.0071, -0.27828849389891563),
+        (10516, 'b', Timestamp('2000-01-04 00:00:00'), 1.08, -0.010416666977107523, -0.007801230013417298,
+         -0.0406, 0.06441962964754251),
+        (10517, 'a', Timestamp('2000-01-03 00:00:00'), 1.11, -0.034246575087308884, -0.02509168647789871,
+         -0.0071, 1.2894209309028417),
+        (10517, 'a', Timestamp('2000-01-04 00:00:00'), 1.12, -0.0035460991784930225, 0.021666938795087725,
+         -0.0406, 0.6210107875266194),
+        ], columns = ['PERMNO', 'byvar', 'Date', 'RET_old', 'RET', 'ABRET', 'mktrf', 'coef_mktrf'])
+    
+    expect_df_abret4w36_m = pd.DataFrame(data = [
+        (10516, 'a', Timestamp('2000-01-01 00:00:00'), 1.01, -0.03092783503234386, -0.015201781697989171),
+        (10516, 'a', Timestamp('2000-01-02 00:00:00'), 1.02, -0.03092783503234386, -0.015201781697989171),
+        (10516, 'a', Timestamp('2000-01-03 00:00:00'), 1.03, -0.03092783503234386, -0.015201781697989171),
+        (10516, 'a', Timestamp('2000-01-04 00:00:00'), 1.04, -0.03092783503234386, -0.015201781697989171),
+        (10516, 'b', Timestamp('2000-01-01 00:00:00'), 1.05, -0.03092783503234386, -0.015201781697989171),
+        (10516, 'b', Timestamp('2000-01-02 00:00:00'), 1.06, -0.03092783503234386, -0.015201781697989171),
+        (10516, 'b', Timestamp('2000-01-03 00:00:00'), 1.07, -0.03092783503234386, -0.015201781697989171),
+        (10516, 'b', Timestamp('2000-01-04 00:00:00'), 1.08, -0.03092783503234386, -0.015201781697989171),
+        (10517, 'a', Timestamp('2000-01-01 00:00:00'), 1.09, -0.07876712083816527, -0.08521445580466151),
+        (10517, 'a', Timestamp('2000-01-02 00:00:00'), 1.1, -0.07876712083816527, -0.08521445580466147),
+        (10517, 'a', Timestamp('2000-01-03 00:00:00'), 1.11, -0.07876712083816527, -0.08521445580466151),
+        (10517, 'a', Timestamp('2000-01-04 00:00:00'), 1.12, -0.07876712083816527, -0.08521445580466147),
+        ], columns = ['PERMNO', 'byvar', 'Date', 'RET_old', 'RET', 'ABRET'])
+    
+    expect_df_cumfirst_abret1w30_0_3_dropf_d = pd.DataFrame(data = [
+        (10516, 'a', Timestamp('2000-01-01 00:00:00'), 1.01, -0.015789473429322243, -0.015727664052322177,
+         -0.036082473970969975, -0.035403777170113115),
+        (10516, 'a', Timestamp('2000-01-02 00:00:00'), 1.02, -0.015789473429322243, -0.015727664052322177,
+         -0.036082473970969975, -0.035403777170113115),
+        (10516, 'a', Timestamp('2000-01-03 00:00:00'), 1.03, 0.005347593687474728, 0.005768911806993904,
+         -0.036082473970969975, -0.035403777170113115),
+        (10516, 'a', Timestamp('2000-01-04 00:00:00'), 1.04, 0.01595744676887989, 0.01380041347759553,
+         -0.036082473970969975, -0.035403777170113115),
+        (10516, 'b', Timestamp('2000-01-01 00:00:00'), 1.05, -0.015789473429322243, -0.015727664052322177,
+         -0.020833333285060984, -0.017772315431326513),
+        (10516, 'b', Timestamp('2000-01-02 00:00:00'), 1.06, -0.015789473429322243, -0.015727664052322177,
+         -0.020833333285060984, -0.017772315431326513),
+        (10516, 'b', Timestamp('2000-01-03 00:00:00'), 1.07, 0.005347593687474728, 0.005768911806993904,
+         0.005263158220441877, 0.0036122426944029673),
+        (10516, 'b', Timestamp('2000-01-04 00:00:00'), 1.08, 0.01595744676887989, 0.01380041347759553,
+         0.005263158220441877, 0.0036122426944029673),
+        (10517, 'a', Timestamp('2000-01-01 00:00:00'), 1.09, -0.007117437664419413, -0.006556736999594248,
+         -0.04452054752927759, -0.010499124911873436),
+        (10517, 'a', Timestamp('2000-01-02 00:00:00'), 1.1, -0.007117437664419413, -0.006556736999594248,
+         -0.04452054752927759, -0.010499124911873436),
+        (10517, 'a', Timestamp('2000-01-03 00:00:00'), 1.11, 0.00358422938734293, 0.008023039340786076,
+         -0.0070921984149733275, 0.02311126667204144),
+        (10517, 'a', Timestamp('2000-01-04 00:00:00'), 1.12, 0.0, -0.012660052545687028, -0.0035587188063158637,
+         -0.011264252646533746),
+        ], columns = ['PERMNO', 'byvar', 'Date', 'RET_old', 'RET3', 'ABRET3', 'cum_RET3', 'cum_ABRET3'])
+
+    
+    gc_prc_shrout_m = dero.data.get_crsp(input_data.df_datetime, debug=True) #get PRC and SHROUT is default
+    gc_ret_0_3_m = dero.data.get_crsp(input_data.df_datetime, get=['RET'], time=[0,3],
+                                      other_byvars='byvar', debug=True) #freq m default
+    
+    
+    gc_prc_shrout_d = dero.data.get_crsp(input_data.df_datetime, freq='d', debug=True) #get PRC and SHROUT is default
+    
+    gc_ret_0_3_d = dero.data.get_crsp(input_data.df_datetime, freq='d', get=['RET'],
+                                      other_byvars='byvar', time=[0,3], debug=True)
+    
+    gc_abret1w30_d = dero.data.get_crsp(input_data.df_datetime, freq='d', get=['RET'],
+                                        other_byvars='byvar', abret=1, window=30, debug=True)
+    gc_abret3w30_d = dero.data.get_crsp(input_data.df_datetime, freq='d', get=['RET'],
+                                        other_byvars='byvar', abret=3, window=30, debug=True)
+    gc_abret4w30_d = dero.data.get_crsp(input_data.df_datetime, freq='d', get=['RET'],
+                                        other_byvars='byvar', abret=4, window=30, debug=True)
+    
+    gc_abret1w30ific_d = dero.data.get_crsp(input_data.df_datetime, freq='d', get=['RET'],
+                                        other_byvars='byvar', abret=1, window=30,
+                                        includefac=True, includecoef=True, debug=True)
+    
+    gc_abret4w36_m = dero.data.get_crsp(input_data.df_datetime, get=['RET'],
+                                        other_byvars='byvar', abret=4, window=36, debug=True)
+
+    gc_cumfirst_abret1w30_0_3_dropf_d = dero.data.get_crsp(
+                                        input_data.df_datetime, freq='d', get=['RET'], 
+                                        other_byvars='byvar',time=[0,3], cumret='first', abret=1,
+                                        window=30, drop_first=True, debug=True)
+
+    
+    
+    def test_get_prc_shrout_same_period_monthly(self):
+        assert_frame_equal(self.expect_df_prc_shrout_m, self.gc_prc_shrout_m)
+        
+    def test_get_prc_shrout_same_period_daily(self):
+        assert_frame_equal(self.expect_df_prc_shrout_d, self.gc_prc_shrout_d)
+        
+    def test_get_ret_0_3_monthly(self):
+        assert_frame_equal(self.expect_df_ret_0_3_m, self.gc_ret_0_3_m)
+        
+    def test_get_ret_0_3_daily(self):
+        assert_frame_equal(self.expect_df_ret_0_3_d, self.gc_ret_0_3_d)
+        
+    def test_get_abret_daily(self):
+        assert_frame_equal(self.expect_df_abret1w30_d, self.gc_abret1w30_d)
+        assert_frame_equal(self.expect_df_abret3w30_d, self.gc_abret3w30_d)
+        assert_frame_equal(self.expect_df_abret4w30_d, self.gc_abret4w30_d)
+        
+    def test_get_abret_includecoef_includefac(self):
+        assert_frame_equal(self.expect_df_abret1w30ific_d, self.gc_abret1w30ific_d)
+        
+    def test_get_abret_monthly(self):
+        assert_frame_equal(self.expect_df_abret4w36_m, self.gc_abret4w36_m)
+        
+    def test_get_abret_0_3_cumretfirst_dropfirst_daily(self):
+        assert_frame_equal(self.expect_df_cumfirst_abret1w30_0_3_dropf_d,
+                           self.gc_cumfirst_abret1w30_0_3_dropf_d, check_dtype=False)
+
+
+class TestPortfolioAverages:
+    
+    input_data = DataFrameTest()
+    
+    expect_avgs_no_wt = pd.DataFrame(data = [
+                    (1, 'a', 1.0250000000000001),
+                    (1, 'b', 1.0550000000000002),
+                    (2, 'a', 1.1050000000000002),
+                    (2, 'b', 1.0750000000000002),
+                    ], columns = ['portfolio', 'byvar', 'RET'])
+    
+    expect_avgs_wt = pd.DataFrame(data = [
+                    (1, 'a', 1.0250000000000001, 1.025),
+                    (1, 'b', 1.0550000000000002, 1.0550000000000002),
+                    (2, 'a', 1.1050000000000002, 1.12),
+                    (2, 'b', 1.0750000000000002, 1.0750000000000002),
+                    ], columns = ['portfolio', 'byvar', 'RET', 'RET_wavg'])
+    
+    expect_ports = pd.DataFrame(data = [
+                    (10516, 'a', '1/1/2000', 1.01, 0, 1),
+                    (10516, 'a', '1/2/2000', 1.02, 1, 1),
+                    (10516, 'a', '1/3/2000', 1.03, 1, 1),
+                    (10516, 'a', '1/4/2000', 1.04, 0, 1),
+                    (10516, 'b', '1/1/2000', 1.05, 1, 1),
+                    (10516, 'b', '1/2/2000', 1.06, 1, 1),
+                    (10516, 'b', '1/3/2000', 1.07, 1, 2),
+                    (10516, 'b', '1/4/2000', 1.08, 1, 2),
+                    (10517, 'a', '1/1/2000', 1.09, 0, 2),
+                    (10517, 'a', '1/2/2000', 1.1, 0, 2),
+                    (10517, 'a', '1/3/2000', 1.11, 0, 2),
+                    (10517, 'a', '1/4/2000', 1.12, 1, 2),
+                    ], columns = ['PERMNO', 'byvar', 'Date', 'RET', 'weight', 'portfolio'])
+    
+    avgs, ports = dero.pandas.portfolio_averages(input_data.df_weight, 'RET', 'RET', ngroups=2,
+                                                  byvars='byvar')
+    
+    w_avgs, w_ports = dero.pandas.portfolio_averages(input_data.df_weight, 'RET', 'RET', ngroups=2,
+                                                  byvars='byvar', wtvar='weight')
+    
+    def test_simple_averages(self):
+        assert_frame_equal(self.expect_avgs_no_wt, self.avgs)
+    
+    def test_weighted_averages(self):
+        assert_frame_equal(self.expect_avgs_wt, self.w_avgs)
+        
+    def test_portfolio_construction(self):
+        assert_frame_equal(self.expect_ports, self.ports)
+        assert_frame_equal(self.expect_ports, self.w_ports)
+
+    
