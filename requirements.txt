@@ -1,4 +1,6 @@
 pandas
+pandasql
+wrds
 numpy
 pdfrw
 selenium
