@@ -366,23 +366,23 @@ class TestWinsorize(DataFrameTest):
     def test_winsor_40_subset_byvars(self):
         
         expect_df = pd.DataFrame(data = [
-            (10516, 'a', '1/1/2000', 1.0216),
-            (10516, 'a', '1/2/2000', 1.0216),
-            (10516, 'a', '1/3/2000', 1.028),
-            (10516, 'a', '1/4/2000', 1.028),
-            (10516, 'b', '1/1/2000', 1.0616),
-            (10516, 'b', '1/2/2000', 1.0616),
-            (10516, 'b', '1/3/2000', 1.068),
-            (10516, 'b', '1/4/2000', 1.068),
-            (10517, 'a', '1/1/2000', 1.1016000000000001),
-            (10517, 'a', '1/2/2000', 1.1016000000000001),
-            (10517, 'a', '1/3/2000', 1.108),
-            (10517, 'a', '1/4/2000', 1.108),
+            (10516, 'a', '1/1/2000', 1.022624),
+            (10516, 'a', '1/2/2000', 1.022624),
+            (10516, 'a', '1/3/2000', 1.02672),
+            (10516, 'a', '1/4/2000', 1.02672),
+            (10516, 'b', '1/1/2000', 1.062624),
+            (10516, 'b', '1/2/2000', 1.062624),
+            (10516, 'b', '1/3/2000', 1.06672),
+            (10516, 'b', '1/4/2000', 1.06672),
+            (10517, 'a', '1/1/2000', 1.102624),
+            (10517, 'a', '1/2/2000', 1.102624),
+            (10517, 'a', '1/3/2000', 1.10672),
+            (10517, 'a', '1/4/2000', 1.10672),
             ], columns = ['PERMNO', 'byvar', 'Date', 'RET'])
         
         wins = dero.pandas.winsorize(self.df, .4, subset='RET', byvars=['PERMNO','byvar'])
         
-        assert_frame_equal(expect_df, wins)
+        assert_frame_equal(expect_df, wins, check_less_precise=True)
     
 class TestRegBy(DataFrameTest):
     
@@ -469,7 +469,7 @@ class TestExpandMonths(DataFrameTest):
         
         em = dero.pandas.expand_months(self.single_ticker_df)
         
-        assert_frame_equal(expect_df.sort(axis=1), em.sort(axis=1))
+        assert_frame_equal(expect_df.sort_index(axis=1), em.sort_index(axis=1))
         
     def test_expand_months_calendardays(self):
         
@@ -509,7 +509,7 @@ class TestExpandMonths(DataFrameTest):
         
         em = dero.pandas.expand_months(self.single_ticker_df, trade_days=False)
         
-        assert_frame_equal(expect_df.sort(axis=1), em.sort(axis=1))
+        assert_frame_equal(expect_df.sort_index(axis=1), em.sort_index(axis=1))
         
         
 class TestPortfolio(DataFrameTest):
