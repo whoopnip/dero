@@ -65,6 +65,19 @@ class TestReg(RegTest):
 
         self._reg_test(self.df, expect_params, expect_cov, robust=False, cluster=False)
 
+    def test_reg_nocons(self):
+        expect_params = pd.Series(data = [
+            0.41916167664670689,
+            0.053892215568862201,
+            ], index=self.xvars)
+
+        expect_cov = pd.DataFrame(data = [
+            (inf, -inf),
+            (-inf, inf),
+            ], columns =self.xvars, index=self.xvars)
+
+        self._reg_test(self.df, expect_params, expect_cov, robust=False, cluster=False, cons=False)
+
     def test_reg_cluster(self):
         expect_params = pd.Series(data=[
             -0.057782704189492023,
