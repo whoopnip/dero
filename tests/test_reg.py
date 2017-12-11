@@ -31,18 +31,39 @@ class DataFrameTest:
         columns=['y', 'x1', 'x2', 'group']
     )
 
+    df_groups_no_nan = pd.DataFrame(
+        data=[
+            (1, 2, 3, 'a'),
+            (4, 5, 8, 'a'),
+            (10, 11, 100, 'a'),
+            (2, 4, 6, 'b'),
+            (5, 10, 20, 'b'),
+            (11, 15, 150, 'b'),
+        ],
+        columns=['y', 'x1', 'x2', 'group']
+    )
+
     yvar = 'y'
     xvars = ['x1', 'x2']
     all_xvars = ['const', 'x1', 'x2']
     groupvar = 'group'
+    fe_xvars = all_xvars + ['a', 'b']
 
 class RegTest(DataFrameTest):
 
     def _reg_test(self, df, expect_params, expect_cov, **reg_kwargs):
         reg_result = dero.reg.reg(df, self.yvar, self.xvars, **reg_kwargs)
 
-        assert_series_equal(expect_params, reg_result.params)
-        assert_frame_equal(expect_cov, reg_result.cov_params())
+        # Single result
+        if (not 'fe' in reg_kwargs) or (not reg_kwargs['fe']):
+            result = reg_result
+        # Tuple of result, dummy_col_dict
+        else:
+            result = reg_result[0]
+
+
+        assert_series_equal(expect_params, result.params)
+        assert_frame_equal(expect_cov, result.cov_params())
 
 
 #### Actual test cases below ####
@@ -92,5 +113,24 @@ class TestReg(RegTest):
         ], columns=self.all_xvars, index=self.all_xvars)
 
         self._reg_test(self.df_groups, expect_params, expect_cov, robust=False, cluster=self.groupvar)
+
+    def test_reg_fe(self):
+        expect_params = pd.Series(data = [
+            -0.23049716725241853,
+            0.60590360637890839,
+            0.022986080158407668,
+            0.74459056311787641,
+            -0.97508773037029473,
+            ], index=self.fe_xvars)
+
+        expect_cov = pd.DataFrame(data = [
+            (0.51833530035154651, -0.13516173067093232, 0.0077398741774187142, 0.095219780867766016, 0.42311551948378062),
+            (-0.13516173067093232, 0.043999645145278161, -0.0029669956299292191, -0.019057301893355846, -0.11610442877757651),
+            (0.0077398741774187142, -0.0029669956299292191, 0.00024317047738642891, 0.0010647919388587532, 0.0066750822385599623),
+            (0.095219780867766016, -0.019057301893355846, 0.0010647919388587532, 0.15764681227101526, -0.06242703140324924),
+            (0.42311551948378062, -0.11610442877757651, 0.0066750822385599623, -0.06242703140324924, 0.48554255088702991),
+            ], columns=self.fe_xvars, index=self.fe_xvars)
+
+        self._reg_test(self.df_groups_no_nan, expect_params, expect_cov, robust=False, fe=self.groupvar)
 
 
