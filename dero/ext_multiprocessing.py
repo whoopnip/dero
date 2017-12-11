@@ -70,3 +70,11 @@ def parallel_loop_with_timeout(target, iterlist, timeout=2, **kwargs):
 
     pool.join()
     return [(result[0], result[1].get()) for result in results]
+
+
+def _extract_ordered_results(parallel_loop_results):
+    # Results are a list of integer index and actual result. Sort by integer index then return actual result.
+    results = sorted(parallel_loop_results, key=lambda x: x[0])
+    results = [result[1] for result in results]
+
+    return results
