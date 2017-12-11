@@ -1,4 +1,4 @@
 
 python setup.py sdist bdist_wheel
-twine upload dist\Dero-0.8.17*
+twine upload dist\Dero-0.9.0*
 pause
