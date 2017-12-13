@@ -103,6 +103,19 @@ class DataFrameTest:
     ], columns=['GVKEY','Date'])
     df_gvkey_str2['Date'] = pd.to_datetime(df_gvkey_str2['Date'])
 
+    df_fill_data = pd.DataFrame(
+            data=[
+                (4, 'c', nan, 'a'),
+                (1, 'd', 3, 'a'),
+                (10, 'e', 100, 'a'),
+                (2, nan, 6, 'b'),
+                (5, 'f', 8, 'b'),
+                (11, 'g', 150, 'b'),
+            ],
+            columns=['y', 'x1', 'x2', 'group']
+        )
+
+
 class TestCumulate(DataFrameTest):
     
     
@@ -878,3 +891,33 @@ class TestFillExcludedRows(DataFrameTest):
         
         result = dero.pandas.fill_excluded_rows(var_df, ['GVKEY','Date'], 'var', value=0)
         assert_frame_equal(expect_df, result)
+
+
+class TestFillnaByGroups(DataFrameTest):
+
+
+    def test_fillna_by_group(self):
+        expect_df = pd.DataFrame(data=[
+            ('a', 4, 'c', 51.5),
+            ('a', 1, 'd', 3.0),
+            ('a', 10, 'e', 100.0),
+            ('b', 2, 'f', 6.0),
+            ('b', 5, 'f', 8.0),
+            ('b', 11, 'g', 150.0),
+        ], columns=['group', 'y', 'x1', 'x2'])
+
+        result = dero.pandas.fillna_by_groups(self.df_fill_data, 'group')
+
+        assert_frame_equal(expect_df, result)
+
+    def test_fillna_by_group_keep_one(self):
+
+        expect_df = pd.DataFrame(data = [
+            ('a', 4, 'c', 51.5),
+            ('b', 2, 'f', 6.0),
+        ], columns = ['group', 'y', 'x1', 'x2'], index=[0, 3])
+
+        result = dero.pandas.fillna_by_groups_and_keep_one_per_group(self.df_fill_data, 'group')
+
+        assert_frame_equal(expect_df, result)
+
