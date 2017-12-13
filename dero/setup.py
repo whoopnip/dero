@@ -1,6 +1,6 @@
 
 from version import __version__
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 setup(name='Dero',
@@ -13,7 +13,7 @@ setup(name='Dero',
       author='Nick DeRobertis',
       author_email='whoopnip@gmail.com',
       license='MIT',
-      packages=['dero'],
+      packages=find_packages(),
       classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
