@@ -43,24 +43,21 @@ class DataFrameTest:
         columns=['y', 'x1', 'x2', 'group']
     )
 
-    df_groups_lag_reg = pd.DataFrame(
-        data=[
-            ('1/1/2000', 1, 2, 3, nan, nan, 'a'),
-            ('1/2/2000', 4, 5, 8, 2, 3, 'a'),
-            ('1/3/2000', 10, 11, 100, 5, 8, 'a'),
-            ('1/4/2000', 15, 12, 40, 11, 100, 'a'),
-            ('1/6/2000', 22, 18, 82, 12, 40, 'a'),
-            ('1/7/2000', 46, 10, 61, 18, 82, 'a'),
-            ('1/1/2000', 2, 4, 6, nan, nan, 'b'),
-            ('1/2/2000', 5, 10, 20, 4, 6, 'b'),
-            ('1/3/2000', 11, 15, 150, 10, 20, 'b'),
-            ('1/4/2000', 13, 12, 156, 15, 150, 'b'),
-            ('1/7/2000', 13, 12, 156, nan, nan, 'b'),
-
-        ],
-        columns=['Date', 'y', 'x1', 'x2', 'x1_lag_pregen', 'x2_lag_pregen', 'group']
-    )
-    df_groups_lag_reg['Date'] = pd.to_datetime(df_groups_lag_reg['Date'])
+    df_groups_lag_reg = pd.DataFrame(data=[
+        (Timestamp('2000-01-01 00:00:00'), 1, 2, 3, nan, nan, 'a', nan, nan, nan, nan),
+        (Timestamp('2000-01-02 00:00:00'), 4, 5, 8, 2.0, 3.0, 'a', 3.0, 5.0, nan, nan),
+        (Timestamp('2000-01-03 00:00:00'), 10, 11, 100, 5.0, 8.0, 'a', 6.0, 92.0, 3.0, 5.0),
+        (Timestamp('2000-01-04 00:00:00'), 15, 12, 40, 11.0, 100.0, 'a', 1.0, -60.0, 6.0, 92.0),
+        (Timestamp('2000-01-06 00:00:00'), 22, 18, 82, 12.0, 40.0, 'a', 6.0, 42.0, 1.0, -60.0),
+        (Timestamp('2000-01-07 00:00:00'), 46, 10, 61, 18.0, 82.0, 'a', -8.0, -21.0, 6.0, 42.0),
+        (Timestamp('2000-01-01 00:00:00'), 2, 4, 6, nan, nan, 'b', nan, nan, nan, nan),
+        (Timestamp('2000-01-02 00:00:00'), 5, 10, 20, 4.0, 6.0, 'b', 6.0, 14.0, nan, nan),
+        (Timestamp('2000-01-03 00:00:00'), 11, 15, 150, 10.0, 20.0, 'b', 5.0, 130.0, 6.0, 14.0),
+        (Timestamp('2000-01-04 00:00:00'), 13, 12, 156, 15.0, 150.0, 'b', -3.0, 6.0, 5.0, 130.0),
+        (Timestamp('2000-01-07 00:00:00'), 13, 12, 156, nan, nan, 'b', nan, nan, nan, nan),
+    ], columns=['Date', 'y', 'x1', 'x2', 'x1_lag_pregen',
+                'x2_lag_pregen', 'group', 'x1_diff_pregen', 'x2_diff_pregen',
+                'x1_diff_lag_pregen', 'x2_diff_lag_pregen'])
 
     yvar = 'y'
     xvars = ['x1', 'x2']
@@ -83,6 +80,10 @@ class RegTest(DataFrameTest):
 
         assert_series_equal(expect_params, result.params)
         assert_frame_equal(expect_cov, result.cov_params())
+
+def compare_params_and_pvalues(result1, result2):
+    assert (result1.params.values == result2.params.values).all()
+    assert (result1.pvalues.values == result2.pvalues.values).all()
 
 
 #### Actual test cases below ####
@@ -170,5 +171,50 @@ class TestLagReg(DataFrameTest):
             lag_id_var='group'
         )
 
-        assert (lag_result.params.values == expected_result.params.values).all()
-        assert (lag_result.pvalues.values == expected_result.pvalues.values).all()
+        compare_params_and_pvalues(expected_result, lag_result)
+
+class TestDiffReg(DataFrameTest):
+
+    def test_diff_reg(self):
+        expected_result = dero.reg.reg(
+            self.df_groups_lag_reg,
+            'y',
+            ['x1_diff_pregen', 'x2_diff_pregen']
+        )
+
+        diff_result = dero.reg.chooser.any_reg(
+            'diff',
+            self.df_groups_lag_reg,
+            'y',
+            ['x1', 'x2'],
+            diff_cols=['x1', 'x2'],
+            difference_lag=1,
+            date_col='Date',
+            id_col='group'
+        )
+
+        compare_params_and_pvalues(expected_result, diff_result)
+
+    def test_diff_reg_lag(self):
+        expected_result = dero.reg.reg(
+            self.df_groups_lag_reg,
+            'y',
+            ['x1_diff_lag_pregen', 'x2_diff_lag_pregen']
+        )
+
+        diff_result = dero.reg.chooser.any_reg(
+            'diff',
+            self.df_groups_lag_reg,
+            'y',
+            ['x1', 'x2'],
+            diff_cols=['x1', 'x2'],
+            difference_lag=1,
+            date_col='Date',
+            id_col='group',
+            lag_variables=['x1', 'x2'],
+            num_lags=1,
+            lag_period_var='Date',
+            lag_id_var='group'
+        )
+
+        compare_params_and_pvalues(expected_result, diff_result)
