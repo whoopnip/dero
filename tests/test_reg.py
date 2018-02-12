@@ -43,11 +43,30 @@ class DataFrameTest:
         columns=['y', 'x1', 'x2', 'group']
     )
 
+    df_groups_lag_reg = pd.DataFrame(
+        data=[
+            ('1/1/2000', 1, 2, 3, nan, nan, 'a'),
+            ('1/2/2000', 4, 5, 8, 2, 3, 'a'),
+            ('1/3/2000', 10, 11, 100, 5, 8, 'a'),
+            ('1/4/2000', 15, 12, 40, 11, 100, 'a'),
+            ('1/6/2000', 22, 18, 82, 12, 40, 'a'),
+            ('1/7/2000', 46, 10, 61, 18, 82, 'a'),
+            ('1/1/2000', 2, 4, 6, nan, nan, 'b'),
+            ('1/2/2000', 5, 10, 20, 4, 6, 'b'),
+            ('1/3/2000', 11, 15, 150, 10, 20, 'b'),
+            ('1/4/2000', 13, 12, 156, 15, 150, 'b'),
+            ('1/7/2000', 13, 12, 156, nan, nan, 'b'),
+
+        ],
+        columns=['Date', 'y', 'x1', 'x2', 'x1_lag_pregen', 'x2_lag_pregen', 'group']
+    )
+    df_groups_lag_reg['Date'] = pd.to_datetime(df_groups_lag_reg['Date'])
+
     yvar = 'y'
     xvars = ['x1', 'x2']
     all_xvars = ['const', 'x1', 'x2']
     groupvar = 'group'
-    fe_xvars = all_xvars + ['a', 'b']
+    fe_xvars = all_xvars + ['b']
 
 class RegTest(DataFrameTest):
 
@@ -116,21 +135,40 @@ class TestReg(RegTest):
 
     def test_reg_fe(self):
         expect_params = pd.Series(data = [
-            -0.23049716725241853,
-            0.60590360637890839,
-            0.022986080158407668,
-            0.74459056311787641,
-            -0.97508773037029473,
+            0.5140934,
+            0.60590361,
+            0.02298608,
+            -1.71967829,
             ], index=self.fe_xvars)
 
         expect_cov = pd.DataFrame(data = [
-            (0.51833530035154651, -0.13516173067093232, 0.0077398741774187142, 0.095219780867766016, 0.42311551948378062),
-            (-0.13516173067093232, 0.043999645145278161, -0.0029669956299292191, -0.019057301893355846, -0.11610442877757651),
-            (0.0077398741774187142, -0.0029669956299292191, 0.00024317047738642891, 0.0010647919388587532, 0.0066750822385599623),
-            (0.095219780867766016, -0.019057301893355846, 0.0010647919388587532, 0.15764681227101526, -0.06242703140324924),
-            (0.42311551948378062, -0.11610442877757651, 0.0066750822385599623, -0.06242703140324924, 0.48554255088702991),
-            ], columns=self.fe_xvars, index=self.fe_xvars)
+            (0.86642167435809347, -0.15421903256428801, 0.0088046661162774695, 0.10782189494174726),
+            (-0.15421903256428801, 0.043999645145278127, -0.0029669956299292195, -0.097047126884220028),
+            (0.0088046661162774695, -0.0029669956299292195, 0.00024317047738642904, 0.0056102902997011801),
+            (0.10782189494174726, -0.097047126884220028, 0.0056102902997011801, 0.76804342596454134),
+        ], columns=self.fe_xvars, index=self.fe_xvars)
 
         self._reg_test(self.df_groups_no_nan, expect_params, expect_cov, robust=False, fe=self.groupvar)
 
 
+class TestLagReg(DataFrameTest):
+
+    def test_lag_reg(self):
+        expected_result = dero.reg.reg(
+            self.df_groups_lag_reg,
+            'y',
+            ['x1_lag_pregen', 'x2_lag_pregen']
+        )
+
+        lag_result = dero.reg.reg(
+            self.df_groups_lag_reg,
+            'y',
+            ['x1', 'x2'],
+            lag_variables=['x1', 'x2'],
+            num_lags=1,
+            lag_period_var='Date',
+            lag_id_var='group'
+        )
+
+        assert (lag_result.params.values == expected_result.params.values).all()
+        assert (lag_result.pvalues.values == expected_result.pvalues.values).all()
