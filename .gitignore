@@ -100,3 +100,7 @@ temp.csv
 Testing*
 Logs
 scratch*
+
+# Deployment files
+Dero-*
+Dero.egg-info
