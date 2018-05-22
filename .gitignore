@@ -95,3 +95,6 @@ ENV/
 
 /.idea
 temp.csv
+
+# Development files
+Testing*
