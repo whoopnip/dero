@@ -31,8 +31,10 @@ def transition_matrix(states):
     return out/out.sum(axis=1)[:,None]
 
 def _map_to_numbers(string_list):
-    """
-    Returns a tuple of mapping from numbers to strings, then from strings to numbers
+    """Returns a tuple of mapping from numbers to strings, then from strings to numbers
+    
+    Args:
+        None
     """
     return {i: item for i, item in enumerate(string_list)}, {item: i for i, item in enumerate(string_list)}
     
