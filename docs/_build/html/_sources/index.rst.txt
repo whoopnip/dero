@@ -9,8 +9,12 @@ Welcome to Dero's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-   README.md
 
+.. automodule:: ext_math
+
+.. automodule:: ext_time
+
+.. automodule:: core
 
 Indices and tables
 ==================

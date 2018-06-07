@@ -14,8 +14,9 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('.'))
-
+# sys.path.insert(0, os.path.abspath('.'))
+# sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, "E:\\University of Florida\\Joost\\Dero\\dero")
 
 # -- Project information -----------------------------------------------------
 
@@ -167,3 +168,6 @@ texinfo_documents = [
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+autodoc_mock_imports = ['unidecode']
+html_theme = 'default'
