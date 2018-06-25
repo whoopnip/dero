@@ -10,11 +10,6 @@ Welcome to Dero's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: ext_math
-
-.. automodule:: ext_time
-
-.. automodule:: core
 
 Indices and tables
 ==================
