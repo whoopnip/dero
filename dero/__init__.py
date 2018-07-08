@@ -1,6 +1,6 @@
 
-__version__ = "0.11.2"
-__version_info__ = (0, 11, 2)
+__version__ = "0.12.0"
+__version_info__ = (0, 12, 0)
 
 #Provided for backwards compatibility with old code. In the old code, add to the top:
 #import builtins
