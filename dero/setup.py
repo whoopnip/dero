@@ -48,5 +48,6 @@ setup(name='Dero',
         'sympy',
         'pandastable',
         'scipy',
-        'linearmodels'],
+        'linearmodels',
+        'astor'],
      )
