@@ -24,5 +24,5 @@ def path_func(subpath, path_func):
 
 #### Project paths
 
-etf_project_path = dropbox_path_func('UF\Andy\ETF Project')
+etf_project_path = dropbox_path_func(os.path.sep.join(['UF', 'Andy', 'ETF Project']))
 etf_path_func = lambda subpath: path_func(subpath, etf_project_path)
