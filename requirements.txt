@@ -12,3 +12,4 @@ matplotlib
 sympy
 pandastable
 linearmodels
+astor

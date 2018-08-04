@@ -47,5 +47,6 @@ setup(name='Dero',
         'linearmodels',
         'matplotlib',
         'sympy',
-        'pandastable'],
+        'pandastable',
+        'astor'],
      )
