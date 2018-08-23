@@ -68,14 +68,14 @@ def estimate_time(length,i,start_time,output=True):
     
         #Do loop stuff here
         
-         estimate_time(len(my_list),i,my_start_time)
+        estimate_time(len(my_list),i,my_start_time)
          
     REQUIRED OPTIONS:
     length:     total number of iterations for the loop
     i:          iterator for the loop
     start_time: timer object, to be started outside of this function (SEE ABOVE)
     
-    OPTIONAL OPTIONS:
+    OPTIONAL OPTIONS:\
     output: specify other than True to suppress printing estimated time. Use this if you want to just store the time
             for some other use or custom output. The syntax then is as follows:
     
@@ -100,11 +100,13 @@ def estimate_time(length,i,start_time,output=True):
 
 def increment_dates(start_date,end_date,frequency='a'):
     '''
-    Returns a list of dates inbetween start and end dates. start_date and end_date should be in one of the following
-    date formats:
+    Returns a list of dates inbetween start and end dates. start_date and end_date should be in one of the following date formats:
         mm/dd/yyyy, mm/yyyy, yyyy
+
     Dates should be frequency should be a single letter, 'a' for annual, 'm' for monthly, 'w' for weekly, and 'd' for daily
+    
     '''
+
     #Find number of slashes to determine how to parse date
     number_of_slashes = []
     number_of_slashes.append(start_date.count('/'))
