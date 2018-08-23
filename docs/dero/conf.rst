@@ -1,8 +1,8 @@
 ext_math module
 ===============
 
-.. automodule:: ext_math
-    :members: 
+.. automodule:: dero.ext_math
+    :members:
     :undoc-members:
     :show-inheritance:
 
@@ -23,7 +23,20 @@ core module
     :undoc-members:
     :show-inheritance:
 
-    .. method:: prepare_for_search(search_list)
-    
-        Strips out punctuation, extra spacing, converts special characters, and converts to lower space. Can be used
-        with a string or list.
+.. reg.reg module
+.. =================================
+
+.. .. automodule:: dero.reg.reg
+..     :members:
+..     :inherited-members:
+..     :undoc-members:
+..     :show-inheritance:
+
+figure module
+=================================
+
+.. automodule:: dero.latex.figure.models.figure
+    :members:
+    :inherited-members:
+    :undoc-members:
+    :show-inheritance:
