@@ -2,9 +2,23 @@
 import collections
 import string, pdb
 from unidecode import unidecode
+import os
+import sys
+
+sys.path.insert(0, "E:\\University of Florida\\Joost\\Dero\\dero")
+
 
 class OrderedSet(collections.MutableSet):
-
+    """Class illustrating how to document python source code
+ 
+    This class provides some basic methods for incrementing, decrementing,
+    and clearing a number.
+ 
+    .. note::
+ 
+        This class does not provide any significant functionality that the
+        python does not already include. It is just for illustrative purposes.
+    """
     def __init__(self, iterable=None):
         self.end = end = [] 
         end += [None, end, end]         # sentinel node for doubly linked list
