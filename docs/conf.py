@@ -16,7 +16,9 @@ import os
 import sys
 # sys.path.insert(0, os.path.abspath('.'))
 # sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, "E:\\University of Florida\\Joost\\Dero\\dero")
+# sys.path.insert(0, os.path.abspath('../dero'))
+# sys.path.append(os.path.join(os.path.dirname(__name__), '..'))
+sys.path.insert(0, "E:\\University of Florida\\Joost\\Dero")
 
 # -- Project information -----------------------------------------------------
 
@@ -46,6 +48,7 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx.ext.napoleon'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -163,11 +166,27 @@ texinfo_documents = [
 
 
 # -- Extension configuration -------------------------------------------------
+# Napoleon settings
+napoleon_google_docstring = True
+napoleon_numpy_docstring = True
+napoleon_include_init_with_doc = False
+napoleon_include_private_with_doc = False
+napoleon_include_special_with_doc = True
+napoleon_use_admonition_for_examples = False
+napoleon_use_admonition_for_notes = False
+napoleon_use_admonition_for_references = False
+napoleon_use_ivar = False
+napoleon_use_param = True
+napoleon_use_rtype = True
 
 # -- Options for todo extension ----------------------------------------------
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
-autodoc_mock_imports = ['unidecode']
+autodoc_mock_imports = [
+    'unidecode', 'sas7bdat', 'pandasql', 'pandastable', 'statsmodels', 
+    'pdfrw', 'linearmodels', 'matplotlib', 'pandas', 'sympy', 
+    'any_reg', 'numpy', 'dateutil', 'selenium'
+]
 html_theme = 'default'
