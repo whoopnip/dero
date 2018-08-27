@@ -1,4 +1,3 @@
-dero/
 pandas
 pandasql
 wrds
