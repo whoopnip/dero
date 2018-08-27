@@ -1,0 +1,17 @@
+# .readthedocs.yml
+
+build:
+    image: latest
+
+requirements_file: 
+    requirements.txt
+
+python:
+    version: 3.7
+    setup_py_install: true
+    use_system_site_packages: false
+    extra_requirements: 
+        any_reg
+        dateutil
+        linearmodels
+        
