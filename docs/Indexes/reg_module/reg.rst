@@ -1,7 +1,7 @@
 reg module
 ==========
 
-.. automodule:: reg.reg
+.. automodule:: dero.reg.reg
     :members:
     :inherited-members:
     :undoc-members:
