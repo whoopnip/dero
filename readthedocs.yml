@@ -11,5 +11,5 @@ python:
     setup_py_install: true
     use_system_site_packages: false
     extra_requirements: 
-        [any_reg, dateutil, linearmodels]
+        [any_reg, dateutil, linearmodels, tkinter]
         
