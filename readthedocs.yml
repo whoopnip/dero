@@ -10,7 +10,7 @@ python:
     version: 3.6
     setup_py_install: true
     pip_install: false
-    use_system_site_packages: true
+    use_system_site_packages: false
     extra_requirements: 
-        [any_reg, dateutil, linearmodels, tkinter]
+        [any_reg, dateutil, linearmodels]
         
