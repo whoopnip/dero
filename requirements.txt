@@ -11,4 +11,4 @@ statsmodels
 matplotlib
 sympy
 pandastable
-Tkinter
+tkinter
