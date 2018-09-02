@@ -190,3 +190,5 @@ autodoc_mock_imports = [
     'any_reg', 'numpy', 'dateutil', 'selenium' 
 ]
 html_theme = 'default'
+import matplotlib
+matplotlib.use('agg')
