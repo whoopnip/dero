@@ -29,10 +29,14 @@ def _create_dropbox_info_path(appdata_str):
     Then checks if the info.json exists at that path, and if so returns the filepath, otherwise
     returns False
     """
-    path = os.path.join(os.environ[appdata_str], r'Dropbox\info.json')
-    if os.path.exists(path):
-        return path
-    return False
+    try:
+        path = os.path.join(os.environ[appdata_str], r'Dropbox\info.json')
+        if os.path.exists(path):
+            return path
+    except Exception as e:
+        raise e
+    finally:
+        return False
 
 def _get_dictionary_from_path_to_json(info_path):
     """
