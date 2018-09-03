@@ -46,6 +46,7 @@ setup(name='Dero',
         'statsmodels',
         'matplotlib',
         'sympy',
-        'pandastable', 
+        'pandastable',
+        'astor' 
         ],
      )
