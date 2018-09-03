@@ -32,13 +32,11 @@ def _create_dropbox_info_path(appdata_str):
     Then checks if the info.json exists at that path, and if so returns the filepath, otherwise
     returns False
     """
-    try:
-        path = os.path.join(os.environ[appdata_str], r'Dropbox\info.json')
-        if os.path.exists(path):
-            return path
-    except Exception as e:
-        return False
-        
+    path = _get_info_json_path(appdata_str)
+    if os.path.exists(path):
+        return path
+    return False
+            
 def _get_dictionary_from_path_to_json(info_path):
     """
     Loads a json file and returns as a dictionary
@@ -53,6 +51,22 @@ def _get_dropbox_path_from_dictionary(info_dict, account_type):
     Returns the 'path' value under the account_type dictionary within the main dictionary
     """
     return info_dict[account_type]['path']
+
+def _get_info_json_path(appdata_str: str) -> str:
+    """
+    Returns the filepath of the Dropbox info.json file, handling OS differences
+    """
+    os_name = platform.system()
+
+    try:
+        if os_name == 'Windows':
+            return os.path.join(os.environ[appdata_str], r'Dropbox\info.json')
+        elif os_name in ('Linux', 'Darwin'):
+            return os.path.expanduser('~/.dropbox/info.json')
+        else:
+            raise ValueError(f'could not handle os {os_name}')
+    except Exception as e:
+        return False
 
 
 filepath = _get_dropbox_location()
