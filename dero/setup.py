@@ -50,5 +50,5 @@ setup(name='Dero',
         'scipy',
         'linearmodels',
         'astor', 
-        'tkinter'],
+        ],
      )

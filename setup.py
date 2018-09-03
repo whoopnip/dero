@@ -47,5 +47,5 @@ setup(name='Dero',
         'matplotlib',
         'sympy',
         'pandastable', 
-        'tkinter'],
+        ],
      )
