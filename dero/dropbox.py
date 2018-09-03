@@ -2,6 +2,7 @@ __author__ = 'Nick'
 
 import os
 import json
+import platform
 
 def _get_dropbox_location(account_type='personal'):
     """
@@ -36,7 +37,7 @@ def _create_dropbox_info_path(appdata_str):
     if os.path.exists(path):
         return path
     return False
-            
+
 def _get_dictionary_from_path_to_json(info_path):
     """
     Loads a json file and returns as a dictionary
