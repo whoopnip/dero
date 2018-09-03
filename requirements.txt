@@ -13,4 +13,3 @@ sympy
 pandastable
 linearmodels
 astor
-
