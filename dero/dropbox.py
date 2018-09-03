@@ -15,9 +15,7 @@ def _get_dropbox_location(account_type='personal'):
         return _get_dropbox_path_from_dictionary(info_dict, account_type)
     else:
         return ""
-    #     info_dict = _get_dictionary_from_path_to_json(info_path)
-    # return _get_dropbox_path_from_dictionary(info_dict, account_type)
-
+    
 def _get_dropbox_info_path():
     """
     Returns filepath of Dropbox file info.json
