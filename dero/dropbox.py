@@ -40,7 +40,9 @@ def _create_dropbox_info_path(appdata_str):
             return path
     except Exception as e:
         raise e
-        return False
+    finally:
+        if not os.path.exists(path):    
+            return False
         
 def _get_dictionary_from_path_to_json(info_path):
     """
