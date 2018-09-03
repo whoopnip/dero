@@ -190,6 +190,8 @@ autodoc_mock_imports = [
 ]
 html_theme = 'default'
 
+
+# Old way of mocking:
 # from unittest.mock import MagicMock
 
 # class Mock(MagicMock):
@@ -199,3 +201,4 @@ html_theme = 'default'
 
 # MOCK_MODULES = ['tkinter']
 # sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+
