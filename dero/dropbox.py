@@ -10,8 +10,13 @@ def _get_dropbox_location(account_type='personal'):
     :param account_type: str, 'business' or 'personal'
     """
     info_path = _get_dropbox_info_path()
-    info_dict = _get_dictionary_from_path_to_json(info_path)
-    return _get_dropbox_path_from_dictionary(info_dict, account_type)
+    if info_path:
+        info_dict = _get_dictionary_from_path_to_json(info_path)
+        return _get_dropbox_path_from_dictionary(info_dict, account_type)
+    else:
+        return ""
+    #     info_dict = _get_dictionary_from_path_to_json(info_path)
+    # return _get_dropbox_path_from_dictionary(info_dict, account_type)
 
 def _get_dropbox_info_path():
     """
@@ -35,9 +40,8 @@ def _create_dropbox_info_path(appdata_str):
             return path
     except Exception as e:
         raise e
-    finally:
         return False
-
+        
 def _get_dictionary_from_path_to_json(info_path):
     """
     Loads a json file and returns as a dictionary
