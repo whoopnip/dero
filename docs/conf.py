@@ -186,7 +186,7 @@ todo_include_todos = True
 autodoc_mock_imports = [
     'unidecode', 'sas7bdat', 'pandasql', 'pandastable', 'statsmodels', 
     'pdfrw', 'linearmodels', 'matplotlib', 'pandas', 'sympy', 
-    'any_reg', 'numpy', 'dateutil', 'selenium'
+    'any_reg', 'numpy', 'dateutil', 'selenium', 'tkinter'
 ]
 html_theme = 'default'
 
