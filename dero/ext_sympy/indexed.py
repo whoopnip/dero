@@ -1,12 +1,37 @@
 import itertools
-from typing import List, Tuple, Set, Dict, Any
+from typing import List, Tuple, Set, Dict, Any, Union
 from sympy import Idx, Eq, Expr, Symbol
 from sympy.tensor.index_methods import get_indices, IndexConformanceException
 from dero.mixins.propertycache import SimplePropertyCacheMixin
 
+IntTuple = Tuple[int]
+IntOrIntTuple = Union[IntTuple, int]
+
 
 class IndexedEquation(Eq, SimplePropertyCacheMixin):
     is_IndexedEquation = True
+
+    def __getitem__(self, item: IntOrIntTuple):
+        raise NotImplementedError('have partial implementation, but need to handle order of indices to get working.')
+        if isinstance(item, int):
+            # cast to tuple
+            item = (item,)
+        lhs_indices = get_all_indices(self.lhs)
+        if len(item) != len(lhs_indices):
+            raise ValueError(f'could not align desired indices {item} with lhs indices {lhs_indices}')
+        sub_dict = {}
+        # TODO: this is becoming out of order because indices are not ordered
+        for i, idx in enumerate(lhs_indices):
+            sub_dict[idx] = item[i]
+        if not _sub_dict_is_valid_for_expr(sub_dict, self.lhs):
+            raise ValueError(f'invalid sub dict {sub_dict} for expr {self.lhs}')
+
+        evaled_lhs = self.lhs.subs(sub_dict)
+        for eq in self.evaluated_index_eqs:
+            if evaled_lhs in eq.lhs.free_symbols:
+                return eq
+
+        raise ValueError(f'could not find any evaluated index equations with lhs matching {evaled_lhs}')
 
     @property
     def evaluated_index_eqs(self):
@@ -150,5 +175,10 @@ def _sub_dict_is_valid_for_indices(sub_dict: Dict[Idx, Any], indices: Set[Idx]) 
 
 def _sub_dict_is_valid_for_equation(sub_dict: Dict[Idx, Any], equation: Eq) -> bool:
     indices = get_all_indices_for_eq(equation)
+
+    return _sub_dict_is_valid_for_indices(sub_dict, indices)
+
+def _sub_dict_is_valid_for_expr(sub_dict: Dict[Idx, Any], expr: Expr) -> bool:
+    indices = get_all_indices(expr)
 
     return _sub_dict_is_valid_for_indices(sub_dict, indices)
