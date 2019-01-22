@@ -2,6 +2,33 @@ import itertools
 from typing import List, Tuple, Set, Dict, Any
 from sympy import Idx, Eq, Expr, Symbol
 from sympy.tensor.index_methods import get_indices, IndexConformanceException
+from dero.mixins.propertycache import SimplePropertyCacheMixin
+
+
+class IndexedEquation(Eq, SimplePropertyCacheMixin):
+    is_IndexedEquation = True
+
+    @property
+    def evaluated_index_eqs(self):
+        return self._try_getattr_else_call_func('_evaluated_index_eqs', self._generate_evaluated_index_eqs)
+
+    @property
+    def indices(self):
+        return self._try_getattr_else_call_func('_indices', self._extract_indices)
+
+    @property
+    def index_symbols(self):
+        return self._try_getattr_else_call_func('_index_symbols', self._extract_symbols_from_indices)
+
+    def _extract_symbols_from_indices(self):
+        self._index_symbols = _get_symbols_from_indices(self.indices)
+
+    def _generate_evaluated_index_eqs(self):
+        self._evaluated_index_eqs = equations_from_indexed_equation(self, self.index_symbols)
+
+    def _extract_indices(self):
+        self._indices = get_all_indices_for_eq(self)
+
 
 
 def equations_from_indexed_equation(equation: Eq, indices: Tuple[Idx]) -> List[Eq]:
@@ -84,6 +111,12 @@ def get_all_indices(expr: Expr) -> Set[Idx]:
     return all_indices
 
 
+def get_all_indices_for_eq(equation: Eq) -> Set[Idx]:
+    indices = get_all_indices(equation.lhs)
+    indices.update(get_all_indices(equation.rhs))
+    return indices
+
+
 def _get_all_indices(expr: Expr) -> Set[Idx]:
     indices, empty_dict = get_indices(expr)
     return indices
@@ -116,7 +149,6 @@ def _sub_dict_is_valid_for_indices(sub_dict: Dict[Idx, Any], indices: Set[Idx]) 
 
 
 def _sub_dict_is_valid_for_equation(sub_dict: Dict[Idx, Any], equation: Eq) -> bool:
-    indices = get_all_indices(equation.lhs)
-    indices.update(get_all_indices(equation.rhs))
+    indices = get_all_indices_for_eq(equation)
 
     return _sub_dict_is_valid_for_indices(sub_dict, indices)
