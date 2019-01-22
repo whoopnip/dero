@@ -1,0 +1,122 @@
+import itertools
+from typing import List, Tuple, Set, Dict, Any
+from sympy import Idx, Eq, Expr, Symbol
+from sympy.tensor.index_methods import get_indices, IndexConformanceException
+
+
+def equations_from_indexed_equation(equation: Eq, indices: Tuple[Idx]) -> List[Eq]:
+    """
+    Generates a set of equations with evaluated indices from a single indexed equation
+
+    Args:
+        equation: must contain indices
+        indices: indices which should be evaluated
+
+    Returns:
+        evaluated equations
+
+    Examples:
+        >>> from sympy import symbols, Idx, IndexedBase, Eq
+        >>> N = 2
+        >>> T = 2
+        >>> i = Idx('i', range=(1, N))
+        >>> t = Idx('t', range=(0, T))
+
+        >>> price = IndexedBase('P', shape=(N, T + 1))
+        >>> ret = IndexedBase('r', shape=(N, T))
+
+        >>> p_eq = Eq(price[i, t], price[i, t - 1] * ret[i, t])
+
+        >>> equations_from_indexed_equation(p_eq, (i, t))
+
+        P_{1,1} = P_{1,0} r_{1,1}
+        P_{1,2} = P_{1,1} r_{1,2}
+        P_{2,1} = P_{2,0} r_{2,1}
+        P_{2,2} = P_{2,1} r_{2,2}
+
+    """
+    if not _all_bounds_are_numeric(indices):
+        # Not possible to create equations when bounds are symbolic
+        return equation
+
+    index_element_tuples = map(_elements_from_index, indices)
+    substitution_tuples = itertools.product(*index_element_tuples)
+
+    output_eqs = []
+    for sub_tup in substitution_tuples:
+        sub_dict = {index: sub_tup[i] for i, index in enumerate(indices)}
+        if _sub_dict_is_valid_for_equation(sub_dict, equation):
+            evaled_eq = equation.subs(sub_dict)
+            output_eqs.append(evaled_eq)
+
+    return output_eqs
+
+
+def _all_bounds_are_numeric(indexes: Tuple[Idx]) -> bool:
+    return all(map(_bounds_are_numeric, indexes))
+
+
+def _bounds_are_numeric(index: Idx) -> bool:
+    if (not index.lower.is_symbol) and (not index.upper.is_symbol):
+        return True
+
+    return False
+
+
+def _elements_from_index(index: Idx) -> Tuple:
+    return tuple([i for i in range(index.lower, index.upper + 1)])
+
+
+def get_all_indices(expr: Expr) -> Set[Idx]:
+    all_indices = set()
+    # First try to get indices for entire expr
+    try:
+        indices = _get_all_indices(expr)
+        all_indices.update(indices)
+    except IndexConformanceException:
+        pass
+
+    # Now get indices for each term of expr
+    for term in expr.args:
+        # Recursively call get indices on each sub term
+        indices = get_all_indices(term)
+        all_indices.update(indices)
+    return all_indices
+
+
+def _get_all_indices(expr: Expr) -> Set[Idx]:
+    indices, empty_dict = get_indices(expr)
+    return indices
+
+
+def _get_symbols_from_indices(idx_set: Set[Idx]) -> Set[Symbol]:
+    all_symbols = set()
+    for idx in idx_set:
+        all_symbols.update(idx.free_symbols)
+    return all_symbols
+
+
+def _is_in_indices(sym: Symbol, idx_set: Set[Idx]) -> bool:
+    symbols = _get_symbols_from_indices(idx_set)
+    return sym in symbols
+
+
+def _sub_dict_is_valid_for_indices(sub_dict: Dict[Idx, Any], indices: Set[Idx]) -> bool:
+    for idx in indices:
+        for sub_idx, sub_val in sub_dict.items():
+            if _is_in_indices(sub_idx, {idx}):
+                symbols = idx.free_symbols
+                result = idx.subs(sub_dict)
+                for symbol in symbols:
+                    if hasattr(symbol, 'lower') and result < symbol.lower:
+                        return False
+                    if hasattr(symbol, 'upper') and result > symbol.upper:
+                        return False
+    return True
+
+
+def _sub_dict_is_valid_for_equation(sub_dict: Dict[Idx, Any], equation: Eq) -> bool:
+    indices = get_all_indices(equation.lhs)
+    indices.update(get_all_indices(equation.rhs))
+
+    return _sub_dict_is_valid_for_indices(sub_dict, indices)
