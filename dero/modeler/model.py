@@ -1,6 +1,7 @@
-from sympy import Eq, solve
-from dero.modeler.typing import EqList, Any, List, Equation
+from sympy import Eq, solve, Expr
+from dero.modeler.typing import EqList, Any, List, Equation, EquationOrNone
 from dero.ext_sympy.subs import substitute_equations, substitute_equations_ordered
+from dero.ext_sympy.match import get_equation_where_lhs_matches
 
 
 class Model:
@@ -26,5 +27,9 @@ class Model:
 
     def solve(self, *symbols, **flags):
         return solve(self.evaluated_equations, *symbols, **flags)
+
+    def get_eq_for(self, lhs_expr: Expr) -> EquationOrNone:
+        return get_equation_where_lhs_matches(lhs_expr, self.evaluated_equations)
+
 
 
