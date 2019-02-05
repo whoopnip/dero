@@ -1,5 +1,5 @@
 from typing import List
-from sympy import Eq
+from sympy import Eq, Expr
 
 
 def substitute_equations(orig_eq: Eq, sub_eqs: List[Eq]) -> Eq:

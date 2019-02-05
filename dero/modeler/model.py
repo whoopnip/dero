@@ -1,3 +1,4 @@
+from copy import deepcopy
 from sympy import Eq, solve, Expr
 from dero.modeler.typing import EqList, Any, List, Equation, EquationOrNone
 from dero.ext_sympy.subs import substitute_equations, substitute_equations_ordered
@@ -30,6 +31,32 @@ class Model:
 
     def get_eq_for(self, lhs_expr: Expr) -> EquationOrNone:
         return get_equation_where_lhs_matches(lhs_expr, self.evaluated_equations)
+
+    def subs(self, *args, **kwargs):
+        new_model = deepcopy(self)
+        new_model.equations = [eq.subs(*args, **kwargs) for eq in self.equations]
+        new_model.evaluated_equations = [eq.subs(*args, **kwargs) for eq in self.evaluated_equations]
+
+        # TODO: deep sub, run on loop, extract definitions so they don't evaluate as true. stop when equations stop changing.
+        new_model._eliminate_useless_eqs()  # need to do before reevaluating as expecting eq but have True
+        new_model._reevaluate_eqs()
+        new_model._eliminate_useless_eqs()  # need to do again after reevaluating as some are newly True
+
+        return new_model
+
+    def _eliminate_useless_eqs(self):
+        self.equations = [eq for eq in self.equations if not eq == True]
+        self.evaluated_equations = [eq for eq in self.evaluated_equations if not eq == True]
+
+    def _reevaluate_eqs(self):
+        self.equations = [
+            substitute_equations_ordered(eq, self.equations) for eq in self.equations
+        ]
+        self.evaluated_equations = [
+            substitute_equations_ordered(eq, self.evaluated_equations) for eq in self.evaluated_equations
+        ]
+
+
 
 
 

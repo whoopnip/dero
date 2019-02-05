@@ -11,27 +11,27 @@ IntOrIntTuple = Union[IntTuple, int]
 class IndexedEquation(Eq, SimplePropertyCacheMixin):
     is_IndexedEquation = True
 
-    def __getitem__(self, item: IntOrIntTuple):
-        raise NotImplementedError('have partial implementation, but need to handle order of indices to get working.')
-        if isinstance(item, int):
-            # cast to tuple
-            item = (item,)
-        lhs_indices = get_all_indices(self.lhs)
-        if len(item) != len(lhs_indices):
-            raise ValueError(f'could not align desired indices {item} with lhs indices {lhs_indices}')
-        sub_dict = {}
-        # TODO: this is becoming out of order because indices are not ordered
-        for i, idx in enumerate(lhs_indices):
-            sub_dict[idx] = item[i]
-        if not _sub_dict_is_valid_for_expr(sub_dict, self.lhs):
-            raise ValueError(f'invalid sub dict {sub_dict} for expr {self.lhs}')
-
-        evaled_lhs = self.lhs.subs(sub_dict)
-        for eq in self.evaluated_index_eqs:
-            if evaled_lhs in eq.lhs.free_symbols:
-                return eq
-
-        raise ValueError(f'could not find any evaluated index equations with lhs matching {evaled_lhs}')
+    # def __getitem__(self, item: IntOrIntTuple):
+    #     raise NotImplementedError('have partial implementation, but need to handle order of indices to get working.')
+    #     if isinstance(item, int):
+    #         # cast to tuple
+    #         item = (item,)
+    #     lhs_indices = get_all_indices(self.lhs)
+    #     if len(item) != len(lhs_indices):
+    #         raise ValueError(f'could not align desired indices {item} with lhs indices {lhs_indices}')
+    #     sub_dict = {}
+    #     # TODO: this is becoming out of order because indices are not ordered
+    #     for i, idx in enumerate(lhs_indices):
+    #         sub_dict[idx] = item[i]
+    #     if not _sub_dict_is_valid_for_expr(sub_dict, self.lhs):
+    #         raise ValueError(f'invalid sub dict {sub_dict} for expr {self.lhs}')
+    #
+    #     evaled_lhs = self.lhs.subs(sub_dict)
+    #     for eq in self.evaluated_index_eqs:
+    #         if evaled_lhs in eq.lhs.free_symbols:
+    #             return eq
+    #
+    #     raise ValueError(f'could not find any evaluated index equations with lhs matching {evaled_lhs}')
 
     @property
     def evaluated_index_eqs(self):
@@ -109,10 +109,21 @@ def _all_bounds_are_numeric(indexes: Tuple[Idx]) -> bool:
 
 
 def _bounds_are_numeric(index: Idx) -> bool:
-    if (not index.lower.is_symbol) and (not index.upper.is_symbol):
+    if (
+            hasattr(index, 'lower') and _bound_is_numeric(index.lower) and
+            hasattr(index, 'upper') and _bound_is_numeric(index.upper)
+    ):
         return True
 
     return False
+
+
+def _bound_is_numeric(any: Any) -> bool:
+    if not hasattr(any, 'is_symbol'):
+        # if doesn't have is_symbol property, assumed we got a number
+        return True
+
+    return not any.is_symbol
 
 
 def _elements_from_index(index: Idx) -> Tuple:
