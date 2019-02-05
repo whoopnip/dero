@@ -1,5 +1,5 @@
 
-import math, time, datetime, timeit
+import math, time, datetime, timeit, sys
 
 def time_elapsed(seconds):
     '''
@@ -95,6 +95,7 @@ def estimate_time(length,i,start_time,output=True):
     
     if output == True:
         print("Estimated finish time: {}. Completed {}/{}, ({:.0%})".format(est_finish_time, i, length, i/length), end="\r")
+        sys.stdout.flush()
     
     return est_finish_time
 
