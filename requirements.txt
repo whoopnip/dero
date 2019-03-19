@@ -13,3 +13,5 @@ sympy
 pandastable
 linearmodels
 astor
+PyPDF2
+sklearn
