@@ -4,8 +4,8 @@ from dero.ml.typing import AllModelResultsDict
 
 def train_and_score_model(model, x_train: pd.DataFrame, y_train: pd.Series, x_val: pd.DataFrame,
                           y_val: pd.Series) -> float:
-    model.fit(x_train, y_train)
-    return model.score(x_val, y_val)
+    model.fit(x_train.values, y_train.values)
+    return model.score(x_val.values, y_val.values)
 
 
 def train_and_score_models(models, x_train: pd.DataFrame, y_train: pd.Series, x_val: pd.DataFrame,
