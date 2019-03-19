@@ -1,6 +1,9 @@
 
 import os
+from typing import Sequence, List
 from pdfrw import PdfReader, PdfWriter
+from PyPDF2 import PdfFileMerger
+
 
 def strip_pages_pdf(indir, infile, outdir=None, outfile=None, numpages=1, keep=False):
     '''
@@ -26,3 +29,18 @@ def strip_pages_pdf(indir, infile, outdir=None, outfile=None, numpages=1, keep=F
                 output.addpage(page)
 
     output.write(outpath)
+
+
+def merge_pdfs(pdf_paths: Sequence[str], out_path: str):
+    merger = PdfFileMerger()
+
+    for pdf in pdf_paths:
+        merger.append(pdf)
+
+    merger.write(out_path)
+
+
+def pdf_filenames_in_folder(folder: str) -> List[str]:
+    pdf_files = [file for file in next(os.walk(folder))[2] if file.endswith('.pdf')]
+    return pdf_files
+
