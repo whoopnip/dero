@@ -51,5 +51,6 @@ setup(name='Dero',
         'pandastable',
         'astor',
         'PyPDF2',
-        'sklearn'],
+        'sklearn',
+        'latex'],
      )
