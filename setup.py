@@ -52,5 +52,7 @@ setup(name='Dero',
         'astor',
         'PyPDF2',
         'sklearn',
-        'latex'],
+        'latex',
+        'bibtexparser'
+       ],
      )

@@ -16,3 +16,4 @@ astor
 PyPDF2
 sklearn
 latex
+bibtexparser
