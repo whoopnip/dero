@@ -1,0 +1,672 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.latex.models package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-latex-models-package">
+<h1>dero.latex.models package<a class="headerlink" href="#dero-latex-models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.boxes.html">dero.latex.models.boxes package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.boxes.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.boxes.html#module-dero.latex.models.boxes.base">dero.latex.models.boxes.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.boxes.html#module-dero.latex.models.boxes.vbox">dero.latex.models.boxes.vbox module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.boxes.html#module-dero.latex.models.boxes">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.commands.html">dero.latex.models.commands package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.commands.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.commands.html#module-dero.latex.models.commands.begin">dero.latex.models.commands.begin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.commands.html#module-dero.latex.models.commands.end">dero.latex.models.commands.end module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.commands.html#module-dero.latex.models.commands.endfloat">dero.latex.models.commands.endfloat module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.commands.html#module-dero.latex.models.commands.floatrow">dero.latex.models.commands.floatrow module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.commands.html#module-dero.latex.models.commands.newenvironment">dero.latex.models.commands.newenvironment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.commands.html#module-dero.latex.models.commands.renewcommand">dero.latex.models.commands.renewcommand module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.commands.html#module-dero.latex.models.commands">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.control.html">dero.latex.models.control package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.control.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.control.html#module-dero.latex.models.control.documentclass">dero.latex.models.control.documentclass module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.control.html#module-dero.latex.models.control.extrafloats">dero.latex.models.control.extrafloats module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.control.html#module-dero.latex.models.control.filecontents">dero.latex.models.control.filecontents module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.control.html#module-dero.latex.models.control.maxdeadcycles">dero.latex.models.control.maxdeadcycles module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.control.html#dero-latex-models-control-mode-module">dero.latex.models.control.mode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.control.html#module-dero.latex.models.control">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.credits.html">dero.latex.models.credits package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.credits.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dero.latex.models.credits.institution.html">dero.latex.models.credits.institution package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.credits.institution.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.credits.institution.html#module-dero.latex.models.credits.institution.inst">dero.latex.models.credits.institution.inst module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.credits.institution.html#module-dero.latex.models.credits.institution.institute">dero.latex.models.credits.institution.institute module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.credits.institution.html#module-dero.latex.models.credits.institution">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.credits.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.credits.html#module-dero.latex.models.credits.author">dero.latex.models.credits.author module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.credits.html#module-dero.latex.models.credits">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.format.html">dero.latex.models.format package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.format.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.format.html#module-dero.latex.models.format.and_">dero.latex.models.format.and_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.format.html#module-dero.latex.models.format.breaks">dero.latex.models.format.breaks module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.format.html#module-dero.latex.models.format.linespacing">dero.latex.models.format.linespacing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.format.html#module-dero.latex.models.format.raw">dero.latex.models.format.raw module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.format.html#module-dero.latex.models.format.sectionnum">dero.latex.models.format.sectionnum module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.format.html#module-dero.latex.models.format.text">dero.latex.models.format.text module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.format.html#module-dero.latex.models.format.textcolor">dero.latex.models.format.textcolor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.format.html#module-dero.latex.models.format.vfill">dero.latex.models.format.vfill module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.format.html#module-dero.latex.models.format">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.lists.html">dero.latex.models.lists package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.lists.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.lists.html#dero-latex-models-lists-base-module">dero.latex.models.lists.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.lists.html#dero-latex-models-lists-item-module">dero.latex.models.lists.item module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.lists.html#dero-latex-models-lists-ordered-module">dero.latex.models.lists.ordered module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.lists.html#dero-latex-models-lists-unordered-module">dero.latex.models.lists.unordered module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.lists.html#module-dero.latex.models.lists">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.page.html">dero.latex.models.page package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.page.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.page.html#module-dero.latex.models.page.footer">dero.latex.models.page.footer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.page.html#module-dero.latex.models.page.header">dero.latex.models.page.header module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.page.html#module-dero.latex.models.page.number">dero.latex.models.page.number module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.page.html#module-dero.latex.models.page.style">dero.latex.models.page.style module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.page.html#module-dero.latex.models.page">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.presentation.html">dero.latex.models.presentation package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.presentation.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dero.latex.models.presentation.beamer.html">dero.latex.models.presentation.beamer package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.presentation.beamer.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="dero.latex.models.presentation.beamer.columns.html">dero.latex.models.presentation.beamer.columns package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.columns.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.columns.html#module-dero.latex.models.presentation.beamer.columns.column">dero.latex.models.presentation.beamer.columns.column module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.columns.html#module-dero.latex.models.presentation.beamer.columns.columns">dero.latex.models.presentation.beamer.columns.columns module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.columns.html#module-dero.latex.models.presentation.beamer.columns">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="dero.latex.models.presentation.beamer.frame.html">dero.latex.models.presentation.beamer.frame package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.frame.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.frame.html#module-dero.latex.models.presentation.beamer.frame.frame">dero.latex.models.presentation.beamer.frame.frame module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.frame.html#module-dero.latex.models.presentation.beamer.frame.title">dero.latex.models.presentation.beamer.frame.title module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.frame.html#module-dero.latex.models.presentation.beamer.frame">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="dero.latex.models.presentation.beamer.overlay.html">dero.latex.models.presentation.beamer.overlay package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.overlay.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.overlay.html#module-dero.latex.models.presentation.beamer.overlay.next">dero.latex.models.presentation.beamer.overlay.next module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.overlay.html#module-dero.latex.models.presentation.beamer.overlay.offset">dero.latex.models.presentation.beamer.overlay.offset module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.overlay.html#module-dero.latex.models.presentation.beamer.overlay.overlay">dero.latex.models.presentation.beamer.overlay.overlay module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.overlay.html#module-dero.latex.models.presentation.beamer.overlay.overlay_param">dero.latex.models.presentation.beamer.overlay.overlay_param module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.overlay.html#module-dero.latex.models.presentation.beamer.overlay.range">dero.latex.models.presentation.beamer.overlay.range module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.overlay.html#module-dero.latex.models.presentation.beamer.overlay.until_end">dero.latex.models.presentation.beamer.overlay.until_end module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.overlay.html#module-dero.latex.models.presentation.beamer.overlay">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="dero.latex.models.presentation.beamer.theme.html">dero.latex.models.presentation.beamer.theme package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.theme.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.theme.html#module-dero.latex.models.presentation.beamer.theme.usetheme">dero.latex.models.presentation.beamer.theme.usetheme module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.presentation.beamer.theme.html#module-dero.latex.models.presentation.beamer.theme">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.presentation.beamer.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.presentation.beamer.html#module-dero.latex.models.presentation.beamer.block">dero.latex.models.presentation.beamer.block module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.presentation.beamer.html#module-dero.latex.models.presentation.beamer">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.presentation.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.presentation.html#module-dero.latex.models.presentation.presentation">dero.latex.models.presentation.presentation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.presentation.html#module-dero.latex.models.presentation">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.references.html">dero.latex.models.references package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.references.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dero.latex.models.references.bibtex.html">dero.latex.models.references.bibtex package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.references.bibtex.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="dero.latex.models.references.bibtex.style.html">dero.latex.models.references.bibtex.style package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.references.bibtex.style.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="dero.latex.models.references.bibtex.style.custom.html">dero.latex.models.references.bibtex.style.custom package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="dero.latex.models.references.bibtex.style.custom.html#submodules">Submodules</a></li>
+<li class="toctree-l8"><a class="reference internal" href="dero.latex.models.references.bibtex.style.custom.html#module-dero.latex.models.references.bibtex.style.custom.jof">dero.latex.models.references.bibtex.style.custom.jof module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="dero.latex.models.references.bibtex.style.custom.html#module-dero.latex.models.references.bibtex.style.custom">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.references.bibtex.style.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.references.bibtex.style.html#module-dero.latex.models.references.bibtex.style.builtin_styles">dero.latex.models.references.bibtex.style.builtin_styles module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.references.bibtex.style.html#module-dero.latex.models.references.bibtex.style.manager">dero.latex.models.references.bibtex.style.manager module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.references.bibtex.style.html#module-dero.latex.models.references.bibtex.style.style">dero.latex.models.references.bibtex.style.style module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="dero.latex.models.references.bibtex.style.html#module-dero.latex.models.references.bibtex.style">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.references.bibtex.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.references.bibtex.html#module-dero.latex.models.references.bibtex.addresource">dero.latex.models.references.bibtex.addresource module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.references.bibtex.html#module-dero.latex.models.references.bibtex.article">dero.latex.models.references.bibtex.article module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.references.bibtex.html#module-dero.latex.models.references.bibtex.base">dero.latex.models.references.bibtex.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.references.bibtex.html#module-dero.latex.models.references.bibtex.generic">dero.latex.models.references.bibtex.generic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.references.bibtex.html#module-dero.latex.models.references.bibtex.manual">dero.latex.models.references.bibtex.manual module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.references.bibtex.html#module-dero.latex.models.references.bibtex.misc">dero.latex.models.references.bibtex.misc module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.references.bibtex.html#module-dero.latex.models.references.bibtex.printbib">dero.latex.models.references.bibtex.printbib module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.latex.models.references.bibtex.html#module-dero.latex.models.references.bibtex">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.references.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.references.html#module-dero.latex.models.references.bibliography">dero.latex.models.references.bibliography module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.references.html#module-dero.latex.models.references.citations">dero.latex.models.references.citations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.references.html#module-dero.latex.models.references">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.section.html">dero.latex.models.section package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.section.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.section.html#module-dero.latex.models.section.abstract">dero.latex.models.section.abstract module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.section.html#module-dero.latex.models.section.appendix">dero.latex.models.section.appendix module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.section.html#module-dero.latex.models.section.base">dero.latex.models.section.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.section.html#module-dero.latex.models.section.paragraphs">dero.latex.models.section.paragraphs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.section.html#module-dero.latex.models.section.sections">dero.latex.models.section.sections module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.section.html#module-dero.latex.models.section">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.sizes.html">dero.latex.models.sizes package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.sizes.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.sizes.html#module-dero.latex.models.sizes.linewidth">dero.latex.models.sizes.linewidth module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.sizes.html#module-dero.latex.models.sizes.textheight">dero.latex.models.sizes.textheight module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.sizes.html#module-dero.latex.models.sizes.textsizes">dero.latex.models.sizes.textsizes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.sizes.html#module-dero.latex.models.sizes.textwidth">dero.latex.models.sizes.textwidth module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.sizes.html#module-dero.latex.models.sizes">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.latex.models.title.html">dero.latex.models.title package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.title.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.title.html#module-dero.latex.models.title.frame">dero.latex.models.title.frame module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.title.html#module-dero.latex.models.title.framepage">dero.latex.models.title.framepage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.title.html#module-dero.latex.models.title.page">dero.latex.models.title.page module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.title.html#module-dero.latex.models.title.subtitle">dero.latex.models.title.subtitle module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.title.html#module-dero.latex.models.title.title">dero.latex.models.title.title module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.latex.models.title.html#module-dero.latex.models.title">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.latex.models.caption">
+<span id="dero-latex-models-caption-module"></span><h2>dero.latex.models.caption module<a class="headerlink" href="#module-dero.latex.models.caption" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.caption.Caption">
+<em class="property">class </em><code class="descclassname">dero.latex.models.caption.</code><code class="descname">Caption</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/caption.html#Caption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.caption.Caption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.SimpleItem" title="dero.latex.models.item.SimpleItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.SimpleItem</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.caption.Caption.name">
+<code class="descname">name</code><em class="property"> = 'caption'</em><a class="headerlink" href="#dero.latex.models.caption.Caption.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.containeritem">
+<span id="dero-latex-models-containeritem-module"></span><h2>dero.latex.models.containeritem module<a class="headerlink" href="#module-dero.latex.models.containeritem" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.containeritem.ContainerItem">
+<em class="property">class </em><code class="descclassname">dero.latex.models.containeritem.</code><code class="descname">ContainerItem</code><span class="sig-paren">(</span><em>name</em>, <em>content</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/containeritem.html#ContainerItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.containeritem.ContainerItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.documentitem.DocumentItem" title="dero.latex.models.documentitem.DocumentItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.documentitem.DocumentItem</span></code></a></p>
+<p>Inherit to be able to include LaTeX objects inside LaTeX objects</p>
+<dl class="method">
+<dt id="dero.latex.models.containeritem.ContainerItem.add_data_from_content">
+<code class="descname">add_data_from_content</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/containeritem.html#ContainerItem.add_data_from_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.containeritem.ContainerItem.add_data_from_content" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.models.containeritem.ContainerItem.init_data">
+<code class="descname">init_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/containeritem.html#ContainerItem.init_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.containeritem.ContainerItem.init_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.date">
+<span id="dero-latex-models-date-module"></span><h2>dero.latex.models.date module<a class="headerlink" href="#module-dero.latex.models.date" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.date.Date">
+<em class="property">class </em><code class="descclassname">dero.latex.models.date.</code><code class="descname">Date</code><span class="sig-paren">(</span><em>contents=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/date.html#Date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.date.Date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.SimpleItem" title="dero.latex.models.item.SimpleItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.SimpleItem</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.date.Date.name">
+<code class="descname">name</code><em class="property"> = 'date'</em><a class="headerlink" href="#dero.latex.models.date.Date.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.document">
+<span id="dero-latex-models-document-module"></span><h2>dero.latex.models.document module<a class="headerlink" href="#module-dero.latex.models.document" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.document.Document">
+<em class="property">class </em><code class="descclassname">dero.latex.models.document.</code><code class="descname">Document</code><span class="sig-paren">(</span><em>content: typing.Union[dero.latex.models.item.Item, dero.latex.models.documentitem.DocumentItem, typing.List[typing.Union[dero.latex.models.item.Item, dero.latex.models.documentitem.DocumentItem]]], packages: typing.List[dero.latex.models.package.Package] = None, landscape=False, title: str = None, author: str = None, date: str = None, abstract: str = None, skip_title_page: bool = False, page_modifier_str: typing.Union[str, NoneType] = 'margin=0.8in, bottom=1.2in', page_header: bool = False, page_numbers: bool = True, appendix_modifier_str: typing.Union[str, NoneType] = 'page', section_numbering_styles: typing.Union[typing.Dict[str, str], NoneType] = None, floats_at_end: bool = False, floats_at_end_options: str = 'nolists', document_type: str = 'article', font_size: typing.Union[float, NoneType] = None, num_columns: typing.Union[int, NoneType] = None, line_spacing: typing.Union[float, NoneType] = None, tables_relative_font_size: int = 0, figures_relative_font_size: int = 0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/document.html#Document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.document.Document" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.document.DocumentBase" title="dero.latex.models.document.DocumentBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.document.DocumentBase</span></code></a></p>
+<dl class="method">
+<dt id="dero.latex.models.document.Document.construct_packages">
+<code class="descname">construct_packages</code><span class="sig-paren">(</span><em>packages: typing.List[dero.latex.models.package.Package] = None</em>, <em>page_modifier_str: typing.Union[str</em>, <em>NoneType] = 'margin=0.8in</em>, <em>bottom=1.2in'</em>, <em>appendix_modifier_str: typing.Union[str</em>, <em>NoneType] = 'page'</em>, <em>floats_at_end: bool = False</em>, <em>floats_at_end_options: str = 'nolists'</em>, <em>line_spacing: typing.Union[float</em>, <em>NoneType] = None</em>, <em>tables_relative_font_size: int = 0</em>, <em>figures_relative_font_size: int = 0</em><span class="sig-paren">)</span> &#x2192; typing.List[dero.latex.models.package.Package]<a class="reference internal" href="_modules/dero/latex/models/document.html#Document.construct_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.document.Document.construct_packages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.models.document.Document.name">
+<code class="descname">name</code><em class="property"> = 'document'</em><a class="headerlink" href="#dero.latex.models.document.Document.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.document.DocumentBase">
+<em class="property">class </em><code class="descclassname">dero.latex.models.document.</code><code class="descname">DocumentBase</code><span class="sig-paren">(</span><em>content: typing.Union[dero.latex.models.item.Item, dero.latex.models.documentitem.DocumentItem, typing.List[typing.Union[dero.latex.models.item.Item, dero.latex.models.documentitem.DocumentItem]]], packages: typing.List[dero.latex.models.package.Package] = None, pre_env_contents: typing.Union[dero.latex.models.item.Item, dero.latex.models.documentitem.DocumentItem, typing.List[typing.Union[dero.latex.models.item.Item, dero.latex.models.documentitem.DocumentItem]], NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/document.html#DocumentBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.document.DocumentBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.containeritem.ContainerItem" title="dero.latex.models.containeritem.ContainerItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.containeritem.ContainerItem</span></code></a>, <a class="reference internal" href="#dero.latex.models.item.Item" title="dero.latex.models.item.Item"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.Item</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.document.DocumentBase.document_class_obj">
+<code class="descname">document_class_obj</code><em class="property"> = None</em><a class="headerlink" href="#dero.latex.models.document.DocumentBase.document_class_obj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.models.document.DocumentBase.from_ambiguous_collection">
+<em class="property">classmethod </em><code class="descname">from_ambiguous_collection</code><span class="sig-paren">(</span><em>collection</em>, <em>**document_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/document.html#DocumentBase.from_ambiguous_collection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.document.DocumentBase.from_ambiguous_collection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.models.document.DocumentBase.name">
+<code class="descname">name</code><em class="property"> = '&lt;invalid, do not use DocumentBase directly&gt;'</em><a class="headerlink" href="#dero.latex.models.document.DocumentBase.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.models.document.DocumentBase.to_pdf_and_move">
+<code class="descname">to_pdf_and_move</code><span class="sig-paren">(</span><em>outfolder</em>, <em>outname='document'</em>, <em>move_folder_name='Tables'</em>, <em>as_document=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/document.html#DocumentBase.to_pdf_and_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.document.DocumentBase.to_pdf_and_move" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.document.DocumentEnvironment">
+<em class="property">class </em><code class="descclassname">dero.latex.models.document.</code><code class="descname">DocumentEnvironment</code><a class="reference internal" href="_modules/dero/latex/models/document.html#DocumentEnvironment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.document.DocumentEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.environment.Environment" title="dero.latex.models.environment.Environment"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.environment.Environment</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.document.DocumentEnvironment.name">
+<code class="descname">name</code><em class="property"> = 'document'</em><a class="headerlink" href="#dero.latex.models.document.DocumentEnvironment.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.documentitem">
+<span id="dero-latex-models-documentitem-module"></span><h2>dero.latex.models.documentitem module<a class="headerlink" href="#module-dero.latex.models.documentitem" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.documentitem.DocumentItem">
+<em class="property">class </em><code class="descclassname">dero.latex.models.documentitem.</code><code class="descname">DocumentItem</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/documentitem.html#DocumentItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.documentitem.DocumentItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.mixins.IsSpecificClassMixin" title="dero.latex.models.mixins.IsSpecificClassMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.mixins.IsSpecificClassMixin</span></code></a>, <a class="reference internal" href="#dero.latex.models.item.IsLatexItemMixin" title="dero.latex.models.item.IsLatexItemMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.IsLatexItemMixin</span></code></a></p>
+<p>Used for differentiating which items can be directly included in a document</p>
+<dl class="attribute">
+<dt id="dero.latex.models.documentitem.DocumentItem.is_DocumentItem">
+<code class="descname">is_DocumentItem</code><em class="property"> = True</em><a class="headerlink" href="#dero.latex.models.documentitem.DocumentItem.is_DocumentItem" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.documentsetup">
+<span id="dero-latex-models-documentsetup-module"></span><h2>dero.latex.models.documentsetup module<a class="headerlink" href="#module-dero.latex.models.documentsetup" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.documentsetup.DocumentSetupData">
+<em class="property">class </em><code class="descclassname">dero.latex.models.documentsetup.</code><code class="descname">DocumentSetupData</code><span class="sig-paren">(</span><em>filepaths: typing.Union[typing.List[str], NoneType] = None, binaries: typing.Union[typing.List[bytes], NoneType] = None, begin_document_items: typing.Union[typing.List[dero.latex.models.documentitem.DocumentItem], NoneType] = None, end_document_items: typing.Union[typing.List[dero.latex.models.documentitem.DocumentItem], NoneType] = None, packages: typing.Union[typing.List[dero.latex.models.package.Package], NoneType] = None, source_paths: typing.Union[typing.List[str], NoneType] = None, references: typing.Union[typing.Sequence[dero.latex.models.references.bibtex.base.BibTexEntryBase], NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/documentsetup.html#DocumentSetupData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.documentsetup.DocumentSetupData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.attrequals.EqOnAttrsMixin" title="dero.mixins.attrequals.EqOnAttrsMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.attrequals.EqOnAttrsMixin</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.attrequals.EqHashMixin" title="dero.mixins.attrequals.EqHashMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.attrequals.EqHashMixin</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.documentsetup.DocumentSetupData.attrs">
+<code class="descname">attrs</code><a class="headerlink" href="#dero.latex.models.documentsetup.DocumentSetupData.attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.models.documentsetup.DocumentSetupData.equal_attrs">
+<code class="descname">equal_attrs</code><em class="property"> = ['filepaths', 'binaries', 'begin_document_items', 'end_document_items', 'packages', 'source_paths', 'references']</em><a class="headerlink" href="#dero.latex.models.documentsetup.DocumentSetupData.equal_attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.models.documentsetup.DocumentSetupData.ignore_attrs">
+<code class="descname">ignore_attrs</code><em class="property"> = ['ignore_attrs', 'repr_cols', 'attrs', 'readable_repr', 'equal_attrs']</em><a class="headerlink" href="#dero.latex.models.documentsetup.DocumentSetupData.ignore_attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.models.documentsetup.DocumentSetupData.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['filepaths', 'begin_document_items', 'end_document_items', 'packages', 'source_paths', 'references']</em><a class="headerlink" href="#dero.latex.models.documentsetup.DocumentSetupData.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.documentsetup.UniqueDataList">
+<em class="property">class </em><code class="descclassname">dero.latex.models.documentsetup.</code><code class="descname">UniqueDataList</code><span class="sig-paren">(</span><em>iterable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/documentsetup.html#UniqueDataList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.documentsetup.UniqueDataList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">list</span></code></p>
+<dl class="method">
+<dt id="dero.latex.models.documentsetup.UniqueDataList.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/documentsetup.html#UniqueDataList.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.documentsetup.UniqueDataList.append" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.models.documentsetup.UniqueDataList.extend">
+<code class="descname">extend</code><span class="sig-paren">(</span><em>iterable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/documentsetup.html#UniqueDataList.extend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.documentsetup.UniqueDataList.extend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.environment">
+<span id="dero-latex-models-environment-module"></span><h2>dero.latex.models.environment module<a class="headerlink" href="#module-dero.latex.models.environment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.environment.Environment">
+<em class="property">class </em><code class="descclassname">dero.latex.models.environment.</code><code class="descname">Environment</code><span class="sig-paren">(</span><em>name</em>, <em>modifiers: typing.Union[str</em>, <em>NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/environment.html#Environment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.environment.Environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dero.latex.models.environment.Environment.wrap">
+<code class="descname">wrap</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/environment.html#Environment.wrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.environment.Environment.wrap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.equation">
+<span id="dero-latex-models-equation-module"></span><h2>dero.latex.models.equation module<a class="headerlink" href="#module-dero.latex.models.equation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.equation.Equation">
+<em class="property">class </em><code class="descclassname">dero.latex.models.equation.</code><code class="descname">Equation</code><span class="sig-paren">(</span><em>eq: typing.Union[sympy.core.relational.Equality</em>, <em>NoneType] = None</em>, <em>str_eq: typing.Union[str</em>, <em>NoneType] = None</em>, <em>inline: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/equation.html#Equation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.equation.Equation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.mixins.IsSpecificClassMixin" title="dero.latex.models.mixins.IsSpecificClassMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.mixins.IsSpecificClassMixin</span></code></a>, <a class="reference internal" href="#dero.latex.models.item.IsLatexItemMixin" title="dero.latex.models.item.IsLatexItemMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.IsLatexItemMixin</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.equation.Equation.eq_str">
+<code class="descname">eq_str</code><a class="headerlink" href="#dero.latex.models.equation.Equation.eq_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.models.equation.Equation.formatted_eq">
+<code class="descname">formatted_eq</code><a class="headerlink" href="#dero.latex.models.equation.Equation.formatted_eq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.models.equation.Equation.name">
+<code class="descname">name</code><em class="property"> = 'equation'</em><a class="headerlink" href="#dero.latex.models.equation.Equation.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.footnote">
+<span id="dero-latex-models-footnote-module"></span><h2>dero.latex.models.footnote module<a class="headerlink" href="#module-dero.latex.models.footnote" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.footnote.Footnote">
+<em class="property">class </em><code class="descclassname">dero.latex.models.footnote.</code><code class="descname">Footnote</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/footnote.html#Footnote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.footnote.Footnote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.SimpleItem" title="dero.latex.models.item.SimpleItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.SimpleItem</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.footnote.Footnote.name">
+<code class="descname">name</code><em class="property"> = 'footnote'</em><a class="headerlink" href="#dero.latex.models.footnote.Footnote.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="dero-latex-models-item-module">
+<h2>dero.latex.models.item module<a class="headerlink" href="#dero-latex-models-item-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-dero.latex.models.item"></span><dl class="class">
+<dt id="dero.latex.models.item.DataItem">
+<em class="property">class </em><code class="descclassname">dero.latex.models.item.</code><code class="descname">DataItem</code><a class="reference internal" href="_modules/dero/latex/models/item.html#DataItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.item.DataItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dero.latex.models.item.DataItem.init_data">
+<code class="descname">init_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/item.html#DataItem.init_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.item.DataItem.init_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.item.EqualsItem">
+<em class="property">class </em><code class="descclassname">dero.latex.models.item.</code><code class="descname">EqualsItem</code><span class="sig-paren">(</span><em>name</em>, <em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/item.html#EqualsItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.item.EqualsItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.ItemBase" title="dero.latex.models.item.ItemBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.ItemBase</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.item.IsLatexItemMixin">
+<em class="property">class </em><code class="descclassname">dero.latex.models.item.</code><code class="descname">IsLatexItemMixin</code><a class="reference internal" href="_modules/dero/latex/models/item.html#IsLatexItemMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.item.IsLatexItemMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="dero.latex.models.item.IsLatexItemMixin.is_LatexItem">
+<code class="descname">is_LatexItem</code><em class="property"> = True</em><a class="headerlink" href="#dero.latex.models.item.IsLatexItemMixin.is_LatexItem" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.item.Item">
+<em class="property">class </em><code class="descclassname">dero.latex.models.item.</code><code class="descname">Item</code><span class="sig-paren">(</span><em>name</em>, <em>contents</em>, <em>pre_env_contents=None</em>, <em>post_env_contents=None</em>, <em>env_modifiers=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/item.html#Item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.item.Item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.ItemBase" title="dero.latex.models.item.ItemBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.ItemBase</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.item.Item.equal_attrs">
+<code class="descname">equal_attrs</code><em class="property"> = ['contents', 'pre_env_contents', 'post_env_contents', 'data', 'env']</em><a class="headerlink" href="#dero.latex.models.item.Item.equal_attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.item.ItemBase">
+<em class="property">class </em><code class="descclassname">dero.latex.models.item.</code><code class="descname">ItemBase</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/item.html#ItemBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.item.ItemBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.DataItem" title="dero.latex.models.item.DataItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.DataItem</span></code></a>, <a class="reference internal" href="#dero.latex.models.mixins.IsSpecificClassMixin" title="dero.latex.models.mixins.IsSpecificClassMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.mixins.IsSpecificClassMixin</span></code></a>, <a class="reference internal" href="#dero.latex.models.item.IsLatexItemMixin" title="dero.latex.models.item.IsLatexItemMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.IsLatexItemMixin</span></code></a>, <a class="reference internal" href="#dero.latex.models.mixins.StringAdditionMixin" title="dero.latex.models.mixins.StringAdditionMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.mixins.StringAdditionMixin</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.attrequals.EqOnAttrsMixin" title="dero.mixins.attrequals.EqOnAttrsMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.attrequals.EqOnAttrsMixin</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.attrequals.EqHashMixin" title="dero.mixins.attrequals.EqHashMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.attrequals.EqHashMixin</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.item.MultiOptionSimpleItem">
+<em class="property">class </em><code class="descclassname">dero.latex.models.item.</code><code class="descname">MultiOptionSimpleItem</code><a class="reference internal" href="_modules/dero/latex/models/item.html#MultiOptionSimpleItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.item.MultiOptionSimpleItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.ItemBase" title="dero.latex.models.item.ItemBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.ItemBase</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.item.NoBracesItem">
+<em class="property">class </em><code class="descclassname">dero.latex.models.item.</code><code class="descname">NoBracesItem</code><a class="reference internal" href="_modules/dero/latex/models/item.html#NoBracesItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.item.NoBracesItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.ItemBase" title="dero.latex.models.item.ItemBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.ItemBase</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.item.NoOptionsNoContentsItem">
+<em class="property">class </em><code class="descclassname">dero.latex.models.item.</code><code class="descname">NoOptionsNoContentsItem</code><a class="reference internal" href="_modules/dero/latex/models/item.html#NoOptionsNoContentsItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.item.NoOptionsNoContentsItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.ItemBase" title="dero.latex.models.item.ItemBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.ItemBase</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.item.SimpleItem">
+<em class="property">class </em><code class="descclassname">dero.latex.models.item.</code><code class="descname">SimpleItem</code><a class="reference internal" href="_modules/dero/latex/models/item.html#SimpleItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.item.SimpleItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.ItemBase" title="dero.latex.models.item.ItemBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.ItemBase</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.item.SimpleItem.equal_attrs">
+<code class="descname">equal_attrs</code><em class="property"> = ['contents', 'pre_env_contents', 'post_env_contents', 'data']</em><a class="headerlink" href="#dero.latex.models.item.SimpleItem.equal_attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.label">
+<span id="dero-latex-models-label-module"></span><h2>dero.latex.models.label module<a class="headerlink" href="#module-dero.latex.models.label" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.label.Label">
+<em class="property">class </em><code class="descclassname">dero.latex.models.label.</code><code class="descname">Label</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/label.html#Label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.label.Label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.SimpleItem" title="dero.latex.models.item.SimpleItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.SimpleItem</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.label.Label.name">
+<code class="descname">name</code><em class="property"> = 'label'</em><a class="headerlink" href="#dero.latex.models.label.Label.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.landscape">
+<span id="dero-latex-models-landscape-module"></span><h2>dero.latex.models.landscape module<a class="headerlink" href="#module-dero.latex.models.landscape" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.landscape.Landscape">
+<em class="property">class </em><code class="descclassname">dero.latex.models.landscape.</code><code class="descname">Landscape</code><a class="reference internal" href="_modules/dero/latex/models/landscape.html#Landscape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.landscape.Landscape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.environment.Environment" title="dero.latex.models.environment.Environment"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.environment.Environment</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.landscape.Landscape.name">
+<code class="descname">name</code><em class="property"> = 'landscape'</em><a class="headerlink" href="#dero.latex.models.landscape.Landscape.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.mixins">
+<span id="dero-latex-models-mixins-module"></span><h2>dero.latex.models.mixins module<a class="headerlink" href="#module-dero.latex.models.mixins" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.mixins.IsSpecificClassMixin">
+<em class="property">class </em><code class="descclassname">dero.latex.models.mixins.</code><code class="descname">IsSpecificClassMixin</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/mixins.html#IsSpecificClassMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.mixins.IsSpecificClassMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>creates attribute is_ClassName (with whatever class name)</p>
+<p>be sure to put this mixin first among multiple classes</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.mixins.StringAdditionMixin">
+<em class="property">class </em><code class="descclassname">dero.latex.models.mixins.</code><code class="descname">StringAdditionMixin</code><a class="reference internal" href="_modules/dero/latex/models/mixins.html#StringAdditionMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.mixins.StringAdditionMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dero.latex.models.mixins.StringAdditionMixin.join">
+<code class="descname">join</code><span class="sig-paren">(</span><em>iterable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/mixins.html#StringAdditionMixin.join"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.mixins.StringAdditionMixin.join" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.models.mixins.StringEqMixin">
+<em class="property">class </em><code class="descclassname">dero.latex.models.mixins.</code><code class="descname">StringEqMixin</code><a class="reference internal" href="_modules/dero/latex/models/mixins.html#StringEqMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.mixins.StringEqMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.package">
+<span id="dero-latex-models-package-module"></span><h2>dero.latex.models.package module<a class="headerlink" href="#module-dero.latex.models.package" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.package.Package">
+<em class="property">class </em><code class="descclassname">dero.latex.models.package.</code><code class="descname">Package</code><span class="sig-paren">(</span><em>name</em>, <em>modifier_str=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/package.html#Package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.package.Package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dero.latex.models.package.Package.matches_name">
+<code class="descname">matches_name</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/package.html#Package.matches_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.package.Package.matches_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models.ref">
+<span id="dero-latex-models-ref-module"></span><h2>dero.latex.models.ref module<a class="headerlink" href="#module-dero.latex.models.ref" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.models.ref.Ref">
+<em class="property">class </em><code class="descclassname">dero.latex.models.ref.</code><code class="descname">Ref</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/models/ref.html#Ref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.models.ref.Ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.models.item.SimpleItem" title="dero.latex.models.item.SimpleItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.SimpleItem</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.models.ref.Ref.name">
+<code class="descname">name</code><em class="property"> = 'ref'</em><a class="headerlink" href="#dero.latex.models.ref.Ref.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.latex.models" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.latex.models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

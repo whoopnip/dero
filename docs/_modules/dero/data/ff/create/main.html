@@ -1,0 +1,266 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.data.ff.create.main &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.data.ff.create.main</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">dero.ext_pandas.pdutils</span> <span class="k">import</span> <span class="n">_to_list_if_str</span>
+<span class="kn">from</span> <span class="nn">dero.data.ff.fftypes</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">ListOrStr</span><span class="p">,</span>
+    <span class="n">StrOrInt</span><span class="p">,</span>
+    <span class="n">DictofStrsandStrLists</span><span class="p">,</span>
+    <span class="n">GroupvarNgroupsDict</span><span class="p">,</span>
+    <span class="n">TwoStrTupleList</span><span class="p">,</span>
+    <span class="n">TwoStrTuple</span><span class="p">,</span>
+    <span class="n">StrBoolDict</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">dero.data.ff.create.model</span> <span class="k">import</span> <span class="n">_validate_model</span>
+<span class="kn">from</span> <span class="nn">dero.data.ff.create.sort</span> <span class="k">import</span> <span class="n">create_ff_portfolios</span><span class="p">,</span> <span class="n">_other_groupvar_portname</span>
+<span class="kn">from</span> <span class="nn">dero.data.ff.create.label</span> <span class="k">import</span> <span class="n">get_and_set_labels</span>
+<span class="kn">from</span> <span class="nn">dero.data.ff.create.dualsort</span> <span class="k">import</span> <span class="n">create_dual_sort_variables_get_pairings</span><span class="p">,</span> <span class="n">_dual_sort_varname</span>
+<span class="kn">from</span> <span class="nn">dero.data.ff.create.average</span> <span class="k">import</span> <span class="n">portfolio_returns</span><span class="p">,</span> <span class="n">market_returns</span>
+<span class="kn">from</span> <span class="nn">dero.data.ff.create.reshape</span> <span class="k">import</span> <span class="n">long_averages_to_wide_averages</span>
+<span class="kn">from</span> <span class="nn">dero.data.ff.create.minus</span> <span class="k">import</span> <span class="n">construct_minus_variables</span>
+<span class="kn">from</span> <span class="nn">dero.data.ff.create.inputs</span> <span class="k">import</span> <span class="n">_standardize_custom_args</span>
+<span class="kn">from</span> <span class="nn">dero.data.ff.create.mainport</span> <span class="k">import</span> <span class="n">combine_main_portfolios</span>
+
+<div class="viewcode-block" id="create_ff_factors"><a class="viewcode-back" href="../../../../../dero.data.ff.create.html#dero.data.ff.create.main.create_ff_factors">[docs]</a><span class="k">def</span> <span class="nf">create_ff_factors</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">factor_model</span><span class="p">:</span> <span class="n">StrOrInt</span><span class="p">,</span>
+                      <span class="n">id_var</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;PERMNO&#39;</span><span class="p">,</span> <span class="n">datevar</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">byvars</span><span class="p">:</span> <span class="n">ListOrStr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">retvar</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;RET&#39;</span><span class="p">,</span> <span class="n">wtvar</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;Market Equity&#39;</span><span class="p">,</span>
+                      <span class="n">size_var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">value_var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="n">profitability_var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">investment_var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="n">custom_labels</span><span class="p">:</span> <span class="n">DictofStrsandStrLists</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="n">custom_groupvar_ngroups_dict</span><span class="p">:</span> <span class="n">GroupvarNgroupsDict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">custom_pairings</span><span class="p">:</span> <span class="n">TwoStrTupleList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">custom_low_minus_high_dict</span><span class="p">:</span> <span class="n">StrBoolDict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+
+    <span class="c1">#### Argument preparation #####</span>
+
+    <span class="n">_validate_model</span><span class="p">(</span>
+        <span class="n">factor_model</span><span class="p">,</span>
+        <span class="n">custom_labels</span><span class="o">=</span><span class="n">custom_labels</span><span class="p">,</span>
+        <span class="n">custom_groupvar_ngroups_dict</span><span class="o">=</span><span class="n">custom_groupvar_ngroups_dict</span><span class="p">,</span>
+        <span class="n">custom_pairings</span><span class="o">=</span><span class="n">custom_pairings</span><span class="p">,</span>
+        <span class="n">custom_low_minus_high_dict</span><span class="o">=</span><span class="n">custom_low_minus_high_dict</span>
+    <span class="p">)</span>
+
+    <span class="n">custom_labels</span><span class="p">,</span> <span class="n">custom_groupvar_ngroups_dict</span><span class="p">,</span> <span class="n">custom_pairings</span><span class="p">,</span> <span class="n">custom_low_minus_high_dict</span> <span class="o">=</span> <span class="n">_standardize_custom_args</span><span class="p">(</span>
+        <span class="n">custom_labels</span><span class="o">=</span><span class="n">custom_labels</span><span class="p">,</span>
+        <span class="n">custom_groupvar_ngroups_dict</span><span class="o">=</span><span class="n">custom_groupvar_ngroups_dict</span><span class="p">,</span>
+        <span class="n">custom_pairings</span><span class="o">=</span><span class="n">custom_pairings</span><span class="p">,</span>
+        <span class="n">custom_low_minus_high_dict</span><span class="o">=</span><span class="n">custom_low_minus_high_dict</span>
+    <span class="p">)</span>
+
+    <span class="n">byvars</span> <span class="o">=</span> <span class="n">_to_list_if_str</span><span class="p">(</span><span class="n">byvars</span><span class="p">)</span>
+
+    <span class="n">default_varnames</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">size_var</span><span class="o">=</span><span class="n">size_var</span><span class="p">,</span>
+        <span class="n">value_var</span><span class="o">=</span><span class="n">value_var</span><span class="p">,</span>
+        <span class="n">profitability_var</span><span class="o">=</span><span class="n">profitability_var</span><span class="p">,</span>
+        <span class="n">investment_var</span><span class="o">=</span><span class="n">investment_var</span>
+    <span class="p">)</span>
+    <span class="c1"># Convert to portfolio names</span>
+    <span class="n">default_portfolio_varnames</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">key</span><span class="p">:</span> <span class="n">_other_groupvar_portname</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">default_varnames</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">##### Main logic ##########</span>
+
+    <span class="c1"># Assigns portfolios, leaves data in the original shape</span>
+    <span class="n">ff_portfolios</span> <span class="o">=</span> <span class="n">create_ff_portfolios</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">factor_model</span><span class="o">=</span><span class="n">factor_model</span><span class="p">,</span>
+        <span class="n">byvars</span><span class="o">=</span><span class="n">byvars</span><span class="p">,</span>
+        <span class="n">id_var</span><span class="o">=</span><span class="n">id_var</span><span class="p">,</span>
+        <span class="n">date_var</span><span class="o">=</span><span class="n">datevar</span><span class="p">,</span>
+        <span class="n">custom_groupvar_ngroups_dict</span><span class="o">=</span><span class="n">custom_groupvar_ngroups_dict</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">default_varnames</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Replace numbered portfolios with labeled portfolios</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">get_and_set_labels</span><span class="p">(</span>
+        <span class="n">ff_portfolios</span><span class="p">,</span>
+        <span class="n">factor_model</span><span class="o">=</span><span class="n">factor_model</span><span class="p">,</span>
+        <span class="n">custom_labels</span><span class="o">=</span><span class="n">custom_labels</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">default_portfolio_varnames</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Get necessary dual sort pairings, create dual sort portfolio variables</span>
+    <span class="n">pairings</span> <span class="o">=</span> <span class="n">create_dual_sort_variables_get_pairings</span><span class="p">(</span>
+        <span class="n">ff_portfolios</span><span class="p">,</span>
+        <span class="n">factor_model</span><span class="o">=</span><span class="n">factor_model</span><span class="p">,</span>
+        <span class="n">custom_pairings</span><span class="o">=</span><span class="n">custom_pairings</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">default_portfolio_varnames</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">byvars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">base_vars</span> <span class="o">=</span> <span class="n">byvars</span> <span class="o">+</span> <span class="p">[</span><span class="n">datevar</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">base_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">datevar</span><span class="p">]</span>
+
+    <span class="c1"># Fama-French portfolio difference procedure. Reduces down to size of time/byvars</span>
+    <span class="c1"># With 3 factor model, this is the last calculation step, as the SMB factor calculated</span>
+    <span class="c1"># using value portfolios is the entire SMB factor. Just need to rename after.</span>
+    <span class="n">base_df</span> <span class="o">=</span> <span class="n">ff_portfolios</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">base_vars</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">pairing</span> <span class="ow">in</span> <span class="n">pairings</span><span class="p">:</span>
+        <span class="n">minus_vars_df</span> <span class="o">=</span> <span class="n">construct_averges_and_minus_variables_for_pairing</span><span class="p">(</span>
+            <span class="n">df</span><span class="o">=</span><span class="n">ff_portfolios</span><span class="p">,</span>
+            <span class="n">pairing</span><span class="o">=</span><span class="n">pairing</span><span class="p">,</span>
+            <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+            <span class="n">factor_model</span><span class="o">=</span><span class="n">factor_model</span><span class="p">,</span>
+            <span class="n">datevar</span><span class="o">=</span><span class="n">datevar</span><span class="p">,</span>
+            <span class="n">byvars</span><span class="o">=</span><span class="n">byvars</span><span class="p">,</span>
+            <span class="n">retvar</span><span class="o">=</span><span class="n">retvar</span><span class="p">,</span>
+            <span class="n">wtvar</span><span class="o">=</span><span class="n">wtvar</span><span class="p">,</span>
+            <span class="n">custom_low_minus_high_dict</span><span class="o">=</span><span class="n">custom_low_minus_high_dict</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">default_portfolio_varnames</span>
+        <span class="p">)</span>
+        <span class="n">base_df</span> <span class="o">=</span> <span class="n">base_df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">minus_vars_df</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">base_vars</span><span class="p">)</span>
+
+    <span class="c1"># 3 factor model, just rename SMB_HML to SMB</span>
+    <span class="c1"># For 5 factor model, SMB is calculated separatetely with value ports, profitability</span>
+    <span class="c1"># ports, and investment ports, then the three are averaged to get the final SMB fator</span>
+    <span class="n">combine_main_portfolios</span><span class="p">(</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">base_df</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+        <span class="n">pairings</span><span class="o">=</span><span class="n">pairings</span><span class="p">,</span>
+        <span class="n">factor_model</span><span class="o">=</span><span class="n">factor_model</span><span class="p">,</span>
+        <span class="n">custom_low_minus_high_dict</span><span class="o">=</span><span class="n">custom_low_minus_high_dict</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">default_portfolio_varnames</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Add market returns</span>
+    <span class="n">mkt_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="n">market_returns</span><span class="p">(</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">ff_portfolios</span><span class="p">,</span>
+        <span class="n">retvar</span><span class="o">=</span><span class="n">retvar</span><span class="p">,</span>
+        <span class="n">datevar</span><span class="o">=</span><span class="n">datevar</span><span class="p">,</span>
+        <span class="n">wtvar</span><span class="o">=</span><span class="n">wtvar</span><span class="p">,</span>
+        <span class="n">byvars</span><span class="o">=</span><span class="n">byvars</span>
+    <span class="p">)</span>
+    <span class="n">base_df</span> <span class="o">=</span> <span class="n">base_df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mkt_df</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">base_vars</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">base_df</span></div>
+
+
+<div class="viewcode-block" id="construct_averges_and_minus_variables_for_pairing"><a class="viewcode-back" href="../../../../../dero.data.ff.create.html#dero.data.ff.create.main.construct_averges_and_minus_variables_for_pairing">[docs]</a><span class="k">def</span> <span class="nf">construct_averges_and_minus_variables_for_pairing</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pairing</span><span class="p">:</span> <span class="n">TwoStrTuple</span><span class="p">,</span>
+                                                      <span class="n">labels</span><span class="p">:</span> <span class="n">DictofStrsandStrLists</span><span class="p">,</span> <span class="n">factor_model</span><span class="p">:</span> <span class="n">StrOrInt</span><span class="p">,</span>
+                                                      <span class="n">datevar</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">byvars</span><span class="p">:</span> <span class="n">ListOrStr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                                      <span class="n">retvar</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;RET&#39;</span><span class="p">,</span> <span class="n">wtvar</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;Market Equity&#39;</span><span class="p">,</span>
+                                                      <span class="n">size_var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">value_var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                                                      <span class="n">profitability_var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">investment_var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                                                      <span class="n">custom_low_minus_high_dict</span><span class="p">:</span> <span class="n">StrBoolDict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+
+    <span class="n">dual_portname</span> <span class="o">=</span> <span class="n">_dual_sort_varname</span><span class="p">(</span><span class="n">pairing</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pairing</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">averages_long_shape</span> <span class="o">=</span> <span class="n">portfolio_returns</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">retvar</span><span class="o">=</span><span class="n">retvar</span><span class="p">,</span>
+        <span class="n">datevar</span><span class="o">=</span><span class="n">datevar</span><span class="p">,</span>
+        <span class="n">wtvar</span><span class="o">=</span><span class="n">wtvar</span><span class="p">,</span>
+        <span class="n">byvars</span><span class="o">=</span><span class="n">byvars</span><span class="p">,</span>
+        <span class="n">portvar</span><span class="o">=</span><span class="n">dual_portname</span>
+    <span class="p">)</span>
+
+    <span class="n">wide</span> <span class="o">=</span> <span class="n">long_averages_to_wide_averages</span><span class="p">(</span>
+        <span class="n">averages_long_shape</span><span class="p">,</span>
+        <span class="n">datevar</span><span class="o">=</span><span class="n">datevar</span><span class="p">,</span>
+        <span class="n">retvar</span><span class="o">=</span><span class="n">retvar</span><span class="p">,</span>
+        <span class="n">byvars</span><span class="o">=</span><span class="n">byvars</span><span class="p">,</span>
+        <span class="n">dual_portvar</span><span class="o">=</span><span class="n">dual_portname</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">construct_minus_variables</span><span class="p">(</span>
+        <span class="n">wide</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+        <span class="n">pairing</span><span class="o">=</span><span class="n">pairing</span><span class="p">,</span>
+        <span class="n">factor_model</span><span class="o">=</span><span class="n">factor_model</span><span class="p">,</span>
+        <span class="n">byvars</span><span class="o">=</span><span class="n">byvars</span><span class="p">,</span>
+        <span class="n">datevar</span><span class="o">=</span><span class="n">datevar</span><span class="p">,</span>
+        <span class="n">size_var</span><span class="o">=</span><span class="n">size_var</span><span class="p">,</span>
+        <span class="n">value_var</span><span class="o">=</span><span class="n">value_var</span><span class="p">,</span>
+        <span class="n">profitability_var</span><span class="o">=</span><span class="n">profitability_var</span><span class="p">,</span>
+        <span class="n">investment_var</span><span class="o">=</span><span class="n">investment_var</span><span class="p">,</span>
+        <span class="n">custom_low_minus_high_dict</span><span class="o">=</span><span class="n">custom_low_minus_high_dict</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  <li><a href="../../../data.html">dero.data</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

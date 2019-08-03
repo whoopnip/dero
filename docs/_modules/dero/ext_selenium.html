@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.ext_selenium &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.ext_selenium</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">selenium</span><span class="o">,</span> <span class="nn">zipfile</span><span class="o">,</span> <span class="nn">os</span>
+
+<div class="viewcode-block" id="apply_proxy_with_authentication_to_chrome_selenium"><a class="viewcode-back" href="../../dero.html#dero.ext_selenium.apply_proxy_with_authentication_to_chrome_selenium">[docs]</a><span class="k">def</span> <span class="nf">apply_proxy_with_authentication_to_chrome_selenium</span><span class="p">(</span><span class="n">proxy</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">directory</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Applies a proxy server to Chrome driven by Selenium, with authentication included. This works by</span>
+<span class="sd">    creating a zip file extension for Chrome which sets the proxy setting and catches prompt</span>
+<span class="sd">    windows to include username and password info.</span>
+
+<span class="sd">    proxy: string, IP or address of your proxy, i.e. &#39;dubai.wonderproxy.com&#39;</span>
+<span class="sd">    port: integer, Port for proxy, i.e. 12000</span>
+<span class="sd">    username: string</span>
+<span class="sd">    password: string</span>
+<span class="sd">    directory: string, This should be the wherever you want the zipfile to be placed, i.e. r&#39;C:/Users/John/Desktop&#39;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">chrome_options</span> <span class="o">=</span> <span class="n">selenium</span><span class="o">.</span><span class="n">webdriver</span><span class="o">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
+    <span class="c1">#self.chrome_options.add_argument(&#39;--proxy-server={}&#39;.format(proxy))</span>
+
+    <span class="n">manifest_json</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    {</span>
+<span class="s2">        &quot;version&quot;: &quot;1.0.0&quot;,</span>
+<span class="s2">        &quot;manifest_version&quot;: 2,</span>
+<span class="s2">        &quot;name&quot;: &quot;Chrome Proxy&quot;,</span>
+<span class="s2">        &quot;permissions&quot;: [</span>
+<span class="s2">            &quot;proxy&quot;,</span>
+<span class="s2">            &quot;tabs&quot;,</span>
+<span class="s2">            &quot;unlimitedStorage&quot;,</span>
+<span class="s2">            &quot;storage&quot;,</span>
+<span class="s2">            &quot;&lt;all_urls&gt;&quot;,</span>
+<span class="s2">            &quot;webRequest&quot;,</span>
+<span class="s2">            &quot;webRequestBlocking&quot;</span>
+<span class="s2">        ],</span>
+<span class="s2">        &quot;background&quot;: {</span>
+<span class="s2">            &quot;scripts&quot;: [&quot;background.js&quot;]</span>
+<span class="s2">        },</span>
+<span class="s2">        &quot;minimum_chrome_version&quot;:&quot;22.0.0&quot;</span>
+<span class="s2">    }</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">background_js</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    var config = {{</span>
+<span class="s1">            mode: &quot;fixed_servers&quot;,</span>
+<span class="s1">            rules: {{</span>
+<span class="s1">              singleProxy: {{</span>
+<span class="s1">                scheme: &quot;http&quot;,</span>
+<span class="s1">                host: &quot;</span><span class="si">{0}</span><span class="s1">&quot;,</span>
+<span class="s1">                port: parseInt(</span><span class="si">{1}</span><span class="s1">)</span>
+<span class="s1">              }},</span>
+<span class="s1">              bypassList: [&quot;foobar.com&quot;]</span>
+<span class="s1">            }}</span>
+<span class="s1">          }};</span>
+
+<span class="s1">    chrome.proxy.settings.set({{value: config, scope: &quot;regular&quot;}}, function() {{}});</span>
+
+<span class="s1">    function callbackFn(details) {{</span>
+<span class="s1">        return {{</span>
+<span class="s1">            authCredentials: {{</span>
+<span class="s1">                username: &quot;</span><span class="si">{2}</span><span class="s1">&quot;,</span>
+<span class="s1">                password: &quot;</span><span class="si">{3}</span><span class="s1">&quot;</span>
+<span class="s1">            }}</span>
+<span class="s1">        }};</span>
+<span class="s1">    }}</span>
+
+<span class="s1">    chrome.webRequest.onAuthRequired.addListener(</span>
+<span class="s1">                callbackFn,</span>
+<span class="s1">                {{urls: [&quot;&lt;all_urls&gt;&quot;]}},</span>
+<span class="s1">                [&#39;blocking&#39;]</span>
+<span class="s1">    );</span>
+
+<span class="s1">    &#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">proxy</span><span class="p">,</span><span class="n">port</span><span class="p">,</span><span class="n">username</span><span class="p">,</span><span class="n">password</span><span class="p">)</span>
+
+    <span class="n">plugin_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span><span class="s1">&#39;proxy_auth_plugin.zip&#39;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">plugin_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zp</span><span class="p">:</span>
+        <span class="n">zp</span><span class="o">.</span><span class="n">writestr</span><span class="p">(</span><span class="s2">&quot;manifest.json&quot;</span><span class="p">,</span> <span class="n">manifest_json</span><span class="p">)</span>
+        <span class="n">zp</span><span class="o">.</span><span class="n">writestr</span><span class="p">(</span><span class="s2">&quot;background.js&quot;</span><span class="p">,</span> <span class="n">background_js</span><span class="p">)</span>
+
+    <span class="n">chrome_options</span><span class="o">.</span><span class="n">add_extension</span><span class="p">(</span><span class="n">plugin_file</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">chrome_options</span></div>
+
+<div class="viewcode-block" id="AnyEC"><a class="viewcode-back" href="../../dero.html#dero.ext_selenium.AnyEC">[docs]</a><span class="k">class</span> <span class="nc">AnyEC</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Use with WebDriverWait to combine expected_conditions</span>
+<span class="sd">        in an OR.</span>
+<span class="sd">        </span>
+<span class="sd">    Then call it like...</span>
+
+<span class="sd">    from selenium.webdriver.support import expected_conditions as EC</span>
+<span class="sd">    # ...</span>
+<span class="sd">    WebDriverWait(driver, 10).until( AnyEC(</span>
+<span class="sd">        EC.presence_of_element_located(</span>
+<span class="sd">             (By.CSS_SELECTOR, &quot;div.some_result&quot;)),</span>
+<span class="sd">        EC.presence_of_element_located(</span>
+<span class="sd">             (By.CSS_SELECTOR, &quot;div.no_result&quot;)) ))</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ecs</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">driver</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ecs</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">fn</span><span class="p">(</span><span class="n">driver</span><span class="p">):</span> <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

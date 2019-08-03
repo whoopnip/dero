@@ -1,0 +1,240 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.ext_time &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.ext_time</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">datetime</span><span class="o">,</span> <span class="nn">timeit</span><span class="o">,</span> <span class="nn">sys</span>
+
+<div class="viewcode-block" id="time_elapsed"><a class="viewcode-back" href="../../dero.html#dero.ext_time.time_elapsed">[docs]</a><span class="k">def</span> <span class="nf">time_elapsed</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Takes an amount of time in seconds and converts it into how a human would say it. </span>
+<span class="sd">    </span>
+<span class="sd">    Required Options:</span>
+<span class="sd">    seconds: time in number of seconds (raw number, int or float). </span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+    <span class="k">if</span> <span class="n">seconds</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">:</span> <span class="c1">#if this is greater than a minute</span>
+        <span class="k">if</span> <span class="n">seconds</span> <span class="o">&gt;</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">:</span> <span class="c1">#if this is greater than an hour</span>
+            <span class="k">if</span> <span class="n">seconds</span> <span class="o">&gt;</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">:</span> <span class="c1">#if this is greater than a day</span>
+                <span class="k">if</span> <span class="n">seconds</span> <span class="o">&gt;</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">30</span><span class="p">:</span> <span class="c1">#if this is greater than a month (approx.):</span>
+                    <span class="n">months</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span><span class="mi">30</span><span class="p">))</span>
+                    <span class="n">seconds</span> <span class="o">-=</span> <span class="n">months</span> <span class="o">*</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+                    <span class="n">days</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">))</span>
+                    <span class="n">seconds</span> <span class="o">-=</span> <span class="n">days</span> <span class="o">*</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+                    <span class="n">hours</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">))</span>
+                    <span class="n">seconds</span> <span class="o">-=</span> <span class="n">hours</span> <span class="o">*</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+                    <span class="n">minutes</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+                    <span class="n">seconds</span> <span class="o">-=</span> <span class="n">minutes</span> <span class="o">*</span> <span class="mi">60</span>
+                    <span class="n">seconds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+                    <span class="n">time_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> months, </span><span class="si">{}</span><span class="s2"> days, </span><span class="si">{}</span><span class="s2"> hours, </span><span class="si">{}</span><span class="s2"> minutes, </span><span class="si">{}</span><span class="s2"> seconds.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">months</span><span class="p">,</span> <span class="n">days</span><span class="p">,</span> <span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">days</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">))</span>
+                    <span class="n">seconds</span> <span class="o">-=</span> <span class="n">days</span> <span class="o">*</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+                    <span class="n">hours</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">))</span>
+                    <span class="n">seconds</span> <span class="o">-=</span> <span class="n">hours</span> <span class="o">*</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+                    <span class="n">minutes</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+                    <span class="n">seconds</span> <span class="o">-=</span> <span class="n">minutes</span> <span class="o">*</span> <span class="mi">60</span>
+                    <span class="n">seconds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+                    <span class="n">time_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> days, </span><span class="si">{}</span><span class="s2"> hours, </span><span class="si">{}</span><span class="s2"> minutes, </span><span class="si">{}</span><span class="s2"> seconds.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c1">#if this is greater than an hour but less than a day</span>
+                <span class="n">hours</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">))</span>
+                <span class="n">seconds</span> <span class="o">-=</span> <span class="n">hours</span> <span class="o">*</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+                <span class="n">minutes</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+                <span class="n">seconds</span> <span class="o">-=</span> <span class="n">minutes</span> <span class="o">*</span> <span class="mi">60</span>
+                <span class="n">seconds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+                <span class="n">time_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> hours, </span><span class="si">{}</span><span class="s2"> minutes, </span><span class="si">{}</span><span class="s2"> seconds.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1">#if this is greater than a minute but less than an hour</span>
+            <span class="n">minutes</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+            <span class="n">seconds</span> <span class="o">-=</span> <span class="n">minutes</span> <span class="o">*</span> <span class="mi">60</span>
+            <span class="n">seconds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+            <span class="n">time_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> minutes, </span><span class="si">{}</span><span class="s2"> seconds.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1">#if this is less than a minute</span>
+        <span class="n">seconds</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">trunc</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+        <span class="n">time_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> seconds.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">time_str</span></div>
+        
+<div class="viewcode-block" id="estimate_time"><a class="viewcode-back" href="../../dero.html#dero.ext_time.estimate_time">[docs]</a><span class="k">def</span> <span class="nf">estimate_time</span><span class="p">(</span><span class="n">length</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">start_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns the estimate of when a looping operation will be finished. </span>
+<span class="sd">    </span>
+<span class="sd">    HOW TO USE:</span>
+<span class="sd">    This function goes at the end of the loop to be timed. Outside of this function at the beginning of the</span>
+<span class="sd">    loop, you must start a timer object as follows:</span>
+<span class="sd">    </span>
+<span class="sd">    start_time = timeit.default_timer()</span>
+<span class="sd">    </span>
+<span class="sd">    So the entire loop will look like this:</span>
+<span class="sd">    </span>
+<span class="sd">    my_start_time = timeit.default_timer()</span>
+<span class="sd">    for i, item in enumerate(my_list):</span>
+<span class="sd">    </span>
+<span class="sd">        #Do loop stuff here</span>
+<span class="sd">        </span>
+<span class="sd">         estimate_time(len(my_list),i,my_start_time)</span>
+<span class="sd">         </span>
+<span class="sd">    REQUIRED OPTIONS:</span>
+<span class="sd">    length:     total number of iterations for the loop</span>
+<span class="sd">    i:          iterator for the loop</span>
+<span class="sd">    start_time: timer object, to be started outside of this function (SEE ABOVE)</span>
+<span class="sd">    </span>
+<span class="sd">    OPTIONAL OPTIONS:</span>
+<span class="sd">    output: specify other than True to suppress printing estimated time. Use this if you want to just store the time</span>
+<span class="sd">            for some other use or custom output. The syntax then is as follows:</span>
+<span class="sd">    </span>
+<span class="sd">    my_start_time = timeit.default_timer()</span>
+<span class="sd">    for i, item in enumerate(my_list):</span>
+<span class="sd">        </span>
+<span class="sd">        #Do loop stuff here</span>
+<span class="sd">        </span>
+<span class="sd">        my_timer = estimate_time(len(my_list),i,my_start_time, output=False)</span>
+<span class="sd">        print(&quot;I like my output sentence better! Here&#39;s the estimate: {}&quot;.format(my_timer))</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">avg_time</span> <span class="o">=</span> <span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">loops_left</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">est_time_remaining</span> <span class="o">=</span> <span class="n">avg_time</span> <span class="o">*</span> <span class="n">loops_left</span>
+    <span class="n">est_finish_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">est_time_remaining</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated finish time: </span><span class="si">{}</span><span class="s2">. Completed </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">, (</span><span class="si">{:.0%}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">est_finish_time</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">i</span><span class="o">/</span><span class="n">length</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">est_finish_time</span></div>
+
+<div class="viewcode-block" id="increment_dates"><a class="viewcode-back" href="../../dero.html#dero.ext_time.increment_dates">[docs]</a><span class="k">def</span> <span class="nf">increment_dates</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span><span class="n">end_date</span><span class="p">,</span><span class="n">frequency</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns a list of dates inbetween start and end dates. start_date and end_date should be in one of the following</span>
+<span class="sd">    date formats:</span>
+<span class="sd">        mm/dd/yyyy, mm/yyyy, yyyy</span>
+<span class="sd">    Dates should be frequency should be a single letter, &#39;a&#39; for annual, &#39;m&#39; for monthly, &#39;w&#39; for weekly, and &#39;d&#39; for daily</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1">#Find number of slashes to determine how to parse date</span>
+    <span class="n">number_of_slashes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">number_of_slashes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_date</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+    <span class="n">number_of_slashes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end_date</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+    <span class="n">date_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;%Y&#39;</span><span class="p">,</span><span class="s1">&#39;%Y&#39;</span><span class="p">]</span> <span class="c1">#set container for date formats</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">number_of_slashes</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#no slashes means interpret as year</span>
+            <span class="k">pass</span> <span class="c1">#already set as year in container</span>
+        <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1">#one slash means interpret as month/year</span>
+            <span class="n">date_formats</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;%m/%Y&#39;</span>
+        <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> <span class="c1">#one slash means interpret as month/year</span>
+            <span class="n">date_formats</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y&#39;</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">date_formats</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+    <span class="n">end</span>   <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span>   <span class="n">date_formats</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+    
+    <span class="n">number_of_years</span> <span class="o">=</span> <span class="n">end</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">year</span>
+    <span class="n">number_of_months</span> <span class="o">=</span> <span class="n">end</span><span class="o">.</span><span class="n">month</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">month</span>
+    <span class="n">number_of_days</span> <span class="o">=</span> <span class="n">end</span><span class="o">.</span><span class="n">day</span> <span class="o">-</span> <span class="n">start</span><span class="o">.</span><span class="n">day</span>
+    
+    <span class="k">if</span> <span class="n">frequency</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="n">number_of_periods</span> <span class="o">=</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span> 
+    <span class="k">if</span> <span class="n">frequency</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">number_of_periods</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span> 
+    <span class="k">if</span> <span class="n">frequency</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">number_of_periods</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">frequency</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span> <span class="n">number_of_periods</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">365</span><span class="o">/</span><span class="mi">12</span><span class="p">))</span>
+    
+    <span class="n">outlist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">period</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_periods</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">frequency</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> 
+            <span class="n">new_date</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">period</span><span class="p">)</span>
+            <span class="n">outlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">new_date</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">new_date</span><span class="o">.</span><span class="n">day</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">new_date</span><span class="o">.</span><span class="n">year</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">frequency</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span> 
+            <span class="n">new_date</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">weeks</span><span class="o">=</span><span class="n">period</span><span class="p">)</span>
+            <span class="n">outlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">new_date</span><span class="o">.</span><span class="n">month</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">new_date</span><span class="o">.</span><span class="n">day</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">new_date</span><span class="o">.</span><span class="n">year</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">frequency</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">outlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">year</span> <span class="o">+</span> <span class="n">period</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">frequency</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+            <span class="n">new_period</span> <span class="o">=</span> <span class="n">period</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">current_month</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">month</span> <span class="o">+</span> <span class="n">new_period</span><span class="p">)</span>
+            <span class="n">current_year</span> <span class="o">=</span> <span class="n">start</span><span class="o">.</span><span class="n">year</span>
+            <span class="n">years_passed</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">current_month</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
+            <span class="n">current_year</span> <span class="o">+=</span> <span class="n">years_passed</span>
+            <span class="n">current_month</span> <span class="o">-=</span> <span class="mi">12</span> <span class="o">*</span> <span class="n">years_passed</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">current_month</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="n">outlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">current_month</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">current_year</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">outlist</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

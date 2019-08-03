@@ -1,0 +1,240 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.ext_sympy package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-ext-sympy-package">
+<h1>dero.ext_sympy package<a class="headerlink" href="#dero-ext-sympy-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.ext_sympy.indexed">
+<span id="dero-ext-sympy-indexed-module"></span><h2>dero.ext_sympy.indexed module<a class="headerlink" href="#module-dero.ext_sympy.indexed" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.ext_sympy.indexed.IndexedEquation">
+<em class="property">class </em><code class="descclassname">dero.ext_sympy.indexed.</code><code class="descname">IndexedEquation</code><a class="reference internal" href="_modules/dero/ext_sympy/indexed.html#IndexedEquation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.indexed.IndexedEquation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sympy.core.relational.Equality</span></code>, <a class="reference internal" href="dero.mixins.html#dero.mixins.propertycache.SimplePropertyCacheMixin" title="dero.mixins.propertycache.SimplePropertyCacheMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.propertycache.SimplePropertyCacheMixin</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.ext_sympy.indexed.IndexedEquation.default_assumptions">
+<code class="descname">default_assumptions</code><em class="property"> = {}</em><a class="headerlink" href="#dero.ext_sympy.indexed.IndexedEquation.default_assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.ext_sympy.indexed.IndexedEquation.evaluated_index_eqs">
+<code class="descname">evaluated_index_eqs</code><a class="headerlink" href="#dero.ext_sympy.indexed.IndexedEquation.evaluated_index_eqs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.ext_sympy.indexed.IndexedEquation.index_symbols">
+<code class="descname">index_symbols</code><a class="headerlink" href="#dero.ext_sympy.indexed.IndexedEquation.index_symbols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.ext_sympy.indexed.IndexedEquation.indices">
+<code class="descname">indices</code><a class="headerlink" href="#dero.ext_sympy.indexed.IndexedEquation.indices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.ext_sympy.indexed.IndexedEquation.is_IndexedEquation">
+<code class="descname">is_IndexedEquation</code><em class="property"> = True</em><a class="headerlink" href="#dero.ext_sympy.indexed.IndexedEquation.is_IndexedEquation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_sympy.indexed.equations_from_indexed_equation">
+<code class="descclassname">dero.ext_sympy.indexed.</code><code class="descname">equations_from_indexed_equation</code><span class="sig-paren">(</span><em>equation: sympy.core.relational.Equality, indices: typing.Tuple[sympy.tensor.indexed.Idx]</em><span class="sig-paren">)</span> &#x2192; typing.List[sympy.core.relational.Equality]<a class="reference internal" href="_modules/dero/ext_sympy/indexed.html#equations_from_indexed_equation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.indexed.equations_from_indexed_equation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a set of equations with evaluated indices from a single indexed equation</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>equation: must contain indices
+indices: indices which should be evaluated</dd>
+<dt>Returns:</dt>
+<dd>evaluated equations</dd>
+<dt>Examples:</dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">Idx</span><span class="p">,</span> <span class="n">IndexedBase</span><span class="p">,</span> <span class="n">Eq</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Idx</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">price</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ret</span> <span class="o">=</span> <span class="n">IndexedBase</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p_eq</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">price</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">],</span> <span class="n">price</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">ret</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">equations_from_indexed_equation</span><span class="p">(</span><span class="n">p_eq</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="last">P_{1,1} = P_{1,0} r_{1,1}
+P_{1,2} = P_{1,1} r_{1,2}
+P_{2,1} = P_{2,0} r_{2,1}
+P_{2,2} = P_{2,1} r_{2,2}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_sympy.indexed.get_all_indices">
+<code class="descclassname">dero.ext_sympy.indexed.</code><code class="descname">get_all_indices</code><span class="sig-paren">(</span><em>expr: sympy.core.expr.Expr</em><span class="sig-paren">)</span> &#x2192; typing.Set[sympy.tensor.indexed.Idx]<a class="reference internal" href="_modules/dero/ext_sympy/indexed.html#get_all_indices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.indexed.get_all_indices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_sympy.indexed.get_all_indices_for_eq">
+<code class="descclassname">dero.ext_sympy.indexed.</code><code class="descname">get_all_indices_for_eq</code><span class="sig-paren">(</span><em>equation: sympy.core.relational.Equality</em><span class="sig-paren">)</span> &#x2192; typing.Set[sympy.tensor.indexed.Idx]<a class="reference internal" href="_modules/dero/ext_sympy/indexed.html#get_all_indices_for_eq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.indexed.get_all_indices_for_eq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.ext_sympy.match">
+<span id="dero-ext-sympy-match-module"></span><h2>dero.ext_sympy.match module<a class="headerlink" href="#module-dero.ext_sympy.match" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.ext_sympy.match.get_equation_where_lhs_matches">
+<code class="descclassname">dero.ext_sympy.match.</code><code class="descname">get_equation_where_lhs_matches</code><span class="sig-paren">(</span><em>match_expr: sympy.core.expr.Expr, equations: typing.List[sympy.core.relational.Equality]</em><span class="sig-paren">)</span> &#x2192; typing.Union[sympy.core.relational.Equality, NoneType]<a class="reference internal" href="_modules/dero/ext_sympy/match.html#get_equation_where_lhs_matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.match.get_equation_where_lhs_matches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.ext_sympy.solver">
+<span id="dero-ext-sympy-solver-module"></span><h2>dero.ext_sympy.solver module<a class="headerlink" href="#module-dero.ext_sympy.solver" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.ext_sympy.solver.EquationSolver">
+<em class="property">class </em><code class="descclassname">dero.ext_sympy.solver.</code><code class="descname">EquationSolver</code><span class="sig-paren">(</span><em>log_dir=None</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_sympy/solver.html#EquationSolver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.solver.EquationSolver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dero.ext_sympy.solver.EquationSolver.create_log_file">
+<code class="descname">create_log_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_sympy/solver.html#EquationSolver.create_log_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.solver.EquationSolver.create_log_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.ext_sympy.solver.EquationSolver.log">
+<code class="descname">log</code><span class="sig-paren">(</span><em>message</em>, <em>error=False</em>, <em>neverprint=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_sympy/solver.html#EquationSolver.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.solver.EquationSolver.log" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.ext_sympy.solver.EquationSolver.solve_equations">
+<code class="descname">solve_equations</code><span class="sig-paren">(</span><em>selected_tuple</em>, <em>equations=None</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_sympy/solver.html#EquationSolver.solve_equations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.solver.EquationSolver.solve_equations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves a subset of a set of equations. For use with parallel_loop_with_timeout. Combining the two gets
+all possible solutions for an overidentified system using parallel processing. Doing this without the
+timeout can cause sympy to get stuck on some sets of equations.</p>
+<p>Arguments:
+selected_tuple: tuple, indices of the equations to select. Typically created by itertools.combinations.
+equations: full list of equations to solve. The subset of equations will be pulled from this list.
+params: parameters to solve the system in terms of.</p>
+<p>Typical usage:
+import sympy
+sympy.init_session()
+eqs = []
+eqs.append(Eq(3*x + y, 2))
+eqs.append(Eq(2*x + y, 5))
+eqs.append(Eq(4*x + 2*y, 6))
+params = [x, y]</p>
+<p>log_dir =’C:Usersderobertisna.UFADDropboxUFNimalV PINModelingTestingEquations’</p>
+<p>combinations = list(itertools.combinations(range(len(equations)), len(params)))
+solve = dero.EquationSolver(log_dir=log_dir)
+solutions = dero.parallel_loop_with_timeout(solve.solve_equations, combinations, timeout=120,</p>
+<blockquote>
+<div>equations=eqs, params=params)</div></blockquote>
+<p>print([sol for sol in solutions if sol[1] not in ([],’timeout’)])</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.ext_sympy.subs">
+<span id="dero-ext-sympy-subs-module"></span><h2>dero.ext_sympy.subs module<a class="headerlink" href="#module-dero.ext_sympy.subs" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.ext_sympy.subs.substitute_equations">
+<code class="descclassname">dero.ext_sympy.subs.</code><code class="descname">substitute_equations</code><span class="sig-paren">(</span><em>orig_eq: sympy.core.relational.Equality, sub_eqs: typing.List[sympy.core.relational.Equality]</em><span class="sig-paren">)</span> &#x2192; sympy.core.relational.Equality<a class="reference internal" href="_modules/dero/ext_sympy/subs.html#substitute_equations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.subs.substitute_equations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_sympy.subs.substitute_equations_ordered">
+<code class="descclassname">dero.ext_sympy.subs.</code><code class="descname">substitute_equations_ordered</code><span class="sig-paren">(</span><em>orig_eq: sympy.core.relational.Equality, sub_eqs: typing.List[sympy.core.relational.Equality]</em><span class="sig-paren">)</span> &#x2192; sympy.core.relational.Equality<a class="reference internal" href="_modules/dero/ext_sympy/subs.html#substitute_equations_ordered"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_sympy.subs.substitute_equations_ordered" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.ext_sympy">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.ext_sympy" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.ext_sympy.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

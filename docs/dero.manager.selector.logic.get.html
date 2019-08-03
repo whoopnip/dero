@@ -1,0 +1,126 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.selector.logic.get package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-manager-selector-logic-get-package">
+<h1>dero.manager.selector.logic.get package<a class="headerlink" href="#dero-manager-selector-logic-get-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.manager.selector.logic.get.fromglobs">
+<span id="dero-manager-selector-logic-get-fromglobs-module"></span><h2>dero.manager.selector.logic.get.fromglobs module<a class="headerlink" href="#module-dero.manager.selector.logic.get.fromglobs" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.manager.selector.logic.get.fromglobs.get_dict_of_pipeline_manager_names_and_instances_from_globals">
+<code class="descclassname">dero.manager.selector.logic.get.fromglobs.</code><code class="descname">get_dict_of_pipeline_manager_names_and_instances_from_globals</code><span class="sig-paren">(</span><em>globs=None</em><span class="sig-paren">)</span> &#x2192; typing.Dict[str, dero.manager.main.PipelineManager]<a class="reference internal" href="_modules/dero/manager/selector/logic/get/fromglobs.html#get_dict_of_pipeline_manager_names_and_instances_from_globals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.selector.logic.get.fromglobs.get_dict_of_pipeline_manager_names_and_instances_from_globals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.selector.logic.get.frommanager">
+<span id="dero-manager-selector-logic-get-frommanager-module"></span><h2>dero.manager.selector.logic.get.frommanager module<a class="headerlink" href="#module-dero.manager.selector.logic.get.frommanager" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.manager.selector.logic.get.frommanager.get_pipeline_dict_path_and_data_dict_path_from_manager">
+<code class="descclassname">dero.manager.selector.logic.get.frommanager.</code><code class="descname">get_pipeline_dict_path_and_data_dict_path_from_manager</code><span class="sig-paren">(</span><em>manager: dero.manager.main.PipelineManager</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[str, str]<a class="reference internal" href="_modules/dero/manager/selector/logic/get/frommanager.html#get_pipeline_dict_path_and_data_dict_path_from_manager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.selector.logic.get.frommanager.get_pipeline_dict_path_and_data_dict_path_from_manager" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.selector.logic.get.globs">
+<span id="dero-manager-selector-logic-get-globs-module"></span><h2>dero.manager.selector.logic.get.globs module<a class="headerlink" href="#module-dero.manager.selector.logic.get.globs" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.manager.selector.logic.get.globs.iter_globals">
+<code class="descclassname">dero.manager.selector.logic.get.globs.</code><code class="descname">iter_globals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/selector/logic/get/globs.html#iter_globals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.selector.logic.get.globs.iter_globals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator which first returns globals for current module, then next level up, and so on</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.selector.logic.get.main">
+<span id="dero-manager-selector-logic-get-main-module"></span><h2>dero.manager.selector.logic.get.main module<a class="headerlink" href="#module-dero.manager.selector.logic.get.main" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.manager.selector.logic.get.main.get_dict_of_any_defined_pipeline_manager_names_and_instances">
+<code class="descclassname">dero.manager.selector.logic.get.main.</code><code class="descname">get_dict_of_any_defined_pipeline_manager_names_and_instances</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/selector/logic/get/main.html#get_dict_of_any_defined_pipeline_manager_names_and_instances"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.selector.logic.get.main.get_dict_of_any_defined_pipeline_manager_names_and_instances" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.selector.logic.get">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.manager.selector.logic.get" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.manager.selector.logic.get.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

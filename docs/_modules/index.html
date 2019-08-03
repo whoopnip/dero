@@ -1,0 +1,451 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Overview: module code &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>All modules for which code is available</h1>
+<ul><li><a href="builtins.html">builtins</a></li>
+<li><a href="dero/compustat.html">dero.compustat</a></li>
+<li><a href="dero/config.html">dero.config</a></li>
+<li><a href="dero/core.html">dero.core</a></li>
+<li><a href="dero/data.html">dero.data</a></li>
+<ul><li><a href="dero/data/compareids/backend.html">dero.data.compareids.backend</a></li>
+<li><a href="dero/data/compareids/frontends/text_summ.html">dero.data.compareids.frontends.text_summ</a></li>
+<li><a href="dero/data/compareids/models/bars.html">dero.data.compareids.models.bars</a></li>
+<li><a href="dero/data/compareids/models/base.html">dero.data.compareids.models.base</a></li>
+<li><a href="dero/data/compareids/models/datasets.html">dero.data.compareids.models.datasets</a></li>
+<li><a href="dero/data/compareids/models/flowchart.html">dero.data.compareids.models.flowchart</a></li>
+<li><a href="dero/data/compareids/models/interface.html">dero.data.compareids.models.interface</a></li>
+<li><a href="dero/data/compareids/models/main.html">dero.data.compareids.models.main</a></li>
+<li><a href="dero/data/compareids/models/steps.html">dero.data.compareids.models.steps</a></li>
+<li><a href="dero/data/display.html">dero.data.display</a></li>
+<li><a href="dero/data/ff/create/average.html">dero.data.ff.create.average</a></li>
+<li><a href="dero/data/ff/create/dualsort.html">dero.data.ff.create.dualsort</a></li>
+<li><a href="dero/data/ff/create/label.html">dero.data.ff.create.label</a></li>
+<li><a href="dero/data/ff/create/main.html">dero.data.ff.create.main</a></li>
+<li><a href="dero/data/ff/create/mainport.html">dero.data.ff.create.mainport</a></li>
+<li><a href="dero/data/ff/create/minus.html">dero.data.ff.create.minus</a></li>
+<li><a href="dero/data/ff/create/model.html">dero.data.ff.create.model</a></li>
+<li><a href="dero/data/ff/create/reshape.html">dero.data.ff.create.reshape</a></li>
+<li><a href="dero/data/ff/create/sort.html">dero.data.ff.create.sort</a></li>
+<li><a href="dero/data/formatters/models/result.html">dero.data.formatters.models.result</a></li>
+<li><a href="dero/data/formatters/stars.html">dero.data.formatters.stars</a></li>
+<li><a href="dero/data/formatters/stderr.html">dero.data.formatters.stderr</a></li>
+<li><a href="dero/data/panel/did/dataprep.html">dero.data.panel.did.dataprep</a></li>
+<li><a href="dero/data/panel/did/main.html">dero.data.panel.did.main</a></li>
+<li><a href="dero/data/panel/did/reg.html">dero.data.panel.did.reg</a></li>
+<li><a href="dero/data/panel/did/totex.html">dero.data.panel.did.totex</a></li>
+<li><a href="dero/data/panel/expandselect.html">dero.data.panel.expandselect</a></li>
+<li><a href="dero/data/portfolio/resample.html">dero.data.portfolio.resample</a></li>
+<li><a href="dero/data/portfolio/sort.html">dero.data.portfolio.sort</a></li>
+<li><a href="dero/data/psm/dataprep.html">dero.data.psm.dataprep</a></li>
+<li><a href="dero/data/psm/main.html">dero.data.psm.main</a></li>
+<li><a href="dero/data/psm/match.html">dero.data.psm.match</a></li>
+<li><a href="dero/data/psm/names.html">dero.data.psm.names</a></li>
+<li><a href="dero/data/psm/predict.html">dero.data.psm.predict</a></li>
+<li><a href="dero/data/psm/score.html">dero.data.psm.score</a></li>
+<li><a href="dero/data/psm/summarize/examine.html">dero.data.psm.summarize.examine</a></li>
+<li><a href="dero/data/psm/summarize/latex.html">dero.data.psm.summarize.latex</a></li>
+<li><a href="dero/data/psm/summarize/main.html">dero.data.psm.summarize.main</a></li>
+<li><a href="dero/data/psm/summarize/predictions.html">dero.data.psm.summarize.predictions</a></li>
+<li><a href="dero/data/psm/summarize/stats.html">dero.data.psm.summarize.stats</a></li>
+<li><a href="dero/data/summarize.html">dero.data.summarize</a></li>
+<ul><li><a href="dero/data/summarize/subset/missing/detail/byid.html">dero.data.summarize.subset.missing.detail.byid</a></li>
+<li><a href="dero/data/summarize/subset/missing/detail/byobs.html">dero.data.summarize.subset.missing.detail.byobs</a></li>
+<li><a href="dero/data/summarize/subset/missing/detail/main.html">dero.data.summarize.subset.missing.detail.main</a></li>
+<li><a href="dero/data/summarize/subset/missing/detail/reformat/main.html">dero.data.summarize.subset.missing.detail.reformat.main</a></li>
+<li><a href="dero/data/summarize/subset/missing/detail/reformat/numformat.html">dero.data.summarize.subset.missing.detail.reformat.numformat</a></li>
+<li><a href="dero/data/summarize/subset/missing/detail/textfuncs.html">dero.data.summarize.subset.missing.detail.textfuncs</a></li>
+<li><a href="dero/data/summarize/subset/missing/detail/totex.html">dero.data.summarize.subset.missing.detail.totex</a></li>
+<li><a href="dero/data/summarize/subset/missing/main.html">dero.data.summarize.subset.missing.main</a></li>
+<li><a href="dero/data/summarize/subset/missing/summary/graphs/pctbyid.html">dero.data.summarize.subset.missing.summary.graphs.pctbyid</a></li>
+<li><a href="dero/data/summarize/subset/missing/summary/tables/fullsample/idcount.html">dero.data.summarize.subset.missing.summary.tables.fullsample.idcount</a></li>
+<li><a href="dero/data/summarize/subset/missing/summary/tables/fullsample/main.html">dero.data.summarize.subset.missing.summary.tables.fullsample.main</a></li>
+<li><a href="dero/data/summarize/subset/missing/summary/tables/fullsample/missingmore.html">dero.data.summarize.subset.missing.summary.tables.fullsample.missingmore</a></li>
+<li><a href="dero/data/summarize/subset/missing/summary/tables/fullsample/obs.html">dero.data.summarize.subset.missing.summary.tables.fullsample.obs</a></li>
+<li><a href="dero/data/summarize/subset/missing/summary/tables/fullsample/periods.html">dero.data.summarize.subset.missing.summary.tables.fullsample.periods</a></li>
+<li><a href="dero/data/summarize/subset/outliers/detail/totex.html">dero.data.summarize.subset.outliers.detail.totex</a></li>
+<li><a href="dero/data/summarize/subset/outliers/main.html">dero.data.summarize.subset.outliers.main</a></li>
+<li><a href="dero/data/summarize/subset/outliers/select.html">dero.data.summarize.subset.outliers.select</a></li>
+<li><a href="dero/data/summarize/subset/outliers/summary/main.html">dero.data.summarize.subset.outliers.summary.main</a></li>
+<li><a href="dero/data/summarize/subset/outliers/summary/overview.html">dero.data.summarize.subset.outliers.summary.overview</a></li>
+<li><a href="dero/data/summarize/subset/outliers/summary/stats.html">dero.data.summarize.subset.outliers.summary.stats</a></li>
+<li><a href="dero/data/summarize/subset/outliers/summary/totex.html">dero.data.summarize.subset.outliers.summary.totex</a></li>
+</ul></ul><li><a href="dero/decorators.html">dero.decorators</a></li>
+<li><a href="dero/ext_logging.html">dero.ext_logging</a></li>
+<li><a href="dero/ext_math.html">dero.ext_math</a></li>
+<li><a href="dero/ext_matplotlib.html">dero.ext_matplotlib</a></li>
+<ul><li><a href="dero/ext_matplotlib/share_x.html">dero.ext_matplotlib.share_x</a></li>
+</ul><li><a href="dero/ext_multiprocessing.html">dero.ext_multiprocessing</a></li>
+<li><a href="dero/ext_pandas.html">dero.ext_pandas</a></li>
+<ul><li><a href="dero/ext_pandas/filldata.html">dero.ext_pandas.filldata</a></li>
+<li><a href="dero/ext_pandas/optimize/dftypes.html">dero.ext_pandas.optimize.dftypes</a></li>
+<li><a href="dero/ext_pandas/optimize/load.html">dero.ext_pandas.optimize.load</a></li>
+<li><a href="dero/ext_pandas/pdutils.html">dero.ext_pandas.pdutils</a></li>
+<li><a href="dero/ext_pandas/regby.html">dero.ext_pandas.regby</a></li>
+</ul><li><a href="dero/ext_selenium.html">dero.ext_selenium</a></li>
+<li><a href="dero/ext_sympy/indexed.html">dero.ext_sympy.indexed</a></li>
+<li><a href="dero/ext_sympy/match.html">dero.ext_sympy.match</a></li>
+<li><a href="dero/ext_sympy/solver.html">dero.ext_sympy.solver</a></li>
+<li><a href="dero/ext_sympy/subs.html">dero.ext_sympy.subs</a></li>
+<li><a href="dero/ext_time.html">dero.ext_time</a></li>
+<li><a href="dero/latex/df.html">dero.latex.df</a></li>
+<li><a href="dero/latex/equations.html">dero.latex.equations</a></li>
+<li><a href="dero/latex/figure/models/figure.html">dero.latex.figure.models.figure</a></li>
+<li><a href="dero/latex/figure/models/graphic.html">dero.latex.figure.models.graphic</a></li>
+<li><a href="dero/latex/figure/models/subfigure.html">dero.latex.figure.models.subfigure</a></li>
+<li><a href="dero/latex/figure/pdf.html">dero.latex.figure.pdf</a></li>
+<li><a href="dero/latex/logic/builder.html">dero.latex.logic.builder</a></li>
+<li><a href="dero/latex/logic/extract/by_attr.html">dero.latex.logic.extract.by_attr</a></li>
+<li><a href="dero/latex/logic/extract/by_type.html">dero.latex.logic.extract.by_type</a></li>
+<li><a href="dero/latex/logic/extract/docitems.html">dero.latex.logic.extract.docitems</a></li>
+<li><a href="dero/latex/logic/extract/get.html">dero.latex.logic.extract.get</a></li>
+<li><a href="dero/latex/logic/format/contents.html">dero.latex.logic.format.contents</a></li>
+<li><a href="dero/latex/logic/format/eq.html">dero.latex.logic.format.eq</a></li>
+<li><a href="dero/latex/logic/pdf/api/builders/lualatex.html">dero.latex.logic.pdf.api.builders.lualatex</a></li>
+<li><a href="dero/latex/logic/pdf/api/exc_handler/main.html">dero.latex.logic.pdf.api.exc_handler.main</a></li>
+<li><a href="dero/latex/logic/pdf/api/exc_handler/prepend/cycles.html">dero.latex.logic.pdf.api.exc_handler.prepend.cycles</a></li>
+<li><a href="dero/latex/logic/pdf/api/exc_handler/prepend/floats.html">dero.latex.logic.pdf.api.exc_handler.prepend.floats</a></li>
+<li><a href="dero/latex/logic/pdf/api/exc_handler/prepend/main.html">dero.latex.logic.pdf.api.exc_handler.prepend.main</a></li>
+<li><a href="dero/latex/logic/pdf/api/main.html">dero.latex.logic.pdf.api.main</a></li>
+<li><a href="dero/latex/logic/pdf/errors/exc.html">dero.latex.logic.pdf.errors.exc</a></li>
+<li><a href="dero/latex/logic/pdf/errors/models/error.html">dero.latex.logic.pdf.errors.models.error</a></li>
+<li><a href="dero/latex/logic/pdf/errors/models/error_collection.html">dero.latex.logic.pdf.errors.models.error_collection</a></li>
+<li><a href="dero/latex/logic/pdf/errors/models/exception_manager.html">dero.latex.logic.pdf.errors.models.exception_manager</a></li>
+<li><a href="dero/latex/logic/pdf/main.html">dero.latex.logic.pdf.main</a></li>
+<li><a href="dero/latex/models/boxes/base.html">dero.latex.models.boxes.base</a></li>
+<li><a href="dero/latex/models/boxes/vbox.html">dero.latex.models.boxes.vbox</a></li>
+<li><a href="dero/latex/models/caption.html">dero.latex.models.caption</a></li>
+<li><a href="dero/latex/models/commands/begin.html">dero.latex.models.commands.begin</a></li>
+<li><a href="dero/latex/models/commands/end.html">dero.latex.models.commands.end</a></li>
+<li><a href="dero/latex/models/commands/endfloat.html">dero.latex.models.commands.endfloat</a></li>
+<li><a href="dero/latex/models/commands/floatrow.html">dero.latex.models.commands.floatrow</a></li>
+<li><a href="dero/latex/models/commands/newenvironment.html">dero.latex.models.commands.newenvironment</a></li>
+<li><a href="dero/latex/models/commands/renewcommand.html">dero.latex.models.commands.renewcommand</a></li>
+<li><a href="dero/latex/models/containeritem.html">dero.latex.models.containeritem</a></li>
+<li><a href="dero/latex/models/control/documentclass.html">dero.latex.models.control.documentclass</a></li>
+<li><a href="dero/latex/models/control/extrafloats.html">dero.latex.models.control.extrafloats</a></li>
+<li><a href="dero/latex/models/control/filecontents.html">dero.latex.models.control.filecontents</a></li>
+<li><a href="dero/latex/models/control/maxdeadcycles.html">dero.latex.models.control.maxdeadcycles</a></li>
+<li><a href="dero/latex/models/control/mode.html">dero.latex.models.control.mode</a></li>
+<li><a href="dero/latex/models/credits/author.html">dero.latex.models.credits.author</a></li>
+<li><a href="dero/latex/models/credits/institution/inst.html">dero.latex.models.credits.institution.inst</a></li>
+<li><a href="dero/latex/models/credits/institution/institute.html">dero.latex.models.credits.institution.institute</a></li>
+<li><a href="dero/latex/models/date.html">dero.latex.models.date</a></li>
+<li><a href="dero/latex/models/document.html">dero.latex.models.document</a></li>
+<li><a href="dero/latex/models/documentitem.html">dero.latex.models.documentitem</a></li>
+<li><a href="dero/latex/models/documentsetup.html">dero.latex.models.documentsetup</a></li>
+<li><a href="dero/latex/models/environment.html">dero.latex.models.environment</a></li>
+<li><a href="dero/latex/models/equation.html">dero.latex.models.equation</a></li>
+<li><a href="dero/latex/models/footnote.html">dero.latex.models.footnote</a></li>
+<li><a href="dero/latex/models/format/and_.html">dero.latex.models.format.and_</a></li>
+<li><a href="dero/latex/models/format/breaks.html">dero.latex.models.format.breaks</a></li>
+<li><a href="dero/latex/models/format/linespacing.html">dero.latex.models.format.linespacing</a></li>
+<li><a href="dero/latex/models/format/raw.html">dero.latex.models.format.raw</a></li>
+<li><a href="dero/latex/models/format/sectionnum.html">dero.latex.models.format.sectionnum</a></li>
+<li><a href="dero/latex/models/format/text.html">dero.latex.models.format.text</a></li>
+<li><a href="dero/latex/models/format/textcolor.html">dero.latex.models.format.textcolor</a></li>
+<li><a href="dero/latex/models/format/vfill.html">dero.latex.models.format.vfill</a></li>
+<li><a href="dero/latex/models/item.html">dero.latex.models.item</a></li>
+<li><a href="dero/latex/models/label.html">dero.latex.models.label</a></li>
+<li><a href="dero/latex/models/landscape.html">dero.latex.models.landscape</a></li>
+<li><a href="dero/latex/models/lists/base.html">dero.latex.models.lists.base</a></li>
+<li><a href="dero/latex/models/lists/item.html">dero.latex.models.lists.item</a></li>
+<li><a href="dero/latex/models/lists/ordered.html">dero.latex.models.lists.ordered</a></li>
+<li><a href="dero/latex/models/lists/unordered.html">dero.latex.models.lists.unordered</a></li>
+<li><a href="dero/latex/models/mixins.html">dero.latex.models.mixins</a></li>
+<li><a href="dero/latex/models/package.html">dero.latex.models.package</a></li>
+<li><a href="dero/latex/models/page/footer.html">dero.latex.models.page.footer</a></li>
+<li><a href="dero/latex/models/page/header.html">dero.latex.models.page.header</a></li>
+<li><a href="dero/latex/models/page/number.html">dero.latex.models.page.number</a></li>
+<li><a href="dero/latex/models/page/style.html">dero.latex.models.page.style</a></li>
+<li><a href="dero/latex/models/presentation/beamer/block.html">dero.latex.models.presentation.beamer.block</a></li>
+<li><a href="dero/latex/models/presentation/beamer/columns/column.html">dero.latex.models.presentation.beamer.columns.column</a></li>
+<li><a href="dero/latex/models/presentation/beamer/columns/columns.html">dero.latex.models.presentation.beamer.columns.columns</a></li>
+<li><a href="dero/latex/models/presentation/beamer/frame/frame.html">dero.latex.models.presentation.beamer.frame.frame</a></li>
+<li><a href="dero/latex/models/presentation/beamer/frame/title.html">dero.latex.models.presentation.beamer.frame.title</a></li>
+<li><a href="dero/latex/models/presentation/beamer/overlay/next.html">dero.latex.models.presentation.beamer.overlay.next</a></li>
+<li><a href="dero/latex/models/presentation/beamer/overlay/offset.html">dero.latex.models.presentation.beamer.overlay.offset</a></li>
+<li><a href="dero/latex/models/presentation/beamer/overlay/overlay.html">dero.latex.models.presentation.beamer.overlay.overlay</a></li>
+<li><a href="dero/latex/models/presentation/beamer/overlay/overlay_param.html">dero.latex.models.presentation.beamer.overlay.overlay_param</a></li>
+<li><a href="dero/latex/models/presentation/beamer/overlay/range.html">dero.latex.models.presentation.beamer.overlay.range</a></li>
+<li><a href="dero/latex/models/presentation/beamer/overlay/until_end.html">dero.latex.models.presentation.beamer.overlay.until_end</a></li>
+<li><a href="dero/latex/models/presentation/beamer/templates/frames/dim_reveal.html">dero.latex.models.presentation.beamer.templates.frames.dim_reveal</a></li>
+<li><a href="dero/latex/models/presentation/beamer/templates/frames/grid.html">dero.latex.models.presentation.beamer.templates.frames.grid</a></li>
+<li><a href="dero/latex/models/presentation/beamer/templates/frames/two_col.html">dero.latex.models.presentation.beamer.templates.frames.two_col</a></li>
+<li><a href="dero/latex/models/presentation/beamer/templates/lists/dim_reveal_items.html">dero.latex.models.presentation.beamer.templates.lists.dim_reveal_items</a></li>
+<li><a href="dero/latex/models/presentation/beamer/theme/usetheme.html">dero.latex.models.presentation.beamer.theme.usetheme</a></li>
+<li><a href="dero/latex/models/presentation/presentation.html">dero.latex.models.presentation.presentation</a></li>
+<li><a href="dero/latex/models/ref.html">dero.latex.models.ref</a></li>
+<li><a href="dero/latex/models/references/bibliography.html">dero.latex.models.references.bibliography</a></li>
+<li><a href="dero/latex/models/references/bibtex/addresource.html">dero.latex.models.references.bibtex.addresource</a></li>
+<li><a href="dero/latex/models/references/bibtex/article.html">dero.latex.models.references.bibtex.article</a></li>
+<li><a href="dero/latex/models/references/bibtex/base.html">dero.latex.models.references.bibtex.base</a></li>
+<li><a href="dero/latex/models/references/bibtex/generic.html">dero.latex.models.references.bibtex.generic</a></li>
+<li><a href="dero/latex/models/references/bibtex/manual.html">dero.latex.models.references.bibtex.manual</a></li>
+<li><a href="dero/latex/models/references/bibtex/misc.html">dero.latex.models.references.bibtex.misc</a></li>
+<li><a href="dero/latex/models/references/bibtex/printbib.html">dero.latex.models.references.bibtex.printbib</a></li>
+<li><a href="dero/latex/models/references/bibtex/style/manager.html">dero.latex.models.references.bibtex.style.manager</a></li>
+<li><a href="dero/latex/models/references/bibtex/style/style.html">dero.latex.models.references.bibtex.style.style</a></li>
+<li><a href="dero/latex/models/references/citations.html">dero.latex.models.references.citations</a></li>
+<li><a href="dero/latex/models/section/abstract.html">dero.latex.models.section.abstract</a></li>
+<li><a href="dero/latex/models/section/appendix.html">dero.latex.models.section.appendix</a></li>
+<li><a href="dero/latex/models/section/base.html">dero.latex.models.section.base</a></li>
+<li><a href="dero/latex/models/section/paragraphs.html">dero.latex.models.section.paragraphs</a></li>
+<li><a href="dero/latex/models/section/sections.html">dero.latex.models.section.sections</a></li>
+<li><a href="dero/latex/models/sizes/linewidth.html">dero.latex.models.sizes.linewidth</a></li>
+<li><a href="dero/latex/models/sizes/textheight.html">dero.latex.models.sizes.textheight</a></li>
+<li><a href="dero/latex/models/sizes/textsizes.html">dero.latex.models.sizes.textsizes</a></li>
+<li><a href="dero/latex/models/sizes/textwidth.html">dero.latex.models.sizes.textwidth</a></li>
+<li><a href="dero/latex/models/title/frame.html">dero.latex.models.title.frame</a></li>
+<li><a href="dero/latex/models/title/framepage.html">dero.latex.models.title.framepage</a></li>
+<li><a href="dero/latex/models/title/page.html">dero.latex.models.title.page</a></li>
+<li><a href="dero/latex/models/title/subtitle.html">dero.latex.models.title.subtitle</a></li>
+<li><a href="dero/latex/models/title/title.html">dero.latex.models.title.title</a></li>
+<li><a href="dero/latex/table/logic/panels/combine.html">dero.latex.table.logic.panels.combine</a></li>
+<li><a href="dero/latex/table/logic/panels/letters.html">dero.latex.table.logic.panels.letters</a></li>
+<li><a href="dero/latex/table/logic/pdf.html">dero.latex.table.logic.pdf</a></li>
+<li><a href="dero/latex/table/logic/table/build.html">dero.latex.table.logic.table.build</a></li>
+<li><a href="dero/latex/table/models/data/dataitem.html">dero.latex.table.models.data.dataitem</a></li>
+<li><a href="dero/latex/table/models/data/row.html">dero.latex.table.models.data.row</a></li>
+<li><a href="dero/latex/table/models/data/table.html">dero.latex.table.models.data.table</a></li>
+<li><a href="dero/latex/table/models/data/valuestable.html">dero.latex.table.models.data.valuestable</a></li>
+<li><a href="dero/latex/table/models/labels/collection.html">dero.latex.table.models.labels.collection</a></li>
+<li><a href="dero/latex/table/models/labels/label.html">dero.latex.table.models.labels.label</a></li>
+<li><a href="dero/latex/table/models/labels/multicolumn.html">dero.latex.table.models.labels.multicolumn</a></li>
+<li><a href="dero/latex/table/models/labels/row.html">dero.latex.table.models.labels.row</a></li>
+<li><a href="dero/latex/table/models/labels/table.html">dero.latex.table.models.labels.table</a></li>
+<li><a href="dero/latex/table/models/mixins/addvalues/ampersand.html">dero.latex.table.models.mixins.addvalues.ampersand</a></li>
+<li><a href="dero/latex/table/models/mixins/addvalues/row.html">dero.latex.table.models.mixins.addvalues.row</a></li>
+<li><a href="dero/latex/table/models/panels/collection.html">dero.latex.table.models.panels.collection</a></li>
+<li><a href="dero/latex/table/models/panels/grid.html">dero.latex.table.models.panels.grid</a></li>
+<li><a href="dero/latex/table/models/panels/panel.html">dero.latex.table.models.panels.panel</a></li>
+<li><a href="dero/latex/table/models/spacing/cell.html">dero.latex.table.models.spacing.cell</a></li>
+<li><a href="dero/latex/table/models/spacing/columntable.html">dero.latex.table.models.spacing.columntable</a></li>
+<li><a href="dero/latex/table/models/spacing/rowtable.html">dero.latex.table.models.spacing.rowtable</a></li>
+<li><a href="dero/latex/table/models/table/caption.html">dero.latex.table.models.table.caption</a></li>
+<li><a href="dero/latex/table/models/table/row.html">dero.latex.table.models.table.row</a></li>
+<li><a href="dero/latex/table/models/table/rowbase.html">dero.latex.table.models.table.rowbase</a></li>
+<li><a href="dero/latex/table/models/table/section.html">dero.latex.table.models.table.section</a></li>
+<li><a href="dero/latex/table/models/table/table.html">dero.latex.table.models.table.table</a></li>
+<li><a href="dero/latex/table/models/texgen/alignment.html">dero.latex.table.models.texgen.alignment</a></li>
+<li><a href="dero/latex/table/models/texgen/environments.html">dero.latex.table.models.texgen.environments</a></li>
+<li><a href="dero/latex/table/models/texgen/items.html">dero.latex.table.models.texgen.items</a></li>
+<li><a href="dero/latex/table/models/texgen/lines.html">dero.latex.table.models.texgen.lines</a></li>
+<li><a href="dero/latex/table/models/texgen/newcolumntype.html">dero.latex.table.models.texgen.newcolumntype</a></li>
+<li><a href="dero/latex/texgen.html">dero.latex.texgen</a></li>
+<ul><li><a href="dero/latex/texgen/packages/columntypes.html">dero.latex.texgen.packages.columntypes</a></li>
+<li><a href="dero/latex/texgen/replacements/file.html">dero.latex.texgen.replacements.file</a></li>
+<li><a href="dero/latex/texgen/replacements/filename.html">dero.latex.texgen.replacements.filename</a></li>
+<li><a href="dero/latex/texgen/replacements/replacer.html">dero.latex.texgen.replacements.replacer</a></li>
+</ul><li><a href="dero/latex/texparser/references/bibtex/extract.html">dero.latex.texparser.references.bibtex.extract</a></li>
+<li><a href="dero/latex/tools.html">dero.latex.tools</a></li>
+<ul><li><a href="dero/latex/tools/fileops.html">dero.latex.tools.fileops</a></li>
+</ul><li><a href="dero/logtimer.html">dero.logtimer</a></li>
+<li><a href="dero/manager/assignments/models/container.html">dero.manager.assignments.models.container</a></li>
+<li><a href="dero/manager/assignments/models/statement.html">dero.manager.assignments.models.statement</a></li>
+<li><a href="dero/manager/basemodels/collection.html">dero.manager.basemodels.collection</a></li>
+<li><a href="dero/manager/basemodels/config.html">dero.manager.basemodels.config</a></li>
+<li><a href="dero/manager/basemodels/container.html">dero.manager.basemodels.container</a></li>
+<li><a href="dero/manager/basemodels/file.html">dero.manager.basemodels.file</a></li>
+<li><a href="dero/manager/basemodels/pipeline.html">dero.manager.basemodels.pipeline</a></li>
+<li><a href="dero/manager/basemodels/registrar.html">dero.manager.basemodels.registrar</a></li>
+<li><a href="dero/manager/config/logic/write.html">dero.manager.config.logic.write</a></li>
+<li><a href="dero/manager/config/models/config.html">dero.manager.config.models.config</a></li>
+<li><a href="dero/manager/config/models/file.html">dero.manager.config.models.file</a></li>
+<li><a href="dero/manager/config/models/manager.html">dero.manager.config.models.manager</a></li>
+<li><a href="dero/manager/config/models/section.html">dero.manager.config.models.section</a></li>
+<li><a href="dero/manager/data/logic/convert.html">dero.manager.data.logic.convert</a></li>
+<li><a href="dero/manager/data/logic/merge.html">dero.manager.data.logic.merge</a></li>
+<ul><li><a href="dero/manager/data/logic/merge/display.html">dero.manager.data.logic.merge.display</a></li>
+<li><a href="dero/manager/data/logic/merge/summarize.html">dero.manager.data.logic.merge.summarize</a></li>
+</ul><li><a href="dero/manager/data/models/astitems.html">dero.manager.data.models.astitems</a></li>
+<li><a href="dero/manager/data/models/collection.html">dero.manager.data.models.collection</a></li>
+<li><a href="dero/manager/data/models/config.html">dero.manager.data.models.config</a></li>
+<li><a href="dero/manager/data/models/dictfile.html">dero.manager.data.models.dictfile</a></li>
+<li><a href="dero/manager/data/models/file.html">dero.manager.data.models.file</a></li>
+<li><a href="dero/manager/data/models/merge.html">dero.manager.data.models.merge</a></li>
+<li><a href="dero/manager/data/models/pipeline.html">dero.manager.data.models.pipeline</a></li>
+<li><a href="dero/manager/data/models/registrar.html">dero.manager.data.models.registrar</a></li>
+<li><a href="dero/manager/data/models/source.html">dero.manager.data.models.source</a></li>
+<li><a href="dero/manager/data/models/type.html">dero.manager.data.models.type</a></li>
+<li><a href="dero/manager/exceptions/base.html">dero.manager.exceptions.base</a></li>
+<li><a href="dero/manager/exceptions/pipelinemanager.html">dero.manager.exceptions.pipelinemanager</a></li>
+<li><a href="dero/manager/imports/logic/load/ext_importlib.html">dero.manager.imports.logic.load.ext_importlib</a></li>
+<li><a href="dero/manager/imports/logic/load/func.html">dero.manager.imports.logic.load.func</a></li>
+<li><a href="dero/manager/imports/logic/load/name.html">dero.manager.imports.logic.load.name</a></li>
+<li><a href="dero/manager/imports/models/statements/comment.html">dero.manager.imports.models.statements.comment</a></li>
+<li><a href="dero/manager/imports/models/statements/container.html">dero.manager.imports.models.statements.container</a></li>
+<li><a href="dero/manager/imports/models/statements/importbase.html">dero.manager.imports.models.statements.importbase</a></li>
+<li><a href="dero/manager/imports/models/statements/module.html">dero.manager.imports.models.statements.module</a></li>
+<li><a href="dero/manager/imports/models/statements/obj.html">dero.manager.imports.models.statements.obj</a></li>
+<li><a href="dero/manager/imports/models/statements/rename.html">dero.manager.imports.models.statements.rename</a></li>
+<li><a href="dero/manager/imports/models/tracker.html">dero.manager.imports.models.tracker</a></li>
+<li><a href="dero/manager/io/file/interfaces/activeconfig.html">dero.manager.io.file.interfaces.activeconfig</a></li>
+<li><a href="dero/manager/io/file/interfaces/config.html">dero.manager.io.file.interfaces.config</a></li>
+<li><a href="dero/manager/io/file/interfaces/datadict.html">dero.manager.io.file.interfaces.datadict</a></li>
+<li><a href="dero/manager/io/file/interfaces/pipeline.html">dero.manager.io.file.interfaces.pipeline</a></li>
+<li><a href="dero/manager/io/file/load/active/loader.html">dero.manager.io.file.load.active.loader</a></li>
+<li><a href="dero/manager/io/file/load/active/userdef.html">dero.manager.io.file.load.active.userdef</a></li>
+<li><a href="dero/manager/io/file/load/lazy/base/impassign.html">dero.manager.io.file.load.lazy.base.impassign</a></li>
+<li><a href="dero/manager/io/file/load/lazy/base/loader.html">dero.manager.io.file.load.lazy.base.loader</a></li>
+<li><a href="dero/manager/io/file/load/lazy/config.html">dero.manager.io.file.load.lazy.config</a></li>
+<li><a href="dero/manager/io/file/load/lazy/dataast.html">dero.manager.io.file.load.lazy.dataast</a></li>
+<li><a href="dero/manager/io/file/load/lazy/datadict.html">dero.manager.io.file.load.lazy.datadict</a></li>
+<li><a href="dero/manager/io/file/load/lazy/pipeline.html">dero.manager.io.file.load.lazy.pipeline</a></li>
+<li><a href="dero/manager/io/file/load/lazy/pipelineast.html">dero.manager.io.file.load.lazy.pipelineast</a></li>
+<li><a href="dero/manager/io/file/load/parsers/assign.html">dero.manager.io.file.load.parsers.assign</a></li>
+<li><a href="dero/manager/io/file/load/parsers/base.html">dero.manager.io.file.load.parsers.base</a></li>
+<li><a href="dero/manager/io/file/load/parsers/collections.html">dero.manager.io.file.load.parsers.collections</a></li>
+<li><a href="dero/manager/io/file/load/parsers/extname.html">dero.manager.io.file.load.parsers.extname</a></li>
+<li><a href="dero/manager/io/file/load/parsers/fromdict.html">dero.manager.io.file.load.parsers.fromdict</a></li>
+<li><a href="dero/manager/io/file/load/parsers/funcdef.html">dero.manager.io.file.load.parsers.funcdef</a></li>
+<li><a href="dero/manager/io/file/load/parsers/imp.html">dero.manager.io.file.load.parsers.imp</a></li>
+<li><a href="dero/manager/io/file/load/parsers/kwargs.html">dero.manager.io.file.load.parsers.kwargs</a></li>
+<li><a href="dero/manager/io/file/load/parsers/py.html">dero.manager.io.file.load.parsers.py</a></li>
+<li><a href="dero/manager/io/file/write/asttosource.html">dero.manager.io.file.write.asttosource</a></li>
+<li><a href="dero/manager/io/file/write/base.html">dero.manager.io.file.write.base</a></li>
+<li><a href="dero/manager/io/file/write/config.html">dero.manager.io.file.write.config</a></li>
+<li><a href="dero/manager/io/func/load/args.html">dero.manager.io.func.load.args</a></li>
+<li><a href="dero/manager/io/func/load/config.html">dero.manager.io.func.load.config</a></li>
+<li><a href="dero/manager/io/func/load/extractimp.html">dero.manager.io.func.load.extractimp</a></li>
+<li><a href="dero/manager/logger.html">dero.manager.logger</a></li>
+<li><a href="dero/manager/main.html">dero.manager.main</a></li>
+<li><a href="dero/manager/mixins/orderpref.html">dero.manager.mixins.orderpref</a></li>
+<li><a href="dero/manager/pipelines/models/collection.html">dero.manager.pipelines.models.collection</a></li>
+<li><a href="dero/manager/pipelines/models/config.html">dero.manager.pipelines.models.config</a></li>
+<li><a href="dero/manager/pipelines/models/dictfile.html">dero.manager.pipelines.models.dictfile</a></li>
+<li><a href="dero/manager/pipelines/models/file.html">dero.manager.pipelines.models.file</a></li>
+<li><a href="dero/manager/pipelines/models/pipeline.html">dero.manager.pipelines.models.pipeline</a></li>
+<li><a href="dero/manager/pipelines/models/registrar.html">dero.manager.pipelines.models.registrar</a></li>
+<li><a href="dero/manager/runner/models/runner.html">dero.manager.runner.models.runner</a></li>
+<li><a href="dero/manager/sectionpath/sectionpath.html">dero.manager.sectionpath.sectionpath</a></li>
+<li><a href="dero/manager/selector/logic/exc/typo.html">dero.manager.selector.logic.exc.typo</a></li>
+<li><a href="dero/manager/selector/logic/get/fromglobs.html">dero.manager.selector.logic.get.fromglobs</a></li>
+<li><a href="dero/manager/selector/logic/get/frommanager.html">dero.manager.selector.logic.get.frommanager</a></li>
+<li><a href="dero/manager/selector/logic/get/globs.html">dero.manager.selector.logic.get.globs</a></li>
+<li><a href="dero/manager/selector/logic/get/main.html">dero.manager.selector.logic.get.main</a></li>
+<li><a href="dero/manager/selector/models/itemview.html">dero.manager.selector.models.itemview</a></li>
+<li><a href="dero/manager/selector/models/selector.html">dero.manager.selector.models.selector</a></li>
+<li><a href="dero/manager/views/object.html">dero.manager.views.object</a></li>
+<li><a href="dero/mixins/attrequals.html">dero.mixins.attrequals</a></li>
+<li><a href="dero/mixins/propertycache.html">dero.mixins.propertycache</a></li>
+<li><a href="dero/mixins/repr.html">dero.mixins.repr</a></li>
+<li><a href="dero/ml/dataprep/split.html">dero.ml.dataprep.split</a></li>
+<li><a href="dero/ml/evaluate/main.html">dero.ml.evaluate.main</a></li>
+<li><a href="dero/ml/evaluate/train_score.html">dero.ml.evaluate.train_score</a></li>
+<li><a href="dero/ml/gen_models/create.html">dero.ml.gen_models.create</a></li>
+<li><a href="dero/ml/gen_models/kwargs.html">dero.ml.gen_models.kwargs</a></li>
+<li><a href="dero/ml/gen_models/main.html">dero.ml.gen_models.main</a></li>
+<li><a href="dero/ml/results/reformat.html">dero.ml.results.reformat</a></li>
+<li><a href="dero/modeler/model.html">dero.modeler.model</a></li>
+<li><a href="dero/pdf.html">dero.pdf</a></li>
+<li><a href="dero/reg/args.html">dero.reg.args</a></li>
+<li><a href="dero/reg/chooser.html">dero.reg.chooser</a></li>
+<li><a href="dero/reg/cluster.html">dero.reg.cluster</a></li>
+<ul><li><a href="dero/reg/cluster/output.html">dero.reg.cluster.output</a></li>
+</ul><li><a href="dero/reg/controls.html">dero.reg.controls</a></li>
+<li><a href="dero/reg/differenced.html">dero.reg.differenced</a></li>
+<li><a href="dero/reg/ext_statsmodels.html">dero.reg.ext_statsmodels</a></li>
+<li><a href="dero/reg/fe/dataprep.html">dero.reg.fe.dataprep</a></li>
+<li><a href="dero/reg/fe/output.html">dero.reg.fe.output</a></li>
+<li><a href="dero/reg/fe/tools.html">dero.reg.fe.tools</a></li>
+<li><a href="dero/reg/hypothesis/lincom.html">dero.reg.hypothesis.lincom</a></li>
+<li><a href="dero/reg/interact.html">dero.reg.interact</a></li>
+<li><a href="dero/reg/iter.html">dero.reg.iter</a></li>
+<li><a href="dero/reg/lag/create.html">dero.reg.lag.create</a></li>
+<li><a href="dero/reg/lag/main.html">dero.reg.lag.main</a></li>
+<li><a href="dero/reg/lag/plot.html">dero.reg.lag.plot</a></li>
+<li><a href="dero/reg/lag/remove.html">dero.reg.lag.remove</a></li>
+<li><a href="dero/reg/linmodels/bindings/fe.html">dero.reg.linmodels.bindings.fe</a></li>
+<li><a href="dero/reg/linmodels/bindings/modelstr.html">dero.reg.linmodels.bindings.modelstr</a></li>
+<li><a href="dero/reg/linmodels/bindings/result.html">dero.reg.linmodels.bindings.result</a></li>
+<li><a href="dero/reg/linmodels/reg.html">dero.reg.linmodels.reg</a></li>
+<li><a href="dero/reg/models.html">dero.reg.models</a></li>
+<li><a href="dero/reg/order.html">dero.reg.order</a></li>
+<li><a href="dero/reg/quantile.html">dero.reg.quantile</a></li>
+<li><a href="dero/reg/reg.html">dero.reg.reg</a></li>
+<li><a href="dero/reg/select.html">dero.reg.select</a></li>
+<li><a href="dero/reg/summarize.html">dero.reg.summarize</a></li>
+<ul><li><a href="dero/reg/summarize/split.html">dero.reg.summarize.split</a></li>
+<li><a href="dero/reg/summarize/tstat.html">dero.reg.summarize.tstat</a></li>
+<li><a href="dero/reg/summarize/yesno.html">dero.reg.summarize.yesno</a></li>
+</ul><li><a href="dero/summ.html">dero.summ</a></li>
+<li><a href="dero/wrds.html">dero.wrds</a></li>
+<li><a href="sympy/core/assumptions.html">sympy.core.assumptions</a></li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

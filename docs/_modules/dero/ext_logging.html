@@ -1,0 +1,350 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.ext_logging &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.ext_logging</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">datetime</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span><span class="o">,</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+
+<span class="kn">from</span> <span class="nn">.ext_time</span> <span class="k">import</span> <span class="n">time_elapsed</span>
+<span class="kn">from</span> <span class="nn">.decorators</span> <span class="k">import</span> <span class="n">apply_decorator_to_all_functions_in_module</span>
+
+<div class="viewcode-block" id="apply_logging_to_all_functions_in_module"><a class="viewcode-back" href="../../dero.html#dero.ext_logging.apply_logging_to_all_functions_in_module">[docs]</a><span class="k">def</span> <span class="nf">apply_logging_to_all_functions_in_module</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    To be used after creating a logger with dero.logging.create_logger(), and after importing</span>
+<span class="sd">    a module. On subsequent calls to any functions from that module, they will be logged using</span>
+<span class="sd">    the log_with decorator. </span>
+<span class="sd">    </span>
+<span class="sd">    NOTE: Be careful not to use this on any module containing a function to be called many times.</span>
+<span class="sd">    For such modules, it is better to use the log_with decorator directly excluding those functions.</span>
+<span class="sd">    </span>
+<span class="sd">    Usage:</span>
+<span class="sd">    import module</span>
+<span class="sd">    import dero</span>
+<span class="sd">    </span>
+<span class="sd">    logger = dero.logging.create_logger()</span>
+
+<span class="sd">    dero.logging.apply_logging_to_all_functions_in_module(module)</span>
+<span class="sd">    </span>
+<span class="sd">    module.whatever_function() #logs correctly</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">_get_all_prior_frames</span><span class="p">()</span>
+    <span class="n">name</span> <span class="o">+=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">module</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">module</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">log_with</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+    <span class="n">apply_decorator_to_all_functions_in_module</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">module</span><span class="o">.</span><span class="n">log</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="create_logger"><a class="viewcode-back" href="../../dero.html#dero.ext_logging.create_logger">[docs]</a><span class="k">def</span> <span class="nf">create_logger</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;main&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a logger in the __main__ namespace. Sets three handlers, two to file and one to stdout.</span>
+<span class="sd">    All output goes to the .debug file, info and higher goes to the .log file, and error and higher</span>
+<span class="sd">    goes to stdout.</span>
+<span class="sd">    </span>
+<span class="sd">    Pass a name to name log files.</span>
+<span class="sd">    </span>
+<span class="sd">    Usage:</span>
+<span class="sd">    Imagine a project with three files, main.py, bar.py, and baz.py. We want to use the </span>
+<span class="sd">    create_logger() function in the main namespace (file being run), and get_logger() in</span>
+<span class="sd">    the imported files.</span>
+<span class="sd">    </span>
+<span class="sd">    Normal logs:</span>
+<span class="sd">    Then log entries may be created with logger.debug(), logger.info(), logger.warning(), logger.error(),</span>
+<span class="sd">    and logger.critical(). </span>
+<span class="sd">    </span>
+<span class="sd">    Exceptions:</span>
+<span class="sd">    Log caught exceptions with logger.exception(&#39;Custom message&#39;), this will include the traceback</span>
+<span class="sd">    </span>
+<span class="sd">    Entering and exiting functions:</span>
+<span class="sd">    Use @dero.logging.log_with(logger) decorator, logs when entering and exiting function as well as</span>
+<span class="sd">    passed args and kwargs and return values. Logs enter and exit at the info level and parameters and</span>
+<span class="sd">    return values at the debug level.</span>
+<span class="sd">    </span>
+<span class="sd">    Example usage:</span>
+<span class="sd">    main.py:</span>
+<span class="sd">    import dero</span>
+<span class="sd">    </span>
+<span class="sd">    logger = dero.logging.create_logger()</span>
+
+<span class="sd">    logger.info(&#39;Starting main&#39;)</span>
+<span class="sd">    bar.barf()</span>
+<span class="sd">    </span>
+<span class="sd">    bar.py:</span>
+<span class="sd">    import dero</span>
+<span class="sd">    import baz</span>
+<span class="sd">    </span>
+<span class="sd">    logger = dero.logging.get_logger()</span>
+<span class="sd">    </span>
+<span class="sd">    def barf():</span>
+<span class="sd">        logger.info(&#39;some info about barf&#39;)</span>
+<span class="sd">        baz.baz()</span>
+<span class="sd">        </span>
+<span class="sd">    baz.py:</span>
+<span class="sd">    import dero</span>
+<span class="sd">    </span>
+<span class="sd">    logger = dero.logging.get_logger()</span>
+<span class="sd">    </span>
+<span class="sd">    def baz():</span>
+<span class="sd">        logger.info(&#39;some info about baz&#39;)</span>
+<span class="sd">        </span>
+<span class="sd">    Running main.py will output:</span>
+<span class="sd">    2016-08-08 15:09:17,109 - __main__ - INFO - Starting main</span>
+<span class="sd">    2016-08-08 15:09:17,111 - __main__.bar - INFO - some info about barf</span>
+<span class="sd">    2016-08-08 15:09:17,111 - __main__.bar.baz - INFO - some info about baz</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#Clear Jupyter notebook logger (this is code that only needs to be run in jupyter notebook)</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1">#Create logger</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;__main__&#39;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+    <span class="n">handlers</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#container for handlers</span>
+    
+    <span class="c1">#Make log dir</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;Logs&#39;</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;Logs&#39;</span><span class="p">)</span>
+
+    <span class="c1">#Create debug logfile which logs everything</span>
+    <span class="n">creation_time</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="n">debug_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Logs\</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">.debug&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">creation_time</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="n">debug_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+    <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">debug_handler</span><span class="p">)</span>
+
+    <span class="c1">#Create standard logfile which logs process (info and up)</span>
+    <span class="n">info_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Logs\</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">.log&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">creation_time</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="n">info_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+    <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info_handler</span><span class="p">)</span>
+
+    <span class="c1">#Now log errors to standard output</span>
+    <span class="n">error_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+    <span class="n">error_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+    <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_handler</span><span class="p">)</span>
+
+    <span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)ls</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+        <span class="n">handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">logger</span></div>
+
+<div class="viewcode-block" id="get_logger"><a class="viewcode-back" href="../../dero.html#dero.ext_logging.get_logger">[docs]</a><span class="k">def</span> <span class="nf">get_logger</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    To be used in an imported file. See create_logger() for usage.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">_get_all_prior_frames</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">_get_all_prior_frames</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets the calling stack formatted as a string seperated by periods, e.g.:</span>
+<span class="sd">    __main__.bar.baz</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#container for output</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_back</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">_filter_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span> <span class="c1">#if False, is a name we don&#39;t need to record, should just continue</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span> <span class="n">out</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span> <span class="c1">#once we get to __main__, we&#39;re done (ignore IPython stuff)</span>
+                    <span class="k">return</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1">#if frame is none, we&#39;re done (no more frames)</span>
+            <span class="k">return</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_filter_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks if this frame is something meaningful and takes the appropriate action</span>
+<span class="sd">    </span>
+<span class="sd">    Returns the name if valid name, returns False if invalid name, returns None if frame is None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span> <span class="n">name</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="p">[</span><span class="s1">&#39;__name__&#39;</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span> <span class="c1">#frame is None</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;importlib._bootstrap&#39;</span><span class="p">,</span><span class="s1">&#39;importlib._bootstrap_external&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">name</span>
+
+<div class="viewcode-block" id="get_func_signature"><a class="viewcode-back" href="../../dero.html#dero.ext_logging.get_func_signature">[docs]</a><span class="k">def</span> <span class="nf">get_func_signature</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">code_list</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsourcelines</span><span class="p">(</span><span class="n">func</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">code_str</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">code_list</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">code_str</span><span class="p">[</span><span class="n">code_str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;def&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span><span class="p">:</span><span class="n">code_str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)]</span></div>
+
+<div class="viewcode-block" id="log_with"><a class="viewcode-back" href="../../dero.html#dero.ext_logging.log_with">[docs]</a><span class="k">class</span> <span class="nc">log_with</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Logging decorator that allows you to log with a</span>
+<span class="sd">    specific logger.</span>
+<span class="sd">    </span>
+<span class="sd">    By default, logs entering and exiting function as well as arguments passed at the info level.</span>
+<span class="sd">    </span>
+<span class="sd">    Usage:</span>
+<span class="sd">    import logging</span>
+<span class="sd">    import dero</span>
+<span class="sd">    </span>
+<span class="sd">    logging.basicConfig()</span>
+<span class="sd">    log = logging.getLogger(&#39;__name__&#39;) #can use custom name but using module name comes with benefits</span>
+<span class="sd">    log.setLevel(logging.DEBUG)</span>
+
+<span class="sd">    @dero.logging.log_with(log)</span>
+<span class="sd">    def test_func(a, b, c=5):</span>
+<span class="sd">        return a + b</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Customize these messages</span>
+    <span class="n">ENTRY_MESSAGE</span> <span class="o">=</span> <span class="s1">&#39;Entering </span><span class="si">{}</span><span class="s1">&#39;</span>
+    <span class="n">args_message</span> <span class="o">=</span> <span class="s1">&#39;Passed Args: </span><span class="se">\n</span><span class="si">{}</span><span class="s1">, Kwargs: </span><span class="si">{}</span><span class="s1">&#39;</span>
+    <span class="n">result_message</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> Result: </span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span>
+    <span class="n">time_message</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> took </span><span class="si">{}</span><span class="s1">&#39;</span>
+    <span class="n">EXIT_MESSAGE</span> <span class="o">=</span> <span class="s1">&#39;Exiting </span><span class="si">{}</span><span class="s1">&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timer</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="n">timer</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns a wrapper that wraps func.</span>
+<span class="sd">The wrapper will log the entry and exit points of the function</span>
+<span class="sd">with logging.INFO level.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+        <span class="c1"># set logger if it was not set earlier</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__module__</span><span class="p">)</span>
+
+        <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">:</span>
+                <span class="n">start_time</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+            
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ENTRY_MESSAGE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">get_func_signature</span><span class="p">(</span><span class="n">func</span><span class="p">)))</span>  <span class="c1"># logging level .info(). Set to .debug() if you want to</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args_message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwds</span><span class="p">))</span>
+            <span class="n">f_result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">f_result</span><span class="p">))</span>
+            <span class="n">time_elapsed_str</span> <span class="o">=</span> <span class="n">time_elapsed</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">time_elapsed_str</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">EXIT_MESSAGE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>   <span class="c1"># logging level .info(). Set to .debug() if you want to</span>
+            <span class="k">return</span> <span class="n">f_result</span>
+        <span class="k">return</span> <span class="n">wrapper</span></div>
+
+<div class="viewcode-block" id="Logger"><a class="viewcode-back" href="../../dero.html#dero.ext_logging.Logger">[docs]</a><span class="k">class</span> <span class="nc">Logger</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_dir</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_dir</span> <span class="o">=</span> <span class="n">log_dir</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_log_file</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Logger.log"><a class="viewcode-back" href="../../dero.html#dero.ext_logging.Logger.log">[docs]</a>    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">neverprint</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;ERROR: &#39;</span> <span class="o">+</span> <span class="n">message</span>
+        <span class="k">if</span> <span class="n">message</span> <span class="o">!=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="n">message</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">neverprint</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span> <span class="c1">#forces output now</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_path</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_list</span><span class="p">]</span> <span class="c1">#log anything saved in memory that couldn&#39;t be written before</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">except</span> <span class="ne">PermissionError</span><span class="p">:</span> <span class="c1">#if someone happened to write to the file at the same time</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="c1">#save it to log later</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Logger.create_log_file"><a class="viewcode-back" href="../../dero.html#dero.ext_logging.Logger.create_log_file">[docs]</a>    <span class="k">def</span> <span class="nf">create_log_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;log_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_dir</span><span class="p">):</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_dir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_path</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div></div>
+
+
+        
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

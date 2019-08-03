@@ -1,0 +1,278 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.wrds &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.wrds</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">StringIO</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="c1"># class WRDS:</span>
+    
+<span class="c1">#     def __init__(self):</span>
+<span class="c1">#         import wrds</span>
+<span class="c1">#         self.wrds_obj = wrds</span>
+        
+<span class="c1">#     def get(self, *args, **kwargs):</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         See docstring of dero.wrds.get</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         return get(*args, wrds_obj=self.wrds_obj, **kwargs)</span>
+    
+<span class="c1">#     def sql(self, *args, **kwargs):</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         See docstring of dero.wrds.sql</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         return sql(*args, wrds_obj=self.wrds_obj, **kwargs)</span>
+
+<div class="viewcode-block" id="Capturing"><a class="viewcode-back" href="../../dero.html#dero.wrds.Capturing">[docs]</a><span class="k">class</span> <span class="nc">Capturing</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stringio</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stringio</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stdout</span></div>
+
+
+<div class="viewcode-block" id="login_if_needed"><a class="viewcode-back" href="../../dero.html#dero.wrds.login_if_needed">[docs]</a><span class="k">def</span> <span class="nf">login_if_needed</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This decorator is to be used after importing wrds. Will log in again</span>
+<span class="sd">    if connection is timed out.</span>
+<span class="sd">    </span>
+<span class="sd">    Usage:</span>
+<span class="sd">    </span>
+<span class="sd">    import wrds</span>
+<span class="sd">    </span>
+<span class="sd">    @login_if_needed</span>
+<span class="sd">    def get_msi():</span>
+<span class="sd">        return wrds.sql(&#39;select * from CRSP.MSI&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">func_or_login_and_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">wrds</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;wrds_obj&#39;</span><span class="p">:</span><span class="n">wrds</span><span class="p">})</span>
+        <span class="k">with</span> <span class="n">Capturing</span><span class="p">()</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="s1">&#39;Connection reset by peer&#39;</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">output</span><span class="p">]):</span> <span class="c1">#connection error</span>
+            <span class="n">wrds</span><span class="o">.</span><span class="n">CONN</span> <span class="o">=</span> <span class="n">wrds</span><span class="o">.</span><span class="n">_authenticate</span><span class="p">(</span><span class="n">wrds</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">wrds</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">return</span> <span class="n">func_or_login_and_func</span></div>
+
+<div class="viewcode-block" id="get"><a class="viewcode-back" href="../../dero.html#dero.wrds.get">[docs]</a><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">libname</span><span class="p">,</span> <span class="n">tablename</span><span class="p">,</span> <span class="n">getvars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">distinct</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Executes a standard SQL query to get variables from table. Passing an int to subset</span>
+<span class="sd">    causes only that many rows to be returned.</span>
+<span class="sd">    </span>
+<span class="sd">    Required inputs: (note: none of these are case sensitive)</span>
+<span class="sd">    libname: str, name of library in wrds</span>
+<span class="sd">    tablename: str, name of table within library in wrds</span>
+<span class="sd">    </span>
+<span class="sd">    Optional inputs:</span>
+<span class="sd">    getvars: False, str, or list of strs, names of columns to pull from table. If False will</span>
+<span class="sd">             pull all columns.</span>
+<span class="sd">    where: False or str, SQL where expression without the word where.</span>
+<span class="sd">            Examples:</span>
+<span class="sd">                &#39;permno = 10516 and askhi &gt; 1000&#39;</span>
+<span class="sd">                &#39;date = &quot;04jan2013&quot;d&#39;</span>
+<span class="sd">                &#39;date between &quot;07jan2013&quot;d and &quot;08jan2013&quot;d&#39;</span>
+<span class="sd">    subset: False or int, set to an int to keep that many observations</span>
+<span class="sd">    distinct: bool, set to true to select distinct</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="c1">#     if not wrds_obj:</span>
+<span class="c1">#         import wrds</span>
+<span class="c1">#         wrds_obj = wrds</span>
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">getvars</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">getvars</span> <span class="o">=</span> <span class="p">[</span><span class="n">getvars</span><span class="p">]</span>
+    
+    <span class="n">select</span> <span class="o">=</span> <span class="s1">&#39;select &#39;</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;distinct &#39;</span> <span class="k">if</span> <span class="n">distinct</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">getvars</span><span class="p">:</span>
+        <span class="n">var_string</span> <span class="o">=</span>  <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">g</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">getvars</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">var_string</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+        
+    <span class="n">table_string</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">n</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="n">libname</span><span class="p">,</span> <span class="n">tablename</span><span class="p">]])</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">select</span> <span class="o">+</span> <span class="n">var_string</span> <span class="o">+</span> <span class="s1">&#39; from &#39;</span> <span class="o">+</span> <span class="n">table_string</span>
+    
+    <span class="k">if</span> <span class="n">subset</span><span class="p">:</span>
+        <span class="n">query</span> <span class="o">+=</span> <span class="s1">&#39; (obs=</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">where</span><span class="p">:</span>
+        <span class="n">query</span> <span class="o">+=</span> <span class="s1">&#39; where &#39;</span> <span class="o">+</span> <span class="n">where</span>
+    
+    <span class="k">return</span> <span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="sql"><a class="viewcode-back" href="../../dero.html#dero.wrds.sql">[docs]</a><span class="nd">@login_if_needed</span>
+<span class="k">def</span> <span class="nf">sql</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replicates wrds.sql with auto-login if necessary. Pass query string and index. Documentation</span>
+<span class="sd">    from wrds.sql below:</span>
+<span class="sd">    </span>
+<span class="sd">    Run a SQL Query on the WRDS Database.</span>
+<span class="sd">    data = wrds.sql(&#39;select * from CRSP.MSI&#39;, &#39;DATE&#39;)</span>
+
+<span class="sd">    The second argument gives the column name of the index, if you&#39;d like</span>
+<span class="sd">    your DataFrame to be indexed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="c1">#     if not wrds_obj:</span>
+<span class="c1">#         import wrds</span>
+<span class="c1">#         wrds_obj = wrds</span>
+
+    <span class="n">wrds_obj</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;wrds_obj&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">wrds_obj</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="strip_str"><a class="viewcode-back" href="../../dero.html#dero.wrds.strip_str">[docs]</a><span class="k">def</span> <span class="nf">strip_str</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="tolist_and_strip_outlist"><a class="viewcode-back" href="../../dero.html#dero.wrds.tolist_and_strip_outlist">[docs]</a><span class="k">def</span> <span class="nf">tolist_and_strip_outlist</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This decorator works for functions that return a pandas Series. It converts the series to</span>
+<span class="sd">    a list and strips white space from the output.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">tolist_and_strip</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">tolist</span><span class="p">()]</span>
+
+    <span class="k">return</span> <span class="n">tolist_and_strip</span></div>
+
+<div class="viewcode-block" id="all_libraries"><a class="viewcode-back" href="../../dero.html#dero.wrds.all_libraries">[docs]</a><span class="nd">@tolist_and_strip_outlist</span>
+<span class="k">def</span> <span class="nf">all_libraries</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns every library in WRDS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sql</span><span class="p">(</span><span class="s1">&#39;select distinct libname from dictionary.tables&#39;</span><span class="p">)[</span><span class="s1">&#39;libname&#39;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="all_tables_in_library"><a class="viewcode-back" href="../../dero.html#dero.wrds.all_tables_in_library">[docs]</a><span class="nd">@tolist_and_strip_outlist</span>
+<span class="k">def</span> <span class="nf">all_tables_in_library</span><span class="p">(</span><span class="n">libname</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns every table in a library in WRDS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sql</span><span class="p">(</span><span class="s1">&#39;select distinct memname from dictionary.columns &#39;</span> 
+                    <span class="s1">&#39;where libname=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">libname</span><span class="o">.</span><span class="n">upper</span><span class="p">()))[</span><span class="s1">&#39;memname&#39;</span><span class="p">]</span></div>
+
+<span class="nd">@tolist_and_strip_outlist</span>
+<span class="k">def</span> <span class="nf">_all_columns_in_table</span><span class="p">(</span><span class="n">libname</span><span class="p">,</span> <span class="n">tablename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns every column in a table in WRDS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sql</span><span class="p">(</span><span class="s1">&#39;select name from dictionary.columns &#39;</span> 
+                    <span class="s1">&#39;where libname=&quot;</span><span class="si">{}</span><span class="s1">&quot; and memname=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">libname</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">tablename</span><span class="o">.</span><span class="n">upper</span><span class="p">()))[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+
+
+<span class="nd">@tolist_and_strip_outlist</span>
+<span class="k">def</span> <span class="nf">_all_labels_in_table</span><span class="p">(</span><span class="n">libname</span><span class="p">,</span> <span class="n">tablename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns every column in a table in WRDS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sql</span><span class="p">(</span><span class="s1">&#39;select label from dictionary.columns &#39;</span> 
+                    <span class="s1">&#39;where libname=&quot;</span><span class="si">{}</span><span class="s1">&quot; and memname=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">libname</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">tablename</span><span class="o">.</span><span class="n">upper</span><span class="p">()))[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="all_columns_in_table"><a class="viewcode-back" href="../../dero.html#dero.wrds.all_columns_in_table">[docs]</a><span class="k">def</span> <span class="nf">all_columns_in_table</span><span class="p">(</span><span class="n">libname</span><span class="p">,</span> <span class="n">tablename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args are libname, tablename strings. Returns a dataframe of column names and labels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sql</span><span class="p">(</span><span class="s1">&#39;select name, label from dictionary.columns &#39;</span> 
+                    <span class="s1">&#39;where libname=&quot;</span><span class="si">{}</span><span class="s1">&quot; and memname=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">libname</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">tablename</span><span class="o">.</span><span class="n">upper</span><span class="p">()))</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span>
+                            <span class="n">strip_str</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="all_tables"><a class="viewcode-back" href="../../dero.html#dero.wrds.all_tables">[docs]</a><span class="k">def</span> <span class="nf">all_tables</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns every table in WRDS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">sql</span><span class="p">(</span><span class="s1">&#39;select libname, memname, memlabel, nvar from dictionary.tables &#39;</span>
+                  <span class="s1">&#39;where not(missing(memlabel))&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+                        <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;nvar&#39;</span><span class="p">:</span><span class="s1">&#39;Number of Columns&#39;</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

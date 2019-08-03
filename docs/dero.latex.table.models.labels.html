@@ -1,0 +1,302 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.latex.table.models.labels package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-latex-table-models-labels-package">
+<h1>dero.latex.table.models.labels package<a class="headerlink" href="#dero-latex-table-models-labels-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.latex.table.models.labels.collection">
+<span id="dero-latex-table-models-labels-collection-module"></span><h2>dero.latex.table.models.labels.collection module<a class="headerlink" href="#module-dero.latex.table.models.labels.collection" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.labels.collection.LabelCollection">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.labels.collection.</code><code class="descname">LabelCollection</code><span class="sig-paren">(</span><em>values: [&lt;class 'dero.latex.table.models.labels.label.Label'&gt;], underline: typing.Union[int, str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/collection.html#LabelCollection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.collection.LabelCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.table.models.table.html#dero.latex.table.models.table.rowbase.RowBase" title="dero.latex.table.models.table.rowbase.RowBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.table.rowbase.RowBase</span></code></a></p>
+<p>Represents one row of labels. Use to construct a LabelTable to apply to a DataTable.</p>
+<p>Main usage is LabelCollection.from_str_list</p>
+<dl class="classmethod">
+<dt id="dero.latex.table.models.labels.collection.LabelCollection.from_str_list">
+<em class="property">classmethod </em><code class="descname">from_str_list</code><span class="sig-paren">(</span><em>str_list: [&lt;class 'str'&gt;], underline: typing.Union[int, str] = None</em><span class="sig-paren">)</span> &#x2192; dero.latex.table.models.labels.collection.LabelCollection<a class="reference internal" href="_modules/dero/latex/table/models/labels/collection.html#LabelCollection.from_str_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.collection.LabelCollection.from_str_list" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">str_list:
+underline: int, str, or None, pass index or label to underline, pass a str range, e.g. ‘2-5’ for a</p>
+<blockquote class="last">
+<div>range of labels to underline, pass space separated indices as a str, e.g. ‘0 2’ for
+separated underlines, or a combination, e.g. ‘2-5 8’</div></blockquote>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.labels.collection.LabelCollection.matches">
+<code class="descname">matches</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/collection.html#LabelCollection.matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.collection.LabelCollection.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare on the basis of having same values, rather than same instance
+Use regular equality to test if same instance
+:param other:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.labels.collection.LabelCollection.pad">
+<code class="descname">pad</code><span class="sig-paren">(</span><em>length: int</em>, <em>direction='right'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/collection.html#LabelCollection.pad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.collection.LabelCollection.pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand row out to the right or left with blanks, until it is length passed
+:param length:
+:return:</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.table.models.labels.collection.LabelCollection.parse_unknown_type">
+<em class="property">classmethod </em><code class="descname">parse_unknown_type</code><span class="sig-paren">(</span><em>unknown_type: typing.Union[str, typing.Iterable[str], _ForwardRef('LabelCollection')]</em><span class="sig-paren">)</span> &#x2192; dero.latex.table.models.labels.collection.LabelCollection<a class="reference internal" href="_modules/dero/latex/table/models/labels/collection.html#LabelCollection.parse_unknown_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.collection.LabelCollection.parse_unknown_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.collection.LabelCollection.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['values', 'underlines']</em><a class="headerlink" href="#dero.latex.table.models.labels.collection.LabelCollection.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.labels.collection.LabelCollection.shift_underlines">
+<code class="descname">shift_underlines</code><span class="sig-paren">(</span><em>shift</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/collection.html#LabelCollection.shift_underlines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.collection.LabelCollection.shift_underlines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.labels.label">
+<span id="dero-latex-table-models-labels-label-module"></span><h2>dero.latex.table.models.labels.label module<a class="headerlink" href="#module-dero.latex.table.models.labels.label" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.labels.label.Label">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.labels.label.</code><code class="descname">Label</code><span class="sig-paren">(</span><em>value</em>, <em>span: int = 1</em>, <em>align='c'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/label.html#Label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.label.Label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a>, <a class="reference internal" href="dero.latex.table.models.mixins.addvalues.html#dero.latex.table.models.mixins.addvalues.row.RowAddMixin" title="dero.latex.table.models.mixins.addvalues.row.RowAddMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.mixins.addvalues.row.RowAddMixin</span></code></a></p>
+<p>Only necessary to use if need to set span or alignment manually. Can construct LabelCollection objects from Labels.</p>
+<p>Useful for constructing custom multicolumn labels.</p>
+<p>&gt;&gt;&gt;import dero.latex.table as lt
+&gt;&gt;&gt;data_table = lt.DataTable.from_df(some_df)
+&gt;&gt;&gt;label = lt.Label(‘Long label’, span=5, align=’r’)
+&gt;&gt;&gt;long_label_collection = lt.LabelCollection([label], underline=‘1-5’)
+&gt;&gt;&gt;
+&gt;&gt;&gt;data_table.column_labels.insert(long_label_collection, 0)</p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.label.Label.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['value', 'span']</em><a class="headerlink" href="#dero.latex.table.models.labels.label.Label.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.labels.multicolumn">
+<span id="dero-latex-table-models-labels-multicolumn-module"></span><h2>dero.latex.table.models.labels.multicolumn module<a class="headerlink" href="#module-dero.latex.table.models.labels.multicolumn" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.labels.multicolumn.MultiColumn">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.labels.multicolumn.</code><code class="descname">MultiColumn</code><span class="sig-paren">(</span><em>contents: str</em>, <em>span: int</em>, <em>align: str = 'c'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/multicolumn.html#MultiColumn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.multicolumn.MultiColumn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.item.MultiOptionSimpleItem" title="dero.latex.models.item.MultiOptionSimpleItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.MultiOptionSimpleItem</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.multicolumn.MultiColumn.name">
+<code class="descname">name</code><em class="property"> = 'multicolumn'</em><a class="headerlink" href="#dero.latex.table.models.labels.multicolumn.MultiColumn.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.labels.row">
+<span id="dero-latex-table-models-labels-row-module"></span><h2>dero.latex.table.models.labels.row module<a class="headerlink" href="#module-dero.latex.table.models.labels.row" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.labels.row.LabelRow">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.labels.row.</code><code class="descname">LabelRow</code><span class="sig-paren">(</span><em>values: typing.Union[dero.latex.table.models.labels.collection.LabelCollection, dero.latex.table.models.labels.label.Label]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/row.html#LabelRow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.row.LabelRow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.table.models.table.html#dero.latex.table.models.table.row.Row" title="dero.latex.table.models.table.row.Row"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.table.row.Row</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.row.LabelRow.length">
+<code class="descname">length</code><a class="headerlink" href="#dero.latex.table.models.labels.row.LabelRow.length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.row.LabelRow.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['values', 'length']</em><a class="headerlink" href="#dero.latex.table.models.labels.row.LabelRow.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.labels.table">
+<span id="dero-latex-table-models-labels-table-module"></span><h2>dero.latex.table.models.labels.table module<a class="headerlink" href="#module-dero.latex.table.models.labels.table" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.labels.table.LabelTable">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.labels.table.</code><code class="descname">LabelTable</code><span class="sig-paren">(</span><em>label_collections: [&lt;class 'dero.latex.table.models.labels.collection.LabelCollection'&gt;]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/table.html#LabelTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.table.models.table.html#dero.latex.table.models.table.section.TableSection" title="dero.latex.table.models.table.section.TableSection"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.table.section.TableSection</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<p>A set of label rows to apply to a DataTable.</p>
+<p>Example:</p>
+<p>&gt;&gt;&gt;import dero.latex.table as lt
+&gt;&gt;&gt;data_table = lt.DataTable.from_df(some_df)
+&gt;&gt;&gt;col_label_table = lt.LabelTable.from_list_of_lists([[‘One header’],[‘More’,’Headers’]])
+&gt;&gt;&gt;row_label_table = lt.LabelTable.from_list_of_lists([[‘Some’,’Row’,’Labels’]]).T
+&gt;&gt;&gt;data_table.column_labels = col_label_table</p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.table.LabelTable.T">
+<code class="descname">T</code><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.T" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.labels.table.LabelTable.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/table.html#LabelTable.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.append" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.labels.table.LabelTable.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/table.html#LabelTable.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: use to compare strings inside LabelCollections. Use label_collection in LabelTable to compare objects
+:param item:
+:return:</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.table.models.labels.table.LabelTable.from_df_index">
+<em class="property">classmethod </em><code class="descname">from_df_index</code><span class="sig-paren">(</span><em>df_columns: pandas.core.indexes.base.Index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/table.html#LabelTable.from_df_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.from_df_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.table.models.labels.table.LabelTable.from_list_of_lists">
+<em class="property">classmethod </em><code class="descname">from_list_of_lists</code><span class="sig-paren">(</span><em>list_of_lists: [[&lt;class 'str'&gt;]]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/table.html#LabelTable.from_list_of_lists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.from_list_of_lists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.labels.table.LabelTable.insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><em>item</em>, <em>index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/table.html#LabelTable.insert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.insert" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.table.LabelTable.is_empty">
+<code class="descname">is_empty</code><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.is_empty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.table.LabelTable.label_collections">
+<code class="descname">label_collections</code><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.label_collections" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.table.LabelTable.length">
+<code class="descname">length</code><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.labels.table.LabelTable.matches">
+<code class="descname">matches</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/table.html#LabelTable.matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: use to compare strings inside LabelTables. Use regular equality comparison to compare objects
+:param other:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.labels.table.LabelTable.pad">
+<code class="descname">pad</code><span class="sig-paren">(</span><em>length: int</em>, <em>direction='right'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/table.html#LabelTable.pad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand table out to the right or left with blanks, until it is length passed (apply to every row)
+:param length:
+:param direction:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.labels.table.LabelTable.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/labels/table.html#LabelTable.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.remove" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.table.LabelTable.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['label_collections']</em><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.labels.table.LabelTable.rows">
+<code class="descname">rows</code><a class="headerlink" href="#dero.latex.table.models.labels.table.LabelTable.rows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.labels">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.latex.table.models.labels" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.latex.table.models.labels.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

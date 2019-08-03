@@ -1,0 +1,390 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.io.file.load.parsers package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-manager-io-file-load-parsers-package">
+<h1>dero.manager.io.file.load.parsers package<a class="headerlink" href="#dero-manager-io-file-load-parsers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="dero-manager-io-file-load-parsers-assign-module">
+<h2>dero.manager.io.file.load.parsers.assign module<a class="headerlink" href="#dero-manager-io-file-load-parsers-assign-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-dero.manager.io.file.load.parsers.assign"></span><dl class="class">
+<dt id="dero.manager.io.file.load.parsers.assign.AssignmentByVarnameExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.assign.</code><code class="descname">AssignmentByVarnameExtractor</code><span class="sig-paren">(</span><em>varname: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/assign.html#AssignmentByVarnameExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.assign.AssignmentByVarnameExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.manager.io.file.load.parsers.assign.AssignmentExtractor" title="dero.manager.io.file.load.parsers.assign.AssignmentExtractor"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.io.file.load.parsers.assign.AssignmentExtractor</span></code></a></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.assign.AssignmentByVarnameExtractor.visit_AnnAssign">
+<code class="descname">visit_AnnAssign</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/assign.html#AssignmentByVarnameExtractor.visit_AnnAssign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.assign.AssignmentByVarnameExtractor.visit_AnnAssign" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.assign.AssignmentByVarnameExtractor.visit_Assign">
+<code class="descname">visit_Assign</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/assign.html#AssignmentByVarnameExtractor.visit_Assign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.assign.AssignmentByVarnameExtractor.visit_Assign" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.assign.AssignmentExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.assign.</code><code class="descname">AssignmentExtractor</code><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/assign.html#AssignmentExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.assign.AssignmentExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ast.NodeVisitor</span></code></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.assign.AssignmentExtractor.visit_AnnAssign">
+<code class="descname">visit_AnnAssign</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/assign.html#AssignmentExtractor.visit_AnnAssign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.assign.AssignmentExtractor.visit_AnnAssign" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.assign.AssignmentExtractor.visit_Assign">
+<code class="descname">visit_Assign</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/assign.html#AssignmentExtractor.visit_Assign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.assign.AssignmentExtractor.visit_Assign" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.assign.extract_assignment_from_ast">
+<code class="descclassname">dero.manager.io.file.load.parsers.assign.</code><code class="descname">extract_assignment_from_ast</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/assign.html#extract_assignment_from_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.assign.extract_assignment_from_ast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.assign.extract_assignment_from_ast_by_name">
+<code class="descclassname">dero.manager.io.file.load.parsers.assign.</code><code class="descname">extract_assignment_from_ast_by_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/assign.html#extract_assignment_from_ast_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.assign.extract_assignment_from_ast_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.assign.extract_assignments_from_ast">
+<code class="descclassname">dero.manager.io.file.load.parsers.assign.</code><code class="descname">extract_assignments_from_ast</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/assign.html#extract_assignments_from_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.assign.extract_assignments_from_ast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.assign.extract_assignments_from_ast_by_name">
+<code class="descclassname">dero.manager.io.file.load.parsers.assign.</code><code class="descname">extract_assignments_from_ast_by_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/assign.html#extract_assignments_from_ast_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.assign.extract_assignments_from_ast_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.load.parsers.base">
+<span id="dero-manager-io-file-load-parsers-base-module"></span><h2>dero.manager.io.file.load.parsers.base module<a class="headerlink" href="#module-dero.manager.io.file.load.parsers.base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.base.FileParser">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.base.</code><code class="descname">FileParser</code><span class="sig-paren">(</span><em>filepath: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/base.html#FileParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.base.FileParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.base.FileParser.load">
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; typing.List[str]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/base.html#FileParser.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.base.FileParser.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.load.parsers.collections">
+<span id="dero-manager-io-file-load-parsers-collections-module"></span><h2>dero.manager.io.file.load.parsers.collections module<a class="headerlink" href="#module-dero.manager.io.file.load.parsers.collections" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.collections.AstDictListConverter">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.collections.</code><code class="descname">AstDictListConverter</code><span class="sig-paren">(</span><em>convert_str_values: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/collections.html#AstDictListConverter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.collections.AstDictListConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ast.NodeVisitor</span></code></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.collections.AstDictListConverter.visit_Dict">
+<code class="descname">visit_Dict</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/collections.html#AstDictListConverter.visit_Dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.collections.AstDictListConverter.visit_Dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.collections.AstDictListConverter.visit_List">
+<code class="descname">visit_List</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/collections.html#AstDictListConverter.visit_List"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.collections.AstDictListConverter.visit_List" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.collections.extract_collection_from_ast">
+<code class="descclassname">dero.manager.io.file.load.parsers.collections.</code><code class="descname">extract_collection_from_ast</code><span class="sig-paren">(</span><em>ast_node: _ast.AST</em>, <em>convert_str_values: bool = False</em><span class="sig-paren">)</span> &#x2192; typing.Union[dict, list, NoneType]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/collections.html#extract_collection_from_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.collections.extract_collection_from_ast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.collections.extract_collections_from_ast">
+<code class="descclassname">dero.manager.io.file.load.parsers.collections.</code><code class="descname">extract_collections_from_ast</code><span class="sig-paren">(</span><em>ast_node: _ast.AST</em>, <em>convert_str_values: bool = False</em><span class="sig-paren">)</span> &#x2192; typing.List[typing.Union[dict, list]]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/collections.html#extract_collections_from_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.collections.extract_collections_from_ast" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a list of dicts or lists. Goes through ast, converting
+ast.Dict to dict and ast.List to list, leaving the rest intact.
+Returns a list of these created dicts and lists</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>ast_node:</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.load.parsers.extname">
+<span id="dero-manager-io-file-load-parsers-extname-module"></span><h2>dero.manager.io.file.load.parsers.extname module<a class="headerlink" href="#module-dero.manager.io.file.load.parsers.extname" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.extname.NameExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.extname.</code><code class="descname">NameExtractor</code><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/extname.html#NameExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.extname.NameExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ast.NodeVisitor</span></code></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.extname.NameExtractor.visit_Name">
+<code class="descname">visit_Name</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/extname.html#NameExtractor.visit_Name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.extname.NameExtractor.visit_Name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.extname.extract_external_name_from_assign_value">
+<code class="descclassname">dero.manager.io.file.load.parsers.extname.</code><code class="descname">extract_external_name_from_assign_value</code><span class="sig-paren">(</span><em>ast_node: _ast.AST</em><span class="sig-paren">)</span> &#x2192; typing.Union[str, NoneType]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/extname.html#extract_external_name_from_assign_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.extname.extract_external_name_from_assign_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifies the root part of an assignment value, so long as it is not builtin.</p>
+<p>Examples
+from a import b</p>
+<p>b -&gt; ‘b’
+b.attr -&gt; ‘b’</p>
+<p>import c</p>
+<p>c.test -&gt; ‘c’
+c.thing.stuff -&gt; ‘c’</p>
+<p>‘abc’ -&gt; None
+123 -&gt; None</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>ast_node: should be ast form of the value of an assignment</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.load.parsers.fromdict">
+<span id="dero-manager-io-file-load-parsers-fromdict-module"></span><h2>dero.manager.io.file.load.parsers.fromdict module<a class="headerlink" href="#module-dero.manager.io.file.load.parsers.fromdict" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.fromdict.extract_dict_from_ast_dict_or_dict_constructor">
+<code class="descclassname">dero.manager.io.file.load.parsers.fromdict.</code><code class="descname">extract_dict_from_ast_dict_or_dict_constructor</code><span class="sig-paren">(</span><em>ast_dict: typing.Union[_ast.Dict, _ast.Call]</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/fromdict.html#extract_dict_from_ast_dict_or_dict_constructor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.fromdict.extract_dict_from_ast_dict_or_dict_constructor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.load.parsers.funcdef">
+<span id="dero-manager-io-file-load-parsers-funcdef-module"></span><h2>dero.manager.io.file.load.parsers.funcdef module<a class="headerlink" href="#module-dero.manager.io.file.load.parsers.funcdef" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionByNameExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.funcdef.</code><code class="descname">FunctionDefinitionByNameExtractor</code><span class="sig-paren">(</span><em>func_name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#FunctionDefinitionByNameExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionByNameExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionExtractor" title="dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionExtractor"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionExtractor</span></code></a></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionByNameExtractor.visit_FunctionDef">
+<code class="descname">visit_FunctionDef</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#FunctionDefinitionByNameExtractor.visit_FunctionDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionByNameExtractor.visit_FunctionDef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.funcdef.</code><code class="descname">FunctionDefinitionExtractor</code><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#FunctionDefinitionExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ast.NodeVisitor</span></code></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionExtractor.visit_ClassDef">
+<code class="descname">visit_ClassDef</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#FunctionDefinitionExtractor.visit_ClassDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionExtractor.visit_ClassDef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionExtractor.visit_FunctionDef">
+<code class="descname">visit_FunctionDef</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#FunctionDefinitionExtractor.visit_FunctionDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionExtractor.visit_FunctionDef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionOrClassInitByNameExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.funcdef.</code><code class="descname">FunctionDefinitionOrClassInitByNameExtractor</code><span class="sig-paren">(</span><em>func_name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#FunctionDefinitionOrClassInitByNameExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionOrClassInitByNameExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionByNameExtractor" title="dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionByNameExtractor"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionByNameExtractor</span></code></a></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionOrClassInitByNameExtractor.visit_ClassDef">
+<code class="descname">visit_ClassDef</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#FunctionDefinitionOrClassInitByNameExtractor.visit_ClassDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.FunctionDefinitionOrClassInitByNameExtractor.visit_ClassDef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.funcdef.extract_function_definition_from_ast_by_name">
+<code class="descclassname">dero.manager.io.file.load.parsers.funcdef.</code><code class="descname">extract_function_definition_from_ast_by_name</code><span class="sig-paren">(</span><em>module: _ast.AST</em>, <em>name: str</em><span class="sig-paren">)</span> &#x2192; typing.Union[_ast.FunctionDef, NoneType]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#extract_function_definition_from_ast_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.extract_function_definition_from_ast_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.funcdef.extract_function_definition_or_class_init_from_ast_by_name">
+<code class="descclassname">dero.manager.io.file.load.parsers.funcdef.</code><code class="descname">extract_function_definition_or_class_init_from_ast_by_name</code><span class="sig-paren">(</span><em>module: _ast.AST</em>, <em>name: str</em><span class="sig-paren">)</span> &#x2192; typing.Union[_ast.FunctionDef, NoneType]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#extract_function_definition_or_class_init_from_ast_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.extract_function_definition_or_class_init_from_ast_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.funcdef.extract_function_definitions_from_ast">
+<code class="descclassname">dero.manager.io.file.load.parsers.funcdef.</code><code class="descname">extract_function_definitions_from_ast</code><span class="sig-paren">(</span><em>module: _ast.AST</em><span class="sig-paren">)</span> &#x2192; typing.List[_ast.FunctionDef]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#extract_function_definitions_from_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.extract_function_definitions_from_ast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.funcdef.extract_function_definitions_from_ast_by_name">
+<code class="descclassname">dero.manager.io.file.load.parsers.funcdef.</code><code class="descname">extract_function_definitions_from_ast_by_name</code><span class="sig-paren">(</span><em>module: _ast.AST</em>, <em>name: str</em><span class="sig-paren">)</span> &#x2192; typing.List[_ast.FunctionDef]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#extract_function_definitions_from_ast_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.extract_function_definitions_from_ast_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.funcdef.extract_function_definitions_or_class_inits_from_ast_by_name">
+<code class="descclassname">dero.manager.io.file.load.parsers.funcdef.</code><code class="descname">extract_function_definitions_or_class_inits_from_ast_by_name</code><span class="sig-paren">(</span><em>module: _ast.AST</em>, <em>name: str</em><span class="sig-paren">)</span> &#x2192; typing.List[_ast.FunctionDef]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/funcdef.html#extract_function_definitions_or_class_inits_from_ast_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.funcdef.extract_function_definitions_or_class_inits_from_ast_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.load.parsers.imp">
+<span id="dero-manager-io-file-load-parsers-imp-module"></span><h2>dero.manager.io.file.load.parsers.imp module<a class="headerlink" href="#module-dero.manager.io.file.load.parsers.imp" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.imp.ImportExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.imp.</code><code class="descname">ImportExtractor</code><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/imp.html#ImportExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.imp.ImportExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ast.NodeVisitor</span></code></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.imp.ImportExtractor.visit_Import">
+<code class="descname">visit_Import</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/imp.html#ImportExtractor.visit_Import"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.imp.ImportExtractor.visit_Import" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.imp.ImportExtractor.visit_ImportFrom">
+<code class="descname">visit_ImportFrom</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/imp.html#ImportExtractor.visit_ImportFrom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.imp.ImportExtractor.visit_ImportFrom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.imp.extract_imports_from_ast">
+<code class="descclassname">dero.manager.io.file.load.parsers.imp.</code><code class="descname">extract_imports_from_ast</code><span class="sig-paren">(</span><em>module: _ast.Module</em><span class="sig-paren">)</span> &#x2192; dero.manager.imports.models.statements.container.ImportStatementContainer<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/imp.html#extract_imports_from_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.imp.extract_imports_from_ast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.imp.extract_module_import_from_ast">
+<code class="descclassname">dero.manager.io.file.load.parsers.imp.</code><code class="descname">extract_module_import_from_ast</code><span class="sig-paren">(</span><em>module: _ast.Module</em><span class="sig-paren">)</span> &#x2192; typing.Union[dero.manager.imports.models.statements.module.ModuleImportStatement, NoneType]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/imp.html#extract_module_import_from_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.imp.extract_module_import_from_ast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.imp.extract_obj_import_from_ast">
+<code class="descclassname">dero.manager.io.file.load.parsers.imp.</code><code class="descname">extract_obj_import_from_ast</code><span class="sig-paren">(</span><em>module: _ast.Module</em><span class="sig-paren">)</span> &#x2192; typing.Union[dero.manager.imports.models.statements.obj.ObjectImportStatement, NoneType]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/imp.html#extract_obj_import_from_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.imp.extract_obj_import_from_ast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.load.parsers.kwargs">
+<span id="dero-manager-io-file-load-parsers-kwargs-module"></span><h2>dero.manager.io.file.load.parsers.kwargs module<a class="headerlink" href="#module-dero.manager.io.file.load.parsers.kwargs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.kwargs.KeywordByNameExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.kwargs.</code><code class="descname">KeywordByNameExtractor</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/kwargs.html#KeywordByNameExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.kwargs.KeywordByNameExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.manager.io.file.load.parsers.kwargs.KeywordExtractor" title="dero.manager.io.file.load.parsers.kwargs.KeywordExtractor"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.io.file.load.parsers.kwargs.KeywordExtractor</span></code></a></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.kwargs.KeywordByNameExtractor.visit_keyword">
+<code class="descname">visit_keyword</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/kwargs.html#KeywordByNameExtractor.visit_keyword"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.kwargs.KeywordByNameExtractor.visit_keyword" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.kwargs.KeywordExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.kwargs.</code><code class="descname">KeywordExtractor</code><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/kwargs.html#KeywordExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.kwargs.KeywordExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ast.NodeVisitor</span></code></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.kwargs.KeywordExtractor.visit_keyword">
+<code class="descname">visit_keyword</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/kwargs.html#KeywordExtractor.visit_keyword"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.kwargs.KeywordExtractor.visit_keyword" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.kwargs.extract_keywords_from_ast">
+<code class="descclassname">dero.manager.io.file.load.parsers.kwargs.</code><code class="descname">extract_keywords_from_ast</code><span class="sig-paren">(</span><em>node: _ast.AST</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/kwargs.html#extract_keywords_from_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.kwargs.extract_keywords_from_ast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.file.load.parsers.kwargs.extract_keywords_from_ast_by_name">
+<code class="descclassname">dero.manager.io.file.load.parsers.kwargs.</code><code class="descname">extract_keywords_from_ast_by_name</code><span class="sig-paren">(</span><em>node: _ast.AST</em>, <em>name: str</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/kwargs.html#extract_keywords_from_ast_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.kwargs.extract_keywords_from_ast_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.load.parsers.py">
+<span id="dero-manager-io-file-load-parsers-py-module"></span><h2>dero.manager.io.file.load.parsers.py module<a class="headerlink" href="#module-dero.manager.io.file.load.parsers.py" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.io.file.load.parsers.py.PythonFileParser">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.load.parsers.py.</code><code class="descname">PythonFileParser</code><span class="sig-paren">(</span><em>filepath: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/py.html#PythonFileParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.py.PythonFileParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.manager.io.file.load.parsers.base.FileParser" title="dero.manager.io.file.load.parsers.base.FileParser"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.io.file.load.parsers.base.FileParser</span></code></a></p>
+<dl class="method">
+<dt id="dero.manager.io.file.load.parsers.py.PythonFileParser.load">
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; typing.Tuple[_ast.Module, typing.List[str]]<a class="reference internal" href="_modules/dero/manager/io/file/load/parsers/py.html#PythonFileParser.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.load.parsers.py.PythonFileParser.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.load.parsers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.manager.io.file.load.parsers" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.manager.io.file.load.parsers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

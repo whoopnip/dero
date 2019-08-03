@@ -1,0 +1,128 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.ml.gen_models.main &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.ml.gen_models.main</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">dero.ml.typing</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">AllModelOptionPossibilitiesDict</span><span class="p">,</span>
+    <span class="n">ModelOptionPossibilitiesDict</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">dero.ml.gen_models.create</span> <span class="k">import</span> <span class="n">create_model_instances_from_model_class_list_and_kwargs_dict</span>
+<span class="kn">from</span> <span class="nn">dero.ml.gen_models.kwargs</span> <span class="k">import</span> <span class="n">get_kwarg_list_model_dict</span>
+
+
+<div class="viewcode-block" id="get_model_instances_from_classes_and_options"><a class="viewcode-back" href="../../../../dero.ml.gen_models.html#dero.ml.gen_models.main.get_model_instances_from_classes_and_options">[docs]</a><span class="k">def</span> <span class="nf">get_model_instances_from_classes_and_options</span><span class="p">(</span><span class="n">model_classes</span><span class="p">,</span>
+                                                 <span class="n">models_option_possibilities</span><span class="p">:</span> <span class="n">AllModelOptionPossibilitiesDict</span><span class="p">,</span>
+                                                 <span class="n">all_models_possibilities</span><span class="p">:</span> <span class="n">ModelOptionPossibilitiesDict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates model instances from every combination of options</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model_classes: list of classes</span>
+<span class="sd">        models_option_possibilities: e.g. {</span>
+<span class="sd">                &#39;SVC&#39;: {</span>
+<span class="sd">                    &#39;kernel&#39;: [&#39;rbf&#39;, &#39;linear&#39;],</span>
+<span class="sd">                },</span>
+<span class="sd">                &#39;RandomForestClassifier&#39;: {</span>
+<span class="sd">                    &#39;n_estimators&#39;: [10, 20]</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        all_models_possibilities: e.g. dict(</span>
+<span class="sd">            class_weight=[None, &#39;balanced&#39;],</span>
+<span class="sd">            random_state=[1564564]</span>
+<span class="sd">        )</span>
+
+<span class="sd">    Returns: list of class instances</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model_all_kwargs_dict</span> <span class="o">=</span> <span class="n">get_kwarg_list_model_dict</span><span class="p">(</span>
+        <span class="n">models_option_possibilities</span><span class="p">,</span>
+        <span class="n">all_models_possibilities</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">instances</span> <span class="o">=</span> <span class="n">create_model_instances_from_model_class_list_and_kwargs_dict</span><span class="p">(</span>
+        <span class="n">model_classes</span><span class="p">,</span>
+        <span class="n">model_all_kwargs_dict</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">instances</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,299 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.reg.summarize &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.reg.summarize</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">dero.reg.ext_statsmodels</span> <span class="k">import</span> <span class="n">summary_col</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">dero.reg.fe.output</span> <span class="k">import</span> <span class="n">add_fixed_effects_rows</span>
+<span class="kn">from</span> <span class="nn">dero.reg.fe.tools</span> <span class="k">import</span> <span class="n">extract_all_dummy_cols_from_dummy_cols_dict_list</span><span class="p">,</span> \
+    <span class="n">extract_all_fe_names_from_dummy_cols_dict_list</span>
+<span class="kn">from</span> <span class="nn">dero.reg.controls</span> <span class="k">import</span> <span class="n">suppress_controls_in_summary_df</span>
+<span class="kn">from</span> <span class="nn">dero.reg.cluster.output</span> <span class="k">import</span> <span class="n">add_cluster_rows</span>
+<span class="kn">from</span> <span class="nn">dero.reg.summarize.split</span> <span class="k">import</span> <span class="n">get_var_df_and_non_var_df</span>
+<span class="kn">from</span> <span class="nn">dero.reg.summarize.yesno</span> <span class="k">import</span> <span class="n">col_boolean_dict_from_list_of_lists_of_columns</span>
+<span class="kn">from</span> <span class="nn">dero.reg.summarize.tstat</span> <span class="k">import</span> <span class="n">replace_stderr_with_t_stat_in_summary_df</span>
+
+
+<div class="viewcode-block" id="produce_summary"><a class="viewcode-back" href="../../../dero.reg.summarize.html#dero.reg.summarize.produce_summary">[docs]</a><span class="k">def</span> <span class="nf">produce_summary</span><span class="p">(</span><span class="n">reg_list</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">t_stats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.1f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">regressor_order</span><span class="o">=</span><span class="p">[],</span>
+                    <span class="n">suppress_other_regressors</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">model_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param reg_list:</span>
+<span class="sd">    :type reg_list:</span>
+<span class="sd">    :param stderr:</span>
+<span class="sd">    :type stderr:</span>
+<span class="sd">    :param float_format:</span>
+<span class="sd">    :type float_format:</span>
+<span class="sd">    :param regressor_order:</span>
+<span class="sd">    :type regressor_order:</span>
+<span class="sd">    :param suppress_other_regressors: True for when using regressor_order to suppress coefficients</span>
+<span class="sd">        that are not in regressor_order into &quot;Controls: Yes&quot;. False to keep coefficients</span>
+<span class="sd">    :type suppress_other_regressors: bool</span>
+<span class="sd">    :param model_names: If a collection is passed, will be used as column names in summary table.</span>
+<span class="sd">    :type model_names: None, list, tuple</span>
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_check_produce_summary_inputs</span><span class="p">(</span>
+        <span class="n">regressor_order</span><span class="p">,</span>
+        <span class="n">suppress_other_regressors</span><span class="p">,</span>
+        <span class="n">model_names</span><span class="p">,</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">reg_list</span><span class="p">),</span>
+        <span class="n">stderr</span><span class="p">,</span>
+        <span class="n">t_stats</span>
+    <span class="p">)</span>
+
+    <span class="n">info_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{0:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">nobs</span><span class="p">))}</span>
+
+    <span class="c1"># Grab proper r-squared. For OLS, it&#39;s adjusted r-squared, for probit and logit, it&#39;s Pseudo r-squared</span>
+    <span class="k">if</span> <span class="n">_result_has_adjusted_r2</span><span class="p">(</span><span class="n">reg_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">info_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="s1">&#39;Adj-R2&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">rsquared_adj</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="k">elif</span> <span class="n">_result_has_pseudo_r2</span><span class="p">(</span><span class="n">reg_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">info_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="s1">&#39;Pseudo-R2&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">prsquared</span><span class="p">)</span>
+        <span class="p">})</span>
+
+    <span class="n">summ</span> <span class="o">=</span> <span class="n">summary_col</span><span class="p">(</span><span class="n">reg_list</span><span class="p">,</span> <span class="n">stars</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="n">float_format</span><span class="p">,</span>
+                       <span class="n">regressor_order</span><span class="o">=</span><span class="n">regressor_order</span><span class="p">,</span>
+                       <span class="n">info_dict</span><span class="o">=</span><span class="n">info_dict</span><span class="p">)</span>
+    <span class="n">split_rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">info_dict</span><span class="p">]</span>
+
+    <span class="c1"># Convert stderrs to t-stats if necessary</span>
+    <span class="k">if</span> <span class="n">t_stats</span><span class="p">:</span>
+        <span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">replace_stderr_with_t_stat_in_summary_df</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">split_rows</span><span class="p">,</span> <span class="n">reg_list</span><span class="p">)</span>
+
+    <span class="c1"># Handle fe - remove individual fe cols and replace with e.g. Industry Fixed Effects No, Yes, Yes</span>
+    <span class="n">dummy_col_dicts</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">dummy_cols_dict</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">reg_list</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">dummy_col_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">dummy_col_dict</span> <span class="ow">in</span> <span class="n">dummy_col_dicts</span><span class="p">]):</span> <span class="c1">#if fixed effects</span>
+        <span class="n">_remove_fe_cols_replace_with_fixed_effect_yes_no_lines</span><span class="p">(</span><span class="n">summ</span><span class="p">,</span> <span class="n">dummy_col_dicts</span><span class="p">,</span> <span class="n">split_rows</span><span class="p">)</span>
+
+    <span class="c1"># Handle dropping of unimportant coefficients and replacing with Controls: Yes or No</span>
+    <span class="k">if</span> <span class="n">suppress_other_regressors</span><span class="p">:</span>
+        <span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">suppress_controls_in_summary_df</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">regressor_order</span><span class="p">,</span> <span class="n">dummy_col_dicts</span><span class="p">,</span>
+                                                         <span class="n">info_dict</span><span class="p">)</span>
+
+    <span class="c1"># Add Yes and No for each cluster variable</span>
+    <span class="n">_add_cluster_yes_no_lines</span><span class="p">(</span><span class="n">summ</span><span class="p">,</span> <span class="n">reg_list</span><span class="p">,</span> <span class="n">split_rows</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">stderr</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">t_stats</span><span class="p">:</span>
+        <span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># drops the rows containing standard errors</span>
+
+    <span class="c1"># Change const to Intercept in output</span>
+    <span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">if</span> <span class="n">col</span> <span class="o">!=</span> <span class="s1">&#39;const&#39;</span> <span class="k">else</span> <span class="s1">&#39;Intercept&#39;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">model_names</span><span class="p">:</span>
+        <span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">model_names</span>
+
+    <span class="k">return</span> <span class="n">summ</span></div>
+
+
+<span class="k">def</span> <span class="nf">_add_cluster_yes_no_lines</span><span class="p">(</span><span class="n">summ</span><span class="p">,</span> <span class="n">reg_list</span><span class="p">,</span> <span class="n">split_rows</span><span class="p">):</span>
+    <span class="n">cluster_list_of_lists</span> <span class="o">=</span> <span class="n">_get_cluster_list_of_lists</span><span class="p">(</span><span class="n">reg_list</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">([</span><span class="n">cluster</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">cluster_list_of_lists</span><span class="p">]):</span>
+        <span class="k">return</span>
+
+    <span class="n">cluster_col_boolean_dict</span> <span class="o">=</span> <span class="n">col_boolean_dict_from_list_of_lists_of_columns</span><span class="p">(</span><span class="n">cluster_list_of_lists</span><span class="p">)</span>
+    <span class="n">var_df</span><span class="p">,</span> <span class="n">split_df</span> <span class="o">=</span> <span class="n">get_var_df_and_non_var_df</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">split_rows</span><span class="o">=</span><span class="n">split_rows</span><span class="p">)</span>
+
+    <span class="n">var_df</span> <span class="o">=</span> <span class="n">add_cluster_rows</span><span class="p">(</span><span class="n">var_df</span><span class="p">,</span> <span class="n">cluster_col_boolean_dict</span><span class="p">)</span>
+
+    <span class="c1"># Recombine with n, R^2, etc. and</span>
+    <span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">var_df</span><span class="p">,</span> <span class="n">split_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_get_cluster_list_of_lists</span><span class="p">(</span><span class="n">reg_list</span><span class="p">):</span>
+    <span class="n">cluster_list_of_lists</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">reg_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;cluster_variables&#39;</span><span class="p">):</span>
+            <span class="n">cluster_list_of_lists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">cluster_variables</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cluster_list_of_lists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cluster_list_of_lists</span>
+
+
+<span class="k">def</span> <span class="nf">_remove_fe_cols_replace_with_fixed_effect_yes_no_lines</span><span class="p">(</span><span class="n">summ</span><span class="p">,</span> <span class="n">dummy_col_dicts</span><span class="p">,</span> <span class="n">split_rows</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Note: inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># split into dataframe of variables and dataframe of N, R^2, etc.</span>
+    <span class="n">var_df</span><span class="p">,</span> <span class="n">split_df</span> <span class="o">=</span> <span class="n">get_var_df_and_non_var_df</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">split_rows</span><span class="o">=</span><span class="n">split_rows</span><span class="p">)</span>
+    <span class="c1"># get name of all fixed effect variables</span>
+    <span class="n">all_cols_to_remove</span> <span class="o">=</span> <span class="n">extract_all_dummy_cols_from_dummy_cols_dict_list</span><span class="p">(</span><span class="n">dummy_col_dicts</span><span class="p">)</span>
+    <span class="c1"># remove fixed effect coefs and stderrs</span>
+    <span class="n">var_df</span> <span class="o">=</span> <span class="n">_drop_variables_from_reg_summary_df</span><span class="p">(</span><span class="n">var_df</span><span class="p">,</span> <span class="n">all_cols_to_remove</span><span class="p">)</span>
+
+    <span class="c1"># construct a single dict where the keys are names of fixed effects and the values are lists of booleans for</span>
+    <span class="c1"># whether the fixed effect was used</span>
+    <span class="n">fe_dict</span> <span class="o">=</span> <span class="n">_multiple_model_fe_dict_from_dummy_col_dict_list</span><span class="p">(</span><span class="n">dummy_col_dicts</span><span class="p">)</span>
+
+    <span class="c1"># Add yes no row</span>
+    <span class="n">var_df</span> <span class="o">=</span> <span class="n">add_fixed_effects_rows</span><span class="p">(</span><span class="n">var_df</span><span class="p">,</span> <span class="n">fe_dict</span><span class="p">)</span>
+
+    <span class="c1"># Recombine with n, R^2, etc. and</span>
+    <span class="n">summ</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">var_df</span><span class="p">,</span> <span class="n">split_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_extract_result_list_and_dummy_dicts</span><span class="p">(</span><span class="n">result_sets</span><span class="p">):</span>
+    <span class="n">plain_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">dummy_dicts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ambiguous_result</span> <span class="ow">in</span> <span class="n">result_sets</span><span class="p">:</span>
+        <span class="c1"># This is the case where fe has been passed, and we have a dummy_col_dict</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ambiguous_result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">plain_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ambiguous_result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">dummy_dicts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ambiguous_result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># No fe passed, just plain result</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plain_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ambiguous_result</span><span class="p">)</span>
+            <span class="n">dummy_dicts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># keep order by appending None</span>
+
+    <span class="k">return</span> <span class="n">plain_results</span><span class="p">,</span> <span class="n">dummy_dicts</span>
+
+
+<span class="k">def</span> <span class="nf">_multiple_model_fe_dict_from_dummy_col_dict_list</span><span class="p">(</span><span class="n">dummy_col_dict_list</span><span class="p">):</span>
+    <span class="n">fixed_effect_rows</span> <span class="o">=</span> <span class="n">extract_all_fe_names_from_dummy_cols_dict_list</span><span class="p">(</span><span class="n">dummy_col_dict_list</span><span class="p">)</span>
+    <span class="n">out_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">fe_name</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">fe_name</span> <span class="ow">in</span> <span class="n">fixed_effect_rows</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">dummy_col_dict</span> <span class="ow">in</span> <span class="n">dummy_col_dict_list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">fe_name</span> <span class="ow">in</span> <span class="n">fixed_effect_rows</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">dummy_col_dict</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">fe_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dummy_col_dict</span><span class="p">):</span>
+                <span class="n">out_dict</span><span class="p">[</span><span class="n">fe_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out_dict</span><span class="p">[</span><span class="n">fe_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">out_dict</span>
+
+
+<span class="k">def</span> <span class="nf">_drop_variables_from_reg_summary_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dropvars</span><span class="p">):</span>
+    <span class="c1"># Find variables to be kept</span>
+    <span class="n">keepvars</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="n">var</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dropvars</span> <span class="ow">and</span> <span class="n">var</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Create column identifying row as an estimate or standard error</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;estimate&#39;</span><span class="p">,</span> <span class="s1">&#39;stderr&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Create column identifying variable name of row (no spaces)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;regressor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="p">[[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+
+    <span class="c1"># Create a column of the original location of the row (will be sorting index, need to get original</span>
+    <span class="c1"># order back later)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;idx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))]</span>
+
+    <span class="c1"># Create the multi-index for slicing</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;regressor&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+    <span class="c1"># Slice on the chosen regressors, reset the index to delete a column later</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">keepvars</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;idx&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Set value of index back to original - which had blanks for stderrs</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;stderr&#39;</span><span class="p">,</span> <span class="s1">&#39;regressor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c1"># Delete the type column</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;idx&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Reindex the dataframe on the regressor</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;regressor&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Get rid of name on index</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+
+
+<span class="k">def</span> <span class="nf">_check_produce_summary_inputs</span><span class="p">(</span><span class="n">regressor_order</span><span class="p">,</span> <span class="n">supress_other_regressors</span><span class="p">,</span> <span class="n">model_names</span><span class="p">,</span> <span class="n">num_models</span><span class="p">,</span>
+                                  <span class="n">stderr</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">t_stats</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">regressor_order</span> <span class="o">==</span> <span class="p">[])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">supress_other_regressors</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;must pass regressors to regressor_order to suppress other regressors&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">model_names</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">model_names</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_models</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;must pass model_names of equal length to num models. Have {len(model_names)} names and </span><span class="si">{num_models}</span><span class="s1"> models.&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">stderr</span> <span class="ow">and</span> <span class="n">t_stats</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;cannot pass both stderr and t stats, pick one of the two or neither&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_result_has_adjusted_r2</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;rsquared_adj&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_result_has_pseudo_r2</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;prsquared&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

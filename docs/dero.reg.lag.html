@@ -1,0 +1,212 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.reg.lag package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-reg-lag-package">
+<h1>dero.reg.lag package<a class="headerlink" href="#dero-reg-lag-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.reg.lag.create">
+<span id="dero-reg-lag-create-module"></span><h2>dero.reg.lag.create module<a class="headerlink" href="#module-dero.reg.lag.create" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.lag.create.create_lagged_variables">
+<code class="descclassname">dero.reg.lag.create.</code><code class="descname">create_lagged_variables</code><span class="sig-paren">(</span><em>df</em>, <em>lag_cols</em>, <em>id_col: typing.Union[str</em>, <em>NoneType] = None</em>, <em>date_col='Date'</em>, <em>num_lags=1</em>, <em>fill_method='ffill'</em>, <em>fill_limit: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/create.html#create_lagged_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.create.create_lagged_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: partially inplace</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.lag.create.varname_to_lagged_varname">
+<code class="descclassname">dero.reg.lag.create.</code><code class="descname">varname_to_lagged_varname</code><span class="sig-paren">(</span><em>varname</em>, <em>num_lags=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/create.html#varname_to_lagged_varname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.create.varname_to_lagged_varname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.lag.main">
+<span id="dero-reg-lag-main-module"></span><h2>dero.reg.lag.main module<a class="headerlink" href="#module-dero.reg.lag.main" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.lag.main.create_lagged_variables_return_yvars_xvars_interaction_tuples">
+<code class="descclassname">dero.reg.lag.main.</code><code class="descname">create_lagged_variables_return_yvars_xvars_interaction_tuples</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, yvar: str, xvars: typing.Union[str, typing.List[str]], interaction_tuples: typing.List[typing.Tuple[str, str]] = None, num_lags: int = 0, lag_variables: typing.Union[str, typing.List[str]] = 'xvars', lag_period_var: str = 'Date', lag_id_var: str = 'TICKER', fill_method: str = 'ffill', fill_limit: int = None</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[[pandas.core.frame.DataFrame, str, typing.Union[str, typing.List[str]], typing.List[typing.Tuple[str, str]]], typing.Union[str, typing.List[str]]]<a class="reference internal" href="_modules/dero/reg/lag/main.html#create_lagged_variables_return_yvars_xvars_interaction_tuples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.main.create_lagged_variables_return_yvars_xvars_interaction_tuples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.lag.plot">
+<span id="dero-reg-lag-plot-module"></span><h2>dero.reg.lag.plot module<a class="headerlink" href="#module-dero.reg.lag.plot" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.lag.plot.interacted_lag_plot_from_lag_result_df">
+<code class="descclassname">dero.reg.lag.plot.</code><code class="descname">interacted_lag_plot_from_lag_result_df</code><span class="sig-paren">(</span><em>result_df</em>, <em>yvar</em>, <em>main_iv</em>, <em>date_var='Year'</em>, <em>outpath=None</em>, <em>clear_figure=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/plot.html#interacted_lag_plot_from_lag_result_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.plot.interacted_lag_plot_from_lag_result_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a plot of effect of main_iv on yvar at different quantiles. To be used after
+reg_for_each_quantile_produce_result_df</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>result_df</strong> – pd.DataFrame, result from reg_for_each_quantile_produce_result_df</li>
+<li><strong>yvar</strong> – str, label of dependent variable</li>
+<li><strong>main_iv</strong> – str, label of independent variable of interest</li>
+<li><strong>outpath</strong> – str, filepath to output figure. must include matplotlib supported extension such as .pdf or .png</li>
+<li><strong>clear_figure</strong> – bool, True wipe memory of matplotlib figure after running function</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.lag.plot.interacted_lag_plot_from_reg_result_list">
+<code class="descclassname">dero.reg.lag.plot.</code><code class="descname">interacted_lag_plot_from_reg_result_list</code><span class="sig-paren">(</span><em>results</em>, <em>lag_tuple</em>, <em>main_iv</em>, <em>interaction_tuples</em>, <em>yvar</em>, <em>interaction_var_value=13.27</em>, <em>date_var='Year'</em>, <em>outpath=None</em>, <em>clear_figure=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/plot.html#interacted_lag_plot_from_reg_result_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.plot.interacted_lag_plot_from_reg_result_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.lag.plot.produce_simplified_result_df">
+<code class="descclassname">dero.reg.lag.plot.</code><code class="descname">produce_simplified_result_df</code><span class="sig-paren">(</span><em>results</em>, <em>lag_tuple</em>, <em>main_iv</em>, <em>interaction_tuples</em>, <em>interaction_var_value=13.27</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/plot.html#produce_simplified_result_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.plot.produce_simplified_result_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.lag.remove">
+<span id="dero-reg-lag-remove-module"></span><h2>dero.reg.lag.remove module<a class="headerlink" href="#module-dero.reg.lag.remove" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.reg.lag.remove.SimplifiedBase">
+<em class="property">class </em><code class="descclassname">dero.reg.lag.remove.</code><code class="descname">SimplifiedBase</code><a class="reference internal" href="_modules/dero/reg/lag/remove.html#SimplifiedBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.remove.SimplifiedBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.reg.lag.remove.SimplifiedModel">
+<em class="property">class </em><code class="descclassname">dero.reg.lag.remove.</code><code class="descname">SimplifiedModel</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/remove.html#SimplifiedModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.remove.SimplifiedModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.reg.lag.remove.SimplifiedBase" title="dero.reg.lag.remove.SimplifiedBase"><code class="xref py py-class docutils literal"><span class="pre">dero.reg.lag.remove.SimplifiedBase</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.reg.lag.remove.SimplifiedRegressionResult">
+<em class="property">class </em><code class="descclassname">dero.reg.lag.remove.</code><code class="descname">SimplifiedRegressionResult</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/remove.html#SimplifiedRegressionResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.remove.SimplifiedRegressionResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.reg.lag.remove.SimplifiedBase" title="dero.reg.lag.remove.SimplifiedBase"><code class="xref py py-class docutils literal"><span class="pre">dero.reg.lag.remove.SimplifiedBase</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.reg.lag.remove.SimplifiedRegressionResult.direct_attrs">
+<code class="descname">direct_attrs</code><em class="property"> = ['params', 'pvalues', 'tvalues', 'nobs', 'rsquared_adj', 'bse', 'conf_int', 'normalized_cov_params', 'cov_params_default', 'scale', 'cov_params', 't_test']</em><a class="headerlink" href="#dero.reg.lag.remove.SimplifiedRegressionResult.direct_attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.reg.lag.remove.SimplifiedRegressionResult.from_statsmodels_result">
+<em class="property">classmethod </em><code class="descname">from_statsmodels_result</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/remove.html#SimplifiedRegressionResult.from_statsmodels_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.remove.SimplifiedRegressionResult.from_statsmodels_result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.reg.lag.remove.SimplifiedRegressionResult.model_attrs">
+<code class="descname">model_attrs</code><em class="property"> = ['exog_names', 'endog_names']</em><a class="headerlink" href="#dero.reg.lag.remove.SimplifiedRegressionResult.model_attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.reg.lag.remove.SimplifiedRegressionResult.pop_model_attrs">
+<em class="property">classmethod </em><code class="descname">pop_model_attrs</code><span class="sig-paren">(</span><em>attr_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/remove.html#SimplifiedRegressionResult.pop_model_attrs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.remove.SimplifiedRegressionResult.pop_model_attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: pops from attr_dict inplace</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="dero.reg.lag.remove.UnsupportedResultAttributeException">
+<em class="property">exception </em><code class="descclassname">dero.reg.lag.remove.</code><code class="descname">UnsupportedResultAttributeException</code><a class="reference internal" href="_modules/dero/reg/lag/remove.html#UnsupportedResultAttributeException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.remove.UnsupportedResultAttributeException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.lag.remove.lag_varname_to_varname">
+<code class="descclassname">dero.reg.lag.remove.</code><code class="descname">lag_varname_to_varname</code><span class="sig-paren">(</span><em>varname</em>, <em>num_lags=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/remove.html#lag_varname_to_varname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.remove.lag_varname_to_varname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.lag.remove.remove_lag_names_from_reg_results">
+<code class="descclassname">dero.reg.lag.remove.</code><code class="descname">remove_lag_names_from_reg_results</code><span class="sig-paren">(</span><em>reg_list</em>, <em>lags=(1</em>, <em>)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/lag/remove.html#remove_lag_names_from_reg_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.lag.remove.remove_lag_names_from_reg_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: partially inplace</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.lag">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.reg.lag" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.reg.lag.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,186 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.logtimer &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.logtimer</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">dero</span>
+
+<span class="kn">from</span> <span class="nn">.ext_pandas</span> <span class="k">import</span> <span class="n">groupby_merge</span>
+
+<div class="viewcode-block" id="load_log_and_produce_timing_dfs"><a class="viewcode-back" href="../../dero.html#dero.logtimer.load_log_and_produce_timing_dfs">[docs]</a><span class="k">def</span> <span class="nf">load_log_and_produce_timing_dfs</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loads a dero log from filepath and returns a tuple of two pandas dataframes, where the</span>
+<span class="sd">    first is a listing of each function in order and the amount of time it took,</span>
+<span class="sd">    and the second is a summary df which sums and averages times by functions (across</span>
+<span class="sd">    multiple calls)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">log_list</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">parse_logs_for_timing</span><span class="p">(</span><span class="n">log_list</span><span class="p">)</span>
+    <span class="n">summ_df</span> <span class="o">=</span> <span class="n">summary_timing_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">summ_df</span></div>
+
+<div class="viewcode-block" id="compare_log_timing"><a class="viewcode-back" href="../../dero.html#dero.logtimer.compare_log_timing">[docs]</a><span class="k">def</span> <span class="nf">compare_log_timing</span><span class="p">(</span><span class="n">filepaths</span><span class="p">,</span> <span class="n">substrings</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loads multiple logs and produces a summary df with how total and average times per functions on the</span>
+<span class="sd">    different runs. Use substrings to identify which sample is which.</span>
+<span class="sd">    </span>
+<span class="sd">    Required inputs:</span>
+<span class="sd">    filepaths: list of strs, locations of logs</span>
+<span class="sd">    substrings: list of strs, must be same length as filepaths list, identifies each sample</span>
+<span class="sd">    </span>
+<span class="sd">    Usage:</span>
+<span class="sd">    filepaths = [</span>
+<span class="sd">    r&#39;C:\Users\derobertisna.UFAD\Dropbox\UF\Investor Attention\Python\2016-08-08 23.37.24 ia.debug&#39;, #20 subset</span>
+<span class="sd">    r&#39;C:\Users\derobertisna.UFAD\Dropbox\UF\Investor Attention\Python\2016-08-09 00.02.53 ia.debug&#39; #200 subset</span>
+<span class="sd">    ]</span>
+<span class="sd">    substrings = [&#39;20&#39;, &#39;200&#39;]</span>
+
+<span class="sd">    dero.logtimer.compare_log_timing(filepaths, substrings)</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df_tups</span> <span class="o">=</span> <span class="p">[</span><span class="n">load_log_and_produce_timing_dfs</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span> <span class="k">for</span> <span class="n">fp</span> <span class="ow">in</span> <span class="n">filepaths</span><span class="p">]</span>
+    <span class="n">summ_dfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="n">df_tups</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">summ_df</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">summ_dfs</span><span class="p">):</span>
+        <span class="n">suff</span> <span class="o">=</span> <span class="n">substrings</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1">#get suffix</span>
+        <span class="n">summ_df</span> <span class="o">=</span> <span class="n">summ_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time_sum&#39;</span><span class="p">:</span><span class="s1">&#39;time_sum&#39;</span> <span class="o">+</span> <span class="n">suff</span><span class="p">,</span> <span class="s1">&#39;time_mean&#39;</span><span class="p">:</span><span class="s1">&#39;time_mean&#39;</span> <span class="o">+</span> <span class="n">suff</span><span class="p">})</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">alldf</span> <span class="o">=</span> <span class="n">summ_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">continue</span>
+        <span class="n">alldf</span> <span class="o">=</span> <span class="n">alldf</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">summ_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;function&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+    
+    <span class="n">diff_col</span> <span class="o">=</span> <span class="s1">&#39;diff_&#39;</span> <span class="o">+</span> <span class="n">substrings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">substrings</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">alldf</span><span class="p">[</span><span class="n">diff_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">alldf</span><span class="p">[</span><span class="s1">&#39;time_sum&#39;</span> <span class="o">+</span> <span class="n">substrings</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">-</span> <span class="n">alldf</span><span class="p">[</span><span class="s1">&#39;time_sum&#39;</span> <span class="o">+</span> <span class="n">substrings</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">alldf</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">diff_col</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">_parse_log_entry</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns an re match object with the contents:</span>
+<span class="sd">    </span>
+<span class="sd">    First group: timestamp</span>
+<span class="sd">    2: module name</span>
+<span class="sd">    3: logging level</span>
+<span class="sd">    4: message</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(\d*-\d*-\d* \d*:\d*:\d*,\d*) - ([\w.]+) - (\w*) - (.+)&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_parse_timing_entry</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a tuple of full function name, time elapsed strings </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">_parse_log_entry</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">timing_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([\w.]+) took (.+)[.]&#39;</span><span class="p">)</span>
+    <span class="n">function_time</span> <span class="o">=</span> <span class="n">timing_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">function_time</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">full_function_str</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span>  <span class="n">function_time</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">full_function_str</span><span class="p">,</span> <span class="n">function_time</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_parse_logs_for_timing</span><span class="p">(</span><span class="n">log_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a list of tuples of full function name, time elapsed strings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">_parse_timing_entry</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">log_list</span><span class="p">]))</span>
+
+<div class="viewcode-block" id="parse_logs_for_timing"><a class="viewcode-back" href="../../dero.html#dero.logtimer.parse_logs_for_timing">[docs]</a><span class="k">def</span> <span class="nf">parse_logs_for_timing</span><span class="p">(</span><span class="n">log_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a tuple of two pandas dataframes, where the first is</span>
+<span class="sd">    full function name, time elapsed</span>
+<span class="sd">    and the </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">_parse_logs_for_timing</span><span class="p">(</span><span class="n">log_list</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">,</span><span class="s1">&#39;time&#39;</span><span class="p">])</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_timedelta</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span><span class="s1">&#39;orig order&#39;</span><span class="p">})</span></div>
+
+<div class="viewcode-block" id="summary_timing_df"><a class="viewcode-back" href="../../dero.html#dero.logtimer.summary_timing_df">[docs]</a><span class="k">def</span> <span class="nf">summary_timing_df</span><span class="p">(</span><span class="n">parsed_df</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">groupby_merge</span><span class="p">(</span><span class="n">parsed_df</span><span class="p">,</span> <span class="s1">&#39;function&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">groupby_merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;function&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="s1">&#39;orig order&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;time_sum&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

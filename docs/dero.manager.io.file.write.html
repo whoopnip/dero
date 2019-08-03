@@ -1,0 +1,127 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.io.file.write package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-manager-io-file-write-package">
+<h1>dero.manager.io.file.write package<a class="headerlink" href="#dero-manager-io-file-write-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.manager.io.file.write.asttosource">
+<span id="dero-manager-io-file-write-asttosource-module"></span><h2>dero.manager.io.file.write.asttosource module<a class="headerlink" href="#module-dero.manager.io.file.write.asttosource" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.manager.io.file.write.asttosource.ast_node_to_source">
+<code class="descclassname">dero.manager.io.file.write.asttosource.</code><code class="descname">ast_node_to_source</code><span class="sig-paren">(</span><em>ast_node: _ast.AST</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/dero/manager/io/file/write/asttosource.html#ast_node_to_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.write.asttosource.ast_node_to_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses astor package to produce source code from ast</p>
+<p>Also handles low-level ast functions, such as wrapping in a module if necessary,
+and fixing line numbers for modified/extracted ast</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>ast_node:</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.write.base">
+<span id="dero-manager-io-file-write-base-module"></span><h2>dero.manager.io.file.write.base module<a class="headerlink" href="#module-dero.manager.io.file.write.base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.io.file.write.base.FileStr">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.write.base.</code><code class="descname">FileStr</code><span class="sig-paren">(</span><em>import_assignment_obj, existing_imports: dero.manager.imports.models.statements.container.ImportStatementContainer, existing_assigns: dero.manager.assignments.models.container.AssignmentStatementContainer, existing_body: typing.List[str]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/file/write/base.html#FileStr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.write.base.FileStr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="dero-manager-io-file-write-config-module">
+<h2>dero.manager.io.file.write.config module<a class="headerlink" href="#dero-manager-io-file-write-config-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-dero.manager.io.file.write.config"></span><dl class="class">
+<dt id="dero.manager.io.file.write.config.ConfigFileStr">
+<em class="property">class </em><code class="descclassname">dero.manager.io.file.write.config.</code><code class="descname">ConfigFileStr</code><a class="reference internal" href="_modules/dero/manager/io/file/write/config.html#ConfigFileStr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.file.write.config.ConfigFileStr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.manager.io.file.write.base.FileStr" title="dero.manager.io.file.write.base.FileStr"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.io.file.write.base.FileStr</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.file.write">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.manager.io.file.write" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.manager.io.file.write.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

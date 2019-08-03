@@ -1,0 +1,130 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.modeler package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-modeler-package">
+<h1>dero.modeler package<a class="headerlink" href="#dero-modeler-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.modeler.model">
+<span id="dero-modeler-model-module"></span><h2>dero.modeler.model module<a class="headerlink" href="#module-dero.modeler.model" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.modeler.model.Model">
+<em class="property">class </em><code class="descclassname">dero.modeler.model.</code><code class="descname">Model</code><span class="sig-paren">(</span><em>equations: typing.List[sympy.core.relational.Equality]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dero.modeler.model.Model.get_eq_for">
+<code class="descname">get_eq_for</code><span class="sig-paren">(</span><em>lhs_expr: sympy.core.expr.Expr</em><span class="sig-paren">)</span> &#x2192; typing.Union[sympy.core.relational.Equality, NoneType]<a class="reference internal" href="_modules/dero/modeler/model.html#Model.get_eq_for"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.get_eq_for" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.modeler.model.Model.set_equations">
+<code class="descname">set_equations</code><span class="sig-paren">(</span><em>equations: typing.List[sympy.core.relational.Equality]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.set_equations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.set_equations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.modeler.model.Model.solve">
+<code class="descname">solve</code><span class="sig-paren">(</span><em>*symbols</em>, <em>**flags</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.solve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.solve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.modeler.model.Model.sub_eq">
+<code class="descname">sub_eq</code><span class="sig-paren">(</span><em>eq: sympy.core.relational.Equality</em>, <em>deep_substitute: bool = True</em><span class="sig-paren">)</span> &#x2192; sympy.core.relational.Equality<a class="reference internal" href="_modules/dero/modeler/model.html#Model.sub_eq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.sub_eq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.modeler.model.Model.subs">
+<code class="descname">subs</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.subs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.subs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.modeler.typing">
+<span id="dero-modeler-typing-module"></span><h2>dero.modeler.typing module<a class="headerlink" href="#module-dero.modeler.typing" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.modeler">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.modeler" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.modeler.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

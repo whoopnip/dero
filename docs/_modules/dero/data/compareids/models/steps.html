@@ -1,0 +1,227 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.data.compareids.models.steps &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.data.compareids.models.steps</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+
+<span class="kn">from</span> <span class="nn">.datasets</span> <span class="k">import</span> <span class="n">DataSubject</span><span class="p">,</span> <span class="n">DataCombination</span>
+<span class="kn">from</span> <span class="nn">.flowchart</span> <span class="k">import</span> <span class="n">Edge</span>
+<span class="kn">from</span> <span class="nn">.interface</span> <span class="k">import</span> <span class="n">PipelineOptions</span>
+
+
+<div class="viewcode-block" id="Step"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.steps.Step">[docs]</a><span class="k">class</span> <span class="nc">Step</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_subject</span><span class="p">:</span> <span class="n">DataSubject</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_subject</span> <span class="o">=</span> <span class="n">data_subject</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_subjects</span> <span class="o">=</span> <span class="p">[</span><span class="n">data_subject</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subgraphs</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Step.subgraphs"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.steps.Step.subgraphs">[docs]</a>    <span class="k">def</span> <span class="nf">subgraphs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="p">[</span><span class="n">PipelineOptions</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="n">PipelineOptions</span><span class="p">()</span> <span class="c1">#initialize with defaults</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subgraphs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_subgraphs</span> <span class="o">=</span> <span class="p">[</span><span class="n">subject</span><span class="o">.</span><span class="n">to_subgraph</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="k">for</span> <span class="n">subject</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_subjects</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subgraphs</span></div>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Step(data_subject=</span><span class="si">{self.data_subject}</span><span class="s1">)&gt;&#39;</span></div>
+
+
+<div class="viewcode-block" id="MergeStep"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.steps.MergeStep">[docs]</a><span class="k">class</span> <span class="nc">MergeStep</span><span class="p">(</span><span class="n">Step</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_subject</span><span class="p">:</span> <span class="n">DataSubject</span><span class="p">,</span> <span class="n">merge_into_data_subject</span><span class="p">:</span> <span class="n">DataSubject</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">merge_into_subject</span> <span class="o">=</span> <span class="n">merge_into_data_subject</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">data_subject</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_subjects</span> <span class="o">=</span> <span class="p">[</span><span class="n">data_subject</span><span class="p">,</span> <span class="n">merge_into_data_subject</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_combined_subject</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="MergeStep.subgraphs"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.steps.MergeStep.subgraphs">[docs]</a>    <span class="k">def</span> <span class="nf">subgraphs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="p">[</span><span class="n">PipelineOptions</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="n">PipelineOptions</span><span class="p">()</span> <span class="c1">#initialize with defaults</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subgraphs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">subgraphs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">subgraphs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_merge_subgraph</span><span class="p">(</span><span class="n">options</span><span class="p">))</span>
+            <span class="n">subgraphs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">subgraphs</span><span class="p">(</span><span class="n">options</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_subgraphs</span> <span class="o">=</span> <span class="n">subgraphs</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subgraphs</span></div>
+
+    <span class="k">def</span> <span class="nf">_merge_subgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">PipelineOptions</span><span class="p">):</span>
+        <span class="n">data_sources</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">orig_source</span><span class="p">,</span> <span class="n">merge_source</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_subject</span><span class="o">.</span><span class="n">sources</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_into_subject</span><span class="o">.</span><span class="n">sources</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">orig_source</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_subject</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">merge_source</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_into_subject</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">data_sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataCombination</span><span class="p">(</span><span class="n">orig_source</span><span class="p">,</span> <span class="n">merge_source</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="n">subject_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_subject</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_into_subject</span><span class="o">.</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_combined_subject</span> <span class="o">=</span> <span class="n">DataSubject</span><span class="p">(</span><span class="o">*</span><span class="n">data_sources</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">subject_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combined_subject</span><span class="o">.</span><span class="n">to_subgraph</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">combined_subject</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combined_subject</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_merge_subgraph</span><span class="p">(</span><span class="n">PipelineOptions</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combined_subject</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;MergeStep(data_subject=</span><span class="si">{self.data_subject}</span><span class="s1">, merge_subject=</span><span class="si">{self.merge_into_subject}</span><span class="s1">)&gt;&#39;</span></div>
+
+
+<div class="viewcode-block" id="Process"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.steps.Process">[docs]</a><span class="k">class</span> <span class="nc">Process</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">steps</span><span class="p">:</span> <span class="p">[</span><span class="n">Step</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Process.to_subgraphs"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.steps.Process.to_subgraphs">[docs]</a>    <span class="k">def</span> <span class="nf">to_subgraphs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="p">[</span><span class="n">PipelineOptions</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="n">PipelineOptions</span><span class="p">()</span> <span class="c1">#initialize with defaults</span>
+
+        <span class="n">subgraphs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">MergeStep</span><span class="p">):</span>
+                <span class="n">subgraphs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">step</span><span class="o">.</span><span class="n">subgraphs</span><span class="p">(</span><span class="n">options</span><span class="p">))</span> <span class="c1">#contains last subgraph, combined subgraph, and to merge subgraph</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">Step</span><span class="p">):</span>
+                <span class="k">continue</span> <span class="c1">#step subgraph will be handled within merge step subgraph</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;must pass Step or MergeStep, got type {type(step)}&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">subgraphs</span></div>
+
+
+<div class="viewcode-block" id="Process.to_edges"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.steps.Process.to_edges">[docs]</a>    <span class="k">def</span> <span class="nf">to_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="p">[</span><span class="n">PipelineOptions</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">edge_kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="n">PipelineOptions</span><span class="p">()</span> <span class="c1">#initialize with defaults</span>
+
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span> <span class="c1">#don&#39;t need to create edges with beginning step</span>
+            <span class="n">edges</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_create_edges_for_step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">edge_kwargs</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">edges</span></div>
+
+    <span class="k">def</span> <span class="nf">_create_edges_for_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="n">MergeStep</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">PipelineOptions</span><span class="p">,</span> <span class="o">**</span><span class="n">edge_kwargs</span><span class="p">):</span>
+        <span class="c1"># For current, need to split combined nodes and merge subgraphs</span>
+        <span class="n">combined_subgraph</span><span class="p">,</span> <span class="n">last_subgraph</span><span class="p">,</span> <span class="n">merge_subgraph</span> <span class="o">=</span> <span class="n">step</span><span class="o">.</span><span class="n">subgraphs</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">last_source_name</span><span class="p">,</span> <span class="n">merge_source_name</span> <span class="o">=</span> <span class="n">_combined_source_name_to_individual_source_names</span><span class="p">(</span><span class="n">combined_subgraph</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">combined_node</span> <span class="ow">in</span> <span class="n">combined_subgraph</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">data_sources</span><span class="p">:</span> <span class="c1">#extract node names by parsing combined name</span>
+                <span class="n">last_node_name</span><span class="p">,</span> <span class="n">merge_node_name</span> <span class="o">=</span> <span class="n">_combined_name_to_input_and_merge_name</span><span class="p">(</span><span class="n">combined_node</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">last_source_name</span><span class="p">,</span> <span class="n">merge_source_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c1">#now the source names are representative of the node names</span>
+                <span class="n">last_node_name</span> <span class="o">=</span> <span class="n">last_source_name</span>
+                <span class="n">merge_node_name</span> <span class="o">=</span> <span class="n">merge_source_name</span>
+            <span class="n">last_node</span> <span class="o">=</span> <span class="n">last_subgraph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">last_node_name</span><span class="p">]</span>
+            <span class="n">merge_node</span> <span class="o">=</span> <span class="n">merge_subgraph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">merge_node_name</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">data_sources</span><span class="p">:</span>
+                <span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Edge</span><span class="p">(</span><span class="n">last_node</span><span class="p">,</span> <span class="n">combined_node</span><span class="p">,</span> <span class="o">**</span><span class="n">edge_kwargs</span><span class="p">))</span>
+                <span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Edge</span><span class="p">(</span><span class="n">merge_node</span><span class="p">,</span> <span class="n">combined_node</span><span class="p">,</span> <span class="o">**</span><span class="n">edge_kwargs</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Edge</span><span class="p">(</span><span class="n">last_node</span><span class="p">,</span> <span class="n">combined_node</span><span class="p">,</span> <span class="n">for_subgraphs</span><span class="o">=</span><span class="p">(</span><span class="n">last_subgraph</span><span class="p">,</span> <span class="n">combined_subgraph</span><span class="p">)))</span>
+                <span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Edge</span><span class="p">(</span><span class="n">merge_node</span><span class="p">,</span> <span class="n">combined_node</span><span class="p">,</span> <span class="n">for_subgraphs</span><span class="o">=</span><span class="p">(</span><span class="n">merge_subgraph</span><span class="p">,</span> <span class="n">combined_subgraph</span><span class="p">)))</span>
+
+        <span class="k">return</span> <span class="n">edges</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;Process(steps=</span><span class="si">{self.steps}</span><span class="s1">)&gt;&#39;</span></div>
+
+
+<span class="k">def</span> <span class="nf">_to_combined_name</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">merge_name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{input_name}</span><span class="s1">/</span><span class="si">{merge_name}</span><span class="s1">&#39;</span>
+
+<span class="k">def</span> <span class="nf">_combined_name_to_input_and_merge_name</span><span class="p">(</span><span class="n">combined_name</span><span class="p">,</span> <span class="n">last_source_name</span><span class="p">,</span> <span class="n">merge_source_name</span><span class="p">):</span>
+    <span class="n">combined_name</span> <span class="o">=</span> <span class="n">combined_name</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;DUMMY&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">last_source_name</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">merge_source_name</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_combined_source_name_to_individual_source_names</span><span class="p">(</span><span class="n">combined_name</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_combined_source_name_to_individual_source_names</span><span class="p">(</span><span class="n">combined_name</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;/&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">combined_name</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;passed regular name instead of combined name. combined name must have /. got </span><span class="si">{combined_name}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">combined_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  <li><a href="../../../data.html">dero.data</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

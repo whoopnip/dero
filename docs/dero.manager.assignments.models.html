@@ -1,0 +1,161 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.assignments.models package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-manager-assignments-models-package">
+<h1>dero.manager.assignments.models package<a class="headerlink" href="#dero-manager-assignments-models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.manager.assignments.models.container">
+<span id="dero-manager-assignments-models-container-module"></span><h2>dero.manager.assignments.models.container module<a class="headerlink" href="#module-dero.manager.assignments.models.container" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.assignments.models.container.AssignmentStatementContainer">
+<em class="property">class </em><code class="descclassname">dero.manager.assignments.models.container.</code><code class="descname">AssignmentStatementContainer</code><span class="sig-paren">(</span><em>items: typing.List[dero.manager.assignments.models.statement.AssignmentStatement]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/assignments/models/container.html#AssignmentStatementContainer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.assignments.models.container.AssignmentStatementContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.container.Container" title="dero.manager.basemodels.container.Container"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.basemodels.container.Container</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="method">
+<dt id="dero.manager.assignments.models.container.AssignmentStatementContainer.contains_varname">
+<code class="descname">contains_varname</code><span class="sig-paren">(</span><em>varname: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/assignments/models/container.html#AssignmentStatementContainer.contains_varname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.assignments.models.container.AssignmentStatementContainer.contains_varname" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.manager.assignments.models.container.AssignmentStatementContainer.from_dict_of_varnames_and_ast">
+<em class="property">classmethod </em><code class="descname">from_dict_of_varnames_and_ast</code><span class="sig-paren">(</span><em>assignment_dict: dict</em>, <em>annotation_dict: dict = None</em>, <em>preferred_position: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/assignments/models/container.html#AssignmentStatementContainer.from_dict_of_varnames_and_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.assignments.models.container.AssignmentStatementContainer.from_dict_of_varnames_and_ast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.manager.assignments.models.container.AssignmentStatementContainer.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['items']</em><a class="headerlink" href="#dero.manager.assignments.models.container.AssignmentStatementContainer.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.assignments.models.container.AssignmentStatementContainer.to_default_dict_and_annotation_dict">
+<code class="descname">to_default_dict_and_annotation_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; typing.Tuple[dict, dict]<a class="reference internal" href="_modules/dero/manager/assignments/models/container.html#AssignmentStatementContainer.to_default_dict_and_annotation_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.assignments.models.container.AssignmentStatementContainer.to_default_dict_and_annotation_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.assignments.models.statement">
+<span id="dero-manager-assignments-models-statement-module"></span><h2>dero.manager.assignments.models.statement module<a class="headerlink" href="#module-dero.manager.assignments.models.statement" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.assignments.models.statement.AssignmentStatement">
+<em class="property">class </em><code class="descclassname">dero.manager.assignments.models.statement.</code><code class="descname">AssignmentStatement</code><span class="sig-paren">(</span><em>target: _ast.Name</em>, <em>value: _ast.AST</em>, <em>annotation: _ast.Name = None</em>, <em>preferred_position: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/assignments/models/statement.html#AssignmentStatement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.assignments.models.statement.AssignmentStatement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a>, <a class="reference internal" href="dero.manager.mixins.html#dero.manager.mixins.orderpref.OrderPreferenceMixin" title="dero.manager.mixins.orderpref.OrderPreferenceMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.mixins.orderpref.OrderPreferenceMixin</span></code></a></p>
+<dl class="classmethod">
+<dt id="dero.manager.assignments.models.statement.AssignmentStatement.from_ast_assign">
+<em class="property">classmethod </em><code class="descname">from_ast_assign</code><span class="sig-paren">(</span><em>ast_assign: typing.Union[_ast.Assign, _ast.AnnAssign], preferred_position: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/assignments/models/statement.html#AssignmentStatement.from_ast_assign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.assignments.models.statement.AssignmentStatement.from_ast_assign" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.manager.assignments.models.statement.AssignmentStatement.from_str">
+<em class="property">classmethod </em><code class="descname">from_str</code><span class="sig-paren">(</span><em>assign_str: str</em>, <em>preferred_position: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/assignments/models/statement.html#AssignmentStatement.from_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.assignments.models.statement.AssignmentStatement.from_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.manager.assignments.models.statement.AssignmentStatement.from_varname_and_ast_value">
+<em class="property">classmethod </em><code class="descname">from_varname_and_ast_value</code><span class="sig-paren">(</span><em>varname: str</em>, <em>value: _ast.AST</em>, <em>annotation: _ast.Name = None</em>, <em>preferred_position: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/assignments/models/statement.html#AssignmentStatement.from_varname_and_ast_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.assignments.models.statement.AssignmentStatement.from_varname_and_ast_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.manager.assignments.models.statement.AssignmentStatement.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['varname', 'value', 'annotation']</em><a class="headerlink" href="#dero.manager.assignments.models.statement.AssignmentStatement.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.assignments.models.statement.AssignmentStatement.to_ast">
+<code class="descname">to_ast</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; typing.Union[_ast.Assign, _ast.AnnAssign]<a class="reference internal" href="_modules/dero/manager/assignments/models/statement.html#AssignmentStatement.to_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.assignments.models.statement.AssignmentStatement.to_ast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.assignments.models.statement.AssignmentStatement.to_default_dict_and_annotation_dict">
+<code class="descname">to_default_dict_and_annotation_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; typing.Tuple[dict, dict]<a class="reference internal" href="_modules/dero/manager/assignments/models/statement.html#AssignmentStatement.to_default_dict_and_annotation_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.assignments.models.statement.AssignmentStatement.to_default_dict_and_annotation_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.assignments.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.manager.assignments.models" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.manager.assignments.models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

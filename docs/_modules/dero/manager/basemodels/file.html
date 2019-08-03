@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.basemodels.file &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.manager.basemodels.file</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">TYPE_CHECKING</span>
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">dero.manager.basemodels.config</span> <span class="k">import</span> <span class="n">ConfigBase</span>
+
+<span class="kn">from</span> <span class="nn">dero.manager.sectionpath.sectionpath</span> <span class="k">import</span> <span class="n">_strip_py</span>
+<span class="kn">from</span> <span class="nn">dero.manager.assignments.models.container</span> <span class="k">import</span> <span class="n">AssignmentStatementContainer</span>
+<span class="kn">from</span> <span class="nn">dero.manager.io.file.interfaces.config</span> <span class="k">import</span> <span class="n">ConfigFileInterface</span>
+
+
+<div class="viewcode-block" id="ConfigFileBase"><a class="viewcode-back" href="../../../../dero.manager.basemodels.html#dero.manager.basemodels.config.ConfigFileBase">[docs]</a><span class="k">class</span> <span class="nc">ConfigFileBase</span><span class="p">:</span>
+
+    <span class="c1">##### Scaffolding functions or attributes. Need to override when subclassing  ####</span>
+
+    <span class="c1"># lines to always import. pass import objects</span>
+    <span class="n">always_imports</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># assignment lines to always include at beginning. pass assignment objects</span>
+    <span class="n">always_assigns</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># always assign dict, where assigns will get added if item name matches dict key</span>
+    <span class="n">always_assign_with_names_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># class to use for interfacing with file</span>
+    <span class="n">interface_class</span> <span class="o">=</span> <span class="n">ConfigFileInterface</span>
+
+    <span class="c1">##### Base class functions and attributes below. Shouldn&#39;t usually need to override in subclassing #####</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_class</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">_strip_py</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+<div class="viewcode-block" id="ConfigFileBase.load"><a class="viewcode-back" href="../../../../dero.manager.basemodels.html#dero.manager.basemodels.config.ConfigFileBase.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_class</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ConfigBase&#39;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">dero.manager.basemodels.config</span> <span class="k">import</span> <span class="n">ConfigBase</span>
+        <span class="n">config_dict</span><span class="p">,</span> <span class="n">annotation_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">config_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">config_class</span> <span class="o">=</span> <span class="n">ConfigBase</span>
+
+        <span class="k">return</span> <span class="n">config_class</span><span class="p">(</span>
+            <span class="n">d</span><span class="o">=</span><span class="n">config_dict</span><span class="p">,</span>
+            <span class="n">annotations</span><span class="o">=</span><span class="n">annotation_dict</span><span class="p">,</span>
+            <span class="n">imports</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">imports</span><span class="p">,</span>
+            <span class="n">_file</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ConfigFileBase.save"><a class="viewcode-back" href="../../../../dero.manager.basemodels.html#dero.manager.basemodels.config.ConfigFileBase.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="s1">&#39;ConfigBase&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_always_imports_and_assigns_to_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_add_always_imports_and_assigns_to_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="s1">&#39;ConfigBase&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Note: inplace</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Add always imports</span>
+        <span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">imports</span><span class="o">.</span><span class="n">add_if_missing</span><span class="p">(</span><span class="n">imp</span><span class="p">)</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">always_imports</span><span class="p">]</span>
+
+        <span class="c1"># # Check if there are any extra assigns for items with this name</span>
+        <span class="n">always_assigns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">always_assigns</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">always_assign_with_names_dict</span><span class="p">:</span>
+            <span class="n">always_assigns</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">always_assign_with_names_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+
+        <span class="c1"># Add always assigns</span>
+        <span class="c1"># First handle begin assigns</span>
+        <span class="n">begin_assigns</span> <span class="o">=</span> <span class="n">AssignmentStatementContainer</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">assign</span> <span class="k">for</span> <span class="n">assign</span> <span class="ow">in</span> <span class="n">always_assigns</span> <span class="k">if</span> <span class="n">assign</span><span class="o">.</span><span class="n">prefer_beginning</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">begin_assignments</span> <span class="o">=</span> <span class="n">begin_assigns</span>
+        <span class="c1"># Now handle the rest</span>
+        <span class="c1"># First get always assigns, annotations as dict</span>
+        <span class="n">other_always_assigns</span> <span class="o">=</span> <span class="n">AssignmentStatementContainer</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">assign</span> <span class="k">for</span> <span class="n">assign</span> <span class="ow">in</span> <span class="n">always_assigns</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">assign</span><span class="o">.</span><span class="n">prefer_beginning</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">always_defaults</span><span class="p">,</span> <span class="n">always_annotations</span> <span class="o">=</span> <span class="n">other_always_assigns</span><span class="o">.</span><span class="n">to_default_dict_and_annotation_dict</span><span class="p">()</span>
+        <span class="c1"># Select assigns, annotations which are not already defined in config</span>
+        <span class="n">new_defaults</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">always_defaults</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="p">}</span>
+        <span class="n">new_annotations</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">always_annotations</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">annotations</span><span class="p">}</span>
+        <span class="c1"># Add to config</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_defaults</span><span class="p">)</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_annotations</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

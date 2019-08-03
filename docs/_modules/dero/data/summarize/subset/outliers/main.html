@@ -1,0 +1,171 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.data.summarize.subset.outliers.main &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.data.summarize.subset.outliers.main</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">dero.latex</span> <span class="k">import</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">dero.data.summarize.subset.outliers.select</span> <span class="k">import</span> <span class="n">outlier_summary_dicts</span>
+<span class="kn">from</span> <span class="nn">dero.data.summarize.subset.outliers.detail.totex</span> <span class="k">import</span> <span class="n">outlier_by_column_summary</span>
+<span class="kn">from</span> <span class="nn">dero.data.summarize.subset.outliers.summary.main</span> <span class="k">import</span> <span class="n">outlier_overview_summary_page_table</span>
+<span class="kn">from</span> <span class="nn">dero.data.summarize.subset.outliers.typing</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">AssociatedColDict</span><span class="p">,</span>
+    <span class="n">MinMaxDict</span><span class="p">,</span>
+    <span class="n">BoolDict</span><span class="p">,</span>
+    <span class="n">StrList</span><span class="p">,</span>
+    <span class="n">FloatSequence</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">dero.data.typing</span> <span class="k">import</span> <span class="n">DocumentOrTables</span>
+
+
+<div class="viewcode-block" id="outlier_summary_tables"><a class="viewcode-back" href="../../../../../../dero.data.summarize.subset.outliers.html#dero.data.summarize.subset.outliers.main.outlier_summary_tables">[docs]</a><span class="k">def</span> <span class="nf">outlier_summary_tables</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">associated_col_dict</span><span class="p">:</span> <span class="n">AssociatedColDict</span><span class="p">,</span>
+                           <span class="n">min_max_dict</span><span class="p">:</span> <span class="n">MinMaxDict</span><span class="p">,</span>
+                           <span class="n">ascending_sort_dict</span><span class="p">:</span> <span class="n">BoolDict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                           <span class="n">always_associated_cols</span><span class="p">:</span> <span class="n">StrList</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bad_column_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;_bad_column&#39;</span><span class="p">,</span>
+                           <span class="n">num_firms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">firm_id_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;TICKER&#39;</span><span class="p">,</span>
+                           <span class="n">date_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Date&#39;</span><span class="p">,</span>
+                           <span class="n">begin_datevar</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Begin Date&#39;</span><span class="p">,</span>
+                           <span class="n">end_datevar</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;End Date&#39;</span><span class="p">,</span>
+                           <span class="n">expand_months</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+                           <span class="n">keep_num_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                           <span class="n">outdir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">as_document</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">author</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                           <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">overview_caption</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;Outlier Overview and Summary Statistics&#39;</span><span class="p">,</span>
+                           <span class="n">quants</span><span class="p">:</span> <span class="n">FloatSequence</span><span class="o">=</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">)</span>
+                           <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DocumentOrTables</span><span class="p">:</span>
+
+    <span class="n">bad_df_dict</span><span class="p">,</span> <span class="n">selected_orig_df_dict</span><span class="p">,</span> <span class="n">bad_df</span> <span class="o">=</span> <span class="n">outlier_summary_dicts</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">associated_col_dict</span><span class="p">,</span>
+        <span class="n">min_max_dict</span><span class="p">,</span>
+        <span class="n">ascending_sort_dict</span><span class="o">=</span><span class="n">ascending_sort_dict</span><span class="p">,</span>
+        <span class="n">always_associated_cols</span><span class="o">=</span><span class="n">always_associated_cols</span><span class="p">,</span>
+        <span class="n">num_firms</span><span class="o">=</span><span class="n">num_firms</span><span class="p">,</span>
+        <span class="n">firm_id_col</span><span class="o">=</span><span class="n">firm_id_col</span><span class="p">,</span>
+        <span class="n">date_col</span><span class="o">=</span><span class="n">date_col</span><span class="p">,</span>
+        <span class="n">expand_months</span><span class="o">=</span><span class="n">expand_months</span><span class="p">,</span>
+        <span class="n">begin_datevar</span><span class="o">=</span><span class="n">begin_datevar</span><span class="p">,</span>
+        <span class="n">end_datevar</span><span class="o">=</span><span class="n">end_datevar</span><span class="p">,</span>
+        <span class="n">bad_column_name</span><span class="o">=</span><span class="n">bad_column_name</span>
+    <span class="p">)</span>
+
+    <span class="n">overview_table</span> <span class="o">=</span> <span class="n">outlier_overview_summary_page_table</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">bad_df</span><span class="p">,</span>
+        <span class="n">min_max_dict</span><span class="p">,</span>
+        <span class="n">bad_column_name</span><span class="o">=</span><span class="n">bad_column_name</span><span class="p">,</span>
+        <span class="n">firm_id_col</span><span class="o">=</span><span class="n">firm_id_col</span><span class="p">,</span>
+        <span class="n">as_document</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">caption</span><span class="o">=</span><span class="n">overview_caption</span><span class="p">,</span>
+        <span class="n">quants</span><span class="o">=</span><span class="n">quants</span>
+    <span class="p">)</span>
+
+    <span class="n">detail_tables</span> <span class="o">=</span> <span class="n">outlier_by_column_summary</span><span class="p">(</span>
+        <span class="n">bad_df_dict</span><span class="p">,</span>
+        <span class="n">selected_orig_df_dict</span><span class="p">,</span>
+        <span class="n">keep_num_rows</span><span class="o">=</span><span class="n">keep_num_rows</span><span class="p">,</span>
+        <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
+        <span class="n">outdir</span><span class="o">=</span><span class="n">outdir</span><span class="p">,</span>
+        <span class="n">as_document</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">all_tables</span> <span class="o">=</span> <span class="p">[</span><span class="n">overview_table</span><span class="p">]</span> <span class="o">+</span> <span class="n">detail_tables</span>
+
+    <span class="k">if</span> <span class="n">as_document</span><span class="p">:</span>
+        <span class="n">document</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">from_ambiguous_collection</span><span class="p">(</span>
+            <span class="n">all_tables</span><span class="p">,</span>
+            <span class="n">author</span><span class="o">=</span><span class="n">author</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">title</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">outdir</span><span class="p">:</span>
+            <span class="n">document</span><span class="o">.</span><span class="n">to_pdf_and_move</span><span class="p">(</span>
+                <span class="n">outdir</span><span class="p">,</span>
+                <span class="n">outname</span><span class="o">=</span><span class="n">title</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">document</span>
+
+    <span class="k">return</span> <span class="n">all_tables</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../../index.html">Module code</a><ul>
+  <li><a href="../../../../data.html">dero.data</a><ul>
+  <li><a href="../../../summarize.html">dero.data.summarize</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

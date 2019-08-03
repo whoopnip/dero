@@ -1,0 +1,234 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.latex.table.models.texgen.items &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.latex.table.models.texgen.items</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">dero.latex.models.item</span> <span class="k">import</span> <span class="n">Item</span>
+<span class="kn">from</span> <span class="nn">dero.mixins.repr</span> <span class="k">import</span> <span class="n">ReprMixin</span>
+<span class="kn">from</span> <span class="nn">dero.latex.table.models.panels.collection</span> <span class="k">import</span> <span class="n">PanelCollection</span>
+<span class="kn">from</span> <span class="nn">dero.latex.table.models.texgen.alignment</span> <span class="k">import</span> <span class="n">ColumnsAlignment</span>
+<span class="kn">from</span> <span class="nn">dero.latex.table.logic.table.build</span> <span class="k">import</span> <span class="n">build_tabular_content_from_panel_collection</span>
+<span class="kn">from</span> <span class="nn">dero.latex.models.caption</span> <span class="k">import</span> <span class="n">Caption</span>
+<span class="kn">from</span> <span class="nn">dero.latex.models.format.breaks</span> <span class="k">import</span> <span class="n">LineBreak</span>
+<span class="kn">from</span> <span class="nn">dero.latex.texgen</span> <span class="k">import</span> <span class="n">_centering_str</span>
+<span class="kn">from</span> <span class="nn">dero.latex.models.document</span> <span class="k">import</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">dero.latex.models.package</span> <span class="k">import</span> <span class="n">Package</span>
+<span class="kn">from</span> <span class="nn">dero.latex.table.models.texgen.packages</span> <span class="k">import</span> <span class="n">default_packages</span>
+<span class="kn">from</span> <span class="nn">dero.latex.models.landscape</span> <span class="k">import</span> <span class="n">Landscape</span>
+<span class="kn">from</span> <span class="nn">dero.latex.models.label</span> <span class="k">import</span> <span class="n">Label</span>
+<span class="kn">from</span> <span class="nn">dero.latex.models.section.base</span> <span class="k">import</span> <span class="n">TextAreaBase</span>
+
+
+<div class="viewcode-block" id="TableNotes"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.TableNotes">[docs]</a><span class="k">class</span> <span class="nc">TableNotes</span><span class="p">(</span><span class="n">TextAreaBase</span><span class="p">,</span> <span class="n">ReprMixin</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;tablenotes&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">contents</span><span class="p">,</span> <span class="n">env_modifiers</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;[para, flushleft]&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Tabular"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.Tabular">[docs]</a><span class="k">class</span> <span class="nc">Tabular</span><span class="p">(</span><span class="n">Item</span><span class="p">,</span> <span class="n">ReprMixin</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;tabular&#39;</span>
+    <span class="n">repr_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;align&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">panel_collection</span><span class="p">:</span> <span class="n">PanelCollection</span><span class="p">,</span> <span class="n">align</span><span class="p">:</span> <span class="n">ColumnsAlignment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">mid_rules</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">align</span> <span class="o">=</span> <span class="n">align</span> <span class="k">if</span> <span class="n">align</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">ColumnsAlignment</span><span class="p">(</span><span class="n">num_columns</span><span class="o">=</span><span class="n">panel_collection</span><span class="o">.</span><span class="n">num_columns</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">panel_collection</span> <span class="o">=</span> <span class="n">panel_collection</span>
+
+        <span class="n">content</span> <span class="o">=</span> <span class="n">build_tabular_content_from_panel_collection</span><span class="p">(</span><span class="n">panel_collection</span><span class="p">,</span> <span class="n">mid_rule</span><span class="o">=</span><span class="n">mid_rules</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">env_modifiers</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;{{</span><span class="si">{self.align}</span><span class="s1">}}&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ThreePartTable"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.ThreePartTable">[docs]</a><span class="k">class</span> <span class="nc">ThreePartTable</span><span class="p">(</span><span class="n">Item</span><span class="p">,</span> <span class="n">ReprMixin</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;threeparttable&#39;</span>
+    <span class="n">repr_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;caption&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_content</span><span class="p">:</span> <span class="n">Tabular</span><span class="p">,</span> <span class="n">caption</span><span class="p">:</span> <span class="n">Caption</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">below_text</span><span class="p">:</span> <span class="n">TableNotes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Label</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">caption</span> <span class="o">=</span> <span class="n">caption</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">caption</span><span class="p">,</span>
+            <span class="n">table_content</span><span class="p">,</span>
+            <span class="n">below_text</span><span class="p">,</span>
+            <span class="n">label</span>
+        <span class="p">]</span>
+        <span class="n">valid_items</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">content</span> <span class="o">=</span> <span class="n">LineBreak</span><span class="p">()</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valid_items</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ThreePartTable.from_panel_collection"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.ThreePartTable.from_panel_collection">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_panel_collection</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">panel_collection</span><span class="p">:</span> <span class="n">PanelCollection</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">tabular_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">tabular</span> <span class="o">=</span> <span class="n">Tabular</span><span class="p">(</span><span class="n">panel_collection</span><span class="p">,</span> <span class="o">**</span><span class="n">tabular_kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">panel_collection</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">caption</span> <span class="o">=</span> <span class="n">Caption</span><span class="p">(</span><span class="n">panel_collection</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">caption</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">tabular</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="n">caption</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="Table"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.Table">[docs]</a><span class="k">class</span> <span class="nc">Table</span><span class="p">(</span><span class="n">Item</span><span class="p">,</span> <span class="n">ReprMixin</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;table&#39;</span>
+    <span class="n">repr_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;caption&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">three_part_table</span><span class="p">:</span> <span class="n">ThreePartTable</span><span class="p">,</span> <span class="n">centering</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">landscape</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">caption</span> <span class="o">=</span> <span class="n">three_part_table</span><span class="o">.</span><span class="n">caption</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">landscape</span> <span class="o">=</span> <span class="n">landscape</span>
+
+        <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">_centering_str</span><span class="p">()</span> <span class="k">if</span> <span class="n">centering</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">three_part_table</span>
+        <span class="p">]</span>
+
+        <span class="n">valid_items</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">content</span> <span class="o">=</span> <span class="n">LineBreak</span><span class="p">()</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valid_items</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">content_with_env</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">landscape</span><span class="p">:</span>
+            <span class="n">content_with_env</span> <span class="o">=</span> <span class="n">Landscape</span><span class="p">()</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">content_with_env</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">content_with_env</span>
+
+<div class="viewcode-block" id="Table.from_panel_collection"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.Table.from_panel_collection">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_panel_collection</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">panel_collection</span><span class="p">:</span> <span class="n">PanelCollection</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">tabular_kwargs</span><span class="o">=</span><span class="p">{},</span>
+                              <span class="n">three_part_table_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">three_part_table</span> <span class="o">=</span> <span class="n">ThreePartTable</span><span class="o">.</span><span class="n">from_panel_collection</span><span class="p">(</span>
+            <span class="n">panel_collection</span><span class="p">,</span>
+            <span class="n">tabular_kwargs</span><span class="o">=</span><span class="n">tabular_kwargs</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">three_part_table_kwargs</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">three_part_table</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Table.from_table_model"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.Table.from_table_model">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_table_model</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">dero.latex.table.models.table.table</span> <span class="k">import</span> <span class="n">Table</span> <span class="k">as</span> <span class="n">TableModel</span>
+        <span class="n">table</span><span class="p">:</span> <span class="n">TableModel</span>
+        <span class="n">tabular</span> <span class="o">=</span> <span class="n">Tabular</span><span class="p">(</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">panels</span><span class="p">,</span>
+            <span class="n">align</span><span class="o">=</span><span class="n">table</span><span class="o">.</span><span class="n">align</span><span class="p">,</span>
+            <span class="n">mid_rules</span><span class="o">=</span><span class="n">table</span><span class="o">.</span><span class="n">mid_rules</span>
+        <span class="p">)</span>
+
+        <span class="n">three_part_table</span> <span class="o">=</span> <span class="n">ThreePartTable</span><span class="p">(</span>
+            <span class="n">tabular</span><span class="p">,</span>
+            <span class="n">caption</span><span class="o">=</span><span class="n">table</span><span class="o">.</span><span class="n">caption</span><span class="p">,</span>
+            <span class="n">below_text</span><span class="o">=</span><span class="n">table</span><span class="o">.</span><span class="n">below_text</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">Label</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="k">if</span> <span class="n">table</span><span class="o">.</span><span class="n">label</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">three_part_table</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">landscape</span><span class="o">=</span><span class="n">table</span><span class="o">.</span><span class="n">landscape</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="LTable"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.LTable">[docs]</a><span class="k">class</span> <span class="nc">LTable</span><span class="p">(</span><span class="n">Table</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ltable&#39;</span></div>
+
+
+<div class="viewcode-block" id="TableDocument"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.TableDocument">[docs]</a><span class="k">class</span> <span class="nc">TableDocument</span><span class="p">(</span><span class="n">Document</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="n">Table</span><span class="p">,</span> <span class="n">packages</span><span class="p">:</span> <span class="p">[</span><span class="n">Package</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">landscape</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">packages</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">packages</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">packages</span> <span class="o">+=</span> <span class="n">default_packages</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">packages</span><span class="p">,</span> <span class="n">landscape</span><span class="o">=</span><span class="n">landscape</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TableDocument.from_panel_collection"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.TableDocument.from_panel_collection">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_panel_collection</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">panel_collection</span><span class="p">:</span> <span class="n">PanelCollection</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">tabular_kwargs</span><span class="o">=</span><span class="p">{},</span>
+                              <span class="n">three_part_table_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">table_kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">from_panel_collection</span><span class="p">(</span>
+            <span class="n">panel_collection</span><span class="p">,</span>
+            <span class="n">tabular_kwargs</span><span class="o">=</span><span class="n">tabular_kwargs</span><span class="p">,</span>
+            <span class="n">three_part_table_kwargs</span><span class="o">=</span><span class="n">three_part_table_kwargs</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">table_kwargs</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TableDocument.from_table_model"><a class="viewcode-back" href="../../../../../../dero.latex.table.models.texgen.html#dero.latex.table.models.texgen.items.TableDocument.from_table_model">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_table_model</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">dero.latex.table.models.table.table</span> <span class="k">import</span> <span class="n">Table</span> <span class="k">as</span> <span class="n">TableModel</span>
+        <span class="n">table</span><span class="p">:</span> <span class="n">TableModel</span>
+        <span class="n">tex_table</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">from_table_model</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">tex_table</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

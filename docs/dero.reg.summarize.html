@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.reg.summarize package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-reg-summarize-package">
+<h1>dero.reg.summarize package<a class="headerlink" href="#dero-reg-summarize-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.reg.summarize.split">
+<span id="dero-reg-summarize-split-module"></span><h2>dero.reg.summarize.split module<a class="headerlink" href="#module-dero.reg.summarize.split" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.summarize.split.get_var_df_and_non_var_df">
+<code class="descclassname">dero.reg.summarize.split.</code><code class="descname">get_var_df_and_non_var_df</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em>, <em>split_rows: typing.Sequence[str] = ('N'</em>, <em>'R2'</em>, <em>'Adj-R2')</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/summarize/split.html#get_var_df_and_non_var_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.summarize.split.get_var_df_and_non_var_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits rows containing N, R2, Adj-R2 into separate dataframe</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.summarize.tstat">
+<span id="dero-reg-summarize-tstat-module"></span><h2>dero.reg.summarize.tstat module<a class="headerlink" href="#module-dero.reg.summarize.tstat" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.summarize.tstat.replace_stderr_with_t_stat_in_summary_df">
+<code class="descclassname">dero.reg.summarize.tstat.</code><code class="descname">replace_stderr_with_t_stat_in_summary_df</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, split_rows: typing.Sequence[str], reg_list</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/reg/summarize/tstat.html#replace_stderr_with_t_stat_in_summary_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.summarize.tstat.replace_stderr_with_t_stat_in_summary_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.summarize.tstat.replace_stderr_with_t_stat_in_var_df">
+<code class="descclassname">dero.reg.summarize.tstat.</code><code class="descname">replace_stderr_with_t_stat_in_var_df</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em>, <em>reg_list</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/reg/summarize/tstat.html#replace_stderr_with_t_stat_in_var_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.summarize.tstat.replace_stderr_with_t_stat_in_var_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.summarize.yesno">
+<span id="dero-reg-summarize-yesno-module"></span><h2>dero.reg.summarize.yesno module<a class="headerlink" href="#module-dero.reg.summarize.yesno" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.summarize.yesno.col_boolean_dict_from_list_of_lists_of_columns">
+<code class="descclassname">dero.reg.summarize.yesno.</code><code class="descname">col_boolean_dict_from_list_of_lists_of_columns</code><span class="sig-paren">(</span><em>column_list_list: typing.List[typing.List[str]]</em><span class="sig-paren">)</span> &#x2192; typing.Dict[str, typing.List[bool]]<a class="reference internal" href="_modules/dero/reg/summarize/yesno.html#col_boolean_dict_from_list_of_lists_of_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.summarize.yesno.col_boolean_dict_from_list_of_lists_of_columns" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>transforms [</dt>
+<dd>[‘a’, ‘b’],
+[‘a’],
+[‘b’],
+None,
+False,
+[],
+[‘a’,’b’]</dd>
+</dl>
+<p>]</p>
+<dl class="docutils">
+<dt>into {</dt>
+<dd>‘a’: [True, True, False, False, False, False, True],
+‘b’: [True, False, True, False, False, False, True]</dd>
+</dl>
+<p>}
+Returns:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.summarize">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.reg.summarize" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.summarize.produce_summary">
+<code class="descclassname">dero.reg.summarize.</code><code class="descname">produce_summary</code><span class="sig-paren">(</span><em>reg_list</em>, <em>stderr=False</em>, <em>t_stats: bool = False</em>, <em>float_format='%0.1f'</em>, <em>regressor_order=[]</em>, <em>suppress_other_regressors=False</em>, <em>model_names=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/summarize.html#produce_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.summarize.produce_summary" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>reg_list</strong> – </li>
+<li><strong>stderr</strong> – </li>
+<li><strong>float_format</strong> – </li>
+<li><strong>regressor_order</strong> – </li>
+<li><strong>suppress_other_regressors</strong> (<em>bool</em>) – True for when using regressor_order to suppress coefficients
+that are not in regressor_order into “Controls: Yes”. False to keep coefficients</li>
+<li><strong>model_names</strong> (<em>None</em><em>, </em><em>list</em><em>, </em><em>tuple</em>) – If a collection is passed, will be used as column names in summary table.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.reg.summarize.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

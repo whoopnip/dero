@@ -1,0 +1,187 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.views.object &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.manager.views.object</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">ast</span>
+
+<span class="kn">from</span> <span class="nn">dero.mixins.propertycache</span> <span class="k">import</span> <span class="n">SimplePropertyCacheMixin</span>
+<span class="kn">from</span> <span class="nn">dero.manager.imports.models.statements.interfaces</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">AnyImportStatement</span><span class="p">,</span>
+    <span class="n">ObjectImportStatement</span><span class="p">,</span>
+    <span class="n">ModuleImportStatement</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">dero.manager.imports.models.statements.container</span> <span class="k">import</span> <span class="n">ImportStatementContainer</span>
+<span class="kn">from</span> <span class="nn">dero.manager.io.file.load.parsers.extname</span> <span class="k">import</span> <span class="n">extract_external_name_from_assign_value</span>
+<span class="kn">from</span> <span class="nn">dero.manager.io.file.load.parsers.kwargs</span> <span class="k">import</span> <span class="n">extract_keywords_from_ast_by_name</span>
+<span class="kn">from</span> <span class="nn">dero.manager.io.func.load.config</span> <span class="k">import</span> <span class="n">FunctionConfigExtractor</span>
+<span class="kn">from</span> <span class="nn">dero.mixins.repr</span> <span class="k">import</span> <span class="n">ReprMixin</span>
+
+<div class="viewcode-block" id="ObjectView"><a class="viewcode-back" href="../../../../dero.manager.views.html#dero.manager.views.object.ObjectView">[docs]</a><span class="k">class</span> <span class="nc">ObjectView</span><span class="p">(</span><span class="n">SimplePropertyCacheMixin</span><span class="p">,</span> <span class="n">ReprMixin</span><span class="p">):</span>
+    <span class="n">repr_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;obj_ast&#39;</span><span class="p">,</span> <span class="s1">&#39;section_path_str&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_ast</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">AST</span><span class="p">,</span> <span class="n">import_statement</span><span class="p">:</span> <span class="n">AnyImportStatement</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">section_path_str</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_ast</span> <span class="o">=</span> <span class="n">obj_ast</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_statement</span> <span class="o">=</span> <span class="n">import_statement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">section_path_str</span> <span class="o">=</span> <span class="n">section_path_str</span>
+
+<div class="viewcode-block" id="ObjectView.load"><a class="viewcode-back" href="../../../../dero.manager.views.html#dero.manager.views.object.ObjectView.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># executes import</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">import_statement</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_item</span> <span class="o">=</span> <span class="n">_execute_import_get_obj_from_result</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">import_statement</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_item</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">default_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_try_getattr_else_call_func</span><span class="p">(</span><span class="s1">&#39;_default_config&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_default_config</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_try_getattr_else_call_func</span><span class="p">(</span><span class="s1">&#39;_item&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">module</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_try_getattr_else_call_func</span><span class="p">(</span><span class="s1">&#39;_module&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_module</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_try_getattr_else_call_func</span><span class="p">(</span><span class="s1">&#39;_name&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_name</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">output_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_name</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+<div class="viewcode-block" id="ObjectView.from_ast_and_imports"><a class="viewcode-back" href="../../../../dero.manager.views.html#dero.manager.views.object.ObjectView.from_ast_and_imports">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_ast_and_imports</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj_ast</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">AST</span><span class="p">,</span> <span class="n">import_statements</span><span class="p">:</span> <span class="n">ImportStatementContainer</span><span class="p">,</span>
+                             <span class="n">section_path_str</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">import_statement</span> <span class="o">=</span> <span class="n">import_statements</span><span class="o">.</span><span class="n">get_import_for_ast_obj</span><span class="p">(</span><span class="n">obj_ast</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">obj_ast</span><span class="p">,</span>
+            <span class="n">import_statement</span><span class="o">=</span><span class="n">import_statement</span><span class="p">,</span>
+            <span class="n">section_path_str</span><span class="o">=</span><span class="n">section_path_str</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_set_module</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">import_statement</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_module</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">import_statement</span><span class="p">,</span> <span class="n">ObjectImportStatement</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_module</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">import_statement</span><span class="o">.</span><span class="n">module</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">import_statement</span><span class="p">,</span> <span class="n">ModuleImportStatement</span><span class="p">):</span>
+            <span class="c1"># have already ensured in creating ObjectView that there should be only one module</span>
+            <span class="c1"># in the module import statement. So just take the first module</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_module</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">import_statement</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;expected import statement to be ObjectImportStatement or ModuleImportStatement.&#39;</span>
+                             <span class="n">f</span><span class="s1">&#39; Got </span><span class="si">{self.import_statement}</span><span class="s1"> of type {type(self.import_statement)}&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">extract_external_name_from_assign_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj_ast</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;DataPipeline&#39;</span><span class="p">:</span>
+            <span class="c1"># DataPipeline may be passed in pipeline dict. Then need to get name from DataPipeline constructor</span>
+            <span class="n">ast_name</span> <span class="o">=</span> <span class="n">extract_keywords_from_ast_by_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj_ast</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">)[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_output_name</span> <span class="o">=</span> <span class="n">ast_name</span><span class="o">.</span><span class="n">s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">_get_default_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default_config</span> <span class="o">=</span> <span class="n">FunctionConfigExtractor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">extract_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_execute_import_get_obj_from_result</span><span class="p">(</span><span class="n">import_statement</span><span class="p">:</span> <span class="n">AnyImportStatement</span><span class="p">,</span> <span class="n">obj_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="c1"># Should be just a single module or object, can take first of either.</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">import_statement</span><span class="o">.</span><span class="n">execute</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">import_statement</span><span class="p">,</span> <span class="n">ObjectImportStatement</span><span class="p">):</span>
+        <span class="c1"># Result is the object itself</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">import_statement</span><span class="p">,</span> <span class="n">ModuleImportStatement</span><span class="p">):</span>
+        <span class="c1"># Result is the module. Get the object from the module</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">obj_name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;expected import statement to be ObjectImportStatement or ModuleImportStatement.&#39;</span>
+                         <span class="n">f</span><span class="s1">&#39; Got </span><span class="si">{import_statement}</span><span class="s1"> of type {type(import_statement)}&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

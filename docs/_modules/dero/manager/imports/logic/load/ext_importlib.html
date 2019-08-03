@@ -1,0 +1,138 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.imports.logic.load.ext_importlib &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.manager.imports.logic.load.ext_importlib</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">importlib._bootstrap</span> <span class="k">import</span> <span class="n">_find_spec</span>
+<span class="kn">from</span> <span class="nn">importlib.util</span> <span class="k">import</span> <span class="n">resolve_name</span>
+<span class="kn">from</span> <span class="nn">importlib.machinery</span> <span class="k">import</span> <span class="n">ModuleSpec</span>
+
+
+<div class="viewcode-block" id="get_filepath_from_module_str"><a class="viewcode-back" href="../../../../../../dero.manager.imports.logic.load.html#dero.manager.imports.logic.load.ext_importlib.get_filepath_from_module_str">[docs]</a><span class="k">def</span> <span class="nf">get_filepath_from_module_str</span><span class="p">(</span><span class="n">module_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">location_section_path_str</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">spec</span><span class="p">:</span> <span class="n">ModuleSpec</span> <span class="o">=</span> <span class="n">find_spec</span><span class="p">(</span><span class="n">module_str</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="n">location_section_path_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">spec</span><span class="o">.</span><span class="n">has_location</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;could not find location of module </span><span class="si">{module_str}</span><span class="s1">, package </span><span class="si">{package}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">spec</span><span class="o">.</span><span class="n">origin</span></div>
+
+<div class="viewcode-block" id="find_spec"><a class="viewcode-back" href="../../../../../../dero.manager.imports.logic.load.html#dero.manager.imports.logic.load.ext_importlib.find_spec">[docs]</a><span class="k">def</span> <span class="nf">find_spec</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModuleSpec</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return the spec for the specified module.</span>
+
+<span class="sd">    Note: this is a modification of importlib.util.find_spec which does not</span>
+<span class="sd">    import parent packages. It instead recursively searches through the parents.</span>
+
+<span class="sd">    First, sys.modules is checked to see if the module was already imported. If</span>
+<span class="sd">    so, then sys.modules[name].__spec__ is returned. If that happens to be</span>
+<span class="sd">    set to None, then ValueError is raised. If the module is not in</span>
+<span class="sd">    sys.modules, then sys.meta_path is searched for a suitable spec with the</span>
+<span class="sd">    value of &#39;path&#39; given to the finders. None is returned if no spec could</span>
+<span class="sd">    be found.</span>
+
+<span class="sd">    If the name is for submodule (contains a dot), find_spec is called on the</span>
+<span class="sd">    parent module to determine the submodule_search_locations.</span>
+
+<span class="sd">    The name and package arguments work the same as importlib.import_module().</span>
+<span class="sd">    In other words, relative module names (with leading dots) work.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fullname</span> <span class="o">=</span> <span class="n">resolve_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">package</span><span class="p">)</span> <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">name</span>
+    <span class="k">if</span> <span class="n">fullname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+        <span class="n">parent_name</span> <span class="o">=</span> <span class="n">fullname</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">parent_name</span><span class="p">:</span>
+            <span class="c1"># Use builtins.__import__() in case someone replaced it.</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">find_spec</span><span class="p">(</span><span class="n">parent_name</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="n">package</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_find_spec</span><span class="p">(</span><span class="n">fullname</span><span class="p">,</span> <span class="n">parent</span><span class="o">.</span><span class="n">submodule_search_locations</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_find_spec</span><span class="p">(</span><span class="n">fullname</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">fullname</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">module</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">spec</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">__spec__</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.__spec__ is not set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.__spec__ is None&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">spec</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

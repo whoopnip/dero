@@ -1,0 +1,162 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.summ &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.summ</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="summary_stats"><a class="viewcode-back" href="../../dero.html#dero.summ.summary_stats">[docs]</a><span class="k">def</span> <span class="nf">summary_stats</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pct_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">int_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">float_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a transposed df.describe() table where pct_vars are formatted with two</span>
+<span class="sd">    decimal percentages, int_vars are formatted with zero decimal places, and float_</span>
+<span class="sd">    vars are formatted with two decimal places.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;25%&#39;</span><span class="p">,</span><span class="s1">&#39;50%&#39;</span><span class="p">,</span><span class="s1">&#39;75%&#39;</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
+    <span class="n">all_vars</span> <span class="o">=</span> <span class="n">_if_lists_exist_then_combine</span><span class="p">(</span><span class="n">pct_vars</span><span class="p">,</span> <span class="n">int_vars</span><span class="p">,</span> <span class="n">float_vars</span><span class="p">)</span>
+    <span class="n">summ</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">all_vars</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">apply_formatting</span><span class="p">(</span><span class="n">summ</span><span class="p">,</span> <span class="n">stats</span><span class="p">,</span> <span class="n">pct_vars</span><span class="o">=</span><span class="n">pct_vars</span><span class="p">,</span> <span class="n">int_vars</span><span class="o">=</span><span class="n">int_vars</span><span class="p">,</span> <span class="n">float_vars</span><span class="o">=</span><span class="n">float_vars</span><span class="p">)</span>
+    
+<span class="c1">#     formats = _if_vars_list_exists_then_add_to_format_dict(pct_vars, int_vars, float_vars)</span>
+    
+<span class="c1">#     _apply_formatting_from_format_dict(summ, formats, stats)</span>
+
+    <span class="k">if</span> <span class="n">count</span><span class="p">:</span>
+        <span class="c1">#Format count column individually</span>
+        <span class="n">summ</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">summ</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{0:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">summ</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">summ</span></div>
+
+<div class="viewcode-block" id="summ_vars_single_stat_by_groups"><a class="viewcode-back" href="../../dero.html#dero.summ.summ_vars_single_stat_by_groups">[docs]</a><span class="k">def</span> <span class="nf">summ_vars_single_stat_by_groups</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">groupvar</span><span class="p">,</span> <span class="n">pct_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">int_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">float_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a table where groups are columns and rows are variables, where the values</span>
+<span class="sd">    are a single summary stat</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">all_vars</span> <span class="o">=</span> <span class="n">_if_lists_exist_then_combine</span><span class="p">(</span><span class="n">pct_vars</span><span class="p">,</span> <span class="n">float_vars</span><span class="p">,</span> <span class="n">int_vars</span><span class="p">)</span>
+
+    <span class="n">group</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">groupvar</span><span class="p">)[</span><span class="n">all_vars</span><span class="p">]</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">stat</span><span class="p">)</span> <span class="c1">#gets .mean(), .median(), etc.</span>
+    <span class="n">summ</span> <span class="o">=</span> <span class="n">func</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="c1">#applies .mean(), .median(), etc.</span>
+    <span class="n">apply_formatting</span><span class="p">(</span><span class="n">summ</span><span class="p">,</span> <span class="n">summ</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">pct_vars</span><span class="o">=</span><span class="n">pct_vars</span><span class="p">,</span>
+                               <span class="n">float_vars</span><span class="o">=</span><span class="n">float_vars</span><span class="p">,</span> <span class="n">int_vars</span><span class="o">=</span><span class="n">int_vars</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">summ</span></div>
+
+<div class="viewcode-block" id="apply_formatting"><a class="viewcode-back" href="../../dero.html#dero.summ.apply_formatting">[docs]</a><span class="k">def</span> <span class="nf">apply_formatting</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">pct_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">int_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">float_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Applies percentage, integer, and float formatting to a summary table. Variables must</span>
+<span class="sd">    be in rows, with statistics in columns.</span>
+<span class="sd">    </span>
+<span class="sd">    Note: inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">formats</span> <span class="o">=</span> <span class="n">_if_vars_list_exists_then_add_to_format_dict</span><span class="p">(</span><span class="n">pct_vars</span><span class="p">,</span> <span class="n">int_vars</span><span class="p">,</span> <span class="n">float_vars</span><span class="p">)</span>
+    
+    <span class="n">_apply_formatting_from_format_dict</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">formats</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">_if_lists_exist_then_combine</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">a</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">+=</span> <span class="n">a</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span> <span class="nf">_if_vars_list_exists_then_add_to_format_dict</span><span class="p">(</span><span class="n">pct_vars</span><span class="p">,</span> <span class="n">int_vars</span><span class="p">,</span> <span class="n">float_vars</span><span class="p">):</span>
+    <span class="n">formats</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{:.2%}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{0:.0f}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{0:.2f}</span><span class="s1">&#39;</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var_list</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">pct_vars</span><span class="p">,</span> <span class="n">int_vars</span><span class="p">,</span> <span class="n">float_vars</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">var_list</span><span class="p">:</span>
+            <span class="n">formats</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">var_list</span><span class="p">)]</span> <span class="o">=</span> <span class="n">formats</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c1">#replaces int key with tuple of vars</span>
+    <span class="k">return</span> <span class="n">formats</span>
+
+<span class="k">def</span> <span class="nf">_apply_formatting_from_format_dict</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">formats</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Note: inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span> <span class="c1">#apply appropriate format to stats columns but not count column</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span> <span class="c1">#skip empty lists - these are marked by an integer</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">formats</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

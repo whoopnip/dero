@@ -1,0 +1,127 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.data.portfolio package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-data-portfolio-package">
+<h1>dero.data.portfolio package<a class="headerlink" href="#dero-data-portfolio-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.data.portfolio.name">
+<span id="dero-data-portfolio-name-module"></span><h2>dero.data.portfolio.name module<a class="headerlink" href="#module-dero.data.portfolio.name" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.data.portfolio.resample">
+<span id="dero-data-portfolio-resample-module"></span><h2>dero.data.portfolio.resample module<a class="headerlink" href="#module-dero.data.portfolio.resample" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.data.portfolio.resample.collect_portfolios_through_time">
+<code class="descclassname">dero.data.portfolio.resample.</code><code class="descname">collect_portfolios_through_time</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em>, <em>portvar: str</em>, <em>id_var: str</em>, <em>needed_calendar_days: int</em>, <em>needed_prior_calendar_days: typing.Union[int</em>, <em>NoneType] = None</em>, <em>datevar: str = 'Date'</em>, <em>portfolio_datevar: str = 'Portfolio Date'</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/data/portfolio/resample.html#collect_portfolios_through_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.portfolio.resample.collect_portfolios_through_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.data.portfolio.sort">
+<span id="dero-data-portfolio-sort-module"></span><h2>dero.data.portfolio.sort module<a class="headerlink" href="#module-dero.data.portfolio.sort" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.data.portfolio.sort.sort_portfolio_columns">
+<code class="descclassname">dero.data.portfolio.sort.</code><code class="descname">sort_portfolio_columns</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/portfolio/sort.html#sort_portfolio_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.portfolio.sort.sort_portfolio_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: creates a copy, not inplace</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.data.portfolio.sort.sort_portfolio_columns_and_index">
+<code class="descclassname">dero.data.portfolio.sort.</code><code class="descname">sort_portfolio_columns_and_index</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/data/portfolio/sort.html#sort_portfolio_columns_and_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.portfolio.sort.sort_portfolio_columns_and_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: creates a copy, not inplace</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.data.portfolio.sort.sort_portfolio_index">
+<code class="descclassname">dero.data.portfolio.sort.</code><code class="descname">sort_portfolio_index</code><span class="sig-paren">(</span><em>df</em>, <em>inplace=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/portfolio/sort.html#sort_portfolio_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.portfolio.sort.sort_portfolio_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.data.portfolio.typing">
+<span id="dero-data-portfolio-typing-module"></span><h2>dero.data.portfolio.typing module<a class="headerlink" href="#module-dero.data.portfolio.typing" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.data.portfolio">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.data.portfolio" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.data.portfolio.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

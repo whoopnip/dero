@@ -1,0 +1,271 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.reg.lag.remove &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.reg.lag.remove</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">statsmodels.api</span> <span class="k">import</span> <span class="n">OLS</span>
+
+<div class="viewcode-block" id="SimplifiedBase"><a class="viewcode-back" href="../../../../dero.reg.lag.html#dero.reg.lag.remove.SimplifiedBase">[docs]</a><span class="k">class</span> <span class="nc">SimplifiedBase</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_set_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_dict</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attr_dict</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">attr_dict</span><span class="p">[</span><span class="n">attr</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="SimplifiedRegressionResult"><a class="viewcode-back" href="../../../../dero.reg.lag.html#dero.reg.lag.remove.SimplifiedRegressionResult">[docs]</a><span class="k">class</span> <span class="nc">SimplifiedRegressionResult</span><span class="p">(</span><span class="n">SimplifiedBase</span><span class="p">):</span>
+    <span class="n">direct_attrs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;params&#39;</span><span class="p">,</span> <span class="s1">&#39;pvalues&#39;</span><span class="p">,</span> <span class="s1">&#39;tvalues&#39;</span><span class="p">,</span> <span class="s1">&#39;nobs&#39;</span><span class="p">,</span> <span class="s1">&#39;rsquared_adj&#39;</span><span class="p">,</span> <span class="s1">&#39;bse&#39;</span><span class="p">,</span> <span class="s1">&#39;conf_int&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;normalized_cov_params&#39;</span><span class="p">,</span> <span class="s1">&#39;cov_params_default&#39;</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="s1">&#39;cov_params&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;t_test&#39;</span>
+    <span class="p">]</span>
+    <span class="n">model_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;exog_names&#39;</span><span class="p">,</span> <span class="s1">&#39;endog_names&#39;</span><span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">_validate_attrs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">direct_attrs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_attrs</span><span class="p">)</span>
+        <span class="n">model_kwargs</span> <span class="o">=</span> <span class="n">SimplifiedRegressionResult</span><span class="o">.</span><span class="n">pop_model_attrs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_attrs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">SimplifiedModel</span><span class="p">(</span><span class="o">**</span><span class="n">model_kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SimplifiedRegressionResult.from_statsmodels_result"><a class="viewcode-back" href="../../../../dero.reg.lag.html#dero.reg.lag.remove.SimplifiedRegressionResult.from_statsmodels_result">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_statsmodels_result</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+
+        <span class="c1"># Get direct attributes</span>
+        <span class="n">result_dict</span> <span class="o">=</span> <span class="n">_extract_attrs_into_dict</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">direct_attrs</span><span class="p">)</span>
+
+        <span class="c1"># Get attributes of model</span>
+        <span class="n">result_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">_extract_attrs_into_dict</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_attrs</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">result_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SimplifiedRegressionResult.pop_model_attrs"><a class="viewcode-back" href="../../../../dero.reg.lag.html#dero.reg.lag.remove.SimplifiedRegressionResult.pop_model_attrs">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">pop_model_attrs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">attr_dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Note: pops from attr_dict inplace</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">outdict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attr_dict</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">model_attrs</span><span class="p">:</span>
+                <span class="n">outdict</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr_dict</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span>
+
+        <span class="c1"># Must pop separately as cannot change size of iterating dict</span>
+        <span class="p">[</span><span class="n">attr_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">outdict</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">outdict</span></div></div>
+
+
+<div class="viewcode-block" id="SimplifiedModel"><a class="viewcode-back" href="../../../../dero.reg.lag.html#dero.reg.lag.remove.SimplifiedModel">[docs]</a><span class="k">class</span> <span class="nc">SimplifiedModel</span><span class="p">(</span><span class="n">SimplifiedBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_attrs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UnsupportedResultAttributeException"><a class="viewcode-back" href="../../../../dero.reg.lag.html#dero.reg.lag.remove.UnsupportedResultAttributeException">[docs]</a><span class="k">class</span> <span class="nc">UnsupportedResultAttributeException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+<span class="k">def</span> <span class="nf">_validate_attrs</span><span class="p">(</span><span class="n">attr_dict</span><span class="p">,</span> <span class="n">valid_attrs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attr_dict</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">attr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_attrs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">UnsupportedResultAttributeException</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Attribute </span><span class="si">{attr}</span><span class="s1"> not supported for SimplifiedRegressionResult&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_extract_attrs_into_dict</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+    <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Get direct attributes</span>
+    <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">result_dict</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">return</span> <span class="n">result_dict</span>
+
+
+<div class="viewcode-block" id="remove_lag_names_from_reg_results"><a class="viewcode-back" href="../../../../dero.reg.lag.html#dero.reg.lag.remove.remove_lag_names_from_reg_results">[docs]</a><span class="k">def</span> <span class="nf">remove_lag_names_from_reg_results</span><span class="p">(</span><span class="n">reg_list</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Note: partially inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">out_reg_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ambiguous_result</span> <span class="ow">in</span> <span class="n">reg_list</span><span class="p">:</span>
+
+        <span class="c1"># Determine type of result</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ambiguous_result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>  <span class="c1"># Tuple of result, fe_dict</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">ambiguous_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># just a single result</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">ambiguous_result</span>
+
+        <span class="c1"># Actually replace names</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">_remove_lag_name_from_reg_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">)</span>
+
+        <span class="c1"># Add to output, depending on type of result</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ambiguous_result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>  <span class="c1"># Tuple of result, fe_dict</span>
+            <span class="n">out_reg_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">result</span><span class="p">,</span> <span class="n">ambiguous_result</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># just a single result</span>
+            <span class="n">out_reg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">out_reg_list</span></div>
+
+
+<span class="k">def</span> <span class="nf">_remove_lag_name_from_reg_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Note: partially inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">SimplifiedRegressionResult</span><span class="o">.</span><span class="n">from_statsmodels_result</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="c1"># Modify base properties inplace</span>
+    <span class="p">[</span>
+        <span class="n">_remove_lag_names_from_ambiguous_property</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">item</span><span class="p">),</span> <span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="s1">&#39;params&#39;</span><span class="p">,</span> <span class="s1">&#39;pvalues&#39;</span><span class="p">,</span> <span class="s1">&#39;tvalues&#39;</span><span class="p">,</span> <span class="s1">&#39;bse&#39;</span><span class="p">,</span> <span class="s1">&#39;normalized_cov_params&#39;</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Modify model properties and reassign (functions not inplace)</span>
+    <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;endog_names&#39;</span><span class="p">,</span> <span class="s1">&#39;exog_names&#39;</span><span class="p">]:</span>
+        <span class="nb">setattr</span><span class="p">(</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">attr</span><span class="p">,</span>
+            <span class="n">_remove_lag_names_from_ambiguous_property</span><span class="p">(</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">attr</span><span class="p">),</span>
+                <span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">_remove_lag_names_from_ambiguous_property</span><span class="p">(</span><span class="n">ambiguous</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Note: Series and DataFrame operations inplace, str and list operations not inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ambiguous</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="n">lag_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">_remove_lag_names_from_df_index_and_columns</span><span class="p">,</span> <span class="n">ambiguous</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ambiguous</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="n">lag_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">_remove_lag_names_from_series_index</span><span class="p">,</span> <span class="n">ambiguous</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ambiguous</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">lag_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">_remove_lag_names_from_varname</span><span class="p">,</span> <span class="n">ambiguous</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ambiguous</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">lag_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">_remove_lag_names_from_list</span><span class="p">,</span> <span class="n">ambiguous</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Must pass DataFrame, Series, str, or list. Got type {type(ambiguous)}&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">lag_func</span><span class="p">(</span><span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_remove_lag_names_from_df_index_and_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Note: inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">[</span><span class="n">_remove_one_lag_names_from_df_index_and_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">num_lags</span><span class="o">=</span><span class="n">num_lags</span><span class="p">)</span> <span class="k">for</span> <span class="n">num_lags</span> <span class="ow">in</span> <span class="n">lags</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_remove_lag_names_from_series_index</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Note: inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">[</span><span class="n">_remove_one_lag_names_from_series_index</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">num_lags</span><span class="o">=</span><span class="n">num_lags</span><span class="p">)</span> <span class="k">for</span> <span class="n">num_lags</span> <span class="ow">in</span> <span class="n">lags</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_remove_one_lag_names_from_df_index_and_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">num_lags</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Note: inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rename_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">lag_varname_to_varname</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">num_lags</span><span class="o">=</span><span class="n">num_lags</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">}</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">rename_dict</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">rename_dict</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_remove_one_lag_names_from_series_index</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">num_lags</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Note: inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rename_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">lag_varname_to_varname</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">num_lags</span><span class="o">=</span><span class="n">num_lags</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">index</span><span class="p">}</span>
+    <span class="n">series</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">rename_dict</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_remove_lag_names_from_list</span><span class="p">(</span><span class="n">list_</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)):</span>
+    <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="n">lags</span><span class="p">:</span>
+        <span class="n">list_</span> <span class="o">=</span> <span class="n">_remove_one_lag_names_from_list</span><span class="p">(</span><span class="n">list_</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">list_</span>
+
+<span class="k">def</span> <span class="nf">_remove_one_lag_names_from_list</span><span class="p">(</span><span class="n">list_</span><span class="p">,</span> <span class="n">num_lags</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">lag_varname_to_varname</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">num_lags</span><span class="o">=</span><span class="n">num_lags</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">_remove_lag_names_from_varname</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)):</span>
+    <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="n">lags</span><span class="p">:</span>
+        <span class="n">varname</span> <span class="o">=</span> <span class="n">lag_varname_to_varname</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">varname</span>
+
+<div class="viewcode-block" id="lag_varname_to_varname"><a class="viewcode-back" href="../../../../dero.reg.lag.html#dero.reg.lag.remove.lag_varname_to_varname">[docs]</a><span class="k">def</span> <span class="nf">lag_varname_to_varname</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="n">num_lags</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">varname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">rf</span><span class="s1">&#39;$_{{t - </span><span class="si">{num_lags}</span><span class="s1">}}$&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

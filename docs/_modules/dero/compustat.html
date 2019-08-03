@@ -1,0 +1,240 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.compustat &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.compustat</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">nan</span><span class="p">,</span> <span class="n">float64</span><span class="p">,</span> <span class="n">issubdtype</span><span class="p">,</span> <span class="n">number</span>
+
+<span class="kn">from</span> <span class="nn">.ext_pandas</span> <span class="k">import</span> <span class="n">convert_sas_date_to_pandas_date</span><span class="p">,</span> <span class="n">load_sas</span><span class="p">,</span> <span class="n">left_merge_latest</span>
+
+<div class="viewcode-block" id="compustat_keep_mask"><a class="viewcode-back" href="../../dero.html#dero.compustat.compustat_keep_mask">[docs]</a><span class="k">def</span> <span class="nf">compustat_keep_mask</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;indfmt&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;INDL&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;datafmt&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;STD&#39;</span><span class="p">)</span> <span class="o">&amp;</span> \
+           <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;popsrc&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;D&#39;</span><span class="p">)</span>    <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;consol&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="add_q_or_y"><a class="viewcode-back" href="../../dero.html#dero.compustat.add_q_or_y">[docs]</a><span class="k">def</span> <span class="nf">add_q_or_y</span><span class="p">(</span><span class="n">get</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes a list of get vars and adds q or y to work with quarterly file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;quarterly&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">q_or_y</span><span class="p">(</span><span class="n">get</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">get</span></div>
+    
+<div class="viewcode-block" id="q_or_y"><a class="viewcode-back" href="../../dero.html#dero.compustat.q_or_y">[docs]</a><span class="k">def</span> <span class="nf">q_or_y</span><span class="p">(</span><span class="n">get</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks compustat cols to see which extension (&#39;q&#39;, &#39;y&#39;, none) is appropriate and adds it.</span>
+<span class="sd">    For use with quarterly data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">out_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">get</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;fqtr&#39;</span><span class="p">,</span><span class="s1">&#39;cusip&#39;</span><span class="p">,</span><span class="s1">&#39;fyr&#39;</span><span class="p">,</span><span class="s1">&#39;tic&#39;</span><span class="p">,</span><span class="s1">&#39;conm&#39;</span><span class="p">):</span>
+            <span class="n">out_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+            <span class="k">continue</span>
+        
+        <span class="n">q</span> <span class="o">=</span> <span class="n">g</span> <span class="o">+</span> <span class="s1">&#39;q&#39;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">g</span> <span class="o">+</span> <span class="s1">&#39;y&#39;</span>
+        <span class="k">if</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">q</span>
+        <span class="k">elif</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;variable </span><span class="si">{}</span><span class="s1"> does not have a quarterly counterpart&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+        <span class="n">out_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out_list</span></div>
+
+<div class="viewcode-block" id="create_q_from_y"><a class="viewcode-back" href="../../dero.html#dero.compustat.create_q_from_y">[docs]</a><span class="k">def</span> <span class="nf">create_q_from_y</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">var_y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Single variable conversion</span>
+<span class="sd">    Creates a compustat quarterly &quot;q&quot; variable from a compustat quarterly &quot;y&quot; variable. &quot;q&quot; variables</span>
+<span class="sd">    are for just what happened in the quarter, while &quot;y&quot; variables are year to date. </span>
+<span class="sd">    </span>
+<span class="sd">    Note: inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="n">var_y</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#gets name of variable without y</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">var_y</span> <span class="o">+</span> <span class="s1">&#39;_lag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">var_y</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;fqtr&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;gvkey&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;gvkey_lag&#39;</span><span class="p">]),</span> <span class="n">var</span> <span class="o">+</span> <span class="s1">&#39;q&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">df</span><span class="p">[</span><span class="n">var_y</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">var_y</span> <span class="o">+</span> <span class="s1">&#39;_lag&#39;</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;fqtr&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">var</span> <span class="o">+</span> <span class="s1">&#39;q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">var_y</span><span class="p">]</span></div>
+    
+<span class="c1">#     var = var_y[:-1] #gets name of variable without y</span>
+<span class="c1">#     df[var_y + &#39;_lag&#39;] = df[var_y].shift(1)</span>
+<span class="c1">#     df.loc[df[&#39;fqtr&#39;] &gt; 1, var + &#39;q&#39;] = df[var_y] - df[var_y + &#39;_lag&#39;]</span>
+<span class="c1">#     df.loc[df[&#39;fqtr&#39;] == 1, var + &#39;q&#39;] = df[var_y]</span>
+    
+<div class="viewcode-block" id="create_qs_from_ys"><a class="viewcode-back" href="../../dero.html#dero.compustat.create_qs_from_ys">[docs]</a><span class="k">def</span> <span class="nf">create_qs_from_ys</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">freq</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dataframe conversion</span>
+<span class="sd">    Creates compustat quarterly &quot;q&quot; variablse from a compustat quarterly &quot;y&quot; variables. &quot;q&quot; variables</span>
+<span class="sd">    are for just what happened in the quarter, while &quot;y&quot; variables are year to date. </span>
+<span class="sd">    </span>
+<span class="sd">    Note: will make edits to prior df even though returns a new df</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;quarterly&#39;</span><span class="p">):</span>
+        <span class="n">y_get</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">get</span> <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)]</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;gvkey_lag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;gvkey&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">create_q_from_y</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">y_get</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">y_get</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;fqtr&#39;</span><span class="p">,</span> <span class="s1">&#39;gvkey_lag&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="s1">&#39;_lag&#39;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">y_get</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+    
+<div class="viewcode-block" id="check_freq"><a class="viewcode-back" href="../../dero.html#dero.compustat.check_freq">[docs]</a><span class="k">def</span> <span class="nf">check_freq</span><span class="p">(</span><span class="n">freq</span><span class="p">):</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">freq</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;q&#39;</span><span class="p">,</span><span class="s1">&#39;annual&#39;</span><span class="p">,</span><span class="s1">&#39;quarterly&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">freq</span></div>
+
+<div class="viewcode-block" id="freq_to_name"><a class="viewcode-back" href="../../dero.html#dero.compustat.freq_to_name">[docs]</a><span class="k">def</span> <span class="nf">freq_to_name</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">debug</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;annual&#39;</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;funda&#39;</span>
+    <span class="k">elif</span> <span class="n">freq</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;quarterly&#39;</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;fundq&#39;</span>
+    <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">+=</span> <span class="s1">&#39;_test&#39;</span>
+    <span class="n">name</span> <span class="o">+=</span> <span class="s1">&#39;.sas7bdat&#39;</span>
+    <span class="k">return</span> <span class="n">name</span></div>
+    
+<div class="viewcode-block" id="keep_relevant_data_compustat"><a class="viewcode-back" href="../../dero.html#dero.compustat.keep_relevant_data_compustat">[docs]</a><span class="k">def</span> <span class="nf">keep_relevant_data_compustat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">get</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sale&#39;</span><span class="p">],</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">):</span>
+    <span class="n">get</span> <span class="o">=</span> <span class="n">add_q_or_y</span><span class="p">(</span><span class="n">get</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="c1">#adds &#39;q&#39; or &#39;y&#39; to getvars if freq=&#39;q&#39;</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">compustat_keep_mask</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">keepvars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gvkey&#39;</span><span class="p">,</span><span class="s1">&#39;datadate&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;quarterly&#39;</span><span class="p">):</span>
+        <span class="n">keepvars</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;fqtr&#39;</span><span class="p">]</span> <span class="c1">#need for converting &#39;y&#39; variables to &#39;q&#39; variables</span>
+    <span class="n">keepvars</span> <span class="o">+=</span> <span class="n">get</span>
+    <span class="n">comp_y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">keepvars</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span>
+        <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gvkey&#39;</span><span class="p">,</span> <span class="s1">&#39;datadate&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#comp_y includes &#39;y&#39; vars, need to convert to &#39;q&#39; vars </span>
+    <span class="k">return</span> <span class="n">create_qs_from_ys</span><span class="p">(</span><span class="n">comp_y</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="convert_date_compustat"><a class="viewcode-back" href="../../dero.html#dero.compustat.convert_date_compustat">[docs]</a><span class="k">def</span> <span class="nf">convert_date_compustat</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;datadate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">convert_sas_date_to_pandas_date</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;datadate&#39;</span><span class="p">])</span></div>
+    
+<div class="viewcode-block" id="load_compustat"><a class="viewcode-back" href="../../dero.html#dero.compustat.load_compustat">[docs]</a><span class="k">def</span> <span class="nf">load_compustat</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">get</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sale&#39;</span><span class="p">],</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">comp_dir</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;C:\Users\derobertisna.UFAD\Desktop\Data\Compustat&#39;</span><span class="p">):</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">check_freq</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">freq_to_name</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">debug</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">comp_dir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">comp</span> <span class="o">=</span> <span class="n">load_sas</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;gvkey&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">})</span>
+    <span class="n">comp</span> <span class="o">=</span> <span class="n">keep_relevant_data_compustat</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="n">get</span><span class="o">=</span><span class="n">get</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">)</span>
+    <span class="n">convert_date_compustat</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">comp</span></div>
+
+<div class="viewcode-block" id="merge_compustat"><a class="viewcode-back" href="../../dero.html#dero.compustat.merge_compustat">[docs]</a><span class="k">def</span> <span class="nf">merge_compustat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">compdf</span><span class="p">,</span> <span class="n">datevar</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">left_merge_latest</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">compdf</span><span class="p">,</span> <span class="s1">&#39;gvkey&#39;</span><span class="p">,</span>
+                            <span class="n">left_datevar</span><span class="o">=</span><span class="n">datevar</span><span class="p">,</span> <span class="n">right_datevar</span><span class="o">=</span><span class="s1">&#39;datadate&#39;</span><span class="p">)</span></div>
+
+<span class="c1"># def merge_compustat(df, compdf, datevar=&#39;Date&#39;):</span>
+<span class="c1">#     many = df.merge(compdf, on=&#39;gvkey&#39;, how=&#39;left&#39;)</span>
+<span class="c1">#     lt = many.loc[many[datevar] &gt;= many[&#39;datadate&#39;]] #left with datadates less than date</span>
+
+<span class="c1">#     #find rows within groups which have the maximum datadate (soonest before given date)</span>
+<span class="c1">#     data_rows = lt.groupby([&#39;gvkey&#39;,datevar], as_index=False)[&#39;datadate&#39;].max() \</span>
+<span class="c1">#         .merge(lt, on=[&#39;gvkey&#39;, datevar, &#39;datadate&#39;], how=&#39;left&#39;)</span>
+    
+<span class="c1">#     return df.merge(data_rows, on=[&#39;gvkey&#39;,datevar], how=&#39;left&#39;)</span>
+
+<div class="viewcode-block" id="convert_numeric_gvkey_to_string"><a class="viewcode-back" href="../../dero.html#dero.compustat.convert_numeric_gvkey_to_string">[docs]</a><span class="k">def</span> <span class="nf">convert_numeric_gvkey_to_string</span><span class="p">(</span><span class="n">gvkey</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a single numeric gvkey to string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">str_gvkey</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">gvkey</span><span class="p">))</span>
+    <span class="n">num_zeroes</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_gvkey</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;0&#39;</span> <span class="o">*</span> <span class="n">num_zeroes</span> <span class="o">+</span> <span class="n">str_gvkey</span></div>
+
+<div class="viewcode-block" id="convert_gvkey_col"><a class="viewcode-back" href="../../dero.html#dero.compustat.convert_gvkey_col">[docs]</a><span class="k">def</span> <span class="nf">convert_gvkey_col</span><span class="p">(</span><span class="n">gvkey</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a column of numeric gvkeys to string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">gvkey</span><span class="p">):</span> <span class="k">return</span> <span class="n">nan</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">convert_numeric_gvkey_to_string</span><span class="p">(</span><span class="n">gvkey</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="convert_gvkey"><a class="viewcode-back" href="../../dero.html#dero.compustat.convert_gvkey">[docs]</a><span class="k">def</span> <span class="nf">convert_gvkey</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">gvkeyvar</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renames gvkeyvar to &#39;gvkey&#39; and converts to string if necessary</span>
+<span class="sd">    </span>
+<span class="sd">    Note: this is inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">gvkeyvar</span> <span class="o">!=</span> <span class="s1">&#39;gvkey&#39;</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">gvkeyvar</span><span class="p">:</span> <span class="s1">&#39;gvkey&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">issubdtype</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;gvkey&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;gvkey&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;gvkey&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_gvkey_col</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

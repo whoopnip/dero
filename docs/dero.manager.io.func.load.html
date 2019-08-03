@@ -1,0 +1,144 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.io.func.load package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-manager-io-func-load-package">
+<h1>dero.manager.io.func.load package<a class="headerlink" href="#dero-manager-io-func-load-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="dero-manager-io-func-load-args-module">
+<h2>dero.manager.io.func.load.args module<a class="headerlink" href="#dero-manager-io-func-load-args-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-dero.manager.io.func.load.args"></span><dl class="class">
+<dt id="dero.manager.io.func.load.args.FunctionArgsExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.func.load.args.</code><code class="descname">FunctionArgsExtractor</code><a class="reference internal" href="_modules/dero/manager/io/func/load/args.html#FunctionArgsExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.func.load.args.FunctionArgsExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dero.manager.io.func.load.args.FunctionArgsExtractor.extract_args">
+<code class="descname">extract_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; typing.Tuple[_ast.arguments, dero.manager.imports.models.statements.container.ImportStatementContainer]<a class="reference internal" href="_modules/dero/manager/io/func/load/args.html#FunctionArgsExtractor.extract_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.func.load.args.FunctionArgsExtractor.extract_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.func.load.args.extract_function_args_and_arg_imports_from_import">
+<code class="descclassname">dero.manager.io.func.load.args.</code><code class="descname">extract_function_args_and_arg_imports_from_import</code><span class="sig-paren">(</span><em>function_name: str, imp: typing.Union[dero.manager.imports.models.statements.module.ModuleImportStatement, dero.manager.imports.models.statements.obj.ObjectImportStatement], import_section_path_str: str = None</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[_ast.arguments, dero.manager.imports.models.statements.container.ImportStatementContainer]<a class="reference internal" href="_modules/dero/manager/io/func/load/args.html#extract_function_args_and_arg_imports_from_import"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.func.load.args.extract_function_args_and_arg_imports_from_import" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.func.load.args.get_module_filepath_from_import">
+<code class="descclassname">dero.manager.io.func.load.args.</code><code class="descname">get_module_filepath_from_import</code><span class="sig-paren">(</span><em>imp: typing.Union[dero.manager.imports.models.statements.module.ModuleImportStatement, dero.manager.imports.models.statements.obj.ObjectImportStatement], import_section_path_str: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/func/load/args.html#get_module_filepath_from_import"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.func.load.args.get_module_filepath_from_import" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="dero-manager-io-func-load-config-module">
+<h2>dero.manager.io.func.load.config module<a class="headerlink" href="#dero-manager-io-func-load-config-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-dero.manager.io.func.load.config"></span><dl class="class">
+<dt id="dero.manager.io.func.load.config.FunctionConfigExtractor">
+<em class="property">class </em><code class="descclassname">dero.manager.io.func.load.config.</code><code class="descname">FunctionConfigExtractor</code><a class="reference internal" href="_modules/dero/manager/io/func/load/config.html#FunctionConfigExtractor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.func.load.config.FunctionConfigExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.manager.io.func.load.args.FunctionArgsExtractor" title="dero.manager.io.func.load.args.FunctionArgsExtractor"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.io.func.load.args.FunctionArgsExtractor</span></code></a></p>
+<dl class="method">
+<dt id="dero.manager.io.func.load.config.FunctionConfigExtractor.extract_config">
+<code class="descname">extract_config</code><span class="sig-paren">(</span><em>name: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/io/func/load/config.html#FunctionConfigExtractor.extract_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.func.load.config.FunctionConfigExtractor.extract_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.io.func.load.config.function_args_as_arg_and_annotation_dict">
+<code class="descclassname">dero.manager.io.func.load.config.</code><code class="descname">function_args_as_arg_and_annotation_dict</code><span class="sig-paren">(</span><em>args: _ast.arguments</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[dict, dict]<a class="reference internal" href="_modules/dero/manager/io/func/load/config.html#function_args_as_arg_and_annotation_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.func.load.config.function_args_as_arg_and_annotation_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.func.load.extractimp">
+<span id="dero-manager-io-func-load-extractimp-module"></span><h2>dero.manager.io.func.load.extractimp module<a class="headerlink" href="#module-dero.manager.io.func.load.extractimp" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.manager.io.func.load.extractimp.extract_import_statements_from_function_args_imports_and_assigns">
+<code class="descclassname">dero.manager.io.func.load.extractimp.</code><code class="descname">extract_import_statements_from_function_args_imports_and_assigns</code><span class="sig-paren">(</span><em>args: _ast.arguments</em>, <em>imports: dero.manager.imports.models.statements.container.ImportStatementContainer</em>, <em>assigns: dero.manager.assignments.models.container.AssignmentStatementContainer</em>, <em>current_module_section_path_str: str</em><span class="sig-paren">)</span> &#x2192; dero.manager.imports.models.statements.container.ImportStatementContainer<a class="reference internal" href="_modules/dero/manager/io/func/load/extractimp.html#extract_import_statements_from_function_args_imports_and_assigns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.io.func.load.extractimp.extract_import_statements_from_function_args_imports_and_assigns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.io.func.load">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.manager.io.func.load" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.manager.io.func.load.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

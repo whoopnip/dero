@@ -1,0 +1,286 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.data.compareids.models.datasets &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.data.compareids.models.datasets</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">..tools</span> <span class="k">import</span> <span class="n">_ids_str_or_tuple_to_id_name</span>
+<span class="kn">from</span> <span class="nn">.flowchart</span> <span class="k">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Subgraph</span>
+<span class="kn">from</span> <span class="nn">.interface</span> <span class="k">import</span> <span class="n">PipelineOptions</span><span class="p">,</span> <span class="n">IDSet</span><span class="p">,</span> <span class="n">IDCollection</span>
+<span class="kn">from</span> <span class="nn">..backend</span> <span class="k">import</span> <span class="n">compare_id_collections</span>
+<span class="kn">from</span> <span class="nn">.bars</span> <span class="k">import</span> <span class="n">MatchComparisonBarGraph</span>
+
+
+<div class="viewcode-block" id="DataItem"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.datasets.DataItem">[docs]</a><span class="k">class</span> <span class="nc">DataItem</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="DataSource"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.datasets.DataSource">[docs]</a><span class="k">class</span> <span class="nc">DataSource</span><span class="p">(</span><span class="n">DataItem</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">id_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data_source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data_loader</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">data_loader_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param name:</span>
+<span class="sd">        :type name:</span>
+<span class="sd">        :param id_cols: list of tuples or strs of id sets to match on, e.g. [&#39;CUSIP6&#39;, (&#39;CUSIP6&#39;,&#39;Year&#39;), &#39;ISIN&#39;, (&#39;ISIN&#39;, &#39;Year&#39;)]</span>
+<span class="sd">        :type id_cols: list of tuples</span>
+<span class="sd">        :param data_source:</span>
+<span class="sd">        :type data_source:</span>
+<span class="sd">        :param data_loader: function that takes self.data_source as the arg, and usecols=self.id_cols as kwargs</span>
+<span class="sd">        :type data_loader: Function</span>
+<span class="sd">        :param data_loader_kwargs:</span>
+<span class="sd">        :type data_loader_kwargs:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_source</span> <span class="o">=</span> <span class="n">data_source</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">id_cols</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id_cols</span> <span class="o">=</span> <span class="n">_id_cols_collection_to_flattened_list</span><span class="p">(</span><span class="n">id_cols</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_ids</span><span class="p">(</span><span class="n">id_cols</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id_cols</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_loader</span> <span class="o">=</span> <span class="n">_data_loader_or_pd_read_csv</span><span class="p">(</span><span class="n">data_loader</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_loader_kwargs</span> <span class="o">=</span> <span class="n">data_loader_kwargs</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_source</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">_dummy_load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_source</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_cols</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_loader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_source</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id_cols</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">data_loader_kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span>
+
+<div class="viewcode-block" id="DataSource.set_ids"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.datasets.DataSource.set_ids">[docs]</a>    <span class="k">def</span> <span class="nf">set_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_cols</span><span class="p">):</span>
+        <span class="n">id_sets</span> <span class="o">=</span> <span class="n">_extract_id_sets</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="n">id_cols</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="n">IDCollection</span><span class="p">(</span><span class="n">id_sets</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataSource.to_node"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.datasets.DataSource.to_node">[docs]</a>    <span class="k">def</span> <span class="nf">to_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">node_kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Node</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">node_kwargs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;DataSource(name=</span><span class="si">{self.name}</span><span class="s1">, data_source=</span><span class="si">{self.data_source}</span><span class="s1">)&gt;&#39;</span></div>
+
+<div class="viewcode-block" id="DataSubject"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.datasets.DataSubject">[docs]</a><span class="k">class</span> <span class="nc">DataSubject</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">sources</span><span class="p">:</span> <span class="p">[</span><span class="n">DataSource</span><span class="p">,</span> <span class="s1">&#39;DataCombination&#39;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources</span> <span class="o">=</span> <span class="n">sources</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+<div class="viewcode-block" id="DataSubject.to_subgraph"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.datasets.DataSubject.to_subgraph">[docs]</a>    <span class="k">def</span> <span class="nf">to_subgraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">PipelineOptions</span><span class="p">):</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_nodes</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Subgraph</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">digraph</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">digraph</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="o">.</span><span class="n">graph_attr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataSubject.to_nodes"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.datasets.DataSubject.to_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">to_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">PipelineOptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">data_sources</span><span class="p">:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">source</span><span class="o">.</span><span class="n">to_node</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="o">.</span><span class="n">node_attr</span><span class="p">)</span> <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node_kwargs</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">node_attr</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">_add_no_node_line_to_node_kwargs</span><span class="p">(</span><span class="n">node_kwargs</span><span class="p">)</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Node</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;DUMMY&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">node_kwargs</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">nodes</span></div>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;DataSubject(name=</span><span class="si">{self.name}</span><span class="s1">, sources=</span><span class="si">{self.sources}</span><span class="s1">)&gt;&#39;</span></div>
+
+<div class="viewcode-block" id="DataCombination"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.datasets.DataCombination">[docs]</a><span class="k">class</span> <span class="nc">DataCombination</span><span class="p">(</span><span class="n">DataItem</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_source</span><span class="p">:</span> <span class="n">DataSource</span><span class="p">,</span> <span class="n">other_data_source</span><span class="p">:</span> <span class="n">DataSource</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_source</span> <span class="o">=</span> <span class="n">data_source</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">other_data_source</span> <span class="o">=</span> <span class="n">other_data_source</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ids</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="DataCombination.compare"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.datasets.DataCombination.compare">[docs]</a>    <span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">compare_id_collections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_source</span><span class="o">.</span><span class="n">ids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_data_source</span><span class="o">.</span><span class="n">ids</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataCombination.to_node"><a class="viewcode-back" href="../../../../../dero.data.compareids.models.html#dero.data.compareids.models.datasets.DataCombination.to_node">[docs]</a>    <span class="k">def</span> <span class="nf">to_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">node_kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">plt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+        <span class="c1">#### TEMP</span>
+        <span class="kn">import</span> <span class="nn">pdb</span>
+        <span class="n">pdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+        <span class="c1">#### END TEMP</span>
+
+        <span class="n">comparison</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare</span><span class="p">()</span>
+        <span class="c1"># No ids, could not generate comparison, display normal node</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">comparison</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Node</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">node_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Implicit else, has ids, able to generate comparison, now put graph in node</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">MatchComparisonBarGraph</span><span class="o">.</span><span class="n">from_id_comparison_collection</span><span class="p">(</span><span class="n">comparison</span><span class="p">,</span> <span class="n">plt</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+
+        <span class="c1">#### TEMP</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">plt</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+        <span class="n">name_for_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span>
+        <span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C:\Users\derobertisna.UFAD\Dropbox (Personal)\UF\Andy\ETF Project\Temp\idcomp&#39;</span><span class="p">,</span> <span class="n">name_for_path</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Set node style</span>
+        <span class="n">this_node_kwargs</span> <span class="o">=</span> <span class="n">node_kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">_add_no_node_line_to_node_kwargs</span><span class="p">(</span><span class="n">this_node_kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Node</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">img_path</span><span class="p">,</span> <span class="o">**</span><span class="n">this_node_kwargs</span><span class="p">)</span></div>
+
+        <span class="c1">#### END TEMP</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ids</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Find overlapping id sets</span>
+            <span class="n">id_sets</span> <span class="o">=</span> <span class="p">[</span><span class="n">id_set</span> <span class="k">for</span> <span class="n">id_set</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_source</span><span class="o">.</span><span class="n">ids</span> <span class="k">if</span> <span class="n">id_set</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_data_source</span><span class="o">.</span><span class="n">ids</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ids</span> <span class="o">=</span> <span class="n">IDCollection</span><span class="p">(</span><span class="n">id_sets</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ids</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;&lt;DataCombination(name=</span><span class="si">{self.name}</span><span class="s1">, data_source=</span><span class="si">{self.data_source.name}</span><span class="s1">, merge_source=</span><span class="si">{self.other_data_source.name}</span><span class="s1">)&gt;&#39;</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_data_loader_or_pd_read_csv</span><span class="p">(</span><span class="n">data_loader</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">data_loader</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">data_loader</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span>
+
+<span class="k">def</span> <span class="nf">_dummy_load</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">usecols</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">usecols</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">_extract_id_sets</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">id_cols</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="n">collection_items</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ids</span> <span class="ow">in</span> <span class="n">id_cols</span><span class="p">:</span>
+        <span class="n">id_set_name</span> <span class="o">=</span> <span class="n">_ids_str_or_tuple_to_id_name</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+        <span class="n">unique</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">ids</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        <span class="c1"># &#39;itertuples&#39; for dfs, &#39;tolist&#39; for series</span>
+        <span class="n">_extract_from_df_or_series_attr</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">_get_func_attr_and_kwargs_to_reduce_from_df_or_series</span><span class="p">(</span><span class="n">unique</span><span class="p">)</span>
+        <span class="n">reduce_func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">_extract_from_df_or_series_attr</span><span class="p">)</span>
+        <span class="n">id_rows</span> <span class="o">=</span> <span class="n">reduce_func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">id_set</span> <span class="o">=</span> <span class="n">IDSet</span><span class="p">(</span><span class="n">id_rows</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">id_set_name</span><span class="p">)</span>
+        <span class="n">collection_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">id_set</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">IDCollection</span><span class="p">(</span><span class="n">collection_items</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_id_cols_collection_to_flattened_list</span><span class="p">(</span><span class="n">id_cols</span><span class="p">):</span>
+    <span class="n">out_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">col_or_tuple</span> <span class="ow">in</span> <span class="n">id_cols</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col_or_tuple</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+            <span class="p">[</span><span class="n">out_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">col_or_tuple</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col_or_tuple</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out_list</span>
+
+<span class="k">def</span> <span class="nf">_get_func_attr_and_kwargs_to_reduce_from_df_or_series</span><span class="p">(</span><span class="n">df_or_series</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df_or_series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;itertuples&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;ids&#39;</span><span class="p">}</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df_or_series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;tolist&#39;</span><span class="p">,</span> <span class="p">{}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Must pass series or dataframe, got type {type(df_or_series)}&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_add_no_node_line_to_node_kwargs</span><span class="p">(</span><span class="n">node_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    NOTE: inplace</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Set node style</span>
+    <span class="n">no_line_str</span> <span class="o">=</span> <span class="s1">&#39;setlinewidth(0)&#39;</span>
+    <span class="k">if</span> <span class="s1">&#39;style&#39;</span> <span class="ow">in</span> <span class="n">node_kwargs</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="n">node_kwargs</span><span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="n">no_line_str</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="n">no_line_str</span>
+    <span class="n">node_kwargs</span><span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">style</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  <li><a href="../../../data.html">dero.data</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

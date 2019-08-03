@@ -1,0 +1,176 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.reg.summarize.yesno &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.reg.summarize.yesno</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="n">ColBoolDict</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span>
+
+<div class="viewcode-block" id="col_boolean_dict_from_list_of_lists_of_columns"><a class="viewcode-back" href="../../../../dero.reg.summarize.html#dero.reg.summarize.yesno.col_boolean_dict_from_list_of_lists_of_columns">[docs]</a><span class="k">def</span> <span class="nf">col_boolean_dict_from_list_of_lists_of_columns</span><span class="p">(</span><span class="n">column_list_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">ColBoolDict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    transforms [</span>
+<span class="sd">        [&#39;a&#39;, &#39;b&#39;],</span>
+<span class="sd">        [&#39;a&#39;],</span>
+<span class="sd">        [&#39;b&#39;],</span>
+<span class="sd">        None,</span>
+<span class="sd">        False,</span>
+<span class="sd">        [],</span>
+<span class="sd">        [&#39;a&#39;,&#39;b&#39;]</span>
+<span class="sd">    ]</span>
+
+<span class="sd">    into {</span>
+<span class="sd">        &#39;a&#39;: [True, True, False, False, False, False, True],</span>
+<span class="sd">        &#39;b&#39;: [True, False, True, False, False, False, True]</span>
+<span class="sd">    }</span>
+<span class="sd">    Returns:</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">all_columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">column_list</span> <span class="ow">in</span> <span class="n">column_list_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">column_list</span><span class="p">:</span>
+            <span class="n">all_columns</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">column_list</span><span class="p">)</span>
+    <span class="n">all_columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">all_columns</span><span class="p">))</span>
+
+    <span class="n">col_bool_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">all_columns</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">column_list</span> <span class="ow">in</span> <span class="n">column_list_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">column_list</span><span class="p">:</span>
+            <span class="c1"># None, False, [] for column list. Just add False to all columns</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">col_bool_dict</span><span class="p">:</span>
+                <span class="n">col_bool_dict</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Valid column list</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">col_bool_dict</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">column_list</span><span class="p">:</span>
+                    <span class="n">col_bool_dict</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">col_bool_dict</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">col_bool_dict</span></div>
+
+
+<span class="k">def</span> <span class="nf">_standardize_col_boolean_dict</span><span class="p">(</span><span class="n">summ_df</span><span class="p">,</span> <span class="n">fixed_effect_dict</span><span class="p">):</span>
+    <span class="n">num_models</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">summ_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="n">out_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">fixed_effect_name</span><span class="p">,</span> <span class="n">booleans</span> <span class="ow">in</span> <span class="n">fixed_effect_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Here we are being passed a list of booleans matching the size of models.</span>
+        <span class="c1"># This is the correct format so just output</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">booleans</span><span class="p">,</span> <span class="nb">list</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">booleans</span><span class="p">)</span> <span class="o">==</span> <span class="n">num_models</span><span class="p">):</span>
+            <span class="n">out_booleans</span> <span class="o">=</span> <span class="n">booleans</span>
+
+            <span class="c1"># Here we are being passed a single boolean or a list with single boolean</span>
+        <span class="c1"># Need to expand to cover all models</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">booleans</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+                <span class="n">booleans</span> <span class="o">=</span> <span class="p">[</span><span class="n">booleans</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">booleans</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="n">f</span><span class="s1">&#39;Incorrect shape of booleans for </span><span class="si">{fixed_effect_name}</span><span class="s1"> fixed effect passed. Got {len(booleans)} bools, was expecting </span><span class="si">{num_models}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">out_booleans</span> <span class="o">=</span> <span class="p">[</span><span class="n">booleans</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">*</span> <span class="n">num_models</span>
+
+            <span class="c1"># Final input checks</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">out_booleans</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">out_booleans</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fixed_effect_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+
+        <span class="c1"># Assign to output dictionary</span>
+        <span class="n">out_dict</span><span class="p">[</span><span class="n">fixed_effect_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">out_booleans</span>
+
+    <span class="k">return</span> <span class="n">out_dict</span>
+
+
+<span class="k">def</span> <span class="nf">_add_yes_no_row</span><span class="p">(</span><span class="n">summ_df</span><span class="p">,</span> <span class="n">bool_list</span><span class="p">,</span> <span class="n">item_name</span><span class="o">=</span><span class="s1">&#39;Time Fixed Effects&#39;</span><span class="p">):</span>
+    <span class="n">yes_no_row</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">_get_yes_no</span><span class="p">(</span><span class="n">bool_</span><span class="p">)</span> <span class="k">for</span> <span class="n">bool_</span> <span class="ow">in</span> <span class="n">bool_list</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">item_name</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">yes_no_row</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">summ_df</span><span class="o">.</span><span class="n">columns</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">summ_df</span><span class="p">,</span> <span class="n">yes_no_row</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_yes_no</span><span class="p">(</span><span class="n">bool_</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">bool_</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Yes&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;No&#39;</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  <li><a href="../summarize.html">dero.reg.summarize</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

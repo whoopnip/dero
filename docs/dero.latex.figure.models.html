@@ -1,0 +1,194 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.latex.figure.models package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-latex-figure-models-package">
+<h1>dero.latex.figure.models package<a class="headerlink" href="#dero-latex-figure-models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.latex.figure.models.figure">
+<span id="dero-latex-figure-models-figure-module"></span><h2>dero.latex.figure.models.figure module<a class="headerlink" href="#module-dero.latex.figure.models.figure" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.figure.models.figure.Figure">
+<em class="property">class </em><code class="descclassname">dero.latex.figure.models.figure.</code><code class="descname">Figure</code><span class="sig-paren">(</span><em>subfigures: typing.List[typing.Union[dero.latex.figure.models.subfigure.Subfigure, dero.latex.figure.models.graphic.Graphic]], caption=None, label=None, centering=True, position_str=None, landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/figure/models/figure.html#Figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.containeritem.ContainerItem" title="dero.latex.models.containeritem.ContainerItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.containeritem.ContainerItem</span></code></a>, <a class="reference internal" href="dero.latex.models.html#dero.latex.models.item.Item" title="dero.latex.models.item.Item"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.Item</span></code></a></p>
+<p>used for creating latex figures from images. Currently the main usage is the Figure class created with the method
+Figure.from_dict_of_names_and_filepaths. Pass a dictionary where the keys are names for subfigures and the values
+are filepaths where the image for the subfigure is located.</p>
+<dl class="method">
+<dt id="dero.latex.figure.models.figure.Figure.as_document">
+<code class="descname">as_document</code><span class="sig-paren">(</span><em>landscape=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/figure/models/figure.html#Figure.as_document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.as_document" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths">
+<em class="property">classmethod </em><code class="descname">from_dict_of_names_and_filepaths</code><span class="sig-paren">(</span><em>filepath_name_dict: dict</em>, <em>figure_name: str = None</em>, <em>position_str_name_dict: dict = None</em>, <em>label=None</em>, <em>centering=True</em>, <em>landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/figure/models/figure.html#Figure.from_dict_of_names_and_filepaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first docutils">
+<dt>filepath_name_dict: dictionary where keys are names of subfigures and values</dt>
+<dd>are the filepaths to the images for those subfigures.</dd>
+</dl>
+<p>figure_name: name for overall figure
+position_str_name_dict: dictionary where keys are names of subfigures and values</p>
+<blockquote class="last">
+<div>are the position strs for those figures, e.g. r’[t]{0.45linewidth}’</div></blockquote>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures">
+<em class="property">classmethod </em><code class="descname">from_dict_of_names_and_plt_figures</code><span class="sig-paren">(</span><em>plt_fig_name_dict: typing.Dict[str, typing.Union[matplotlib.axes._axes.Axes, matplotlib.figure.Figure]], sources_outfolder: str, source_filetype: str = 'pdf', figure_name: str = None, position_str_name_dict: dict = None, label=None, centering=True, landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/figure/models/figure.html#Figure.from_dict_of_names_and_plt_figures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">plt_fig_name_dict: Key is display name in output figure, value is matplotlib axes or figure
+sources_outfolder: folder to output individual plt figures
+source_filetype: Filetype for individual plt figures. The default is pdf. Use png or another image type if</p>
+<blockquote>
+<div>outputting complicated figures or performance may be affected when viewing the pdf.</div></blockquote>
+<p>figure_name: name for overall figure
+position_str_name_dict: dictionary where keys are names of subfigures and values</p>
+<blockquote>
+<div>are the position strs for those figures, e.g. r’[t]{0.45linewidth}’</div></blockquote>
+<p class="last">label:
+centering:
+landscape:</p>
+</dd>
+</dl>
+<p>Returns: Figure</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.figure.models.figure.Figure.name">
+<code class="descname">name</code><em class="property"> = 'figure'</em><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.figure.models.figure.Figure.to_pdf_and_move">
+<code class="descname">to_pdf_and_move</code><span class="sig-paren">(</span><em>as_document=True</em>, <em>outfolder: str = None</em>, <em>outname: str = None</em>, <em>landscape=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/figure/models/figure.html#Figure.to_pdf_and_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.to_pdf_and_move" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.figure.models.graphic">
+<span id="dero-latex-figure-models-graphic-module"></span><h2>dero.latex.figure.models.graphic module<a class="headerlink" href="#module-dero.latex.figure.models.graphic" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.figure.models.graphic.Graphic">
+<em class="property">class </em><code class="descclassname">dero.latex.figure.models.graphic.</code><code class="descname">Graphic</code><span class="sig-paren">(</span><em>filepath</em>, <em>width: typing.Union[str</em>, <em>float] = 1.0</em>, <em>cache: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/figure/models/graphic.html#Graphic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.graphic.Graphic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.item.ItemBase" title="dero.latex.models.item.ItemBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.ItemBase</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.figure.models.graphic.Graphic.filepaths">
+<code class="descname">filepaths</code><a class="headerlink" href="#dero.latex.figure.models.graphic.Graphic.filepaths" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.figure.models.graphic.Graphic.width_str">
+<code class="descname">width_str</code><a class="headerlink" href="#dero.latex.figure.models.graphic.Graphic.width_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.figure.models.subfigure">
+<span id="dero-latex-figure-models-subfigure-module"></span><h2>dero.latex.figure.models.subfigure module<a class="headerlink" href="#module-dero.latex.figure.models.subfigure" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.figure.models.subfigure.Subfigure">
+<em class="property">class </em><code class="descclassname">dero.latex.figure.models.subfigure.</code><code class="descname">Subfigure</code><span class="sig-paren">(</span><em>filepath</em>, <em>caption=None</em>, <em>label=None</em>, <em>centering=True</em>, <em>position_str='[t]{0.45\linewidth}'</em>, <em>cache: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/figure/models/subfigure.html#Subfigure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.subfigure.Subfigure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.containeritem.ContainerItem" title="dero.latex.models.containeritem.ContainerItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.containeritem.ContainerItem</span></code></a>, <a class="reference internal" href="dero.latex.models.html#dero.latex.models.item.Item" title="dero.latex.models.item.Item"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.Item</span></code></a></p>
+<p>Used for more control over building figures</p>
+<dl class="attribute">
+<dt id="dero.latex.figure.models.subfigure.Subfigure.name">
+<code class="descname">name</code><em class="property"> = 'subfigure'</em><a class="headerlink" href="#dero.latex.figure.models.subfigure.Subfigure.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.figure.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.latex.figure.models" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.latex.figure.models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

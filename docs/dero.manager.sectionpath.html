@@ -1,0 +1,127 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.sectionpath package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-manager-sectionpath-package">
+<h1>dero.manager.sectionpath package<a class="headerlink" href="#dero-manager-sectionpath-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.manager.sectionpath.sectionpath">
+<span id="dero-manager-sectionpath-sectionpath-module"></span><h2>dero.manager.sectionpath.sectionpath module<a class="headerlink" href="#module-dero.manager.sectionpath.sectionpath" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.sectionpath.sectionpath.SectionPath">
+<em class="property">class </em><code class="descclassname">dero.manager.sectionpath.sectionpath.</code><code class="descname">SectionPath</code><span class="sig-paren">(</span><em>section_path: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/sectionpath/sectionpath.html#SectionPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.sectionpath.sectionpath.SectionPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="classmethod">
+<dt id="dero.manager.sectionpath.sectionpath.SectionPath.from_filepath">
+<em class="property">classmethod </em><code class="descname">from_filepath</code><span class="sig-paren">(</span><em>basepath: str</em>, <em>filepath: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/sectionpath/sectionpath.html#SectionPath.from_filepath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.sectionpath.sectionpath.SectionPath.from_filepath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.manager.sectionpath.sectionpath.SectionPath.from_section_str_list">
+<em class="property">classmethod </em><code class="descname">from_section_str_list</code><span class="sig-paren">(</span><em>section_strs: typing.List[str]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/sectionpath/sectionpath.html#SectionPath.from_section_str_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.sectionpath.sectionpath.SectionPath.from_section_str_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.manager.sectionpath.sectionpath.SectionPath.join">
+<em class="property">classmethod </em><code class="descname">join</code><span class="sig-paren">(</span><em>section_path_1: typing.Union[str, _ForwardRef('SectionPath')], section_path_2: typing.Union[str, _ForwardRef('SectionPath')]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/sectionpath/sectionpath.html#SectionPath.join"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.sectionpath.sectionpath.SectionPath.join" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.manager.sectionpath.sectionpath.SectionPath.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['path_str', 'sections']</em><a class="headerlink" href="#dero.manager.sectionpath.sectionpath.SectionPath.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.sectionpath.sectionpath.SectionPath.to_filepath">
+<code class="descname">to_filepath</code><span class="sig-paren">(</span><em>basepath: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/sectionpath/sectionpath.html#SectionPath.to_filepath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.sectionpath.sectionpath.SectionPath.to_filepath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.sectionpath">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.manager.sectionpath" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.manager.sectionpath.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,561 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.reg package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-reg-package">
+<h1>dero.reg package<a class="headerlink" href="#dero-reg-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dero.reg.cluster.html">dero.reg.cluster package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.cluster.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.cluster.html#module-dero.reg.cluster.output">dero.reg.cluster.output module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.cluster.html#module-dero.reg.cluster">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.reg.fe.html">dero.reg.fe package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.fe.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.fe.html#module-dero.reg.fe.dataprep">dero.reg.fe.dataprep module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.fe.html#module-dero.reg.fe.output">dero.reg.fe.output module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.fe.html#module-dero.reg.fe.tools">dero.reg.fe.tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.fe.html#module-dero.reg.fe">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.reg.hypothesis.html">dero.reg.hypothesis package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.hypothesis.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.hypothesis.html#module-dero.reg.hypothesis.lincom">dero.reg.hypothesis.lincom module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.hypothesis.html#module-dero.reg.hypothesis">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.reg.lag.html">dero.reg.lag package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.lag.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.lag.html#module-dero.reg.lag.create">dero.reg.lag.create module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.lag.html#module-dero.reg.lag.main">dero.reg.lag.main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.lag.html#module-dero.reg.lag.plot">dero.reg.lag.plot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.lag.html#module-dero.reg.lag.remove">dero.reg.lag.remove module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.lag.html#module-dero.reg.lag">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.reg.linmodels.html">dero.reg.linmodels package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.linmodels.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dero.reg.linmodels.bindings.html">dero.reg.linmodels.bindings package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dero.reg.linmodels.bindings.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.reg.linmodels.bindings.html#module-dero.reg.linmodels.bindings.fe">dero.reg.linmodels.bindings.fe module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.reg.linmodels.bindings.html#module-dero.reg.linmodels.bindings.fit">dero.reg.linmodels.bindings.fit module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.reg.linmodels.bindings.html#module-dero.reg.linmodels.bindings.input">dero.reg.linmodels.bindings.input module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.reg.linmodels.bindings.html#module-dero.reg.linmodels.bindings.modelstr">dero.reg.linmodels.bindings.modelstr module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.reg.linmodels.bindings.html#module-dero.reg.linmodels.bindings.result">dero.reg.linmodels.bindings.result module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dero.reg.linmodels.bindings.html#module-dero.reg.linmodels.bindings">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.linmodels.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.linmodels.html#module-dero.reg.linmodels.reg">dero.reg.linmodels.reg module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.linmodels.html#module-dero.reg.linmodels">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dero.reg.summarize.html">dero.reg.summarize package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.summarize.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.summarize.html#module-dero.reg.summarize.split">dero.reg.summarize.split module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.summarize.html#module-dero.reg.summarize.tstat">dero.reg.summarize.tstat module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.summarize.html#module-dero.reg.summarize.yesno">dero.reg.summarize.yesno module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.reg.summarize.html#module-dero.reg.summarize">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.reg.args">
+<span id="dero-reg-args-module"></span><h2>dero.reg.args module<a class="headerlink" href="#module-dero.reg.args" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.reg.args.RegressionSetArgs">
+<em class="property">class </em><code class="descclassname">dero.reg.args.</code><code class="descname">RegressionSetArgs</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars_list</em>, <em>fe_list=None</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/args.html#RegressionSetArgs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.args.RegressionSetArgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="dero.reg.args.RegressionSetArgs.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/args.html#RegressionSetArgs.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.args.RegressionSetArgs.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.chooser">
+<span id="dero-reg-chooser-module"></span><h2>dero.reg.chooser module<a class="headerlink" href="#module-dero.reg.chooser" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.chooser.any_reg">
+<code class="descclassname">dero.reg.chooser.</code><code class="descname">any_reg</code><span class="sig-paren">(</span><em>reg_type</em>, <em>*reg_args</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/chooser.html#any_reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.chooser.any_reg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.controls">
+<span id="dero-reg-controls-module"></span><h2>dero.reg.controls module<a class="headerlink" href="#module-dero.reg.controls" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.controls.suppress_controls_in_summary_df">
+<code class="descclassname">dero.reg.controls.</code><code class="descname">suppress_controls_in_summary_df</code><span class="sig-paren">(</span><em>summ_df</em>, <em>regressor_order</em>, <em>dummy_col_dicts</em>, <em>info_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/controls.html#suppress_controls_in_summary_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.controls.suppress_controls_in_summary_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.dataprep">
+<span id="dero-reg-dataprep-module"></span><h2>dero.reg.dataprep module<a class="headerlink" href="#module-dero.reg.dataprep" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.reg.differenced">
+<span id="dero-reg-differenced-module"></span><h2>dero.reg.differenced module<a class="headerlink" href="#module-dero.reg.differenced" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.differenced.create_differenced_variables">
+<code class="descclassname">dero.reg.differenced.</code><code class="descname">create_differenced_variables</code><span class="sig-paren">(</span><em>df</em>, <em>diff_cols</em>, <em>id_col='TICKER'</em>, <em>date_col='Date'</em>, <em>difference_lag=1</em>, <em>fill_method='ffill'</em>, <em>fill_limit: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/differenced.html#create_differenced_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.differenced.create_differenced_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: partially inplace</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.differenced.diff_reg">
+<code class="descclassname">dero.reg.differenced.</code><code class="descname">diff_reg</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars</em>, <em>id_col</em>, <em>date_col</em>, <em>difference_lag=1</em>, <em>diff_cols=None</em>, <em>diff_fill_method: str = 'ffill'</em>, <em>diff_fill_limit: int = None</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/differenced.html#diff_reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.differenced.diff_reg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.ext_statsmodels">
+<span id="dero-reg-ext-statsmodels-module"></span><h2>dero.reg.ext_statsmodels module<a class="headerlink" href="#module-dero.reg.ext_statsmodels" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.ext_statsmodels.summary_col">
+<code class="descclassname">dero.reg.ext_statsmodels.</code><code class="descname">summary_col</code><span class="sig-paren">(</span><em>results</em>, <em>float_format='%.4f'</em>, <em>model_names=[]</em>, <em>stars=False</em>, <em>info_dict=None</em>, <em>regressor_order=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/ext_statsmodels.html#summary_col"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.ext_statsmodels.summary_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>NOTE: the purpose of recreating the summary_col function is becuase of issue
+#3767 in statsmodels:
+<a class="reference external" href="https://github.com/statsmodels/statsmodels/issues/3767">https://github.com/statsmodels/statsmodels/issues/3767</a>
+Which can cause coefficients to become mismatched when using regressor_order.
+I have patched the issue by replacing np.unique with pd.unique.</p>
+<p>TODO: Once the issue is patched, replace this function with simply a reference
+to summary_col from statsmodels</p>
+<p>Summarize multiple results instances side-by-side (coefs and SEs)</p>
+<p>results : statsmodels results instance or list of result instances
+float_format : string</p>
+<blockquote>
+<div>float format for coefficients and standard errors
+Default : ‘%.4f’</div></blockquote>
+<dl class="docutils">
+<dt>model_names <span class="classifier-delimiter">:</span> <span class="classifier">list of strings of length len(results) if the names are not</span></dt>
+<dd>unique, a roman number will be appended to all model names</dd>
+<dt>stars <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd>print significance stars</dd>
+<dt>info_dict <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd>dict of lambda functions to be applied to results instances to retrieve
+model info. To use specific information for different models, add a
+(nested) info_dict with model name as the key.
+Example: <cite>info_dict = {“N”:…, “R2”: …, “OLS”:{“R2”:…}}</cite> would
+only show <cite>R2</cite> for OLS regression models, but additionally <cite>N</cite> for
+all other results.
+Default : None (use the info_dict specified in
+result.default_model_infos, if this property exists)</dd>
+<dt>regressor_order <span class="classifier-delimiter">:</span> <span class="classifier">list of strings</span></dt>
+<dd>list of names of the regressors in the desired order. All regressors
+not specified will be appended to the end of the list.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.ext_statsmodels.update_statsmodel_result_with_new_cov_matrix">
+<code class="descclassname">dero.reg.ext_statsmodels.</code><code class="descname">update_statsmodel_result_with_new_cov_matrix</code><span class="sig-paren">(</span><em>result</em>, <em>cov_matrix: pandas.core.frame.DataFrame</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/ext_statsmodels.html#update_statsmodel_result_with_new_cov_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.ext_statsmodels.update_statsmodel_result_with_new_cov_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: inplace</p>
+<p>Statsmodels results have caching going on. Need to update all the properties
+which depend on the covariance matrix</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.interact">
+<span id="dero-reg-interact-module"></span><h2>dero.reg.interact module<a class="headerlink" href="#module-dero.reg.interact" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.interact.create_interaction_variables">
+<code class="descclassname">dero.reg.interact.</code><code class="descname">create_interaction_variables</code><span class="sig-paren">(</span><em>df</em>, <em>interaction_tuples</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/interact.html#create_interaction_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.interact.create_interaction_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: inplace</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.interact.delete_interaction_variables">
+<code class="descclassname">dero.reg.interact.</code><code class="descname">delete_interaction_variables</code><span class="sig-paren">(</span><em>df</em>, <em>interaction_tuples</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/interact.html#delete_interaction_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.interact.delete_interaction_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: inplace</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.iter">
+<span id="dero-reg-iter-module"></span><h2>dero.reg.iter module<a class="headerlink" href="#module-dero.reg.iter" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.iter.reg_for_each_combo">
+<code class="descclassname">dero.reg.iter.</code><code class="descname">reg_for_each_combo</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars</em>, <em>reg_type='reg'</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/iter.html#reg_for_each_combo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.iter.reg_for_each_combo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes each possible combination of xvars (starting from each var individually, then each pair
+of vars, etc. all the way up to all xvars), and regresses yvar on each set of xvars. Returns
+a list of fitted regressions.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.iter.reg_for_each_combo_select_and_produce_summary">
+<code class="descclassname">dero.reg.iter.</code><code class="descname">reg_for_each_combo_select_and_produce_summary</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars</em>, <em>robust=True</em>, <em>cluster=False</em>, <em>keepnum=5</em>, <em>stderr=False</em>, <em>t_stats: bool = True</em>, <em>float_format='%0.1f'</em>, <em>regressor_order=[]</em>, <em>**other_reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/iter.html#reg_for_each_combo_select_and_produce_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.iter.reg_for_each_combo_select_and_produce_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function to run regressions for every combination of xvars, select the best models,
+and present them in a summary format. Returns a tuple of (reg_list, summary) where reg_list
+is a list of fitted regression models, and summary is a single dataframe of results</p>
+<p>Required inputs:
+df: pandas dataframe containing regression data
+yvar: str, column name of y variable
+xvars: list of strs, column names of all possible x variables</p>
+<p>Optional inputs:
+robust: bool, set to True to use heterskedasticity-robust standard errors
+cluster: False or str, set to a column name to calculate standard errors within clusters</p>
+<blockquote>
+<div>given by unique values of given column name</div></blockquote>
+<dl class="docutils">
+<dt>keepnum: int, number to keep for each amount of x variables. The total number of outputted</dt>
+<dd>regressions will be roughly keepnum * len(xvars)</dd>
+</dl>
+<p>stderr: bool, set to True to keep rows for standard errors below coefficient estimates
+t_stats: bool, set to True to keep rows for standard errors below coefficient estimates and convert them to t-stats</p>
+<p>Note: only specify at most one of robust and cluster.
+Note: don’t set both stderr and t_stats to True</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.iter.reg_for_each_lag">
+<code class="descclassname">dero.reg.iter.</code><code class="descname">reg_for_each_lag</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars</em>, <em>lag_tuple=(1</em>, <em>2</em>, <em>3</em>, <em>4)</em>, <em>reg_type='reg'</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/iter.html#reg_for_each_lag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.iter.reg_for_each_lag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.iter.reg_for_each_lag_and_produce_summary">
+<code class="descclassname">dero.reg.iter.</code><code class="descname">reg_for_each_lag_and_produce_summary</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars</em>, <em>main_ivs</em>, <em>lag_tuple=(1</em>, <em>2</em>, <em>3</em>, <em>4)</em>, <em>consolidate_lags=True</em>, <em>reg_type='reg'</em>, <em>stderr=False</em>, <em>t_stats: bool = True</em>, <em>float_format='%0.2f'</em>, <em>suppress_other_regressors=False</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/iter.html#reg_for_each_lag_and_produce_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.iter.reg_for_each_lag_and_produce_summary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.iter.reg_for_each_xvar_set">
+<code class="descclassname">dero.reg.iter.</code><code class="descname">reg_for_each_xvar_set</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars_list</em>, <em>reg_type='reg'</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/iter.html#reg_for_each_xvar_set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.iter.reg_for_each_xvar_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs regressions on the same y variable for each set of x variables passed. xvars_list
+should be a list of lists, where each individual list is one set of x variables for one model.
+Returns a list of fitted regressions.</p>
+<p>If fe is passed, should either pass a string to use fe in all models, or a list of strings or
+None of same length as num models</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.iter.reg_for_each_xvar_set_and_produce_summary">
+<code class="descclassname">dero.reg.iter.</code><code class="descname">reg_for_each_xvar_set_and_produce_summary</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars_list</em>, <em>robust=True</em>, <em>cluster=False</em>, <em>stderr=False</em>, <em>t_stats: bool = True</em>, <em>fe=None</em>, <em>float_format='%0.2f'</em>, <em>suppress_other_regressors=False</em>, <em>regressor_order=[]</em>, <em>**other_reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/iter.html#reg_for_each_xvar_set_and_produce_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.iter.reg_for_each_xvar_set_and_produce_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function to run regressions for every set of xvars passed
+and present them in a summary format. Returns a tuple of (reg_list, summary) where reg_list
+is a list of fitted regression models, and summary is a single dataframe of results.</p>
+<p>Required inputs:
+df: pandas dataframe containing regression data
+yvar: str, column name of y variable
+xvars_list: list of lists of strs, each individual list has column names of x variables for that model</p>
+<p>Optional inputs:
+robust: bool, set to True to use heterskedasticity-robust standard errors
+cluster: False or str, set to a column name to calculate standard errors within clusters</p>
+<blockquote>
+<div>given by unique values of given column name</div></blockquote>
+<p>stderr: bool, set to True to keep rows for standard errors below coefficient estimates
+t_stats: bool, set to True to keep rows for standard errors below coefficient estimates and convert them to t-stats
+fe:    If fe is passed, should either pass a string to use fe in all models, or a list of strings or
+None of same length as num models</p>
+<p>Note: only specify at most one of robust and cluster.
+Note: don’t set both stderr and t_stats to True</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.iter.reg_for_each_yvar">
+<code class="descclassname">dero.reg.iter.</code><code class="descname">reg_for_each_yvar</code><span class="sig-paren">(</span><em>df</em>, <em>yvars</em>, <em>xvars</em>, <em>reg_type='reg'</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/iter.html#reg_for_each_yvar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.iter.reg_for_each_yvar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.iter.reg_for_each_yvar_and_produce_summary">
+<code class="descclassname">dero.reg.iter.</code><code class="descname">reg_for_each_yvar_and_produce_summary</code><span class="sig-paren">(</span><em>df</em>, <em>yvars</em>, <em>xvars</em>, <em>main_ivs</em>, <em>reg_type='reg'</em>, <em>stderr=False</em>, <em>t_stats: bool = True</em>, <em>float_format='%0.2f'</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/iter.html#reg_for_each_yvar_and_produce_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.iter.reg_for_each_yvar_and_produce_summary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.models">
+<span id="dero-reg-models-module"></span><h2>dero.reg.models module<a class="headerlink" href="#module-dero.reg.models" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.models.get_model_class_by_string">
+<code class="descclassname">dero.reg.models.</code><code class="descname">get_model_class_by_string</code><span class="sig-paren">(</span><em>model_string</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/models.html#get_model_class_by_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.models.get_model_class_by_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.models.get_model_name_by_string">
+<code class="descclassname">dero.reg.models.</code><code class="descname">get_model_name_by_string</code><span class="sig-paren">(</span><em>model_string: str</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/dero/reg/models.html#get_model_name_by_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.models.get_model_name_by_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.order">
+<span id="dero-reg-order-module"></span><h2>dero.reg.order module<a class="headerlink" href="#module-dero.reg.order" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.order.convert_regressor_order_for_diff">
+<code class="descclassname">dero.reg.order.</code><code class="descname">convert_regressor_order_for_diff</code><span class="sig-paren">(</span><em>regressor_order</em>, <em>reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/order.html#convert_regressor_order_for_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.order.convert_regressor_order_for_diff" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.order.convert_regressor_order_for_lags">
+<code class="descclassname">dero.reg.order.</code><code class="descname">convert_regressor_order_for_lags</code><span class="sig-paren">(</span><em>regressor_order</em>, <em>reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/order.html#convert_regressor_order_for_lags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.order.convert_regressor_order_for_lags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.quantile">
+<span id="dero-reg-quantile-module"></span><h2>dero.reg.quantile module<a class="headerlink" href="#module-dero.reg.quantile" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.quantile.quantile_plot_from_quantile_result_df">
+<code class="descclassname">dero.reg.quantile.</code><code class="descname">quantile_plot_from_quantile_result_df</code><span class="sig-paren">(</span><em>result_df</em>, <em>yvar</em>, <em>main_iv</em>, <em>outpath=None</em>, <em>clear_figure=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/quantile.html#quantile_plot_from_quantile_result_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.quantile.quantile_plot_from_quantile_result_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a plot of effect of main_iv on yvar at different quantiles. To be used after
+reg_for_each_quantile_produce_result_df</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>result_df</strong> – pd.DataFrame, result from reg_for_each_quantile_produce_result_df</li>
+<li><strong>yvar</strong> – str, label of dependent variable</li>
+<li><strong>main_iv</strong> – str, label of independent variable of interest</li>
+<li><strong>outpath</strong> – str, filepath to output figure. must include matplotlib supported extension such as .pdf or .png</li>
+<li><strong>clear_figure</strong> – bool, True wipe memory of matplotlib figure after running function</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.quantile.quantile_reg">
+<code class="descclassname">dero.reg.quantile.</code><code class="descname">quantile_reg</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars</em>, <em>q=0.5</em>, <em>robust=True</em>, <em>cluster=False</em>, <em>cons=True</em>, <em>fe=None</em>, <em>interaction_tuples=None</em>, <em>num_lags=0</em>, <em>lag_variables='xvars'</em>, <em>lag_period_var='Date'</em>, <em>lag_id_var='TICKER'</em>, <em>lag_fill_method: str = 'ffill'</em>, <em>lag_fill_limit: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/quantile.html#quantile_reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.quantile.quantile_reg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a fitted quantile regression. Takes df, produces a regression df with no missing among needed
+variables, and fits a regression model. If robust is specified, uses heteroskedasticity-
+robust standard errors. If cluster is specified, calculated clustered standard errors
+by the given variable.</p>
+<p>Note: only specify at most one of robust and cluster.</p>
+<p>Required inputs:
+df: pandas dataframe containing regression data
+yvar: str, column name of outcome y variable
+xvars: list of strs, column names of x variables for regression</p>
+<p>Optional inputs:
+q: float between 0 and 1. Quantile of dependent variable to estimate coefficients for
+robust: bool, set to True to use heterskedasticity-robust standard errors
+cluster: False or str, set to a column name to calculate standard errors within clusters</p>
+<blockquote>
+<div>given by unique values of given column name</div></blockquote>
+<p>cons: bool, set to False to not include a constant in the regression
+fe: None or str or list of strs. If a str or list of strs is passed, uses these categorical
+variables to construct dummies for fixed effects.
+interaction_tuples: tuple or list of tuples of column names to interact and include as xvars
+num_lags: int, Number of periods to lag variables. Setting to other than 0 will activate lags
+lag_variables: ‘all’, ‘xvars’, or list of strs of names of columns to lag for regressions.
+lag_period_var: str, only used if lag_variables is not None. name of column which</p>
+<blockquote>
+<div>contains period variable for lagging</div></blockquote>
+<dl class="docutils">
+<dt>lag_fill_method: str, ‘ffill’ or ‘bfill’ for which method to use to fill in missing rows when</dt>
+<dd>creating lag variables. See pandas.DataFrame.fillna for more details</dd>
+<dt>lag_id_var: str, only used if lag_variables is not None. name of column which</dt>
+<dd>contains identifier variable for lagging</dd>
+</dl>
+<p>lag_fill_limit: pandas fill limit</p>
+<p>Returns:
+If fe=None, returns statsmodels regression result
+if fe is not None, returns a tuple of (statsmodels regression result, dummy_cols_dict)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.quantile.reg_for_each_quantile_output_plot">
+<code class="descclassname">dero.reg.quantile.</code><code class="descname">reg_for_each_quantile_output_plot</code><span class="sig-paren">(</span><em>main_iv</em>, <em>*reg_args</em>, <em>num_quantiles=8</em>, <em>main_iv_label=None</em>, <em>outpath=None</em>, <em>clear_figure=True</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/quantile.html#reg_for_each_quantile_output_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.quantile.reg_for_each_quantile_output_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a plot of effect of main_iv on yvar at different quantiles. To be used after
+reg_for_each_quantile_produce_result_df</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>main_iv</strong> – str, column name of independent variable of interest</li>
+<li><strong>reg_args</strong> – see quantile_reg for args</li>
+<li><strong>num_quantiles</strong> – number of quantile regressions to run. will be spaced evenly. higher numbers
+produce smoother graphs but take longer to run</li>
+<li><strong>main_iv_label</strong> – str, label of independent variable of interest</li>
+<li><strong>outpath</strong> – str, filepath to output figure. must include matplotlib supported extension such as .pdf or .png</li>
+<li><strong>clear_figure</strong> – bool, True wipe memory of matplotlib figure after running function</li>
+<li><strong>reg_kwargs</strong> – see quantile_reg for kwargs</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">result_df from reg_for_each_quantile_produce_result_df</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.reg.quantile.reg_for_each_quantile_produce_result_df">
+<code class="descclassname">dero.reg.quantile.</code><code class="descname">reg_for_each_quantile_produce_result_df</code><span class="sig-paren">(</span><em>main_iv</em>, <em>*reg_args</em>, <em>num_quantiles=8</em>, <em>**reg_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/quantile.html#reg_for_each_quantile_produce_result_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.quantile.reg_for_each_quantile_produce_result_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produce result DataFrame of running multiple quantile regressions spaced out between the
+(0,1) interval</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>main_iv</strong> – str, column name of independent variable of interest</li>
+<li><strong>reg_args</strong> – see quantile_reg for args</li>
+<li><strong>num_quantiles</strong> – number of quantile regressions to run. will be spaced evenly. higher numbers
+produce smoother graphs but take longer to run</li>
+<li><strong>reg_kwargs</strong> – see quantile_reg for kwargs</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.reg">
+<span id="dero-reg-reg-module"></span><h2>dero.reg.reg module<a class="headerlink" href="#module-dero.reg.reg" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.reg.reg">
+<code class="descclassname">dero.reg.reg.</code><code class="descname">reg</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars</em>, <em>robust=True</em>, <em>cluster=False</em>, <em>cons=True</em>, <em>fe=None</em>, <em>interaction_tuples=None</em>, <em>num_lags=0</em>, <em>lag_variables='xvars'</em>, <em>lag_period_var='Date'</em>, <em>lag_id_var='TICKER'</em>, <em>lag_fill_method: str = 'ffill'</em>, <em>model_type='OLS'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/reg.html#reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.reg.reg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a fitted regression. Takes df, produces a regression df with no missing among needed
+variables, and fits a regression model. If robust is specified, uses heteroskedasticity-
+robust standard errors. If cluster is specified, calculated clustered standard errors
+by the given variable.</p>
+<p>Note: only specify at most one of robust and cluster.</p>
+<p>Required inputs:
+df: pandas dataframe containing regression data
+yvar: str, column name of outcome y variable
+xvars: list of strs, column names of x variables for regression</p>
+<p>Optional inputs:
+robust: bool, set to True to use heterskedasticity-robust standard errors
+cluster: False or list of strs, set to a column name to calculate standard errors within clusters</p>
+<blockquote>
+<div>given by unique values of given column name. set to multiple column names for multiway
+clustering following Cameron, Gelbach, and Miller (2011). NOTE: will get exponentially
+slower as more cluster variables are added</div></blockquote>
+<p>cons: bool, set to False to not include a constant in the regression
+fe: None or str or list of strs. If a str or list of strs is passed, uses these categorical
+variables to construct dummies for fixed effects.
+interaction_tuples: tuple or list of tuples of column names to interact and include as xvars
+num_lags: int, Number of periods to lag variables. Setting to other than 0 will activate lags
+lag_variables: ‘all’, ‘xvars’, or list of strs of names of columns to lag for regressions.
+lag_period_var: str, only used if lag_variables is not None. name of column which</p>
+<blockquote>
+<div>contains period variable for lagging</div></blockquote>
+<dl class="docutils">
+<dt>lag_id_var: str, only used if lag_variables is not None. name of column which</dt>
+<dd>contains identifier variable for lagging</dd>
+<dt>lag_fill_method: str, ‘ffill’ or ‘bfill’ for which method to use to fill in missing rows when</dt>
+<dd>creating lag variables. See pandas.DataFrame.fillna for more details</dd>
+</dl>
+<p>model_type: str, ‘OLS’, ‘probit’, or ‘logit’ for type of model</p>
+<p>Returns:
+If fe=None, returns statsmodels regression result
+if fe is not None, returns a tuple of (statsmodels regression result, dummy_cols_dict)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.regtypes">
+<span id="dero-reg-regtypes-module"></span><h2>dero.reg.regtypes module<a class="headerlink" href="#module-dero.reg.regtypes" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.reg.select">
+<span id="dero-reg-select-module"></span><h2>dero.reg.select module<a class="headerlink" href="#module-dero.reg.select" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.reg.select.select_models">
+<code class="descclassname">dero.reg.select.</code><code class="descname">select_models</code><span class="sig-paren">(</span><em>reg_list</em>, <em>keepnum</em>, <em>xvars</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/select.html#select_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.select.select_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a list of fitted regression models and selects among them based on adjusted R-Squared. For each
+number of variables involved in the regressions, keepnum with the highest R-squareds will be kept.</p>
+<p>For example, if reg_list contains 3 regressions with two variables and 6 regressions with three variables,
+and keepnum is 2, will return a list of four regressions, 2 with two variables and 2 with three variables.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.reg.tools">
+<span id="dero-reg-tools-module"></span><h2>dero.reg.tools module<a class="headerlink" href="#module-dero.reg.tools" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.reg">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.reg" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.reg.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

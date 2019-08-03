@@ -1,0 +1,130 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.data.summarize.subset.outliers.summary package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-data-summarize-subset-outliers-summary-package">
+<h1>dero.data.summarize.subset.outliers.summary package<a class="headerlink" href="#dero-data-summarize-subset-outliers-summary-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.data.summarize.subset.outliers.summary.main">
+<span id="dero-data-summarize-subset-outliers-summary-main-module"></span><h2>dero.data.summarize.subset.outliers.summary.main module<a class="headerlink" href="#module-dero.data.summarize.subset.outliers.summary.main" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.data.summarize.subset.outliers.summary.main.outlier_overview_summary_page_table">
+<code class="descclassname">dero.data.summarize.subset.outliers.summary.main.</code><code class="descname">outlier_overview_summary_page_table</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, bad_df: pandas.core.frame.DataFrame, min_max_dict: typing.Dict[str, typing.Tuple[typing.Union[int, float], typing.Union[int, float]]], bad_column_name: str = '_bad_column', firm_id_col: str = 'TICKER', outdir: str = None, as_document=True, author: str = None, caption: str = 'Outlier Overview and Summary Statistics', quants: typing.Sequence[float] = (0.01, 0.1, 0.5, 0.9, 0.99)</em><span class="sig-paren">)</span> &#x2192; typing.Union[dero.latex.models.document.Document, typing.List[dero.latex.table.models.table.table.Table]]<a class="reference internal" href="_modules/dero/data/summarize/subset/outliers/summary/main.html#outlier_overview_summary_page_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.summarize.subset.outliers.summary.main.outlier_overview_summary_page_table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.data.summarize.subset.outliers.summary.overview">
+<span id="dero-data-summarize-subset-outliers-summary-overview-module"></span><h2>dero.data.summarize.subset.outliers.summary.overview module<a class="headerlink" href="#module-dero.data.summarize.subset.outliers.summary.overview" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.data.summarize.subset.outliers.summary.overview.bad_df_summary_df">
+<code class="descclassname">dero.data.summarize.subset.outliers.summary.overview.</code><code class="descname">bad_df_summary_df</code><span class="sig-paren">(</span><em>bad_df: pandas.core.frame.DataFrame, min_max_dict: typing.Dict[str, typing.Tuple[typing.Union[int, float], typing.Union[int, float]]], firm_id_col: str = 'TICKER', bad_column_name: str = '_bad_column'</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/data/summarize/subset/outliers/summary/overview.html#bad_df_summary_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.summarize.subset.outliers.summary.overview.bad_df_summary_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.data.summarize.subset.outliers.summary.stats">
+<span id="dero-data-summarize-subset-outliers-summary-stats-module"></span><h2>dero.data.summarize.subset.outliers.summary.stats module<a class="headerlink" href="#module-dero.data.summarize.subset.outliers.summary.stats" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.data.summarize.subset.outliers.summary.stats.bad_df_summary_stats_df">
+<code class="descclassname">dero.data.summarize.subset.outliers.summary.stats.</code><code class="descname">bad_df_summary_stats_df</code><span class="sig-paren">(</span><em>bad_df: pandas.core.frame.DataFrame, outlier_cols: typing.List[str], bad_column_name: str = '_bad_column', quants: typing.Sequence[float] = (0.01, 0.1, 0.5, 0.9, 0.99)</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/data/summarize/subset/outliers/summary/stats.html#bad_df_summary_stats_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.summarize.subset.outliers.summary.stats.bad_df_summary_stats_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.data.summarize.subset.outliers.summary.stats.full_df_summary_stats_df">
+<code class="descclassname">dero.data.summarize.subset.outliers.summary.stats.</code><code class="descname">full_df_summary_stats_df</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, outlier_cols: typing.List[str], quants: typing.Sequence[float] = (0.01, 0.1, 0.5, 0.9, 0.99)</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/data/summarize/subset/outliers/summary/stats.html#full_df_summary_stats_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.summarize.subset.outliers.summary.stats.full_df_summary_stats_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.data.summarize.subset.outliers.summary.totex">
+<span id="dero-data-summarize-subset-outliers-summary-totex-module"></span><h2>dero.data.summarize.subset.outliers.summary.totex module<a class="headerlink" href="#module-dero.data.summarize.subset.outliers.summary.totex" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.data.summarize.subset.outliers.summary.totex.df_dict_to_table">
+<code class="descclassname">dero.data.summarize.subset.outliers.summary.totex.</code><code class="descname">df_dict_to_table</code><span class="sig-paren">(</span><em>df_dict: typing.Dict[str, pandas.core.frame.DataFrame], as_document: bool = False, author: str = None, caption: str = None</em><span class="sig-paren">)</span> &#x2192; typing.Union[dero.latex.models.document.Document, dero.latex.table.models.table.table.Table]<a class="reference internal" href="_modules/dero/data/summarize/subset/outliers/summary/totex.html#df_dict_to_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.summarize.subset.outliers.summary.totex.df_dict_to_table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.data.summarize.subset.outliers.summary">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.data.summarize.subset.outliers.summary" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.data.summarize.subset.outliers.summary.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,383 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.latex.table.models.table package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-latex-table-models-table-package">
+<h1>dero.latex.table.models.table package<a class="headerlink" href="#dero-latex-table-models-table-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.latex.table.models.table.caption">
+<span id="dero-latex-table-models-table-caption-module"></span><h2>dero.latex.table.models.table.caption module<a class="headerlink" href="#module-dero.latex.table.models.table.caption" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.table.caption.Caption">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.table.caption.</code><code class="descname">Caption</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/caption.html#Caption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.caption.Caption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.item.SimpleItem" title="dero.latex.models.item.SimpleItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.SimpleItem</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.table.caption.Caption.name">
+<code class="descname">name</code><em class="property"> = 'caption'</em><a class="headerlink" href="#dero.latex.table.models.table.caption.Caption.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.table.row">
+<span id="dero-latex-table-models-table-row-module"></span><h2>dero.latex.table.models.table.row module<a class="headerlink" href="#module-dero.latex.table.models.table.row" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.table.row.Row">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.table.row.</code><code class="descname">Row</code><span class="sig-paren">(</span><em>values: typing.Union[typing.Iterable[dero.latex.table.models.data.dataitem.DataItem], dero.latex.table.models.labels.collection.LabelCollection, dero.latex.table.models.labels.label.Label]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/row.html#Row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.row.Row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.table.models.table.rowbase.RowBase" title="dero.latex.table.models.table.rowbase.RowBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.table.rowbase.RowBase</span></code></a></p>
+<dl class="classmethod">
+<dt id="dero.latex.table.models.table.row.Row.from_latex_row_str">
+<em class="property">classmethod </em><code class="descname">from_latex_row_str</code><span class="sig-paren">(</span><em>latex_row_str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/row.html#Row.from_latex_row_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.row.Row.from_latex_row_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.table.row.Row.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['values']</em><a class="headerlink" href="#dero.latex.table.models.table.row.Row.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.table.rowbase">
+<span id="dero-latex-table-models-table-rowbase-module"></span><h2>dero.latex.table.models.table.rowbase module<a class="headerlink" href="#module-dero.latex.table.models.table.rowbase" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.table.rowbase.RowBase">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.table.rowbase.</code><code class="descname">RowBase</code><a class="reference internal" href="_modules/dero/latex/table/models/table/rowbase.html#RowBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.rowbase.RowBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a>, <a class="reference internal" href="dero.latex.table.models.mixins.addvalues.html#dero.latex.table.models.mixins.addvalues.row.RowAddMixin" title="dero.latex.table.models.mixins.addvalues.row.RowAddMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.mixins.addvalues.row.RowAddMixin</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.table.rowbase.RowBase.is_spacer">
+<code class="descname">is_spacer</code><a class="headerlink" href="#dero.latex.table.models.table.rowbase.RowBase.is_spacer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.table.rowbase.RowBase.pad">
+<code class="descname">pad</code><span class="sig-paren">(</span><em>length: int</em>, <em>direction='right'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/rowbase.html#RowBase.pad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.rowbase.RowBase.pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand row out to the right or left with blanks, until it is length passed
+:param length:
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.table.section">
+<span id="dero-latex-table-models-table-section-module"></span><h2>dero.latex.table.models.table.section module<a class="headerlink" href="#module-dero.latex.table.models.table.section" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.table.section.TableSection">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.table.section.</code><code class="descname">TableSection</code><span class="sig-paren">(</span><em>rows: [&lt;class 'dero.latex.table.models.table.row.Row'&gt;]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/section.html#TableSection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.section.TableSection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.table.section.TableSection.is_spacer">
+<code class="descname">is_spacer</code><a class="headerlink" href="#dero.latex.table.models.table.section.TableSection.is_spacer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.table.section.TableSection.join">
+<code class="descname">join</code><span class="sig-paren">(</span><em>sections</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/section.html#TableSection.join"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.section.TableSection.join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Repliactes str.join behavior. Useful for creating padding spaces in a PanelGrid/PanelCollection
+:param sections:
+:return:</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.table.section.TableSection.length">
+<code class="descname">length</code><a class="headerlink" href="#dero.latex.table.models.table.section.TableSection.length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.table.section.TableSection.num_columns">
+<code class="descname">num_columns</code><a class="headerlink" href="#dero.latex.table.models.table.section.TableSection.num_columns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.table.section.TableSection.pad">
+<code class="descname">pad</code><span class="sig-paren">(</span><em>length: int</em>, <em>direction='right'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/section.html#TableSection.pad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.section.TableSection.pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand table out to the right or left with blanks, until it is length passed (apply to every row)
+:param length:
+:param direction:
+:return:</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.table.section.TableSection.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['rows']</em><a class="headerlink" href="#dero.latex.table.models.table.section.TableSection.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="dero-latex-table-models-table-table-module">
+<h2>dero.latex.table.models.table.table module<a class="headerlink" href="#dero-latex-table-models-table-table-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-dero.latex.table.models.table.table"></span><dl class="class">
+<dt id="dero.latex.table.models.table.table.Table">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.table.table.</code><code class="descname">Table</code><span class="sig-paren">(</span><em>panels: dero.latex.table.models.panels.collection.PanelCollection</em>, <em>caption: str = None</em>, <em>above_text: str = None</em>, <em>below_text: str = None</em>, <em>align: str = None</em>, <em>mid_rules=True</em>, <em>landscape=False</em>, <em>label: typing.Union[str</em>, <em>NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/table.html#Table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.table.Table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.documentitem.DocumentItem" title="dero.latex.models.documentitem.DocumentItem"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.documentitem.DocumentItem</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<p>An object for creating latex tables. Easiest way to create is with Table.from_list_of_lists_of_dfs,
+but for more control, construct Panel objects and use Table.from_panel_list</p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.table.table.Table.align">
+<code class="descname">align</code><a class="headerlink" href="#dero.latex.table.models.table.table.Table.align" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.table.models.table.table.Table.from_list_of_lists_of_dfs">
+<em class="property">classmethod </em><code class="descname">from_list_of_lists_of_dfs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/table.html#Table.from_list_of_lists_of_dfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.table.Table.from_list_of_lists_of_dfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>To create a single panel table, pass a single list within
+a list of DataFrames, e.g. [[df1, df2]] then shape will specify how the DataFrames will
+be organized in the Panel. If you pass two lists within the outer list, then shape will
+apply to each Panel. So [[df1, df2], [df3, df4]] with shape=(1,2) create a two Panel table
+with two tables placed within each panel going horizontally, so that the overall shape is (2,2).</p>
+<p>Note: convenience method for if not much control over table is needed.
+To apply different options to each panel, construct them individually using
+Panel.from_df_list or sub panels individually with DataTable.from_df then make modifications</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df_list_of_lists</strong> – list of lists of pandas DataFrame</li>
+<li><strong>panel_names</strong> – list of panel names. Must be of same length as outer list in df_list_of_lists</li>
+<li><strong>shape</strong> – tuple of (rows, columns) to arrange DataFrames. They will be placed from left to right,
+then from top to bottom.
+passsing None defaults one column, as many rows as DataFrames.
+Note: this is for each panel. To apply a different shape to each Panel, construct Panels individually
+and pass to Table.from_panel_list</li>
+<li><strong>include_columns</strong> – </li>
+<li><strong>include_index</strong> – </li>
+<li><strong>label_consolidation</strong> – pass ‘object’ to to avoid consolidating labels. pass ‘str’ to consolidate if
+column or index contents are identical within a column or row of DataFrames</li>
+<li><strong>top_left_corner_labels</strong> – additional labels to place in the top left corner. pass a single string
+or a list of strings for convenience. a list of strings will be create labels
+which span the gap horizontally and go downwards, one label per row. pass
+LabelCollection or LabelTable for more control.</li>
+<li><strong>enforce_label_order</strong> – pass False to allow consolidating lower labels even if upper labels do not match.
+e.g. if labels on one table are [[‘Top1’], [‘Bot1’, ‘Bot2’]], then labels on the other
+table are [[‘Top2’], [‘Bot1’, ‘Bot2’]], consolidated labels when passing False will be
+[‘Bot1’, ‘Bot2’], while when passing True, no labels will be consolidated. Under True,
+will start from the top label, then stop consolidating once it has a mismatch.</li>
+<li><strong>pad_rows</strong> – horizontal spacing to put between panels</li>
+<li><strong>pad_columns</strong> – vertical spacing to put between TableSections</li>
+<li><strong>caption</strong> – overall caption to place at top of table</li>
+<li><strong>above_text</strong> – Not yet implemented</li>
+<li><strong>below_text</strong> – text to place below table</li>
+<li><strong>align</strong> – Can take any string that would normally used in tabular (i.e. rrr for three columns right aligned
+as well as L{&lt;width&gt;), C{&lt;width&gt;}, and R{&lt;width&gt;} (i.e. L{3cm}) for left, center, and right aligned
+fixed width. Default is first column left aligned, rest center aligned.</li>
+<li><strong>mid_rules</strong> – whether to add mid rules between panels</li>
+<li><strong>landscape</strong> – whether to output landscape tex</li>
+<li><strong>label</strong> – label for table to be referenced in text</li>
+<li><strong>data_table_kwargs</strong> – kwargs to be passed to DataTable.from_df. Same kwargs will be passed to
+all data tables.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.table.models.table.table.Table.from_panel_list">
+<em class="property">classmethod </em><code class="descname">from_panel_list</code><span class="sig-paren">(</span><em>panels: [&lt;class 'dero.latex.table.models.panels.panel.Panel'&gt;], label_consolidation: str = 'object', enforce_label_order=True, top_left_corner_labels: typing.Union[dero.latex.table.models.labels.table.LabelTable, dero.latex.table.models.labels.collection.LabelCollection, typing.List[~AnyStr], ~AnyStr] = None, pad_rows: int = 1, pad_columns: int = 1, caption: str = None, above_text: str = None, below_text: str = None, align: str = None, mid_rules=True, landscape=False, label: typing.Union[str, NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/table.html#Table.from_panel_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.table.Table.from_panel_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note: to quickly create latex tables, use Table.from_list_of_lists_of_dfs to pass
+pandas DataFrames directly. Use this method when more control is needed than is provided by that method.
+Construct Panels individually, either directly from DataFrames with Panel.from_df_list, or for even more
+control, use DataTable.from_df and override labels with custom LabelTables.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>panels</strong> – list of Panels</li>
+<li><strong>label_consolidation</strong> – pass ‘object’ to to avoid consolidating labels. pass ‘str’ to consolidate if
+column or index contents are identical within a column or row of DataFrames</li>
+<li><strong>enforce_label_order</strong> – pass False to allow consolidating lower labels even if upper labels do not match.
+e.g. if labels on one table are [[‘Top1’], [‘Bot1’, ‘Bot2’]], then labels on the other
+table are [[‘Top2’], [‘Bot1’, ‘Bot2’]], consolidated labels when passing False will be
+[‘Bot1’, ‘Bot2’], while when passing True, no labels will be consolidated. Under True,
+will start from the top label, then stop consolidating once it has a mismatch.</li>
+<li><strong>top_left_corner_labels</strong> – additional labels to place in the top left corner. pass a single string
+or a list of strings for convenience. a list of strings will be create labels
+which span the gap horizontally and go downwards, one label per row. pass
+LabelCollection or LabelTable for more control.</li>
+<li><strong>pad_rows</strong> – horizontal spacing to put between panels</li>
+<li><strong>pad_columns</strong> – vertical spacing to put between TableSections</li>
+<li><strong>caption</strong> – overall caption to place at top of table</li>
+<li><strong>above_text</strong> – Not yet implemented</li>
+<li><strong>below_text</strong> – text to place below table</li>
+<li><strong>align</strong> – Can take any string that would normally used in tabular (i.e. rrr for three columns right aligned
+as well as L{&lt;width&gt;), C{&lt;width&gt;}, and R{&lt;width&gt;} (i.e. L{3cm}) for left, center, and right aligned
+fixed width. Default is first column left aligned, rest center aligned.</li>
+<li><strong>mid_rules</strong> – whether to add mid rules between panels</li>
+<li><strong>landscape</strong> – whether to output landscape tex</li>
+<li><strong>label</strong> – label for table to be referenced in text</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.table.models.table.table.Table.from_panel_name_df_dict">
+<em class="property">classmethod </em><code class="descname">from_panel_name_df_dict</code><span class="sig-paren">(</span><em>panel_name_df_dict: {&lt;class 'str'&gt;: &lt;class 'pandas.core.frame.DataFrame'&gt;}, include_columns=True, include_index=False, label_consolidation: str = 'str', enforce_label_order=True, top_left_corner_labels: typing.Union[dero.latex.table.models.labels.table.LabelTable, dero.latex.table.models.labels.collection.LabelCollection, typing.List[~AnyStr], ~AnyStr] = None, pad_rows: int = 1, caption: str = None, above_text: str = None, below_text: str = None, align: str = None, mid_rules=True, landscape=False, label: typing.Union[str, NoneType] = None, data_table_kwargs={}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/table.html#Table.from_panel_name_df_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.table.Table.from_panel_name_df_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience method for when there is only one DataFrame per panel. All options will be applied all panels and
+DataTables.
+To apply different options to each panel, construct them individually using
+Panel.from_df_list or sub panels individually with DataTable.from_df then make modifications</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>panel_name_df_dict</strong> – dictionary where keys are names of panels, and values are DataFrames to put in panels
+(only one DataFrame per panel. Use another method if more control is needed)</li>
+<li><strong>include_columns</strong> – </li>
+<li><strong>include_index</strong> – </li>
+<li><strong>label_consolidation</strong> – pass ‘object’ to to avoid consolidating labels. pass ‘str’ to consolidate if
+column or index contents are identical within a column or row of DataFrames</li>
+<li><strong>top_left_corner_labels</strong> – additional labels to place in the top left corner. pass a single string
+or a list of strings for convenience. a list of strings will be create labels
+which span the gap horizontally and go downwards, one label per row. pass
+LabelCollection or LabelTable for more control.</li>
+<li><strong>enforce_label_order</strong> – pass False to allow consolidating lower labels even if upper labels do not match.
+e.g. if labels on one table are [[‘Top1’], [‘Bot1’, ‘Bot2’]], then labels on the other
+table are [[‘Top2’], [‘Bot1’, ‘Bot2’]], consolidated labels when passing False will be
+[‘Bot1’, ‘Bot2’], while when passing True, no labels will be consolidated. Under True,
+will start from the top label, then stop consolidating once it has a mismatch.</li>
+<li><strong>pad_rows</strong> – horizontal spacing to put between panels</li>
+<li><strong>caption</strong> – overall caption to place at top of table</li>
+<li><strong>above_text</strong> – Not yet implemented</li>
+<li><strong>below_text</strong> – text to place below table</li>
+<li><strong>align</strong> – Can take any string that would normally used in tabular (i.e. rrr for three columns right aligned
+as well as L{&lt;width&gt;), C{&lt;width&gt;}, and R{&lt;width&gt;} (i.e. L{3cm}) for left, center, and right aligned
+fixed width. Default is first column left aligned, rest center aligned.</li>
+<li><strong>mid_rules</strong> – whether to add mid rules between panels</li>
+<li><strong>landscape</strong> – whether to output landscape tex</li>
+<li><strong>label</strong> – label for table to be referenced in text</li>
+<li><strong>data_table_kwargs</strong> – kwargs to be passed to DataTable.from_df. Same kwargs will be passed to
+all data tables.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.table.table.Table.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['caption', 'above_text', 'panels', 'below_text']</em><a class="headerlink" href="#dero.latex.table.models.table.table.Table.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.table.table.Table.set_begin_document_items">
+<code class="descname">set_begin_document_items</code><span class="sig-paren">(</span><em>landscape: bool</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/table.html#Table.set_begin_document_items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.table.Table.set_begin_document_items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.table.table.Table.to_pdf_and_move">
+<code class="descname">to_pdf_and_move</code><span class="sig-paren">(</span><em>outfolder</em>, <em>outname=None</em>, <em>move_folder_name='Tables'</em>, <em>as_document=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/table.html#Table.to_pdf_and_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.table.Table.to_pdf_and_move" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.table.table.Table.to_tex">
+<code class="descname">to_tex</code><span class="sig-paren">(</span><em>as_document=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/table/table.html#Table.to_tex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.table.table.Table.to_tex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.table">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.latex.table.models.table" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.latex.table.models.table.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

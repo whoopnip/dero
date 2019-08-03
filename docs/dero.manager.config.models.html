@@ -1,0 +1,229 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.config.models package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-manager-config-models-package">
+<h1>dero.manager.config.models package<a class="headerlink" href="#dero-manager-config-models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.manager.config.models.config">
+<span id="dero-manager-config-models-config-module"></span><h2>dero.manager.config.models.config module<a class="headerlink" href="#module-dero.manager.config.models.config" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.config.models.config.ActiveFunctionConfig">
+<em class="property">class </em><code class="descclassname">dero.manager.config.models.config.</code><code class="descname">ActiveFunctionConfig</code><span class="sig-paren">(</span><em>d: dict = None</em>, <em>name: str = None</em>, <em>annotations: dict = None</em>, <em>imports: dero.manager.imports.models.statements.container.ImportStatementContainer = None</em>, <em>_file: dero.manager.basemodels.file.ConfigFileBase = None</em>, <em>begin_assignments: dero.manager.assignments.models.container.AssignmentStatementContainer = None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/config/models/config.html#ActiveFunctionConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.config.ActiveFunctionConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.manager.pipelines.models.html#dero.manager.pipelines.models.config.FunctionConfig" title="dero.manager.pipelines.models.config.FunctionConfig"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.pipelines.models.config.FunctionConfig</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.manager.config.models.config.ActiveFunctionConfig.config_file_class">
+<code class="descname">config_file_class</code><a class="headerlink" href="#dero.manager.config.models.config.ActiveFunctionConfig.config_file_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#dero.manager.config.models.file.ActiveFunctionConfigFile" title="dero.manager.config.models.file.ActiveFunctionConfigFile"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.config.models.file.ActiveFunctionConfigFile</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="dero-manager-config-models-file-module">
+<h2>dero.manager.config.models.file module<a class="headerlink" href="#dero-manager-config-models-file-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-dero.manager.config.models.file"></span><dl class="class">
+<dt id="dero.manager.config.models.file.ActiveFunctionConfigFile">
+<em class="property">class </em><code class="descclassname">dero.manager.config.models.file.</code><code class="descname">ActiveFunctionConfigFile</code><span class="sig-paren">(</span><em>filepath: str</em>, <em>name: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/config/models/file.html#ActiveFunctionConfigFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.file.ActiveFunctionConfigFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.manager.pipelines.models.html#dero.manager.pipelines.models.file.FunctionConfigFile" title="dero.manager.pipelines.models.file.FunctionConfigFile"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.pipelines.models.file.FunctionConfigFile</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.manager.config.models.file.ActiveFunctionConfigFile.interface_class">
+<code class="descname">interface_class</code><a class="headerlink" href="#dero.manager.config.models.file.ActiveFunctionConfigFile.interface_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="dero.manager.io.file.interfaces.html#dero.manager.io.file.interfaces.activeconfig.ActiveConfigFileInterface" title="dero.manager.io.file.interfaces.activeconfig.ActiveConfigFileInterface"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.io.file.interfaces.activeconfig.ActiveConfigFileInterface</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.config.models.file.ActiveFunctionConfigFile.load">
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/config/models/file.html#ActiveFunctionConfigFile.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.file.ActiveFunctionConfigFile.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.config.models.interfaces">
+<span id="dero-manager-config-models-interfaces-module"></span><h2>dero.manager.config.models.interfaces module<a class="headerlink" href="#module-dero.manager.config.models.interfaces" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.manager.config.models.manager">
+<span id="dero-manager-config-models-manager-module"></span><h2>dero.manager.config.models.manager module<a class="headerlink" href="#module-dero.manager.config.models.manager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.config.models.manager.ConfigManager">
+<em class="property">class </em><code class="descclassname">dero.manager.config.models.manager.</code><code class="descname">ConfigManager</code><span class="sig-paren">(</span><em>basepath: str</em>, <em>main_section: dero.manager.config.models.section.ConfigSection = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/config/models/manager.html#ConfigManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.manager.ConfigManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="method">
+<dt id="dero.manager.config.models.manager.ConfigManager.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><em>section_path_str: str = None</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dero/manager/config/models/manager.html#ConfigManager.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.manager.ConfigManager.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets a function or section config to default. If no section_path_str is passed, resets local config.</p>
+<p>To reset all configs, use .load() instead.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>section_path_str:</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.config.models.manager.ConfigManager.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>section_path_str: str = None</em><span class="sig-paren">)</span> &#x2192; dero.manager.config.models.config.ActiveFunctionConfig<a class="reference internal" href="_modules/dero/manager/config/models/manager.html#ConfigManager.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.manager.ConfigManager.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles config inheritance to get the active config for a section or function</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>section_path_str:</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.config.models.manager.ConfigManager.load">
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/config/models/manager.html#ConfigManager.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.manager.ConfigManager.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.config.models.manager.ConfigManager.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><em>key: str</em>, <em>section_path_str: str = None</em><span class="sig-paren">)</span> &#x2192; typing.Any<a class="reference internal" href="_modules/dero/manager/config/models/manager.html#ConfigManager.pop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.manager.ConfigManager.pop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.manager.config.models.manager.ConfigManager.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['basepath', 'section']</em><a class="headerlink" href="#dero.manager.config.models.manager.ConfigManager.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.config.models.manager.ConfigManager.set">
+<code class="descname">set</code><span class="sig-paren">(</span><em>section_path_str: str = None</em>, <em>value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/config/models/manager.html#ConfigManager.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.manager.ConfigManager.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>In contrast to update, completely replaces the config object.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>section_path_str:
+value:</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.config.models.manager.ConfigManager.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>d: dict = None</em>, <em>section_path_str: str = None</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dero/manager/config/models/manager.html#ConfigManager.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.manager.ConfigManager.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.config.models.section">
+<span id="dero-manager-config-models-section-module"></span><h2>dero.manager.config.models.section module<a class="headerlink" href="#module-dero.manager.config.models.section" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.manager.config.models.section.ConfigSection">
+<em class="property">class </em><code class="descclassname">dero.manager.config.models.section.</code><code class="descname">ConfigSection</code><span class="sig-paren">(</span><em>configs: typing.List[typing.Union[dero.manager.config.models.config.ActiveFunctionConfig, _ForwardRef('ConfigSection')]], section_config: dero.manager.config.models.config.ActiveFunctionConfig = None, name: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/config/models/section.html#ConfigSection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.section.ConfigSection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.container.Container" title="dero.manager.basemodels.container.Container"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.basemodels.container.Container</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.manager.config.models.section.ConfigSection.config_map">
+<code class="descname">config_map</code><a class="headerlink" href="#dero.manager.config.models.section.ConfigSection.config_map" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.manager.config.models.section.ConfigSection.from_files">
+<em class="property">classmethod </em><code class="descname">from_files</code><span class="sig-paren">(</span><em>basepath: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/config/models/section.html#ConfigSection.from_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.section.ConfigSection.from_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.manager.config.models.section.ConfigSection.items">
+<code class="descname">items</code><a class="headerlink" href="#dero.manager.config.models.section.ConfigSection.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.manager.config.models.section.ConfigSection.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['name', 'config', 'items']</em><a class="headerlink" href="#dero.manager.config.models.section.ConfigSection.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.manager.config.models.section.ConfigSection.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>d: dict = None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/config/models/section.html#ConfigSection.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.config.models.section.ConfigSection.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.config.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.manager.config.models" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.manager.config.models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,187 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.io.func.load.args &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.manager.io.func.load.args</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">dero.manager.views.object</span> <span class="k">import</span> <span class="n">ObjectView</span>
+<span class="kn">from</span> <span class="nn">importlib.util</span> <span class="k">import</span> <span class="n">resolve_name</span>
+
+<span class="kn">from</span> <span class="nn">dero.manager.imports.models.statements.interfaces</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">ObjectImportStatement</span><span class="p">,</span>
+    <span class="n">ModuleImportStatement</span><span class="p">,</span>
+    <span class="n">AnyImportStatement</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">dero.manager.io.file.load.parsers.funcdef</span> <span class="k">import</span> <span class="n">extract_function_definition_or_class_init_from_ast_by_name</span>
+<span class="kn">from</span> <span class="nn">dero.manager.io.file.load.lazy.base.impassign</span> <span class="k">import</span> <span class="n">ImportAssignmentLazyLoader</span>
+<span class="kn">from</span> <span class="nn">dero.manager.imports.models.statements.container</span> <span class="k">import</span> <span class="n">ImportStatementContainer</span>
+
+<span class="n">ArgumentsAndImports</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">ast</span><span class="o">.</span><span class="n">arguments</span><span class="p">,</span> <span class="n">ImportStatementContainer</span><span class="p">]</span>
+
+<div class="viewcode-block" id="FunctionArgsExtractor"><a class="viewcode-back" href="../../../../../../dero.manager.io.func.load.html#dero.manager.io.func.load.args.FunctionArgsExtractor">[docs]</a><span class="k">class</span> <span class="nc">FunctionArgsExtractor</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_view</span><span class="p">:</span> <span class="s1">&#39;ObjectView&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">object_view</span> <span class="o">=</span> <span class="n">object_view</span>
+
+<div class="viewcode-block" id="FunctionArgsExtractor.extract_args"><a class="viewcode-back" href="../../../../../../dero.manager.io.func.load.html#dero.manager.io.func.load.args.FunctionArgsExtractor.extract_args">[docs]</a>    <span class="k">def</span> <span class="nf">extract_args</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArgumentsAndImports</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">extract_function_args_and_arg_imports_from_import</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">object_view</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">object_view</span><span class="o">.</span><span class="n">import_statement</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">object_view</span><span class="o">.</span><span class="n">section_path_str</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="extract_function_args_and_arg_imports_from_import"><a class="viewcode-back" href="../../../../../../dero.manager.io.func.load.html#dero.manager.io.func.load.args.extract_function_args_and_arg_imports_from_import">[docs]</a><span class="k">def</span> <span class="nf">extract_function_args_and_arg_imports_from_import</span><span class="p">(</span><span class="n">function_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">imp</span><span class="p">:</span> <span class="n">AnyImportStatement</span><span class="p">,</span>
+                                                      <span class="n">import_section_path_str</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArgumentsAndImports</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">dero.manager.io.func.load.extractimp</span> <span class="k">import</span> <span class="n">extract_import_statements_from_function_args_imports_and_assigns</span>
+
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">get_module_filepath_from_import</span><span class="p">(</span>
+        <span class="n">imp</span><span class="p">,</span>
+        <span class="n">import_section_path_str</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">function_name</span> <span class="ow">in</span> <span class="n">imp</span><span class="o">.</span><span class="n">renames</span><span class="o">.</span><span class="n">new_names</span><span class="p">:</span>
+        <span class="c1"># If was renamed in the import,</span>
+        <span class="c1"># Get original name from rename statement</span>
+        <span class="n">function_name</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">renames</span><span class="o">.</span><span class="n">reverse_name_map</span><span class="p">[</span><span class="n">function_name</span><span class="p">]</span>
+
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">ImportAssignmentLazyLoader</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+    <span class="n">ast_function_def</span> <span class="o">=</span> <span class="n">extract_function_definition_or_class_init_from_ast_by_name</span><span class="p">(</span>
+        <span class="n">loader</span><span class="o">.</span><span class="n">ast</span><span class="p">,</span>
+        <span class="n">function_name</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ast_function_def</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Found function definition in this import</span>
+        <span class="c1"># TODO: handle other class methods - also update extract_function_definition function</span>
+        <span class="k">if</span> <span class="n">ast_function_def</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;__init__&#39;</span><span class="p">:</span>
+            <span class="c1"># Got class init</span>
+            <span class="k">del</span> <span class="n">ast_function_def</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># delete first arg (self)</span>
+        <span class="n">function_arg_imports</span> <span class="o">=</span> <span class="n">extract_import_statements_from_function_args_imports_and_assigns</span><span class="p">(</span>
+            <span class="n">ast_function_def</span><span class="o">.</span><span class="n">args</span><span class="p">,</span>
+            <span class="n">loader</span><span class="o">.</span><span class="n">imports</span><span class="p">,</span>
+            <span class="n">loader</span><span class="o">.</span><span class="n">assigns</span><span class="p">,</span>
+            <span class="n">imp</span><span class="o">.</span><span class="n">module</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">ast_function_def</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">function_arg_imports</span>
+
+    <span class="c1"># Else, this function must have been imported into this file as well.</span>
+    <span class="c1"># Must find the matching import, the extract args from that import</span>
+    <span class="n">next_level_import</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">imports</span><span class="o">.</span><span class="n">get_import_for_module_or_obj_name</span><span class="p">(</span><span class="n">function_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">next_level_import</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;not able to find function definition for </span><span class="si">{function_name}</span><span class="s1">. Could not &#39;</span>
+                         <span class="n">f</span><span class="s1">&#39;find in definitions or in imports&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">import_section_path_str</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">next_module</span> <span class="o">=</span> <span class="n">next_level_import</span><span class="o">.</span><span class="n">module</span>
+        <span class="n">new_section_path</span> <span class="o">=</span> <span class="n">resolve_name</span><span class="p">(</span><span class="n">next_module</span><span class="p">,</span> <span class="n">import_section_path_str</span><span class="p">)</span> <span class="k">if</span> <span class="n">next_module</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">next_module</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_section_path</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">extract_function_args_and_arg_imports_from_import</span><span class="p">(</span>
+        <span class="n">function_name</span><span class="p">,</span>
+        <span class="n">imp</span><span class="o">=</span><span class="n">next_level_import</span><span class="p">,</span>
+        <span class="n">import_section_path_str</span><span class="o">=</span><span class="n">new_section_path</span>
+    <span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="get_module_filepath_from_import"><a class="viewcode-back" href="../../../../../../dero.manager.io.func.load.html#dero.manager.io.func.load.args.get_module_filepath_from_import">[docs]</a><span class="k">def</span> <span class="nf">get_module_filepath_from_import</span><span class="p">(</span><span class="n">imp</span><span class="p">:</span> <span class="n">AnyImportStatement</span><span class="p">,</span> <span class="n">import_section_path_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">imp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">imp</span><span class="p">,</span> <span class="n">ObjectImportStatement</span><span class="p">):</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">imp</span><span class="o">.</span><span class="n">get_module_filepath</span><span class="p">(</span><span class="n">import_section_path_str</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">imp</span><span class="p">,</span> <span class="n">ModuleImportStatement</span><span class="p">):</span>
+        <span class="c1"># have already ensured in creating ObjectView that there should be only one module</span>
+        <span class="c1"># in the module import statement. So just take the first filepath</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">imp</span><span class="o">.</span><span class="n">get_module_filepaths</span><span class="p">(</span><span class="n">import_section_path_str</span><span class="p">)[</span><span class="n">imp</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;expected import statement to be ObjectImportStatement or ModuleImportStatement.&#39;</span>
+                         <span class="n">f</span><span class="s1">&#39; Got </span><span class="si">{imp}</span><span class="s1"> of type {type(imp)}&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">func</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

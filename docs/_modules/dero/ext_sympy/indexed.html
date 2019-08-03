@@ -1,0 +1,279 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.ext_sympy.indexed &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dero.ext_sympy.indexed</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Idx</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Symbol</span>
+<span class="kn">from</span> <span class="nn">sympy.tensor.index_methods</span> <span class="k">import</span> <span class="n">get_indices</span><span class="p">,</span> <span class="n">IndexConformanceException</span>
+<span class="kn">from</span> <span class="nn">dero.mixins.propertycache</span> <span class="k">import</span> <span class="n">SimplePropertyCacheMixin</span>
+
+<span class="n">IntTuple</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+<span class="n">IntOrIntTuple</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">IntTuple</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="IndexedEquation"><a class="viewcode-back" href="../../../dero.ext_sympy.html#dero.ext_sympy.indexed.IndexedEquation">[docs]</a><span class="k">class</span> <span class="nc">IndexedEquation</span><span class="p">(</span><span class="n">Eq</span><span class="p">,</span> <span class="n">SimplePropertyCacheMixin</span><span class="p">):</span>
+    <span class="n">is_IndexedEquation</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># def __getitem__(self, item: IntOrIntTuple):</span>
+    <span class="c1">#     raise NotImplementedError(&#39;have partial implementation, but need to handle order of indices to get working.&#39;)</span>
+    <span class="c1">#     if isinstance(item, int):</span>
+    <span class="c1">#         # cast to tuple</span>
+    <span class="c1">#         item = (item,)</span>
+    <span class="c1">#     lhs_indices = get_all_indices(self.lhs)</span>
+    <span class="c1">#     if len(item) != len(lhs_indices):</span>
+    <span class="c1">#         raise ValueError(f&#39;could not align desired indices {item} with lhs indices {lhs_indices}&#39;)</span>
+    <span class="c1">#     sub_dict = {}</span>
+    <span class="c1">#     # TODO: this is becoming out of order because indices are not ordered</span>
+    <span class="c1">#     for i, idx in enumerate(lhs_indices):</span>
+    <span class="c1">#         sub_dict[idx] = item[i]</span>
+    <span class="c1">#     if not _sub_dict_is_valid_for_expr(sub_dict, self.lhs):</span>
+    <span class="c1">#         raise ValueError(f&#39;invalid sub dict {sub_dict} for expr {self.lhs}&#39;)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     evaled_lhs = self.lhs.subs(sub_dict)</span>
+    <span class="c1">#     for eq in self.evaluated_index_eqs:</span>
+    <span class="c1">#         if evaled_lhs in eq.lhs.free_symbols:</span>
+    <span class="c1">#             return eq</span>
+    <span class="c1">#</span>
+    <span class="c1">#     raise ValueError(f&#39;could not find any evaluated index equations with lhs matching {evaled_lhs}&#39;)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">evaluated_index_eqs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_try_getattr_else_call_func</span><span class="p">(</span><span class="s1">&#39;_evaluated_index_eqs&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_evaluated_index_eqs</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_try_getattr_else_call_func</span><span class="p">(</span><span class="s1">&#39;_indices&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_indices</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">index_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_try_getattr_else_call_func</span><span class="p">(</span><span class="s1">&#39;_index_symbols&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_symbols_from_indices</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_extract_symbols_from_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_index_symbols</span> <span class="o">=</span> <span class="n">_get_symbols_from_indices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_generate_evaluated_index_eqs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluated_index_eqs</span> <span class="o">=</span> <span class="n">equations_from_indexed_equation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_symbols</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_extract_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_indices</span> <span class="o">=</span> <span class="n">get_all_indices_for_eq</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="equations_from_indexed_equation"><a class="viewcode-back" href="../../../dero.ext_sympy.html#dero.ext_sympy.indexed.equations_from_indexed_equation">[docs]</a><span class="k">def</span> <span class="nf">equations_from_indexed_equation</span><span class="p">(</span><span class="n">equation</span><span class="p">:</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Idx</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Eq</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a set of equations with evaluated indices from a single indexed equation</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        equation: must contain indices</span>
+<span class="sd">        indices: indices which should be evaluated</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        evaluated equations</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; from sympy import symbols, Idx, IndexedBase, Eq</span>
+<span class="sd">        &gt;&gt;&gt; N = 2</span>
+<span class="sd">        &gt;&gt;&gt; T = 2</span>
+<span class="sd">        &gt;&gt;&gt; i = Idx(&#39;i&#39;, range=(1, N))</span>
+<span class="sd">        &gt;&gt;&gt; t = Idx(&#39;t&#39;, range=(0, T))</span>
+
+<span class="sd">        &gt;&gt;&gt; price = IndexedBase(&#39;P&#39;, shape=(N, T + 1))</span>
+<span class="sd">        &gt;&gt;&gt; ret = IndexedBase(&#39;r&#39;, shape=(N, T))</span>
+
+<span class="sd">        &gt;&gt;&gt; p_eq = Eq(price[i, t], price[i, t - 1] * ret[i, t])</span>
+
+<span class="sd">        &gt;&gt;&gt; equations_from_indexed_equation(p_eq, (i, t))</span>
+
+<span class="sd">        P_{1,1} = P_{1,0} r_{1,1}</span>
+<span class="sd">        P_{1,2} = P_{1,1} r_{1,2}</span>
+<span class="sd">        P_{2,1} = P_{2,0} r_{2,1}</span>
+<span class="sd">        P_{2,2} = P_{2,1} r_{2,2}</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_all_bounds_are_numeric</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
+        <span class="c1"># Not possible to create equations when bounds are symbolic</span>
+        <span class="k">return</span> <span class="n">equation</span>
+
+    <span class="n">index_element_tuples</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">_elements_from_index</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
+    <span class="n">substitution_tuples</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">index_element_tuples</span><span class="p">)</span>
+
+    <span class="n">output_eqs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sub_tup</span> <span class="ow">in</span> <span class="n">substitution_tuples</span><span class="p">:</span>
+        <span class="n">sub_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">index</span><span class="p">:</span> <span class="n">sub_tup</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indices</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="n">_sub_dict_is_valid_for_equation</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">,</span> <span class="n">equation</span><span class="p">):</span>
+            <span class="n">evaled_eq</span> <span class="o">=</span> <span class="n">equation</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">)</span>
+            <span class="n">output_eqs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaled_eq</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output_eqs</span></div>
+
+
+<span class="k">def</span> <span class="nf">_all_bounds_are_numeric</span><span class="p">(</span><span class="n">indexes</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Idx</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">_bounds_are_numeric</span><span class="p">,</span> <span class="n">indexes</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_bounds_are_numeric</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="n">Idx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;lower&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">_bound_is_numeric</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">lower</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;upper&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">_bound_is_numeric</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">upper</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">_bound_is_numeric</span><span class="p">(</span><span class="nb">any</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">any</span><span class="p">,</span> <span class="s1">&#39;is_symbol&#39;</span><span class="p">):</span>
+        <span class="c1"># if doesn&#39;t have is_symbol property, assumed we got a number</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="ow">not</span> <span class="nb">any</span><span class="o">.</span><span class="n">is_symbol</span>
+
+
+<span class="k">def</span> <span class="nf">_elements_from_index</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="n">Idx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">index</span><span class="o">.</span><span class="n">upper</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
+
+
+<div class="viewcode-block" id="get_all_indices"><a class="viewcode-back" href="../../../dero.ext_sympy.html#dero.ext_sympy.indexed.get_all_indices">[docs]</a><span class="k">def</span> <span class="nf">get_all_indices</span><span class="p">(</span><span class="n">expr</span><span class="p">:</span> <span class="n">Expr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">Idx</span><span class="p">]:</span>
+    <span class="n">all_indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="c1"># First try to get indices for entire expr</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">_get_all_indices</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="n">all_indices</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">IndexConformanceException</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># Now get indices for each term of expr</span>
+    <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+        <span class="c1"># Recursively call get indices on each sub term</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">get_all_indices</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
+        <span class="n">all_indices</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">all_indices</span></div>
+
+
+<div class="viewcode-block" id="get_all_indices_for_eq"><a class="viewcode-back" href="../../../dero.ext_sympy.html#dero.ext_sympy.indexed.get_all_indices_for_eq">[docs]</a><span class="k">def</span> <span class="nf">get_all_indices_for_eq</span><span class="p">(</span><span class="n">equation</span><span class="p">:</span> <span class="n">Eq</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">Idx</span><span class="p">]:</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">get_all_indices</span><span class="p">(</span><span class="n">equation</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+    <span class="n">indices</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">get_all_indices</span><span class="p">(</span><span class="n">equation</span><span class="o">.</span><span class="n">rhs</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">indices</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_all_indices</span><span class="p">(</span><span class="n">expr</span><span class="p">:</span> <span class="n">Expr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">Idx</span><span class="p">]:</span>
+    <span class="n">indices</span><span class="p">,</span> <span class="n">empty_dict</span> <span class="o">=</span> <span class="n">get_indices</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">indices</span>
+
+
+<span class="k">def</span> <span class="nf">_get_symbols_from_indices</span><span class="p">(</span><span class="n">idx_set</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">Idx</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">Symbol</span><span class="p">]:</span>
+    <span class="n">all_symbols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">idx_set</span><span class="p">:</span>
+        <span class="n">all_symbols</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">idx</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">all_symbols</span>
+
+
+<span class="k">def</span> <span class="nf">_is_in_indices</span><span class="p">(</span><span class="n">sym</span><span class="p">:</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">idx_set</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">Idx</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">symbols</span> <span class="o">=</span> <span class="n">_get_symbols_from_indices</span><span class="p">(</span><span class="n">idx_set</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sym</span> <span class="ow">in</span> <span class="n">symbols</span>
+
+
+<span class="k">def</span> <span class="nf">_sub_dict_is_valid_for_indices</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Idx</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">indices</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">Idx</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">sub_idx</span><span class="p">,</span> <span class="n">sub_val</span> <span class="ow">in</span> <span class="n">sub_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">_is_in_indices</span><span class="p">(</span><span class="n">sub_idx</span><span class="p">,</span> <span class="p">{</span><span class="n">idx</span><span class="p">}):</span>
+                <span class="n">symbols</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">free_symbols</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="s1">&#39;lower&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="n">symbol</span><span class="o">.</span><span class="n">lower</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="kc">False</span>
+                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="s1">&#39;upper&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="n">symbol</span><span class="o">.</span><span class="n">upper</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">def</span> <span class="nf">_sub_dict_is_valid_for_equation</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Idx</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">equation</span><span class="p">:</span> <span class="n">Eq</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">get_all_indices_for_eq</span><span class="p">(</span><span class="n">equation</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_sub_dict_is_valid_for_indices</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_sub_dict_is_valid_for_expr</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Idx</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">expr</span><span class="p">:</span> <span class="n">Expr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">get_all_indices</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_sub_dict_is_valid_for_indices</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

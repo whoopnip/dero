@@ -1,0 +1,158 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.manager.imports.logic.load package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-manager-imports-logic-load-package">
+<h1>dero.manager.imports.logic.load package<a class="headerlink" href="#dero-manager-imports-logic-load-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.manager.imports.logic.load.ext_importlib">
+<span id="dero-manager-imports-logic-load-ext-importlib-module"></span><h2>dero.manager.imports.logic.load.ext_importlib module<a class="headerlink" href="#module-dero.manager.imports.logic.load.ext_importlib" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.manager.imports.logic.load.ext_importlib.find_spec">
+<code class="descclassname">dero.manager.imports.logic.load.ext_importlib.</code><code class="descname">find_spec</code><span class="sig-paren">(</span><em>name</em>, <em>package=None</em><span class="sig-paren">)</span> &#x2192; _frozen_importlib.ModuleSpec<a class="reference internal" href="_modules/dero/manager/imports/logic/load/ext_importlib.html#find_spec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.imports.logic.load.ext_importlib.find_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the spec for the specified module.</p>
+<p>Note: this is a modification of importlib.util.find_spec which does not
+import parent packages. It instead recursively searches through the parents.</p>
+<p>First, sys.modules is checked to see if the module was already imported. If
+so, then sys.modules[name].__spec__ is returned. If that happens to be
+set to None, then ValueError is raised. If the module is not in
+sys.modules, then sys.meta_path is searched for a suitable spec with the
+value of ‘path’ given to the finders. None is returned if no spec could
+be found.</p>
+<p>If the name is for submodule (contains a dot), find_spec is called on the
+parent module to determine the submodule_search_locations.</p>
+<p>The name and package arguments work the same as importlib.import_module().
+In other words, relative module names (with leading dots) work.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.imports.logic.load.ext_importlib.get_filepath_from_module_str">
+<code class="descclassname">dero.manager.imports.logic.load.ext_importlib.</code><code class="descname">get_filepath_from_module_str</code><span class="sig-paren">(</span><em>module_str: str</em>, <em>location_section_path_str: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/imports/logic/load/ext_importlib.html#get_filepath_from_module_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.imports.logic.load.ext_importlib.get_filepath_from_module_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.imports.logic.load.func">
+<span id="dero-manager-imports-logic-load-func-module"></span><h2>dero.manager.imports.logic.load.func module<a class="headerlink" href="#module-dero.manager.imports.logic.load.func" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.manager.imports.logic.load.func.function_args_as_dict">
+<code class="descclassname">dero.manager.imports.logic.load.func.</code><code class="descname">function_args_as_dict</code><span class="sig-paren">(</span><em>func: typing.Callable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/imports/logic/load/func.html#function_args_as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.imports.logic.load.func.function_args_as_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.imports.logic.load.func.get_variable_name_of_obj">
+<code class="descclassname">dero.manager.imports.logic.load.func.</code><code class="descname">get_variable_name_of_obj</code><span class="sig-paren">(</span><em>obj: &lt;built-in function any&gt;</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/dero/manager/imports/logic/load/func.html#get_variable_name_of_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.imports.logic.load.func.get_variable_name_of_obj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.imports.logic.load.name">
+<span id="dero-manager-imports-logic-load-name-module"></span><h2>dero.manager.imports.logic.load.name module<a class="headerlink" href="#module-dero.manager.imports.logic.load.name" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.manager.imports.logic.load.name.get_imported_obj_variable_name">
+<code class="descclassname">dero.manager.imports.logic.load.name.</code><code class="descname">get_imported_obj_variable_name</code><span class="sig-paren">(</span><em>obj</em>, <em>module: module</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/dero/manager/imports/logic/load/name.html#get_imported_obj_variable_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.imports.logic.load.name.get_imported_obj_variable_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.imports.logic.load.name.get_module_and_name_imported_from">
+<code class="descclassname">dero.manager.imports.logic.load.name.</code><code class="descname">get_module_and_name_imported_from</code><span class="sig-paren">(</span><em>obj</em>, <em>search_list: typing.List[str] = None</em><span class="sig-paren">)</span> &#x2192; typing.Tuple[module, str]<a class="reference internal" href="_modules/dero/manager/imports/logic/load/name.html#get_module_and_name_imported_from"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.imports.logic.load.name.get_module_and_name_imported_from" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.imports.logic.load.name.is_imported_name">
+<code class="descclassname">dero.manager.imports.logic.load.name.</code><code class="descname">is_imported_name</code><span class="sig-paren">(</span><em>name: str</em>, <em>search_list: typing.List[str] = None</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/dero/manager/imports/logic/load/name.html#is_imported_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.imports.logic.load.name.is_imported_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.manager.imports.logic.load.name.is_imported_obj">
+<code class="descclassname">dero.manager.imports.logic.load.name.</code><code class="descname">is_imported_obj</code><span class="sig-paren">(</span><em>obj</em>, <em>search_list: typing.List[str] = None</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/dero/manager/imports/logic/load/name.html#is_imported_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.imports.logic.load.name.is_imported_obj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.manager.imports.logic.load.skipmodules">
+<span id="dero-manager-imports-logic-load-skipmodules-module"></span><h2>dero.manager.imports.logic.load.skipmodules module<a class="headerlink" href="#module-dero.manager.imports.logic.load.skipmodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.manager.imports.logic.load">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.manager.imports.logic.load" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.manager.imports.logic.load.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

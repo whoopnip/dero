@@ -1,0 +1,707 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.ext_pandas package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-ext-pandas-package">
+<h1>dero.ext_pandas package<a class="headerlink" href="#dero-ext-pandas-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dero.ext_pandas.optimize.html">dero.ext_pandas.optimize package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dero.ext_pandas.optimize.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dero.ext_pandas.optimize.load.html">dero.ext_pandas.optimize.load package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dero.ext_pandas.optimize.load.html#module-dero.ext_pandas.optimize.load">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dero.ext_pandas.optimize.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.ext_pandas.optimize.html#module-dero.ext_pandas.optimize.dftypes">dero.ext_pandas.optimize.dftypes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.ext_pandas.optimize.html#module-dero.ext_pandas.optimize.typing">dero.ext_pandas.optimize.typing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.ext_pandas.optimize.html#module-dero.ext_pandas.optimize">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.ext_pandas.filldata">
+<span id="dero-ext-pandas-filldata-module"></span><h2>dero.ext_pandas.filldata module<a class="headerlink" href="#module-dero.ext_pandas.filldata" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.ext_pandas.filldata.add_missing_group_rows">
+<code class="descclassname">dero.ext_pandas.filldata.</code><code class="descname">add_missing_group_rows</code><span class="sig-paren">(</span><em>df, group_id_cols: typing.List[str], non_group_id_cols: typing.List[str], fill_method='ffill', fill_limit: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/filldata.html#add_missing_group_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.filldata.add_missing_group_rows" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">df:
+group_id_cols: typically entity ids. these ids represents groups in the data. data will not be</p>
+<blockquote>
+<div>forward/back filled across differences in these ids.</div></blockquote>
+<p class="last">non_group_id_cols: typically date or time ids. data will be forward/back filled across differences in these ids
+fill_method: pandas fill methods
+fill_limit: pandas fill limit</p>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.filldata.drop_missing_group_rows">
+<code class="descclassname">dero.ext_pandas.filldata.</code><code class="descname">drop_missing_group_rows</code><span class="sig-paren">(</span><em>df</em>, <em>fill_id_cols</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/filldata.html#drop_missing_group_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.filldata.drop_missing_group_rows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.filldata.fillna_by_groups">
+<code class="descclassname">dero.ext_pandas.filldata.</code><code class="descname">fillna_by_groups</code><span class="sig-paren">(</span><em>df</em>, <em>byvars</em>, <em>exclude_cols=None</em>, <em>str_vars='first'</em>, <em>num_vars='mean'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/filldata.html#fillna_by_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.filldata.fillna_by_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>WARNING: do not use if index is important, it will be dropped</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.filldata.fillna_by_groups_and_keep_one_per_group">
+<code class="descclassname">dero.ext_pandas.filldata.</code><code class="descname">fillna_by_groups_and_keep_one_per_group</code><span class="sig-paren">(</span><em>df</em>, <em>byvars</em>, <em>exclude_cols=None</em>, <em>str_vars='first'</em>, <em>num_vars='mean'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/filldata.html#fillna_by_groups_and_keep_one_per_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.filldata.fillna_by_groups_and_keep_one_per_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>WARNING: do not use if index is important, it will be dropped</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.ext_pandas.pdutils">
+<span id="dero-ext-pandas-pdutils-module"></span><h2>dero.ext_pandas.pdutils module<a class="headerlink" href="#module-dero.ext_pandas.pdutils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dero.ext_pandas.pdutils.create_windows">
+<code class="descclassname">dero.ext_pandas.pdutils.</code><code class="descname">create_windows</code><span class="sig-paren">(</span><em>periods</em>, <em>time</em>, <em>method='between'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/pdutils.html#create_windows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.pdutils.create_windows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.pdutils.split">
+<code class="descclassname">dero.ext_pandas.pdutils.</code><code class="descname">split</code><span class="sig-paren">(</span><em>df</em>, <em>keepvars</em>, <em>keyvar='__key_var__'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/pdutils.html#split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.pdutils.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits a dataframe into a list of arrays based on a key variable</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.pdutils.window_mapping">
+<code class="descclassname">dero.ext_pandas.pdutils.</code><code class="descname">window_mapping</code><span class="sig-paren">(</span><em>time</em>, <em>col</em>, <em>method='between'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/pdutils.html#window_mapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.pdutils.window_mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a pandas series of dates as inputs, calculates windows, and returns a series of which
+windows each observation are in. To be used with groupby.transform()</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.pdutils.year_month_from_single_date">
+<code class="descclassname">dero.ext_pandas.pdutils.</code><code class="descname">year_month_from_single_date</code><span class="sig-paren">(</span><em>date</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/pdutils.html#year_month_from_single_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.pdutils.year_month_from_single_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-dero.ext_pandas.regby">
+<span id="dero-ext-pandas-regby-module"></span><h2>dero.ext_pandas.regby module<a class="headerlink" href="#module-dero.ext_pandas.regby" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.ext_pandas.regby.ResultCounter">
+<em class="property">class </em><code class="descclassname">dero.ext_pandas.regby.</code><code class="descname">ResultCounter</code><span class="sig-paren">(</span><em>num_expected_results</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/regby.html#ResultCounter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.regby.ResultCounter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.regby.df_for_reg">
+<code class="descclassname">dero.ext_pandas.regby.</code><code class="descname">df_for_reg</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars</em>, <em>groupvar</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/regby.html#df_for_reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.regby.df_for_reg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.regby.reg_by">
+<code class="descclassname">dero.ext_pandas.regby.</code><code class="descname">reg_by</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars</em>, <em>groupvar</em>, <em>merge=False</em>, <em>cons=True</em>, <em>mp=False</em>, <em>stderr=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas/regby.html#reg_by"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.regby.reg_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a regression of df[yvar] on df[xvars] by values of groupvar. Outputs a dataframe with values of
+groupvar and corresponding coefficients, unless merge=True, then outputs the original dataframe with the
+appropriate coefficients merged in.</p>
+<p>Required inputs:
+groupvar: str or list of strs, column names of columns identifying by groups</p>
+<p>Optional Options:
+cons: True to include a constant, False to not
+mp: False to use single processor, True to use all processors, int to use # processors
+stderr: bool, True to include standard errors of coefficients</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.ext_pandas">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.ext_pandas" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.ext_pandas.USTradingCalendar">
+<em class="property">class </em><code class="descclassname">dero.ext_pandas.</code><code class="descname">USTradingCalendar</code><span class="sig-paren">(</span><em>name=None</em>, <em>rules=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#USTradingCalendar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.USTradingCalendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pandas.tseries.holiday.AbstractHolidayCalendar</span></code></p>
+<dl class="attribute">
+<dt id="dero.ext_pandas.USTradingCalendar.rules">
+<code class="descname">rules</code><em class="property"> = [Holiday: NewYearsDay (month=1, day=1, observance=&lt;function nearest_workday&gt;), Holiday: Martin Luther King Jr. Day (month=1, day=1, offset=&lt;DateOffset: weekday=MO(+3)&gt;), Holiday: Presidents Day (month=2, day=1, offset=&lt;DateOffset: weekday=MO(+3)&gt;), Holiday: Good Friday (month=1, day=1, offset=[&lt;Easter&gt;, &lt;-2 * Days&gt;]), Holiday: Memorial Day (month=5, day=31, offset=&lt;DateOffset: weekday=MO(-1)&gt;), Holiday: USIndependenceDay (month=7, day=4, observance=&lt;function nearest_workday&gt;), Holiday: Labor Day (month=9, day=1, offset=&lt;DateOffset: weekday=MO(+1)&gt;), Holiday: Thanksgiving (month=11, day=1, offset=&lt;DateOffset: weekday=TH(+4)&gt;), Holiday: Christmas (month=12, day=25, observance=&lt;function nearest_workday&gt;)]</em><a class="headerlink" href="#dero.ext_pandas.USTradingCalendar.rules" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.apply_func_to_unique_and_merge">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">apply_func_to_unique_and_merge</code><span class="sig-paren">(</span><em>series</em>, <em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#apply_func_to_unique_and_merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.apply_func_to_unique_and_merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Many Pandas functions can be slow because they’re doing repeated work. This function reduces
+the given series down to unique values, applies the function, then expands back up to the
+original shape of the data. Returns a series.</p>
+<p>Required inputs:
+seres: pd.Series
+func: function to be applied to the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Usage:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>&gt;&gt;&gt;import functools
+&gt;&gt;&gt;to_datetime = functools.partial(pd.to_datetime, format=’%Y%m’)
+&gt;&gt;&gt;apply_func_to_unique_and_merge(df[‘MONTH’], to_datetime)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.averages">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">averages</code><span class="sig-paren">(</span><em>df</em>, <em>avgvars</em>, <em>byvars</em>, <em>wtvar=None</em>, <em>count=False</em>, <em>flatten=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#averages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.averages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns equal- and value-weighted averages of variables within groups</p>
+<p>avgvars: List of strings or string of variable names to take averages of
+byvars: List of strings or string of variable names for by groups
+wtvar: String of variable to use for calculating weights in weighted average
+count: False or string of variable name, pass variable name to get count of non-missing</p>
+<blockquote>
+<div>of that variable within groups.</div></blockquote>
+<p>flatten: Boolean, False to return df with multi-level index</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.convert_sas_date_to_pandas_date">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">convert_sas_date_to_pandas_date</code><span class="sig-paren">(</span><em>sasdates</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#convert_sas_date_to_pandas_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.convert_sas_date_to_pandas_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.cumulate">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">cumulate</code><span class="sig-paren">(</span><em>df</em>, <em>cumvars</em>, <em>method</em>, <em>periodvar='Date'</em>, <em>byvars=None</em>, <em>time=None</em>, <em>grossify=False</em>, <em>multiprocess=True</em>, <em>replace: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#cumulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.cumulate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cumulates a variable over time. Typically used to get cumulative returns.</p>
+<p>NOTE: Method zero not yet working</p>
+<dl class="docutils">
+<dt>method = ‘between’, ‘zero’, or ‘first’. </dt>
+<dd><p class="first">If ‘zero’, will give returns since the original date. Note: for periods before the original date, 
+this will turn positive returns negative as we are going backwards in time.
+If ‘between’, will give returns since the prior requested time period. Note that
+the first period is period 0.
+If ‘first’, will give returns since the first requested time period.
+For example, if our input data was for date 1/5/2006, but we had shifted dates:</p>
+<blockquote>
+<div>permno  date      RET  shift_date
+10516   1/5/2006  110%  1/5/2006
+10516   1/5/2006  120%  1/6/2006
+10516   1/5/2006  105%  1/7/2006
+10516   1/5/2006  130%  1/8/2006</div></blockquote>
+<dl class="last docutils">
+<dt>Then cumulate(df, ‘RET’, cumret=’between’, time=[1,3], get=’RET’, periodvar=’shift_date’) would return:</dt>
+<dd>permno  date      RET  shift_date  cumret
+10516   1/5/2006  110%  1/5/2006    110%
+10516   1/5/2006  120%  1/6/2006    120%
+10516   1/5/2006  105%  1/7/2006    126%
+10516   1/5/2006  130%  1/8/2006    130%</dd>
+<dt>Then cumulate(df, ‘RET’, cumret=’first’, periodvar=’shift_date’) would return:</dt>
+<dd>permno  date      RET  shift_date  cumret
+10516   1/5/2006  110%  1/5/2006    110%
+10516   1/5/2006  120%  1/6/2006    120%
+10516   1/5/2006  105%  1/7/2006    126%
+10516   1/5/2006  130%  1/8/2006    163.8%</dd>
+</dl>
+</dd>
+</dl>
+<p>byvars: string or list of column names to use to seperate by groups
+time: list of ints, for use with method=’between’. Defines which periods to calculate between.
+grossify: bool, set to True to add one to all variables then subtract one at the end
+multiprocess: bool or int, set to True to use all available processors,</p>
+<blockquote>
+<div>set to False to use only one, pass an int less or equal to than number of 
+processors to use that amount of processors</div></blockquote>
+<dl class="docutils">
+<dt>replace: bool, True to return df with passed columns replaced with cumulated columns.</dt>
+<dd>False to return df with both passed columns and cumulated columns</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.expand_months">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">expand_months</code><span class="sig-paren">(</span><em>df</em>, <em>datevar='Date'</em>, <em>newdatevar='Daily Date'</em>, <em>trade_days=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#expand_months"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.expand_months" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a monthly dataframe and returns a daily (trade day or calendar day) dataframe. 
+For each row in the input data, duplicates that row over each trading/calendar day in the month of 
+the date in that row. Creates a new date column containing the daily date.</p>
+<p>NOTE: If the input dataset has multiple observations per month, all of these will be expanded. Therefore
+you will have one row for each trade day for each original observation.</p>
+<p>Required inputs:
+df: pandas dataframe containing a date variable</p>
+<p>Optional inputs:
+datevar: str, name of column containing dates in the input df
+newdatevar: str, name of new column to be created containing daily dates
+tradedays: bool, True to use trading days and False to use calendar days</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.expand_time">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">expand_time</code><span class="sig-paren">(</span><em>df</em>, <em>intermediate_periods=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#expand_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.expand_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new observations in the dataset advancing the time by the int or list given. Creates a new date variable.
+See _expand_time for keyword arguments.</p>
+<p>Specify intermediate_periods=True to get periods in between given time periods, e.g.
+passing time=[12,24,36] will get periods 12, 13, 14, …, 35, 36.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.factor_reg_by">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">factor_reg_by</code><span class="sig-paren">(</span><em>df</em>, <em>groupvar</em>, <em>fac=4</em>, <em>retvar='RET'</em>, <em>mp=False</em>, <em>stderr=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#factor_reg_by"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.factor_reg_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a dataframe with RET, mktrf, smb, hml, and umd, and produces abnormal returns by groups.</p>
+<p>Required inputs:
+df: pandas datafram containing mktrf, smb, hml, umd, (or what’s required for chosen model)</p>
+<blockquote>
+<div>and a return variable</div></blockquote>
+<p>groupvar: str or list of strs, column names of columns on which to form by groups
+fac: int (1, 3, 4), factor model to run
+retvar: str, name of column containing returns. risk free rate will be subtracted from this column
+stderr: bool, True to include standard errors of coefficients</p>
+<p>Optional Inputs:
+mp: False to use single processor, True to use all processors, int to use # processors</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.fill_excluded_rows">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">fill_excluded_rows</code><span class="sig-paren">(</span><em>df</em>, <em>byvars</em>, <em>fillvars=None</em>, <em>**fillna_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#fill_excluded_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.fill_excluded_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a dataframe which does not contain all possible combinations of byvars as rows. Creates
+those rows if fillna_kwargs are passed, calls fillna using fillna_kwargs for fillvars.</p>
+<dl class="docutils">
+<dt>For example, df:</dt>
+<dd><blockquote class="first">
+<div>date     id  var</div></blockquote>
+<p class="last">0  2003-06-09 42223C    1
+1  2003-06-10 09255G    2</p>
+</dd>
+<dt>with fillna_for_excluded_rows(df, byvars=[‘date’,’id’], fillvars=’var’, value=0) becomes:</dt>
+<dd><blockquote class="first">
+<div>date     id  var</div></blockquote>
+<p class="last">0  2003-06-09 42223C    1
+1  2003-06-10 42223C    0
+2  2003-06-09 09255G    0
+3  2003-06-10 09255G    2</p>
+</dd>
+</dl>
+<p>Required options:
+df: pandas dataframe
+byvars: variables on which dataset should be expanded to product. Can pass a str, list of</p>
+<blockquote>
+<div>strs, or a list of pd.Series.</div></blockquote>
+<p>Optional options:
+fillvars: variables to apply fillna to
+fillna_kwargs: See pandas.DataFrame.fillna for kwargs, value=0 is common</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.groupby_index">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">groupby_index</code><span class="sig-paren">(</span><em>df</em>, <em>byvars</em>, <em>sortvars=None</em>, <em>ascending=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#groupby_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.groupby_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe which is a copy of the old one with an additional column containing an index
+by groups. Each time the bygroup changes, the index restarts at 0.</p>
+<p>Required inputs:
+df: pandas DataFrame
+byvars: str or list of column names containing group identifiers</p>
+<p>Optional inputs:
+sortvars: str or list of column names to sort by within by groups
+ascending: bool, direction of sort</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.groupby_merge">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">groupby_merge</code><span class="sig-paren">(</span><em>df</em>, <em>byvars</em>, <em>func_str</em>, <em>*func_args</em>, <em>subset='all'</em>, <em>replace=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#groupby_merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.groupby_merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a pandas groupby object, applies the aggregation function in func_str, and merges back the 
+aggregated data to the original dataframe.</p>
+<p>Required Inputs:
+df: Pandas DataFrame
+byvars: str or list, column names which uniquely identify groups
+func_str: str, name of groupby aggregation function such as ‘min’, ‘max’, ‘sum’, ‘count’, etc.</p>
+<p>Optional Input:
+subset: str or list, column names for which to apply aggregation functions
+func_args: tuple, arguments to pass to func
+replace: bool, True to replace original columns in the data with aggregated/transformed columns</p>
+<p>Usage:
+df = groupby_merge(df, [‘PERMNO’,’byvar’], ‘max’, subset=’RET’)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.join_col_strings">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">join_col_strings</code><span class="sig-paren">(</span><em>df</em>, <em>cols</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#join_col_strings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.join_col_strings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a dataframe and column name(s) and concatenates string versions of the columns with those names.
+Useful for when a group is identified by several variables and we need one key variable to describe a group.
+Returns a pandas Series.</p>
+<p>Required inputs:
+df: pandas dataframe
+cols: str or list, names of columns in df to be concatenated</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.left_merge_latest">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">left_merge_latest</code><span class="sig-paren">(</span><em>df</em>, <em>df2</em>, <em>on</em>, <em>left_datevar='Date'</em>, <em>right_datevar='Date'</em>, <em>max_offset=None</em>, <em>backend='pandas'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#left_merge_latest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.left_merge_latest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Left merges df2 to df using on, but grabbing the most recent observation (right_datevar will be
+the soonest earlier than left_datevar). Useful for situations where data needs to be merged with
+mismatched dates, and just the most recent data available is needed.</p>
+<p>Required inputs:
+df: Pandas dataframe containing source data (all rows will be kept), must have on variables</p>
+<blockquote>
+<div>and left_datevar</div></blockquote>
+<dl class="docutils">
+<dt>df2: Pandas dataframe containing data to be merged (only the most recent rows before source</dt>
+<dd>data will be kept)</dd>
+</dl>
+<p>on: str or list of strs, names of columns on which to match, excluding date</p>
+<p>Optional inputs:
+left_datevar: str, name of date variable on which to merge in df
+right_datevar: str, name of date variable on which to merge in df2
+max_offset: int or datetime.timedelta, maximum amount of time to go back to look for a match.</p>
+<blockquote>
+<div>When datevar is a datetime column, pass datetime.timedelta. When datevar is an int column
+(e.g. year), pass an int. Currently only applicable for backend ‘pandas’</div></blockquote>
+<dl class="docutils">
+<dt>backend: str, ‘pandas’ or ‘sql’. Specify the underlying machinery used to perform the merge.</dt>
+<dd>‘pandas’ means native pandas, while ‘sql’ uses pandasql. Try ‘sql’ if you run
+out of memory.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.load_sas">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">load_sas</code><span class="sig-paren">(</span><em>filepath</em>, <em>csv=True</em>, <em>**read_csv_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#load_sas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.load_sas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads sas sas7bdat file into a pandas DataFrame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filepath</strong> – str of location of sas7bdat file</li>
+<li><strong>csv</strong> – when set to True, saves a csv version of the data in the same directory as the sas7bdat.
+Next time load_sas will load from the csv version rather than sas7bdat, which speeds up
+load times about 3x. If the sas7bdat file is modified more recently than the csv,
+the sas7bdat will automatically be loaded and saved to the csv again.</li>
+<li><strong>read_csv_kwargs</strong> – kwargs to pass to pd.read_csv if csv option is True</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.long_short_portfolio">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">long_short_portfolio</code><span class="sig-paren">(</span><em>df</em>, <em>portvar</em>, <em>byvars=None</em>, <em>retvars=None</em>, <em>top_minus_bot=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#long_short_portfolio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.long_short_portfolio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a df with a column of numbered portfolios and creates a new
+portfolio which is long the top portfolio and short the bottom portfolio. 
+Returns a df of long-short portfolio</p>
+<p>Required inputs:
+df: pandas dataframe containing a column with portfolio numbers
+portvar: str, name of column containing portfolios</p>
+<p>Optional inputs:
+byvars: str or list of strs of column names containing groups for portfolios.</p>
+<blockquote>
+<div>Calculates long-short within these groups. These should be the same groups
+in which portfolios were formed.</div></blockquote>
+<dl class="docutils">
+<dt>retvars: str or list of strs of variables to return in the long-short dataset. </dt>
+<dd>By default, will use all numeric variables in the df.</dd>
+<dt>top_minus_bot: boolean, True to be long the top portfolio, short the bottom portfolio.</dt>
+<dd>False to be long the bottom portfolio, short the top portfolio.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.long_to_wide">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">long_to_wide</code><span class="sig-paren">(</span><em>df</em>, <em>groupvars</em>, <em>values</em>, <em>colindex=None</em>, <em>colindex_only=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#long_to_wide"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.long_to_wide" title="Permalink to this definition">¶</a></dt>
+<dd><p>groupvars = string or list of variables which signify unique observations in the output dataset
+values = string or list of variables which contain the values which need to be transposed
+colindex = string of column or list of strings of columns containing extension for column name</p>
+<blockquote>
+<div>in the output dataset. If not specified, just uses the
+count of the row within the group. If a list is provided, each column value will be appended
+in order separated by _</div></blockquote>
+<dl class="docutils">
+<dt>colindex_only = boolean. If true, column names in output data will be only the colindex, and will not</dt>
+<dd>include the name of the values variable. Only valid when passing a single value, otherwise
+multiple columns would have the same name.</dd>
+</dl>
+<p>NOTE: Don’t have any variables named key or idx</p>
+<dl class="docutils">
+<dt>For example, if we had a long dataset of returns, with returns 12, 24, 36, 48, and 60 months after the date:</dt>
+<dd>ticker    ret    months
+AA        .01    12
+AA        .15    24
+AA        .21    36
+AA       -.10    48
+AA        .22    60</dd>
+<dt>and we want to get this to one observation per ticker:</dt>
+<dd>ticker    ret12    ret24    ret36    ret48    ret60    
+AA        .01      .15      .21     -.10      .22</dd>
+</dl>
+<p>We would use:
+long_to_wide(df, groupvars=’ticker’, values=’ret’, colindex=’months’)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.portfolio">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">portfolio</code><span class="sig-paren">(</span><em>df, groupvar, ngroups=10, cutoffs: typing.Union[typing.List[typing.Union[float, int]], NoneType] = None, quant_cutoffs: typing.Union[typing.List[float], NoneType] = None, byvars=None, cutdf=None, portvar='portfolio', multiprocess=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#portfolio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.portfolio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs portfolios based on percentile values of groupvar. If ngroups=10, then will form 10 portfolios,
+with portfolio 1 having the bottom 10 percentile of groupvar, and portfolio 10 having the top 10 percentile
+of groupvar.</p>
+<p>df: pandas dataframe, input data
+groupvar: string, name of variable in df to form portfolios on
+ngroups: integer, number of portfolios to form. will be ignored if option cutoffs or quant_cutoffs is passed
+cutoffs: e.g. [100, 10000] to form three portfolios, 1 would be &lt; 100, 2 would be &gt; 100 and &lt; 10000,</p>
+<blockquote>
+<div>3 would be &gt; 10000. cannot be used with option ngroups</div></blockquote>
+<dl class="docutils">
+<dt>quant_cutoffs: eg. [0.1, 0.9] to form three portfolios. 1 would be lowest 10% of data,</dt>
+<dd>2 would be &gt; 10 and &lt; 90 percentiles, 3 would be highest 10%. All will be within byvars if byvars are passed.</dd>
+<dt>byvars: string, list, or None, name of variable(s) in df, finds portfolios within byvars. For example if byvars=’Month’,</dt>
+<dd>would take each month and form portfolios based on the percentiles of the groupvar during only that month</dd>
+</dl>
+<p>cutdf: pandas dataframe or None, optionally determine percentiles using another dataset. See second note.
+portvar: string, name of portfolio variable in the output dataset
+multiprocess: bool or int, set to True to use all available processors,</p>
+<blockquote>
+<div>set to False to use only one, pass an int less or equal to than number of 
+processors to use that amount of processors</div></blockquote>
+<p>NOTE: Resets index and drops in output data, so don’t use if index is important (input data not affected)
+NOTE: If using a cutdf, MUST have the same bygroups as df. The number of observations within each bygroup</p>
+<blockquote>
+<div>can be different, but there MUST be a one-to-one match of bygroups, or this will NOT work correctly.
+This may require some cleaning of the cutdf first.</div></blockquote>
+<p>NOTE: For some reason, multiprocessing seems to be slower in testing, so it is disabled by default</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.portfolio_averages">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">portfolio_averages</code><span class="sig-paren">(</span><em>df</em>, <em>groupvar</em>, <em>avgvars</em>, <em>ngroups=10</em>, <em>byvars=None</em>, <em>cutdf=None</em>, <em>wtvar=None</em>, <em>count=False</em>, <em>portvar='portfolio'</em>, <em>avgonly=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#portfolio_averages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.portfolio_averages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates portfolios and calculates equal- and value-weighted averages of variables within portfolios. If ngroups=10,
+then will form 10 portfolios, with portfolio 1 having the bottom 10 percentile of groupvar, and portfolio 10 having 
+the top 10 percentile of groupvar.</p>
+<p>df: pandas dataframe, input data
+groupvar: string, name of variable in df to form portfolios on
+avgvars: string or list, variables to be averaged
+ngroups: integer, number of portfolios to form
+byvars: string, list, or None, name of variable(s) in df, finds portfolios within byvars. For example if byvars=’Month’,</p>
+<blockquote>
+<div>would take each month and form portfolios based on the percentiles of the groupvar during only that month</div></blockquote>
+<p>cutdf: pandas dataframe or None, optionally determine percentiles using another dataset
+wtvar: string, name of variable in df to use for weighting in weighted average
+count: False or string of variable name, pass variable name to get count of non-missing</p>
+<blockquote>
+<div>of that variable within groups.</div></blockquote>
+<p>portvar: string, name of portfolio variable in the output dataset
+avgonly: boolean, True to return only averages, False to return (averages, individual observations with portfolios)</p>
+<p>NOTE: Resets index and drops in output data, so don’t use if index is important (input data not affected)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.select_rows_by_condition_on_columns">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">select_rows_by_condition_on_columns</code><span class="sig-paren">(</span><em>df</em>, <em>cols</em>, <em>condition='== 1'</em>, <em>logic='or'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#select_rows_by_condition_on_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.select_rows_by_condition_on_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects rows of a pandas dataframe by evaluating a condition on a subset of the dataframe’s columns.</p>
+<p>df: pandas dataframe
+cols: list of column names, the subset of columns on which to evaluate conditions
+condition: string, needs to contain comparison operator and right hand side of comparison. For example,</p>
+<blockquote>
+<div>‘== 1’ checks for each row that the value of each column is equal to one.</div></blockquote>
+<dl class="docutils">
+<dt>logic: ‘or’ or ‘and’. With ‘or’, only one of the columns in cols need to match the condition for the row to be kept.</dt>
+<dd>With ‘and’, all of the columns in cols need to match the condition.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.show_df">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">show_df</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#show_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.show_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.sql">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">sql</code><span class="sig-paren">(</span><em>df_list</em>, <em>query</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#sql"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function for running a pandasql query. Keeps track of which variables are of
+datetime type, and converts them back after running the sql query.</p>
+<p>NOTE: Ensure that dfs are passed in the order that they are used in the query.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.state_abbrev">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">state_abbrev</code><span class="sig-paren">(</span><em>df</em>, <em>col</em>, <em>toabbrev=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#state_abbrev"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.state_abbrev" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.to_copy_paste">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">to_copy_paste</code><span class="sig-paren">(</span><em>df</em>, <em>index=False</em>, <em>column_names=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#to_copy_paste"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.to_copy_paste" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a dataframe and prints all of its data in such a format that it can be copy-pasted to create
+a new dataframe from the pandas.DataFrame() constructor.</p>
+<p>Required inputs:
+df: pandas dataframe</p>
+<p>Optional inputs:
+index: bool, True to include index
+column_names: bool, False to exclude column names</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.to_csv">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">to_csv</code><span class="sig-paren">(</span><em>dataframe</em>, <em>path</em>, <em>filename</em>, <em>output=True</em>, <em>action='w'</em>, <em>index=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#to_csv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.to_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>action=’w’ for overwrite, ‘a’ for append
+set index to False to not include index in output</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.tradedays">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">tradedays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#tradedays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.tradedays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for constructing a range of dates with pandas date_range function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>&gt;&gt;&gt;import pandas as pd
+&gt;&gt;&gt;pd.date_range(
+&gt;&gt;&gt;    start=‘1/1/2000’,
+&gt;&gt;&gt;    end=‘1/31/2000’,
+&gt;&gt;&gt;    freq=dero.pandas.tradedays()
+&gt;&gt;&gt;)
+pd.DatetimeIndex([‘2000-01-03’, ‘2000-01-04’, ‘2000-01-05’, ‘2000-01-06’,</p>
+<blockquote>
+<div><blockquote>
+<div>‘2000-01-07’, ‘2000-01-10’, ‘2000-01-11’, ‘2000-01-12’,
+‘2000-01-13’, ‘2000-01-14’, ‘2000-01-18’, ‘2000-01-19’,
+‘2000-01-20’, ‘2000-01-21’, ‘2000-01-24’, ‘2000-01-25’,
+‘2000-01-26’, ‘2000-01-27’, ‘2000-01-28’, ‘2000-01-31’],</div></blockquote>
+<p>dtype=’datetime64[ns]’, freq=’C’)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.var_change_by_groups">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">var_change_by_groups</code><span class="sig-paren">(</span><em>df</em>, <em>var</em>, <em>byvars</em>, <em>datevar='Date'</em>, <em>numlags=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#var_change_by_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.var_change_by_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for getting variable changes over time within bygroups.</p>
+<dl class="docutils">
+<dt>NOTE: Dataset is not sorted in this process. Sort the data in the order in which you wish</dt>
+<dd>lags to be created before running this command.</dd>
+</dl>
+<p>Required inputs:
+df: pandas dataframe containing bygroups, a date variable, and variables of interest
+var: str or list of strs, column names of variables to get changes
+byvars: str or list of strs, column names of variables identifying by groups</p>
+<p>Optional inputs:
+datevar: str ot list of strs, column names of variables identifying periods
+numlags: int, number of periods to go back to get change</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.winsorize">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">winsorize</code><span class="sig-paren">(</span><em>df</em>, <em>pct</em>, <em>subset=None</em>, <em>byvars=None</em>, <em>bot=True</em>, <em>top=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#winsorize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.winsorize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds observations above the pct percentile and replaces the with the pct percentile value.
+Does this for all columns, or the subset given by subset</p>
+<p>Required inputs:
+df: Pandas dataframe
+pct: 0 &lt; float &lt; 1 or list of two values 0 &lt; float &lt; 1. If two values are given, the first</p>
+<blockquote>
+<div>will be used for the bottom percentile and the second will be used for the top. If one value
+is given and both bot and top are True, will use the same value for both.</div></blockquote>
+<p>Optional inputs:
+subset: List of strings or string of column name(s) to winsorize
+byvars: str, list of strs, or None. Column names of columns identifying groups in the data.</p>
+<blockquote>
+<div>Winsorizing will be done within those groups.</div></blockquote>
+<p>bot: bool, True to winsorize bottom observations
+top: bool, True to winsorize top observations</p>
+<p>Example usage:
+winsorize(df, .05, subset=’RET’) #replaces observations of RET below the 5% and above the 95% values
+winsorize(df, [.05, .1], subset=’RET’) #replaces observations of RET below the 5% and above the 90% values</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dero.ext_pandas.year_month_from_date">
+<code class="descclassname">dero.ext_pandas.</code><code class="descname">year_month_from_date</code><span class="sig-paren">(</span><em>df</em>, <em>date='Date'</em>, <em>yearname='Year'</em>, <em>monthname='Month'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/ext_pandas.html#year_month_from_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.ext_pandas.year_month_from_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a dataframe with a datetime object and creates year and month variables</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.ext_pandas.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

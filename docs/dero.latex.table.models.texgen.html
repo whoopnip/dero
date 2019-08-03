@@ -1,0 +1,379 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dero.latex.table.models.texgen package &#8212; dero 0.15.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.15.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dero-latex-table-models-texgen-package">
+<h1>dero.latex.table.models.texgen package<a class="headerlink" href="#dero-latex-table-models-texgen-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="dero-latex-table-models-texgen-alignment-module">
+<h2>dero.latex.table.models.texgen.alignment module<a class="headerlink" href="#dero-latex-table-models-texgen-alignment-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-dero.latex.table.models.texgen.alignment"></span><dl class="class">
+<dt id="dero.latex.table.models.texgen.alignment.ColumnAlignment">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.alignment.</code><code class="descname">ColumnAlignment</code><span class="sig-paren">(</span><em>align_str: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/alignment.html#ColumnAlignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.alignment.ColumnAlignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.alignment.ColumnAlignment.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['align']</em><a class="headerlink" href="#dero.latex.table.models.texgen.alignment.ColumnAlignment.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.alignment.ColumnsAlignment">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.alignment.</code><code class="descname">ColumnsAlignment</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/alignment.html#ColumnsAlignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.alignment.ColumnsAlignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="classmethod">
+<dt id="dero.latex.table.models.texgen.alignment.ColumnsAlignment.from_alignment_str">
+<em class="property">classmethod </em><code class="descname">from_alignment_str</code><span class="sig-paren">(</span><em>align_str: str</em>, <em>num_columns: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/alignment.html#ColumnsAlignment.from_alignment_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.alignment.ColumnsAlignment.from_alignment_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.alignment.ColumnsAlignment.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['aligns']</em><a class="headerlink" href="#dero.latex.table.models.texgen.alignment.ColumnsAlignment.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.texgen.environments">
+<span id="dero-latex-table-models-texgen-environments-module"></span><h2>dero.latex.table.models.texgen.environments module<a class="headerlink" href="#module-dero.latex.table.models.texgen.environments" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.environments.TableEnvironment">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.environments.</code><code class="descname">TableEnvironment</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/environments.html#TableEnvironment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.environments.TableEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.environment.Environment" title="dero.latex.models.environment.Environment"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.environment.Environment</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.environments.TableEnvironment.name">
+<code class="descname">name</code><em class="property"> = 'table'</em><a class="headerlink" href="#dero.latex.table.models.texgen.environments.TableEnvironment.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.environments.TabularEnvironment">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.environments.</code><code class="descname">TabularEnvironment</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/environments.html#TabularEnvironment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.environments.TabularEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.environment.Environment" title="dero.latex.models.environment.Environment"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.environment.Environment</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.environments.TabularEnvironment.name">
+<code class="descname">name</code><em class="property"> = 'tabular'</em><a class="headerlink" href="#dero.latex.table.models.texgen.environments.TabularEnvironment.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.environments.ThreePartTableEnvironment">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.environments.</code><code class="descname">ThreePartTableEnvironment</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/environments.html#ThreePartTableEnvironment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.environments.ThreePartTableEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.environment.Environment" title="dero.latex.models.environment.Environment"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.environment.Environment</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.environments.ThreePartTableEnvironment.name">
+<code class="descname">name</code><em class="property"> = 'threeparttable'</em><a class="headerlink" href="#dero.latex.table.models.texgen.environments.ThreePartTableEnvironment.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="dero-latex-table-models-texgen-items-module">
+<h2>dero.latex.table.models.texgen.items module<a class="headerlink" href="#dero-latex-table-models-texgen-items-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-dero.latex.table.models.texgen.items"></span><dl class="class">
+<dt id="dero.latex.table.models.texgen.items.LTable">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.items.</code><code class="descname">LTable</code><span class="sig-paren">(</span><em>three_part_table: dero.latex.table.models.texgen.items.ThreePartTable</em>, <em>centering=True</em>, <em>landscape=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#LTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.LTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.table.models.texgen.items.Table" title="dero.latex.table.models.texgen.items.Table"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.texgen.items.Table</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.items.LTable.name">
+<code class="descname">name</code><em class="property"> = 'ltable'</em><a class="headerlink" href="#dero.latex.table.models.texgen.items.LTable.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.items.Table">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.items.</code><code class="descname">Table</code><span class="sig-paren">(</span><em>three_part_table: dero.latex.table.models.texgen.items.ThreePartTable</em>, <em>centering=True</em>, <em>landscape=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#Table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.Table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.item.Item" title="dero.latex.models.item.Item"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.Item</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="classmethod">
+<dt id="dero.latex.table.models.texgen.items.Table.from_panel_collection">
+<em class="property">classmethod </em><code class="descname">from_panel_collection</code><span class="sig-paren">(</span><em>panel_collection: dero.latex.table.models.panels.collection.PanelCollection</em>, <em>*args</em>, <em>tabular_kwargs={}</em>, <em>three_part_table_kwargs={}</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#Table.from_panel_collection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.Table.from_panel_collection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.table.models.texgen.items.Table.from_table_model">
+<em class="property">classmethod </em><code class="descname">from_table_model</code><span class="sig-paren">(</span><em>table</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#Table.from_table_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.Table.from_table_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.items.Table.name">
+<code class="descname">name</code><em class="property"> = 'table'</em><a class="headerlink" href="#dero.latex.table.models.texgen.items.Table.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.items.Table.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['caption']</em><a class="headerlink" href="#dero.latex.table.models.texgen.items.Table.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.items.TableDocument">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.items.</code><code class="descname">TableDocument</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#TableDocument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.TableDocument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.document.Document" title="dero.latex.models.document.Document"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.document.Document</span></code></a></p>
+<dl class="classmethod">
+<dt id="dero.latex.table.models.texgen.items.TableDocument.from_panel_collection">
+<em class="property">classmethod </em><code class="descname">from_panel_collection</code><span class="sig-paren">(</span><em>panel_collection: dero.latex.table.models.panels.collection.PanelCollection</em>, <em>*args</em>, <em>tabular_kwargs={}</em>, <em>three_part_table_kwargs={}</em>, <em>table_kwargs={}</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#TableDocument.from_panel_collection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.TableDocument.from_panel_collection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="dero.latex.table.models.texgen.items.TableDocument.from_table_model">
+<em class="property">classmethod </em><code class="descname">from_table_model</code><span class="sig-paren">(</span><em>table</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#TableDocument.from_table_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.TableDocument.from_table_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.items.TableNotes">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.items.</code><code class="descname">TableNotes</code><span class="sig-paren">(</span><em>contents: typing.Union[str, typing.Sequence[str]]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#TableNotes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.TableNotes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.section.html#dero.latex.models.section.base.TextAreaBase" title="dero.latex.models.section.base.TextAreaBase"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.section.base.TextAreaBase</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.items.TableNotes.name">
+<code class="descname">name</code><em class="property"> = 'tablenotes'</em><a class="headerlink" href="#dero.latex.table.models.texgen.items.TableNotes.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.items.Tabular">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.items.</code><code class="descname">Tabular</code><span class="sig-paren">(</span><em>panel_collection: dero.latex.table.models.panels.collection.PanelCollection</em>, <em>align: dero.latex.table.models.texgen.alignment.ColumnsAlignment = None</em>, <em>mid_rules=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#Tabular"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.Tabular" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.item.Item" title="dero.latex.models.item.Item"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.Item</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.items.Tabular.name">
+<code class="descname">name</code><em class="property"> = 'tabular'</em><a class="headerlink" href="#dero.latex.table.models.texgen.items.Tabular.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.items.Tabular.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['align']</em><a class="headerlink" href="#dero.latex.table.models.texgen.items.Tabular.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.items.ThreePartTable">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.items.</code><code class="descname">ThreePartTable</code><span class="sig-paren">(</span><em>table_content: dero.latex.table.models.texgen.items.Tabular</em>, <em>caption: dero.latex.models.caption.Caption = None</em>, <em>below_text: dero.latex.table.models.texgen.items.TableNotes = None</em>, <em>label: typing.Union[dero.latex.models.label.Label</em>, <em>NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#ThreePartTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.ThreePartTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.item.Item" title="dero.latex.models.item.Item"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.item.Item</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+<dl class="classmethod">
+<dt id="dero.latex.table.models.texgen.items.ThreePartTable.from_panel_collection">
+<em class="property">classmethod </em><code class="descname">from_panel_collection</code><span class="sig-paren">(</span><em>panel_collection: dero.latex.table.models.panels.collection.PanelCollection</em>, <em>*args</em>, <em>tabular_kwargs={}</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/items.html#ThreePartTable.from_panel_collection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.items.ThreePartTable.from_panel_collection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.items.ThreePartTable.name">
+<code class="descname">name</code><em class="property"> = 'threeparttable'</em><a class="headerlink" href="#dero.latex.table.models.texgen.items.ThreePartTable.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.items.ThreePartTable.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['caption']</em><a class="headerlink" href="#dero.latex.table.models.texgen.items.ThreePartTable.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.texgen.lines">
+<span id="dero-latex-table-models-texgen-lines-module"></span><h2>dero.latex.table.models.texgen.lines module<a class="headerlink" href="#module-dero.latex.table.models.texgen.lines" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.lines.BottomRule">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.lines.</code><code class="descname">BottomRule</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#BottomRule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.BottomRule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.table.models.texgen.lines.TableLine" title="dero.latex.table.models.texgen.lines.TableLine"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.texgen.lines.TableLine</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.lines.MidRule">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.lines.</code><code class="descname">MidRule</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#MidRule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.MidRule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.table.models.texgen.lines.TableLine" title="dero.latex.table.models.texgen.lines.TableLine"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.texgen.lines.TableLine</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.lines.TableLine">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.lines.</code><code class="descname">TableLine</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#TableLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.mixins.StringAdditionMixin" title="dero.latex.models.mixins.StringAdditionMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.mixins.StringAdditionMixin</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.lines.TableLineOfSegments">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.lines.</code><code class="descname">TableLineOfSegments</code><span class="sig-paren">(</span><em>segments: [&lt;class 'dero.latex.table.models.texgen.lines.TableLineSegment'&gt;], num_columns: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#TableLineOfSegments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineOfSegments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.table.models.mixins.addvalues.html#dero.latex.table.models.mixins.addvalues.row.RowAddMixin" title="dero.latex.table.models.mixins.addvalues.row.RowAddMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.mixins.addvalues.row.RowAddMixin</span></code></a>, <a class="reference internal" href="#dero.latex.table.models.texgen.lines.TableLine" title="dero.latex.table.models.texgen.lines.TableLine"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.texgen.lines.TableLine</span></code></a></p>
+<dl class="classmethod">
+<dt id="dero.latex.table.models.texgen.lines.TableLineOfSegments.from_list_of_ints">
+<em class="property">classmethod </em><code class="descname">from_list_of_ints</code><span class="sig-paren">(</span><em>int_list: [&lt;class 'int'&gt;], num_columns: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#TableLineOfSegments.from_list_of_ints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineOfSegments.from_list_of_ints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.lines.TableLineOfSegments.is_spacer">
+<code class="descname">is_spacer</code><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineOfSegments.is_spacer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.lines.TableLineOfSegments.num_columns">
+<code class="descname">num_columns</code><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineOfSegments.num_columns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.texgen.lines.TableLineOfSegments.pad">
+<code class="descname">pad</code><span class="sig-paren">(</span><em>length: int</em>, <em>direction='right'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#TableLineOfSegments.pad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineOfSegments.pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method is here to avoid errors when adding rows together through TableSection.__add__
+No padding is actually necessary for these rows as they are not in the tabular format,
+these lines only specify the columns which need to be underlined.</p>
+<p>However when padding left, we just need to shift the values rather than creating padding</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.lines.TableLineOfSegments.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['values', 'num_columns']</em><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineOfSegments.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.texgen.lines.TableLineOfSegments.shift">
+<code class="descname">shift</code><span class="sig-paren">(</span><em>shift</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#TableLineOfSegments.shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineOfSegments.shift" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increments col_from and col_to by int for all segments within this line of segments
+:param shift:
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.lines.TableLineSegment">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.lines.</code><code class="descname">TableLineSegment</code><span class="sig-paren">(</span><em>col_from: int</em>, <em>col_to: int = None</em>, <em>align: str = 'lr'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#TableLineSegment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineSegment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.mixins.StringAdditionMixin" title="dero.latex.models.mixins.StringAdditionMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.mixins.StringAdditionMixin</span></code></a>, <a class="reference internal" href="dero.mixins.html#dero.mixins.repr.ReprMixin" title="dero.mixins.repr.ReprMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.mixins.repr.ReprMixin</span></code></a>, <a class="reference internal" href="dero.latex.table.models.mixins.addvalues.html#dero.latex.table.models.mixins.addvalues.row.RowAddMixin" title="dero.latex.table.models.mixins.addvalues.row.RowAddMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.mixins.addvalues.row.RowAddMixin</span></code></a></p>
+<dl class="classmethod">
+<dt id="dero.latex.table.models.texgen.lines.TableLineSegment.from_list_of_ints">
+<em class="property">classmethod </em><code class="descname">from_list_of_ints</code><span class="sig-paren">(</span><em>int_list: [&lt;class 'int'&gt;]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#TableLineSegment.from_list_of_ints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineSegment.from_list_of_ints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.lines.TableLineSegment.is_spacer">
+<code class="descname">is_spacer</code><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineSegment.is_spacer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dero.latex.table.models.texgen.lines.TableLineSegment.repr_cols">
+<code class="descname">repr_cols</code><em class="property"> = ['col_from', 'col_to']</em><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineSegment.repr_cols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dero.latex.table.models.texgen.lines.TableLineSegment.shift">
+<code class="descname">shift</code><span class="sig-paren">(</span><em>shift: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#TableLineSegment.shift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TableLineSegment.shift" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increments col_from and col_to by int. Used to shift underlines as tables are combined
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.lines.TopRule">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.lines.</code><code class="descname">TopRule</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/lines.html#TopRule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.lines.TopRule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dero.latex.table.models.texgen.lines.TableLine" title="dero.latex.table.models.texgen.lines.TableLine"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.table.models.texgen.lines.TableLine</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.texgen.newcolumntype">
+<span id="dero-latex-table-models-texgen-newcolumntype-module"></span><h2>dero.latex.table.models.texgen.newcolumntype module<a class="headerlink" href="#module-dero.latex.table.models.texgen.newcolumntype" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.newcolumntype.NewColumnType">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.newcolumntype.</code><code class="descname">NewColumnType</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/newcolumntype.html#NewColumnType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.newcolumntype.NewColumnType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">str</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="dero.latex.table.models.texgen.newcolumntype.NewColumnTypes">
+<em class="property">class </em><code class="descclassname">dero.latex.table.models.texgen.newcolumntype.</code><code class="descname">NewColumnTypes</code><a class="reference internal" href="_modules/dero/latex/table/models/texgen/newcolumntype.html#NewColumnTypes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.table.models.texgen.newcolumntype.NewColumnTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.latex.models.html#dero.latex.models.mixins.StringAdditionMixin" title="dero.latex.models.mixins.StringAdditionMixin"><code class="xref py py-class docutils literal"><span class="pre">dero.latex.models.mixins.StringAdditionMixin</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dero.latex.table.models.texgen.packages">
+<span id="dero-latex-table-models-texgen-packages-module"></span><h2>dero.latex.table.models.texgen.packages module<a class="headerlink" href="#module-dero.latex.table.models.texgen.packages" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dero.latex.table.models.texgen">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.latex.table.models.texgen" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Nick DeRobertis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/dero.latex.table.models.texgen.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
