@@ -12,18 +12,11 @@ The following are the main modules of this package:
 
 2. latex 
 
-3. reg  
-
-
-
-.. toctree::
-   :maxdepth: 5
-   :caption: Contents:
+3. reg
 
 .. automodule:: dero
     :members:
     :undoc-members:
-    :show-inheritance:
 
 
 Indices and tables
