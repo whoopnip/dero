@@ -20,9 +20,10 @@ The following are the main modules of this package:
    :maxdepth: 5
    :caption: Contents:
 
-   Indexes/ext_pandas_module/ext_pandas_module_index
-   Indexes/latex_module/latex_module_index
-   Indexes/reg_module/reg_module_index
+.. automodule:: dero
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 
 Indices and tables
