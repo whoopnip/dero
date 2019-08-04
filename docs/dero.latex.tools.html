@@ -1,41 +1,33 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.latex.tools package &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="dero-latex-tools-package">
@@ -47,22 +39,27 @@
 <span id="dero-latex-tools-fileops-module"></span><h2>dero.latex.tools.fileops module<a class="headerlink" href="#module-dero.latex.tools.fileops" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.latex.tools.fileops.move_all_if_exists">
-<code class="descclassname">dero.latex.tools.fileops.</code><code class="descname">move_all_if_exists</code><span class="sig-paren">(</span><em>inpaths: typing.Iterable[str], outfolder: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools/fileops.html#move_all_if_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.fileops.move_all_if_exists" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">dero.latex.tools.fileops.</code><code class="sig-name descname">move_all_if_exists</code><span class="sig-paren">(</span><em class="sig-param">inpaths</em>, <em class="sig-param">outfolder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools/fileops.html#move_all_if_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.fileops.move_all_if_exists" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="dero.latex.tools.fileops.move_if_exists">
-<code class="descclassname">dero.latex.tools.fileops.</code><code class="descname">move_if_exists</code><span class="sig-paren">(</span><em>inpath: str</em>, <em>outpath: str</em>, <em>retries: int = 3</em>, <em>sleep_time: float = 0.1</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dero/latex/tools/fileops.html#move_if_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.fileops.move_if_exists" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.latex.tools.fileops.</code><code class="sig-name descname">move_if_exists</code><span class="sig-paren">(</span><em class="sig-param">inpath</em>, <em class="sig-param">outpath</em>, <em class="sig-param">retries=3</em>, <em class="sig-param">sleep_time=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools/fileops.html#move_if_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.fileops.move_if_exists" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="function">
 <dt id="dero.latex.tools.fileops.remove_all_if_exist">
-<code class="descclassname">dero.latex.tools.fileops.</code><code class="descname">remove_all_if_exist</code><span class="sig-paren">(</span><em>filepaths: typing.Iterable[str]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools/fileops.html#remove_all_if_exist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.fileops.remove_all_if_exist" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">dero.latex.tools.fileops.</code><code class="sig-name descname">remove_all_if_exist</code><span class="sig-paren">(</span><em class="sig-param">filepaths</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools/fileops.html#remove_all_if_exist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.fileops.remove_all_if_exist" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="dero.latex.tools.fileops.remove_if_exists">
-<code class="descclassname">dero.latex.tools.fileops.</code><code class="descname">remove_if_exists</code><span class="sig-paren">(</span><em>filepath: str</em>, <em>retries: int = 3</em>, <em>sleep_time: float = 0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools/fileops.html#remove_if_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.fileops.remove_if_exists" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">dero.latex.tools.fileops.</code><code class="sig-name descname">remove_if_exists</code><span class="sig-paren">(</span><em class="sig-param">filepath</em>, <em class="sig-param">retries=3</em>, <em class="sig-param">sleep_time=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools/fileops.html#remove_if_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.fileops.remove_if_exists" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -70,30 +67,30 @@
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.latex.tools" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.latex.tools.csv_to_raw_latex">
-<code class="descclassname">dero.latex.tools.</code><code class="descname">csv_to_raw_latex</code><span class="sig-paren">(</span><em>infile</em>, <em>csvstring=False</em>, <em>missing_rep=' - '</em>, <em>formatstr='{:.3f}'</em>, <em>skipfix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools.html#csv_to_raw_latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.csv_to_raw_latex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">dero.latex.tools.</code><code class="sig-name descname">csv_to_raw_latex</code><span class="sig-paren">(</span><em class="sig-param">infile</em>, <em class="sig-param">csvstring=False</em>, <em class="sig-param">missing_rep=' - '</em>, <em class="sig-param">formatstr='{:.3f}'</em>, <em class="sig-param">skipfix=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools.html#csv_to_raw_latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.csv_to_raw_latex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes a CSV text file and converts it to a LaTeX formatted list, with each line of the LaTeX
 file as an item in the list.</p>
-<dl class="docutils">
-<dt>Required options:</dt>
-<dd>infile: Full file path of CSV (include r before quotes)</dd>
-<dt>Optional options:</dt>
-<dd>csvstring: True to pass a CSV string to infile rather than load from file
+<dl class="simple">
+<dt>Required options:</dt><dd><p>infile: Full file path of CSV (include r before quotes)</p>
+</dd>
+<dt>Optional options:</dt><dd><p>csvstring: True to pass a CSV string to infile rather than load from file
 missing_rep: Representation for missing numbers, default ” - ”
 formatstr: Python string for number formatting, for example ‘{:.3f}’ with quotes
-skipfix: String or list of strings of fixes to skip, options are [‘&amp;’,’%’,’_’]</dd>
+skipfix: String or list of strings of fixes to skip, options are [‘&amp;’,’%’,’_’]</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="dero.latex.tools.date_time_move_latex">
-<code class="descclassname">dero.latex.tools.</code><code class="descname">date_time_move_latex</code><span class="sig-paren">(</span><em>tablename</em>, <em>filepath</em>, <em>folder_name='Tables'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools.html#date_time_move_latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.date_time_move_latex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">dero.latex.tools.</code><code class="sig-name descname">date_time_move_latex</code><span class="sig-paren">(</span><em class="sig-param">tablename</em>, <em class="sig-param">filepath</em>, <em class="sig-param">folder_name='Tables'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/tools.html#date_time_move_latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.tools.date_time_move_latex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes a LaTeX tex and PDF after the PDF’s been created by pdflatex and moves it into a table
 folder with the date, checking if the table was just previously created. If it’s the same as
 before, it just deletes the file.</p>
-<dl class="docutils">
-<dt>Required arguments:</dt>
-<dd>tablename: operating system name of the table, without extensions
-filepath: full filepath of table, without table name. put r before quotes as follows: r’C:UsersFolder’</dd>
+<dl class="simple">
+<dt>Required arguments:</dt><dd><p>tablename: operating system name of the table, without extensions
+filepath: full filepath of table, without table name. put r before quotes as follows: r’C:UsersFolder’</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -102,6 +99,7 @@ filepath: full filepath of table, without table name. put r before quotes as fol
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -113,13 +111,13 @@ filepath: full filepath of table, without table name. put r before quotes as fol
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -130,8 +128,8 @@ filepath: full filepath of table, without table name. put r before quotes as fol
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/dero.latex.tools.rst.txt"

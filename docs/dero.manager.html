@@ -1,41 +1,33 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.manager package &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="dero-manager-package">
@@ -49,7 +41,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dero.manager.basemodels.html#module-dero.manager.basemodels.collection">dero.manager.basemodels.collection module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dero.manager.basemodels.html#module-dero.manager.basemodels.config">dero.manager.basemodels.config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dero.manager.basemodels.html#module-dero.manager.basemodels.container">dero.manager.basemodels.container module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dero.manager.basemodels.html#dero-manager-basemodels-file-module">dero.manager.basemodels.file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dero.manager.basemodels.html#module-dero.manager.basemodels.file">dero.manager.basemodels.file module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dero.manager.basemodels.html#module-dero.manager.basemodels.pipeline">dero.manager.basemodels.pipeline module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dero.manager.basemodels.html#module-dero.manager.basemodels.registrar">dero.manager.basemodels.registrar module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dero.manager.basemodels.html#module-dero.manager.basemodels">Module contents</a></li>
@@ -99,71 +91,90 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="dero-manager-main-module">
-<h2>dero.manager.main module<a class="headerlink" href="#dero-manager-main-module" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-dero.manager.main"></span><dl class="class">
+<div class="section" id="module-dero.manager.main">
+<span id="dero-manager-main-module"></span><h2>dero.manager.main module<a class="headerlink" href="#module-dero.manager.main" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="dero.manager.main.PipelineManager">
-<em class="property">class </em><code class="descclassname">dero.manager.main.</code><code class="descname">PipelineManager</code><span class="sig-paren">(</span><em>pipeline_dict_path: str</em>, <em>data_dict_path: str</em>, <em>basepath: str</em>, <em>name: str = 'project'</em>, <em>auto_pdb: bool = False</em>, <em>force_continue: bool = False</em>, <em>log_folder: typing.Union[str</em>, <em>NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/main.html#PipelineManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.PipelineManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">dero.manager.main.</code><code class="sig-name descname">PipelineManager</code><span class="sig-paren">(</span><em class="sig-param">pipeline_dict_path</em>, <em class="sig-param">data_dict_path</em>, <em class="sig-param">basepath</em>, <em class="sig-param">name='project'</em>, <em class="sig-param">auto_pdb=False</em>, <em class="sig-param">force_continue=False</em>, <em class="sig-param">log_folder=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/main.html#PipelineManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.PipelineManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Main class for managing flow-based programming and configuration.</p>
 <dl class="method">
 <dt id="dero.manager.main.PipelineManager.get">
-<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/main.html#PipelineManager.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.PipelineManager.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">section_path_str_or_view</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/main.html#PipelineManager.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.PipelineManager.get" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="dero.manager.main.PipelineManager.load">
-<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dero/manager/main.html#PipelineManager.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.PipelineManager.load" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/main.html#PipelineManager.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.PipelineManager.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper to track imported modules so that can reimport them upon reloading</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="dero.manager.main.PipelineManager.reload">
-<code class="descname">reload</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dero/manager/main.html#PipelineManager.reload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.PipelineManager.reload" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reload</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/main.html#PipelineManager.reload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.PipelineManager.reload" title="Permalink to this definition">¶</a></dt>
 <dd><p>Useful for getting file system changes without having to start a new Python session. Also resets
 any locally defined configuration.</p>
 <p>Reloads functions from pipeline dict, scaffolds config files for any new functions,
 and updates configuration from files.</p>
 <p>Returns: None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="dero.manager.main.PipelineManager.run">
-<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/main.html#PipelineManager.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.PipelineManager.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">section_path_str_or_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/main.html#PipelineManager.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.PipelineManager.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to run registered pipelines/functions/sections. Pass a single section path or a list
 of section paths. If a list is passed, the return value will also be a list, with each
 result item corresponding to the function at the same index.</p>
 <p>If a path for a section is passed rather than a path for a function or pipeline, a list
 of results will be returned for that section as well. Therefore, calling a high-level
 section will result in a nested list structure of results.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd><dl class="first last docutils">
-<dt>section_path_str_or_list: . separated name of path of function or section, or list thereof.</dt>
-<dd><p class="first">similar to how a function would be imported. e.g. ‘main.data.summarize.summary_func1’
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>section_path_str_or_list: . separated name of path of function or section, or list thereof.</dt><dd><p>similar to how a function would be imported. e.g. ‘main.data.summarize.summary_func1’
 or when running multiple functions/sections, e.g.</p>
 <blockquote>
-<div>[‘main.data’, ‘main.analysis.reg.1’]</div></blockquote>
-<p class="last">These sections/functions are based on the structure of your pipeline_dict</p>
+<div><p>[‘main.data’, ‘main.analysis.reg.1’]</p>
+</div></blockquote>
+<p>These sections/functions are based on the structure of your pipeline_dict</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p>Returns: result or list of results</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="exception">
 <dt id="dero.manager.main.RunnerException">
-<em class="property">exception </em><code class="descclassname">dero.manager.main.</code><code class="descname">RunnerException</code><a class="reference internal" href="_modules/dero/manager/main.html#RunnerException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.RunnerException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<em class="property">exception </em><code class="sig-prename descclassname">dero.manager.main.</code><code class="sig-name descname">RunnerException</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">section_path_str=None</em>, <em class="sig-param">trace_back=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/main.html#RunnerException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.RunnerException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
 <dl class="function">
 <dt id="dero.manager.main.report_runner_exceptions">
-<code class="descclassname">dero.manager.main.</code><code class="descname">report_runner_exceptions</code><span class="sig-paren">(</span><em>runner_exceptions: typing.List[dero.manager.main.RunnerException]</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/dero/manager/main.html#report_runner_exceptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.report_runner_exceptions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.manager.main.</code><code class="sig-name descname">report_runner_exceptions</code><span class="sig-paren">(</span><em class="sig-param">runner_exceptions</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/main.html#report_runner_exceptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.main.report_runner_exceptions" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-dero.manager">
@@ -178,6 +189,7 @@ high-level section configs, then lower-level section configs, and finally by any
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -189,13 +201,13 @@ high-level section configs, then lower-level section configs, and finally by any
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -206,8 +218,8 @@ high-level section configs, then lower-level section configs, and finally by any
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/dero.manager.rst.txt"

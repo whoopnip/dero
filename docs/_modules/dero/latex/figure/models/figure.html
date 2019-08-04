@@ -1,41 +1,33 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.latex.figure.models.figure &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../../../',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
    
   <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <h1>Source code for dero.latex.figure.models.figure</h1><div class="highlight"><pre>
@@ -62,7 +54,7 @@
 <span class="n">PltFigureOrAxes</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Axes</span><span class="p">,</span> <span class="n">PltFigure</span><span class="p">]</span>
 <span class="n">PltFigureOrAxesNameDict</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">PltFigureOrAxes</span><span class="p">]</span>
 
-<div class="viewcode-block" id="Figure"><a class="viewcode-back" href="../../../../../stubs/dero.latex.figure.models.figure.Figure.html#dero.latex.figure.models.figure.Figure">[docs]</a><span class="k">class</span> <span class="nc">Figure</span><span class="p">(</span><span class="n">ContainerItem</span><span class="p">,</span> <span class="n">Item</span><span class="p">):</span>
+<div class="viewcode-block" id="Figure"><a class="viewcode-back" href="../../../../../stubs/dero.latex.figure.Figure.html#dero.latex.figure.models.figure.Figure">[docs]</a><span class="k">class</span> <span class="nc">Figure</span><span class="p">(</span><span class="n">ContainerItem</span><span class="p">,</span> <span class="n">Item</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    used for creating latex figures from images. Currently the main usage is the Figure class created with the method</span>
 <span class="sd">    Figure.from_dict_of_names_and_filepaths. Pass a dictionary where the keys are names for subfigures and the values</span>
@@ -71,7 +63,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;figure&#39;</span>
 
-<div class="viewcode-block" id="Figure.__init__"><a class="viewcode-back" href="../../../../../stubs/dero.latex.figure.models.figure.Figure.html#dero.latex.figure.models.figure.Figure.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subfigures</span><span class="p">:</span> <span class="n">SubfiguresOrGraphics</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">centering</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">position_str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="Figure.__init__"><a class="viewcode-back" href="../../../../../stubs/dero.latex.figure.Figure.html#dero.latex.figure.models.figure.Figure.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subfigures</span><span class="p">:</span> <span class="n">SubfiguresOrGraphics</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">centering</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">position_str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">landscape</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">subfigures</span> <span class="o">=</span> <span class="n">subfigures</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">caption</span> <span class="o">=</span> <span class="n">Caption</span><span class="p">(</span><span class="n">caption</span><span class="p">)</span> <span class="k">if</span> <span class="n">caption</span> <span class="k">else</span> <span class="kc">None</span>
@@ -146,7 +138,7 @@
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Figure.from_dict_of_names_and_filepaths"><a class="viewcode-back" href="../../../../../stubs/dero.latex.figure.models.figure.Figure.html#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Figure.from_dict_of_names_and_filepaths"><a class="viewcode-back" href="../../../../../stubs/dero.latex.figure.Figure.html#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict_of_names_and_filepaths</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath_name_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">figure_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                          <span class="n">position_str_name_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">centering</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                          <span class="n">landscape</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -186,7 +178,7 @@
             <span class="n">landscape</span><span class="o">=</span><span class="n">landscape</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Figure.from_dict_of_names_and_plt_figures"><a class="viewcode-back" href="../../../../../stubs/dero.latex.figure.models.figure.Figure.html#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Figure.from_dict_of_names_and_plt_figures"><a class="viewcode-back" href="../../../../../stubs/dero.latex.figure.Figure.html#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict_of_names_and_plt_figures</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">plt_fig_name_dict</span><span class="p">:</span> <span class="n">PltFigureOrAxesNameDict</span><span class="p">,</span> <span class="n">sources_outfolder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                                            <span class="n">source_filetype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;pdf&#39;</span><span class="p">,</span>
                                            <span class="n">figure_name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -274,6 +266,7 @@
 </pre></div>
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -287,13 +280,13 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../../../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -304,8 +297,8 @@
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
 

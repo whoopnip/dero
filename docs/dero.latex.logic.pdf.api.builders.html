@@ -1,41 +1,33 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.latex.logic.pdf.api.builders package &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="dero-latex-logic-pdf-api-builders-package">
@@ -45,45 +37,6 @@
 </div>
 <div class="section" id="module-dero.latex.logic.pdf.api.builders.lualatex">
 <span id="dero-latex-logic-pdf-api-builders-lualatex-module"></span><h2>dero.latex.logic.pdf.api.builders.lualatex module<a class="headerlink" href="#module-dero.latex.logic.pdf.api.builders.lualatex" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="dero.latex.logic.pdf.api.builders.lualatex.LuaLatexBuilder">
-<em class="property">class </em><code class="descclassname">dero.latex.logic.pdf.api.builders.lualatex.</code><code class="descname">LuaLatexBuilder</code><span class="sig-paren">(</span><em>lualatex='lualatex'</em>, <em>bibtex: str = 'bibtex'</em>, <em>max_runs=15</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/logic/pdf/api/builders/lualatex.html#LuaLatexBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.logic.pdf.api.builders.lualatex.LuaLatexBuilder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>A simple lualatex based buidler for LaTeX files.</p>
-<p>Builds LaTeX files by copying them to a temporary directly and running
-<code class="docutils literal"><span class="pre">lualatex</span></code> until the associated <code class="docutils literal"><span class="pre">.aux</span></code> file stops changing.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This may miss changes if <code class="docutils literal"><span class="pre">biblatex</span></code> or other additional tools
-are used. Usually, the <code class="xref py py-class docutils literal"><span class="pre">LatexMkBuilder</span></code> will
-give more reliable results.</p>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>lualatex</strong> – The path to the <code class="docutils literal"><span class="pre">pdflatex</span></code> binary (will looked up on
-<code class="docutils literal"><span class="pre">$PATH</span></code>).</li>
-<li><strong>max_runs</strong> – An integer providing an upper limit on the amount of times
-<code class="docutils literal"><span class="pre">pdflatex</span></code> can be rerun before an exception is thrown.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="dero.latex.logic.pdf.api.builders.lualatex.LuaLatexBuilder.build_pdf">
-<code class="descname">build_pdf</code><span class="sig-paren">(</span><em>source: data.Data</em>, <em>texinputs=[]</em>, <em>run_bibtex: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/logic/pdf/api/builders/lualatex.html#LuaLatexBuilder.build_pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.logic.pdf.api.builders.lualatex.LuaLatexBuilder.build_pdf" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dero.latex.logic.pdf.api.builders.lualatex.LuaLatexBuilder.is_available">
-<code class="descname">is_available</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/latex/logic/pdf/api/builders/lualatex.html#LuaLatexBuilder.is_available"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.logic.pdf.api.builders.lualatex.LuaLatexBuilder.is_available" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-dero.latex.logic.pdf.api.builders">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dero.latex.logic.pdf.api.builders" title="Permalink to this headline">¶</a></h2>
@@ -92,6 +45,7 @@ give more reliable results.</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -103,13 +57,13 @@ give more reliable results.</p>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -120,8 +74,8 @@ give more reliable results.</p>
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/dero.latex.logic.pdf.api.builders.rst.txt"

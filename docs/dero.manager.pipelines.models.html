@@ -1,41 +1,33 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.manager.pipelines.models package &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="dero-manager-pipelines-models-package">
@@ -47,8 +39,8 @@
 <span id="dero-manager-pipelines-models-collection-module"></span><h2>dero.manager.pipelines.models.collection module<a class="headerlink" href="#module-dero.manager.pipelines.models.collection" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="dero.manager.pipelines.models.collection.PipelineCollection">
-<em class="property">class </em><code class="descclassname">dero.manager.pipelines.models.collection.</code><code class="descname">PipelineCollection</code><span class="sig-paren">(</span><em>basepath: str</em>, <em>items</em>, <em>name: str = None</em>, <em>imports: dero.manager.imports.models.statements.container.ImportStatementContainer = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/collection.html#PipelineCollection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.collection.PipelineCollection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.collection.Collection" title="dero.manager.basemodels.collection.Collection"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.basemodels.collection.Collection</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">dero.manager.pipelines.models.collection.</code><code class="sig-name descname">PipelineCollection</code><span class="sig-paren">(</span><em class="sig-param">basepath</em>, <em class="sig-param">items</em>, <em class="sig-param">name=None</em>, <em class="sig-param">imports=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/collection.html#PipelineCollection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.collection.PipelineCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.collection.Collection" title="dero.manager.basemodels.collection.Collection"><code class="xref py py-class docutils literal notranslate"><span class="pre">dero.manager.basemodels.collection.Collection</span></code></a></p>
 </dd></dl>
 
 </div>
@@ -56,24 +48,29 @@
 <span id="dero-manager-pipelines-models-config-module"></span><h2>dero.manager.pipelines.models.config module<a class="headerlink" href="#module-dero.manager.pipelines.models.config" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="dero.manager.pipelines.models.config.FunctionConfig">
-<em class="property">class </em><code class="descclassname">dero.manager.pipelines.models.config.</code><code class="descname">FunctionConfig</code><span class="sig-paren">(</span><em>d: dict = None</em>, <em>name: str = None</em>, <em>annotations: dict = None</em>, <em>imports: dero.manager.imports.models.statements.container.ImportStatementContainer = None</em>, <em>_file: dero.manager.basemodels.file.ConfigFileBase = None</em>, <em>begin_assignments: dero.manager.assignments.models.container.AssignmentStatementContainer = None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/config.html#FunctionConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.config.FunctionConfig" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.config.ConfigBase" title="dero.manager.basemodels.config.ConfigBase"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.basemodels.config.ConfigBase</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">dero.manager.pipelines.models.config.</code><code class="sig-name descname">FunctionConfig</code><span class="sig-paren">(</span><em class="sig-param">d=None</em>, <em class="sig-param">name=None</em>, <em class="sig-param">annotations=None</em>, <em class="sig-param">imports=None</em>, <em class="sig-param">_file=None</em>, <em class="sig-param">begin_assignments=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/config.html#FunctionConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.config.FunctionConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.config.ConfigBase" title="dero.manager.basemodels.config.ConfigBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">dero.manager.basemodels.config.ConfigBase</span></code></a></p>
 <dl class="attribute">
 <dt id="dero.manager.pipelines.models.config.FunctionConfig.config_file_class">
-<code class="descname">config_file_class</code><a class="headerlink" href="#dero.manager.pipelines.models.config.FunctionConfig.config_file_class" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#dero.manager.pipelines.models.file.FunctionConfigFile" title="dero.manager.pipelines.models.file.FunctionConfigFile"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.pipelines.models.file.FunctionConfigFile</span></code></a></p>
+<code class="sig-name descname">config_file_class</code><a class="headerlink" href="#dero.manager.pipelines.models.config.FunctionConfig.config_file_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#dero.manager.pipelines.models.file.FunctionConfigFile" title="dero.manager.pipelines.models.file.FunctionConfigFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">dero.manager.pipelines.models.file.FunctionConfigFile</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="dero.manager.pipelines.models.config.FunctionConfig.for_function">
-<code class="descname">for_function</code><span class="sig-paren">(</span><em>func: typing.Callable</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="_modules/dero/manager/pipelines/models/config.html#FunctionConfig.for_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.config.FunctionConfig.for_function" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">for_function</code><span class="sig-paren">(</span><em class="sig-param">func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/config.html#FunctionConfig.for_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.config.FunctionConfig.for_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Strips out items of config which are not applicable to function. Returns dictionary
 of config items for passing to the function.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>func: func for which to filter out config items</dd>
+<dl class="simple">
+<dt>Args:</dt><dd><p>func: func for which to filter out config items</p>
+</dd>
 </dl>
 <p>Returns: dict, applicable config for func</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -83,52 +80,57 @@ of config items for passing to the function.</p>
 <span id="dero-manager-pipelines-models-dictfile-module"></span><h2>dero.manager.pipelines.models.dictfile module<a class="headerlink" href="#module-dero.manager.pipelines.models.dictfile" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="dero.manager.pipelines.models.dictfile.PipelineDictFile">
-<em class="property">class </em><code class="descclassname">dero.manager.pipelines.models.dictfile.</code><code class="descname">PipelineDictFile</code><span class="sig-paren">(</span><em>filepath: str</em>, <em>name: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/dictfile.html#PipelineDictFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.dictfile.PipelineDictFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.file.ConfigFileBase" title="dero.manager.basemodels.file.ConfigFileBase"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.basemodels.file.ConfigFileBase</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">dero.manager.pipelines.models.dictfile.</code><code class="sig-name descname">PipelineDictFile</code><span class="sig-paren">(</span><em class="sig-param">filepath</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/dictfile.html#PipelineDictFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.dictfile.PipelineDictFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.file.ConfigFileBase" title="dero.manager.basemodels.file.ConfigFileBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">dero.manager.basemodels.file.ConfigFileBase</span></code></a></p>
 <dl class="attribute">
 <dt id="dero.manager.pipelines.models.dictfile.PipelineDictFile.always_imports">
-<code class="descname">always_imports</code><em class="property"> = [&lt;ObjectImportStatement(module='dero.manager', objs=['DataPipeline'], renames=&lt;RenameStatementCollection(items=[])&gt;, comment=None)&gt;]</em><a class="headerlink" href="#dero.manager.pipelines.models.dictfile.PipelineDictFile.always_imports" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">always_imports</code><em class="property"> = [&lt;ObjectImportStatement(module='dero.manager', objs=['DataPipeline'], renames=&lt;RenameStatementCollection(items=[])&gt;, comment=None)&gt;]</em><a class="headerlink" href="#dero.manager.pipelines.models.dictfile.PipelineDictFile.always_imports" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="dero.manager.pipelines.models.dictfile.PipelineDictFile.interface_class">
-<code class="descname">interface_class</code><a class="headerlink" href="#dero.manager.pipelines.models.dictfile.PipelineDictFile.interface_class" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="dero.manager.io.file.interfaces.html#dero.manager.io.file.interfaces.pipeline.PipelineDictInterface" title="dero.manager.io.file.interfaces.pipeline.PipelineDictInterface"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.io.file.interfaces.pipeline.PipelineDictInterface</span></code></a></p>
+<code class="sig-name descname">interface_class</code><a class="headerlink" href="#dero.manager.pipelines.models.dictfile.PipelineDictFile.interface_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="dero.manager.io.file.interfaces.html#dero.manager.io.file.interfaces.pipeline.PipelineDictInterface" title="dero.manager.io.file.interfaces.pipeline.PipelineDictInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">dero.manager.io.file.interfaces.pipeline.PipelineDictInterface</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="dero.manager.pipelines.models.dictfile.PipelineDictFile.load">
-<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="_modules/dero/manager/pipelines/models/dictfile.html#PipelineDictFile.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.dictfile.PipelineDictFile.load" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/dictfile.html#PipelineDictFile.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.dictfile.PipelineDictFile.load" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="dero-manager-pipelines-models-file-module">
-<h2>dero.manager.pipelines.models.file module<a class="headerlink" href="#dero-manager-pipelines-models-file-module" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-dero.manager.pipelines.models.file"></span><dl class="class">
+<div class="section" id="module-dero.manager.pipelines.models.file">
+<span id="dero-manager-pipelines-models-file-module"></span><h2>dero.manager.pipelines.models.file module<a class="headerlink" href="#module-dero.manager.pipelines.models.file" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="dero.manager.pipelines.models.file.FunctionConfigFile">
-<em class="property">class </em><code class="descclassname">dero.manager.pipelines.models.file.</code><code class="descname">FunctionConfigFile</code><span class="sig-paren">(</span><em>filepath: str</em>, <em>name: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/file.html#FunctionConfigFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.file.FunctionConfigFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.file.ConfigFileBase" title="dero.manager.basemodels.file.ConfigFileBase"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.basemodels.file.ConfigFileBase</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">dero.manager.pipelines.models.file.</code><code class="sig-name descname">FunctionConfigFile</code><span class="sig-paren">(</span><em class="sig-param">filepath</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/file.html#FunctionConfigFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.file.FunctionConfigFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.file.ConfigFileBase" title="dero.manager.basemodels.file.ConfigFileBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">dero.manager.basemodels.file.ConfigFileBase</span></code></a></p>
 <p>Represents config file on filesystem. Handles low-level functions for writing and reading config file</p>
 <dl class="attribute">
 <dt id="dero.manager.pipelines.models.file.FunctionConfigFile.always_assign_with_names_dict">
-<code class="descname">always_assign_with_names_dict</code><em class="property"> = {'DataPipeline': [&lt;AssignmentStatement(varname='cleanup_kwargs', value=&lt;_ast.Call object at 0x7fe36bc1fc88&gt;, annotation=None)&gt;]}</em><a class="headerlink" href="#dero.manager.pipelines.models.file.FunctionConfigFile.always_assign_with_names_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">always_assign_with_names_dict</code><em class="property"> = {'DataPipeline': [&lt;AssignmentStatement(varname='cleanup_kwargs', value=&lt;_ast.Call object&gt;, annotation=None)&gt;]}</em><a class="headerlink" href="#dero.manager.pipelines.models.file.FunctionConfigFile.always_assign_with_names_dict" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="dero.manager.pipelines.models.file.FunctionConfigFile.always_assigns">
-<code class="descname">always_assigns</code><em class="property"> = [&lt;AssignmentStatement(varname='s', value=&lt;_ast.Call object&gt;, annotation=None)&gt;]</em><a class="headerlink" href="#dero.manager.pipelines.models.file.FunctionConfigFile.always_assigns" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">always_assigns</code><em class="property"> = [&lt;AssignmentStatement(varname='s', value=&lt;_ast.Call object&gt;, annotation=None)&gt;]</em><a class="headerlink" href="#dero.manager.pipelines.models.file.FunctionConfigFile.always_assigns" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="dero.manager.pipelines.models.file.FunctionConfigFile.always_imports">
-<code class="descname">always_imports</code><em class="property"> = [&lt;ObjectImportStatement(module='dero.manager', objs=['Selector', 'MergeOptions'], renames=&lt;RenameStatementCollection(items=[])&gt;, comment=None)&gt;]</em><a class="headerlink" href="#dero.manager.pipelines.models.file.FunctionConfigFile.always_imports" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">always_imports</code><em class="property"> = [&lt;ObjectImportStatement(module='dero.manager', objs=['Selector', 'MergeOptions'], renames=&lt;RenameStatementCollection(items=[])&gt;, comment=None)&gt;]</em><a class="headerlink" href="#dero.manager.pipelines.models.file.FunctionConfigFile.always_imports" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="dero.manager.pipelines.models.file.FunctionConfigFile.save">
-<code class="descname">save</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/file.html#FunctionConfigFile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.file.FunctionConfigFile.save" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/file.html#FunctionConfigFile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.file.FunctionConfigFile.save" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -141,8 +143,8 @@ of config items for passing to the function.</p>
 <span id="dero-manager-pipelines-models-pipeline-module"></span><h2>dero.manager.pipelines.models.pipeline module<a class="headerlink" href="#module-dero.manager.pipelines.models.pipeline" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="dero.manager.pipelines.models.pipeline.FunctionPipeline">
-<em class="property">class </em><code class="descclassname">dero.manager.pipelines.models.pipeline.</code><code class="descname">FunctionPipeline</code><a class="reference internal" href="_modules/dero/manager/pipelines/models/pipeline.html#FunctionPipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.pipeline.FunctionPipeline" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.pipeline.Pipeline" title="dero.manager.basemodels.pipeline.Pipeline"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.basemodels.pipeline.Pipeline</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">dero.manager.pipelines.models.pipeline.</code><code class="sig-name descname">FunctionPipeline</code><a class="reference internal" href="_modules/dero/manager/pipelines/models/pipeline.html#FunctionPipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.pipeline.FunctionPipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.pipeline.Pipeline" title="dero.manager.basemodels.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">dero.manager.basemodels.pipeline.Pipeline</span></code></a></p>
 </dd></dl>
 
 </div>
@@ -150,17 +152,17 @@ of config items for passing to the function.</p>
 <span id="dero-manager-pipelines-models-registrar-module"></span><h2>dero.manager.pipelines.models.registrar module<a class="headerlink" href="#module-dero.manager.pipelines.models.registrar" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="dero.manager.pipelines.models.registrar.PipelineRegistrar">
-<em class="property">class </em><code class="descclassname">dero.manager.pipelines.models.registrar.</code><code class="descname">PipelineRegistrar</code><span class="sig-paren">(</span><em>collection: dero.manager.basemodels.collection.Collection</em>, <em>basepath: str</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/registrar.html#PipelineRegistrar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.registrar.PipelineRegistrar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.registrar.Registrar" title="dero.manager.basemodels.registrar.Registrar"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.basemodels.registrar.Registrar</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">dero.manager.pipelines.models.registrar.</code><code class="sig-name descname">PipelineRegistrar</code><span class="sig-paren">(</span><em class="sig-param">collection</em>, <em class="sig-param">basepath</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/registrar.html#PipelineRegistrar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.registrar.PipelineRegistrar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dero.manager.basemodels.html#dero.manager.basemodels.registrar.Registrar" title="dero.manager.basemodels.registrar.Registrar"><code class="xref py py-class docutils literal notranslate"><span class="pre">dero.manager.basemodels.registrar.Registrar</span></code></a></p>
 <dl class="attribute">
 <dt id="dero.manager.pipelines.models.registrar.PipelineRegistrar.collection_class">
-<code class="descname">collection_class</code><a class="headerlink" href="#dero.manager.pipelines.models.registrar.PipelineRegistrar.collection_class" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#dero.manager.pipelines.models.collection.PipelineCollection" title="dero.manager.pipelines.models.collection.PipelineCollection"><code class="xref py py-class docutils literal"><span class="pre">dero.manager.pipelines.models.collection.PipelineCollection</span></code></a></p>
+<code class="sig-name descname">collection_class</code><a class="headerlink" href="#dero.manager.pipelines.models.registrar.PipelineRegistrar.collection_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#dero.manager.pipelines.models.collection.PipelineCollection" title="dero.manager.pipelines.models.collection.PipelineCollection"><code class="xref py py-class docutils literal notranslate"><span class="pre">dero.manager.pipelines.models.collection.PipelineCollection</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="dero.manager.pipelines.models.registrar.PipelineRegistrar.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>section_path_str: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/registrar.html#PipelineRegistrar.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.registrar.PipelineRegistrar.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">section_path_str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/manager/pipelines/models/registrar.html#PipelineRegistrar.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.manager.pipelines.models.registrar.PipelineRegistrar.get" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -173,6 +175,7 @@ of config items for passing to the function.</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -184,13 +187,13 @@ of config items for passing to the function.</p>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -201,8 +204,8 @@ of config items for passing to the function.</p>
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/dero.manager.pipelines.models.rst.txt"

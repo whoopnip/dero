@@ -1,123 +1,116 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.latex.figure.models.figure.Figure &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Welcome to dero’s documentation!" href="../index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="dero-latex-figure-models-figure-figure">
 <h1>dero.latex.figure.models.figure.Figure<a class="headerlink" href="#dero-latex-figure-models-figure-figure" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="dero.latex.figure.models.figure.Figure">
-<em class="property">class </em><code class="descclassname">dero.latex.figure.models.figure.</code><code class="descname">Figure</code><span class="sig-paren">(</span><em>subfigures: typing.List[typing.Union[dero.latex.figure.models.subfigure.Subfigure, dero.latex.figure.models.graphic.Graphic]], caption=None, label=None, centering=True, position_str=None, landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dero/latex/figure/models/figure.html#Figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">dero.latex.figure.models.figure.</code><code class="sig-name descname">Figure</code><span class="sig-paren">(</span><em class="sig-param">subfigures: List[Union[dero.latex.figure.models.subfigure.Subfigure, dero.latex.figure.models.graphic.Graphic]], caption=None, label=None, centering=True, position_str=None, landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dero/latex/figure/models/figure.html#Figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure" title="Permalink to this definition">¶</a></dt>
 <dd><p>used for creating latex figures from images. Currently the main usage is the Figure class created with the method
 Figure.from_dict_of_names_and_filepaths. Pass a dictionary where the keys are names for subfigures and the values
 are filepaths where the image for the subfigure is located.</p>
 <dl class="method">
 <dt id="dero.latex.figure.models.figure.Figure.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>subfigures: typing.List[typing.Union[dero.latex.figure.models.subfigure.Subfigure, dero.latex.figure.models.graphic.Graphic]], caption=None, label=None, centering=True, position_str=None, landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dero/latex/figure/models/figure.html#Figure.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">subfigures: List[Union[dero.latex.figure.models.subfigure.Subfigure, dero.latex.figure.models.graphic.Graphic]], caption=None, label=None, centering=True, position_str=None, landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dero/latex/figure/models/figure.html#Figure.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
 
 <p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#dero.latex.figure.models.figure.Figure.__init__" title="dero.latex.figure.models.figure.Figure.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(subfigures,&nbsp;…[,&nbsp;caption,&nbsp;label,&nbsp;…])</td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dero.latex.figure.models.figure.Figure.__init__" title="dero.latex.figure.models.figure.Figure.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(subfigures[, caption, label, …])</p></td>
+<td><p>Initialize self.</p></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">add_data_from_content</span></code>(content)</td>
-<td></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_data_from_content</span></code>(content)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../dero.latex.figure.models.html#dero.latex.figure.models.figure.Figure.as_document" title="dero.latex.figure.models.figure.Figure.as_document"><code class="xref py py-obj docutils literal"><span class="pre">as_document</span></code></a>([landscape])</td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../dero.latex.figure.models.html#dero.latex.figure.models.figure.Figure.as_document" title="dero.latex.figure.models.figure.Figure.as_document"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_document</span></code></a>([landscape])</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths" title="dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths"><code class="xref py py-obj docutils literal"><span class="pre">from_dict_of_names_and_filepaths</span></code></a>(…[,&nbsp;…])</td>
-<td>Args:     filepath_name_dict: dictionary where keys are names of subfigures and values                         are the filepaths to the images for those subfigures.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths" title="dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict_of_names_and_filepaths</span></code></a>(…[, …])</p></td>
+<td><p>Args:</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures" title="dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures"><code class="xref py py-obj docutils literal"><span class="pre">from_dict_of_names_and_plt_figures</span></code></a>(…[,&nbsp;…])</td>
-<td>Args:     plt_fig_name_dict: Key is display name in output figure, value is matplotlib axes or figure     sources_outfolder: folder to output individual plt figures     source_filetype: Filetype for individual plt figures.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures" title="dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_dict_of_names_and_plt_figures</span></code></a>(…[, …])</p></td>
+<td><p>Args:</p></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">init_data</span></code>()</td>
-<td></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_data</span></code>()</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">join</span></code>(iterable)</td>
-<td></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">join</span></code>(iterable)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../dero.latex.figure.models.html#dero.latex.figure.models.figure.Figure.to_pdf_and_move" title="dero.latex.figure.models.figure.Figure.to_pdf_and_move"><code class="xref py py-obj docutils literal"><span class="pre">to_pdf_and_move</span></code></a>([as_document,&nbsp;landscape])</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../dero.latex.figure.models.html#dero.latex.figure.models.figure.Figure.to_pdf_and_move" title="dero.latex.figure.models.figure.Figure.to_pdf_and_move"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pdf_and_move</span></code></a>([as_document, outfolder, …])</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
-<dl class="classmethod">
+<dl class="method">
 <dt id="dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths">
-<em class="property">classmethod </em><code class="descname">from_dict_of_names_and_filepaths</code><span class="sig-paren">(</span><em>filepath_name_dict: dict</em>, <em>figure_name: str = None</em>, <em>position_str_name_dict: dict = None</em>, <em>label=None</em>, <em>centering=True</em>, <em>landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dero/latex/figure/models/figure.html#Figure.from_dict_of_names_and_filepaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Args:</dt>
-<dd><dl class="first docutils">
-<dt>filepath_name_dict: dictionary where keys are names of subfigures and values</dt>
-<dd>are the filepaths to the images for those subfigures.</dd>
+<em class="property">classmethod </em><code class="sig-name descname">from_dict_of_names_and_filepaths</code><span class="sig-paren">(</span><em class="sig-param">filepath_name_dict: dict</em>, <em class="sig-param">figure_name: str = None</em>, <em class="sig-param">position_str_name_dict: dict = None</em>, <em class="sig-param">label=None</em>, <em class="sig-param">centering=True</em>, <em class="sig-param">landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dero/latex/figure/models/figure.html#Figure.from_dict_of_names_and_filepaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_filepaths" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>filepath_name_dict: dictionary where keys are names of subfigures and values</dt><dd><p>are the filepaths to the images for those subfigures.</p>
+</dd>
 </dl>
 <p>figure_name: name for overall figure
 position_str_name_dict: dictionary where keys are names of subfigures and values</p>
-<blockquote class="last">
-<div>are the position strs for those figures, e.g. r’[t]{0.45linewidth}’</div></blockquote>
+<blockquote>
+<div><p>are the position strs for those figures, e.g. r’[t]{0.45linewidth}’</p>
+</div></blockquote>
 </dd>
 </dl>
 <p>Returns:</p>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures">
-<em class="property">classmethod </em><code class="descname">from_dict_of_names_and_plt_figures</code><span class="sig-paren">(</span><em>plt_fig_name_dict: typing.Dict[str, typing.Union[matplotlib.axes._axes.Axes, matplotlib.figure.Figure]], sources_outfolder: str, source_filetype: str = 'pdf', figure_name: str = None, position_str_name_dict: dict = None, label=None, centering=True, landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dero/latex/figure/models/figure.html#Figure.from_dict_of_names_and_plt_figures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Args:</dt>
-<dd><p class="first">plt_fig_name_dict: Key is display name in output figure, value is matplotlib axes or figure
+<em class="property">classmethod </em><code class="sig-name descname">from_dict_of_names_and_plt_figures</code><span class="sig-paren">(</span><em class="sig-param">plt_fig_name_dict: Dict[str, Union[matplotlib.axes._axes.Axes, matplotlib.figure.Figure]], sources_outfolder: str, source_filetype: str = 'pdf', figure_name: str = None, position_str_name_dict: dict = None, label=None, centering=True, landscape: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dero/latex/figure/models/figure.html#Figure.from_dict_of_names_and_plt_figures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.latex.figure.models.figure.Figure.from_dict_of_names_and_plt_figures" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Args:</dt><dd><p>plt_fig_name_dict: Key is display name in output figure, value is matplotlib axes or figure
 sources_outfolder: folder to output individual plt figures
 source_filetype: Filetype for individual plt figures. The default is pdf. Use png or another image type if</p>
 <blockquote>
-<div>outputting complicated figures or performance may be affected when viewing the pdf.</div></blockquote>
+<div><p>outputting complicated figures or performance may be affected when viewing the pdf.</p>
+</div></blockquote>
 <p>figure_name: name for overall figure
 position_str_name_dict: dictionary where keys are names of subfigures and values</p>
 <blockquote>
-<div>are the position strs for those figures, e.g. r’[t]{0.45linewidth}’</div></blockquote>
-<p class="last">label:
+<div><p>are the position strs for those figures, e.g. r’[t]{0.45linewidth}’</p>
+</div></blockquote>
+<p>label:
 centering:
 landscape:</p>
 </dd>
@@ -131,6 +124,7 @@ landscape:</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -138,18 +132,17 @@ landscape:</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to dero’s documentation!</a></li>
   </ul></li>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -160,8 +153,8 @@ landscape:</p>
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="../_sources/stubs/dero.latex.figure.models.figure.Figure.rst.txt"

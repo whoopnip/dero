@@ -1,7 +1,7 @@
-dero\.latex\.figure\.models\.figure\.Figure
-===========================================
+dero\.latex\.figure\.Figure
+===========================
 
-.. currentmodule:: dero.latex.figure.models.figure
+.. currentmodule:: dero.latex.figure
 
 .. autoclass:: Figure
 

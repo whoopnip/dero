@@ -1,41 +1,33 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.data.panel.did package &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="dero-data-panel-did-package">
@@ -47,28 +39,38 @@
 <span id="dero-data-panel-did-dataprep-module"></span><h2>dero.data.panel.did.dataprep module<a class="headerlink" href="#module-dero.data.panel.did.dataprep" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.data.panel.did.dataprep.diff_df_from_panel_df">
-<code class="descclassname">dero.data.panel.did.dataprep.</code><code class="descname">diff_df_from_panel_df</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em>, <em>entity_var: str</em>, <em>time_var: str</em>, <em>treated_var: str</em>, <em>treated_time_var: str = 'After'</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/data/panel/did/dataprep.html#diff_df_from_panel_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.panel.did.dataprep.diff_df_from_panel_df" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.data.panel.did.dataprep.</code><code class="sig-name descname">diff_df_from_panel_df</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">entity_var</em>, <em class="sig-param">time_var</em>, <em class="sig-param">treated_var</em>, <em class="sig-param">treated_time_var='After'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/panel/did/dataprep.html#diff_df_from_panel_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.panel.did.dataprep.diff_df_from_panel_df" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-dero.data.panel.did.main">
 <span id="dero-data-panel-did-main-module"></span><h2>dero.data.panel.did.main module<a class="headerlink" href="#module-dero.data.panel.did.main" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.data.panel.did.main.diff_reg_for_each_yvar_from_panel_df">
-<code class="descclassname">dero.data.panel.did.main.</code><code class="descname">diff_reg_for_each_yvar_from_panel_df</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, entity_var: str, time_var: str, treated_var: str, yvars: typing.List[str], treated_time_var: str = 'After', xvars: typing.Union[typing.List[str], NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/panel/did/main.html#diff_reg_for_each_yvar_from_panel_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.panel.did.main.diff_reg_for_each_yvar_from_panel_df" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">dero.data.panel.did.main.</code><code class="sig-name descname">diff_reg_for_each_yvar_from_panel_df</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">entity_var</em>, <em class="sig-param">time_var</em>, <em class="sig-param">treated_var</em>, <em class="sig-param">yvars</em>, <em class="sig-param">treated_time_var='After'</em>, <em class="sig-param">xvars=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/panel/did/main.html#diff_reg_for_each_yvar_from_panel_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.panel.did.main.diff_reg_for_each_yvar_from_panel_df" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="dero.data.panel.did.main.diff_reg_for_each_yvar_from_panel_df_latex_table">
-<code class="descclassname">dero.data.panel.did.main.</code><code class="descname">diff_reg_for_each_yvar_from_panel_df_latex_table</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, entity_var: str, time_var: str, treated_var: str, yvars: typing.List[str], treated_time_var: str = 'After', xvars: typing.Union[typing.List[str], NoneType] = None, caption: str = 'Difference-in-Difference Regressions', extraname: typing.Union[str, NoneType] = None, below_text: typing.Union[str, NoneType] = None, outfolder: typing.Union[str, NoneType] = None</em><span class="sig-paren">)</span> &#x2192; dero.latex.table.models.table.table.Table<a class="reference internal" href="_modules/dero/data/panel/did/main.html#diff_reg_for_each_yvar_from_panel_df_latex_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.panel.did.main.diff_reg_for_each_yvar_from_panel_df_latex_table" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.data.panel.did.main.</code><code class="sig-name descname">diff_reg_for_each_yvar_from_panel_df_latex_table</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">entity_var</em>, <em class="sig-param">time_var</em>, <em class="sig-param">treated_var</em>, <em class="sig-param">yvars</em>, <em class="sig-param">treated_time_var='After'</em>, <em class="sig-param">xvars=None</em>, <em class="sig-param">caption='Difference-in-Difference Regressions'</em>, <em class="sig-param">extraname=None</em>, <em class="sig-param">below_text=None</em>, <em class="sig-param">outfolder=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/panel/did/main.html#diff_reg_for_each_yvar_from_panel_df_latex_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.panel.did.main.diff_reg_for_each_yvar_from_panel_df_latex_table" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="dero.latex.table.models.table.html#dero.latex.table.models.table.table.Table" title="dero.latex.table.models.table.table.Table"><code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-dero.data.panel.did.reg">
 <span id="dero-data-panel-did-reg-module"></span><h2>dero.data.panel.did.reg module<a class="headerlink" href="#module-dero.data.panel.did.reg" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.data.panel.did.reg.diff_reg_for_each_yvar_and_produce_summary">
-<code class="descclassname">dero.data.panel.did.reg.</code><code class="descname">diff_reg_for_each_yvar_and_produce_summary</code><span class="sig-paren">(</span><em>diff_df: pandas.core.frame.DataFrame, yvars: typing.List[str], treated_var: str, treated_time_var: str = 'After', xvars: typing.Union[typing.List[str], NoneType] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/panel/did/reg.html#diff_reg_for_each_yvar_and_produce_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.panel.did.reg.diff_reg_for_each_yvar_and_produce_summary" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">dero.data.panel.did.reg.</code><code class="sig-name descname">diff_reg_for_each_yvar_and_produce_summary</code><span class="sig-paren">(</span><em class="sig-param">diff_df</em>, <em class="sig-param">yvars</em>, <em class="sig-param">treated_var</em>, <em class="sig-param">treated_time_var='After'</em>, <em class="sig-param">xvars=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/panel/did/reg.html#diff_reg_for_each_yvar_and_produce_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.panel.did.reg.diff_reg_for_each_yvar_and_produce_summary" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -76,8 +78,13 @@
 <span id="dero-data-panel-did-totex-module"></span><h2>dero.data.panel.did.totex module<a class="headerlink" href="#module-dero.data.panel.did.totex" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.data.panel.did.totex.diff_reg_summary_to_latex_table_and_output">
-<code class="descclassname">dero.data.panel.did.totex.</code><code class="descname">diff_reg_summary_to_latex_table_and_output</code><span class="sig-paren">(</span><em>summ, entity_var: str, caption: str = 'Difference-in-Difference Regressions', extraname: typing.Union[str, NoneType] = None, below_text: typing.Union[str, NoneType] = None, outfolder: typing.Union[str, NoneType] = None, xvars: typing.Union[typing.List[str], NoneType] = None</em><span class="sig-paren">)</span> &#x2192; dero.latex.table.models.table.table.Table<a class="reference internal" href="_modules/dero/data/panel/did/totex.html#diff_reg_summary_to_latex_table_and_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.panel.did.totex.diff_reg_summary_to_latex_table_and_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.data.panel.did.totex.</code><code class="sig-name descname">diff_reg_summary_to_latex_table_and_output</code><span class="sig-paren">(</span><em class="sig-param">summ</em>, <em class="sig-param">entity_var</em>, <em class="sig-param">caption='Difference-in-Difference Regressions'</em>, <em class="sig-param">extraname=None</em>, <em class="sig-param">below_text=None</em>, <em class="sig-param">outfolder=None</em>, <em class="sig-param">xvars=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/panel/did/totex.html#diff_reg_summary_to_latex_table_and_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.panel.did.totex.diff_reg_summary_to_latex_table_and_output" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="dero.latex.table.models.table.html#dero.latex.table.models.table.table.Table" title="dero.latex.table.models.table.table.Table"><code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-dero.data.panel.did">
@@ -87,6 +94,7 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -98,13 +106,13 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -115,8 +123,8 @@
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/dero.data.panel.did.rst.txt"

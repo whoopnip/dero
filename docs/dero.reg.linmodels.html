@@ -1,41 +1,33 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.reg.linmodels package &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="dero-reg-linmodels-package">
@@ -64,10 +56,9 @@
 <span id="dero-reg-linmodels-reg-module"></span><h2>dero.reg.linmodels.reg module<a class="headerlink" href="#module-dero.reg.linmodels.reg" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.reg.linmodels.reg.linear_reg">
-<code class="descclassname">dero.reg.linmodels.reg.</code><code class="descname">linear_reg</code><span class="sig-paren">(</span><em>df</em>, <em>yvar</em>, <em>xvars</em>, <em>entity_var=None</em>, <em>time_var=None</em>, <em>robust=True</em>, <em>cluster=False</em>, <em>cons=True</em>, <em>fe=None</em>, <em>interaction_tuples=None</em>, <em>num_lags=0</em>, <em>lag_variables='xvars'</em>, <em>lag_period_var='Date'</em>, <em>lag_id_var='TICKER'</em>, <em>lag_fill_method: str = 'ffill'</em>, <em>lag_fill_limit: int = None</em>, <em>model_type='fama macbeth'</em>, <em>**fit_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/linmodels/reg.html#linear_reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.linmodels.reg.linear_reg" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Args:</dt>
-<dd><p class="first">df: pandas dataframe containing regression data
+<code class="sig-prename descclassname">dero.reg.linmodels.reg.</code><code class="sig-name descname">linear_reg</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">yvar</em>, <em class="sig-param">xvars</em>, <em class="sig-param">entity_var=None</em>, <em class="sig-param">time_var=None</em>, <em class="sig-param">robust=True</em>, <em class="sig-param">cluster=False</em>, <em class="sig-param">cons=True</em>, <em class="sig-param">fe=None</em>, <em class="sig-param">interaction_tuples=None</em>, <em class="sig-param">num_lags=0</em>, <em class="sig-param">lag_variables='xvars'</em>, <em class="sig-param">lag_period_var='Date'</em>, <em class="sig-param">lag_id_var='TICKER'</em>, <em class="sig-param">lag_fill_method='ffill'</em>, <em class="sig-param">lag_fill_limit=None</em>, <em class="sig-param">model_type='fama macbeth'</em>, <em class="sig-param">**fit_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/reg/linmodels/reg.html#linear_reg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.reg.linmodels.reg.linear_reg" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Args:</dt><dd><p>df: pandas dataframe containing regression data
 yvar: str, column name of outcome y variable
 xvars: list of strs, column names of x variables for regression
 entity_var: str, name of variable identifying groups for panel
@@ -75,7 +66,8 @@ time_var: str, name of variable identifying time for panel
 robust: bool, set to True to use heterskedasticity-robust standard errors
 cluster: False or str, set to a column name to calculate standard errors within clusters</p>
 <blockquote>
-<div>given by unique values of given column name</div></blockquote>
+<div><p>given by unique values of given column name</p>
+</div></blockquote>
 <p>cons: bool, set to False to not include a constant in the regression
 fe: None or str or list of strs. If a str or list of strs is passed, uses these categorical
 variables to construct dummies for fixed effects.
@@ -84,14 +76,15 @@ num_lags: int, Number of periods to lag variables. Setting to other than 0 will 
 lag_variables: ‘all’, ‘xvars’, or list of strs of names of columns to lag for regressions.
 lag_period_var: str, only used if lag_variables is not None. name of column which</p>
 <blockquote>
-<div>contains period variable for lagging</div></blockquote>
-<dl class="docutils">
-<dt>lag_id_var: str, only used if lag_variables is not None. name of column which</dt>
-<dd>contains identifier variable for lagging</dd>
-<dt>lag_fill_method: str, ‘ffill’ or ‘bfill’ for which method to use to fill in missing rows when</dt>
-<dd>creating lag variables. See pandas.DataFrame.fillna for more details</dd>
+<div><p>contains period variable for lagging</p>
+</div></blockquote>
+<dl class="simple">
+<dt>lag_id_var: str, only used if lag_variables is not None. name of column which</dt><dd><p>contains identifier variable for lagging</p>
+</dd>
+<dt>lag_fill_method: str, ‘ffill’ or ‘bfill’ for which method to use to fill in missing rows when</dt><dd><p>creating lag variables. See pandas.DataFrame.fillna for more details</p>
+</dd>
 </dl>
-<p class="last">lag_fill_limit: int, maximum number of periods to go back or forward for filling
+<p>lag_fill_limit: int, maximum number of periods to go back or forward for filling
 model_type: str, ‘fama macbeth’ for type of model</p>
 </dd>
 </dl>
@@ -106,6 +99,7 @@ model_type: str, ‘fama macbeth’ for type of model</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -117,13 +111,13 @@ model_type: str, ‘fama macbeth’ for type of model</p>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -134,8 +128,8 @@ model_type: str, ‘fama macbeth’ for type of model</p>
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/dero.reg.linmodels.rst.txt"

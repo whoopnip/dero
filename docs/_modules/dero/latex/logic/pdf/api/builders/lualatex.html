@@ -1,41 +1,33 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.latex.logic.pdf.api.builders.lualatex &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="../../../../../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../../../../../',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../../../../" src="../../../../../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../../../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../../../search.html" />
    
   <link rel="stylesheet" href="../../../../../../../_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <h1>Source code for dero.latex.logic.pdf.api.builders.lualatex</h1><div class="highlight"><pre>
@@ -73,8 +65,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">bibtex</span> <span class="o">=</span> <span class="n">bibtex</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span> <span class="o">=</span> <span class="mi">15</span>
 
-<div class="viewcode-block" id="LuaLatexBuilder.build_pdf"><a class="viewcode-back" href="../../../../../../../dero.latex.logic.pdf.api.builders.html#dero.latex.logic.pdf.api.builders.lualatex.LuaLatexBuilder.build_pdf">[docs]</a>    <span class="nd">@data</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">build_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">texinputs</span><span class="o">=</span><span class="p">[],</span> <span class="n">run_bibtex</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="LuaLatexBuilder.build_pdf"><a class="viewcode-back" href="../../../../../../../dero.latex.logic.pdf.api.builders.html#dero.latex.logic.pdf.api.builders.lualatex.LuaLatexBuilder.build_pdf">[docs]</a>    <span class="k">def</span> <span class="nf">build_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">texinputs</span><span class="o">=</span><span class="p">[],</span> <span class="n">run_bibtex</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">TempDir</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">,</span>\
                 <span class="n">source</span><span class="o">.</span><span class="n">temp_saved</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.latex&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="n">tmpdir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmp</span><span class="p">:</span>
 
@@ -146,6 +137,7 @@
 </pre></div>
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -159,13 +151,13 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../../../../../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -176,8 +168,8 @@
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
 

@@ -1,41 +1,33 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.modeler package &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="dero-modeler-package">
@@ -47,31 +39,41 @@
 <span id="dero-modeler-model-module"></span><h2>dero.modeler.model module<a class="headerlink" href="#module-dero.modeler.model" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="dero.modeler.model.Model">
-<em class="property">class </em><code class="descclassname">dero.modeler.model.</code><code class="descname">Model</code><span class="sig-paren">(</span><em>equations: typing.List[sympy.core.relational.Equality]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">dero.modeler.model.</code><code class="sig-name descname">Model</code><span class="sig-paren">(</span><em class="sig-param">equations</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="dero.modeler.model.Model.get_eq_for">
-<code class="descname">get_eq_for</code><span class="sig-paren">(</span><em>lhs_expr: sympy.core.expr.Expr</em><span class="sig-paren">)</span> &#x2192; typing.Union[sympy.core.relational.Equality, NoneType]<a class="reference internal" href="_modules/dero/modeler/model.html#Model.get_eq_for"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.get_eq_for" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">get_eq_for</code><span class="sig-paren">(</span><em class="sig-param">lhs_expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.get_eq_for"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.get_eq_for" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Equality</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="dero.modeler.model.Model.set_equations">
-<code class="descname">set_equations</code><span class="sig-paren">(</span><em>equations: typing.List[sympy.core.relational.Equality]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.set_equations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.set_equations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_equations</code><span class="sig-paren">(</span><em class="sig-param">equations</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.set_equations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.set_equations" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="dero.modeler.model.Model.solve">
-<code class="descname">solve</code><span class="sig-paren">(</span><em>*symbols</em>, <em>**flags</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.solve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.solve" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param">*symbols</em>, <em class="sig-param">**flags</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.solve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.solve" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="dero.modeler.model.Model.sub_eq">
-<code class="descname">sub_eq</code><span class="sig-paren">(</span><em>eq: sympy.core.relational.Equality</em>, <em>deep_substitute: bool = True</em><span class="sig-paren">)</span> &#x2192; sympy.core.relational.Equality<a class="reference internal" href="_modules/dero/modeler/model.html#Model.sub_eq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.sub_eq" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">sub_eq</code><span class="sig-paren">(</span><em class="sig-param">eq</em>, <em class="sig-param">deep_substitute=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.sub_eq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.sub_eq" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Equality</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="dero.modeler.model.Model.subs">
-<code class="descname">subs</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.subs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.subs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">subs</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/modeler/model.html#Model.subs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.modeler.model.Model.subs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -87,6 +89,7 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -98,13 +101,13 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -115,8 +118,8 @@
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/dero.modeler.rst.txt"

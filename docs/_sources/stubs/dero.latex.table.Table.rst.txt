@@ -1,0 +1,28 @@
+dero\.latex\.table\.Table
+=========================
+
+.. currentmodule:: dero.latex.table
+
+.. autoclass:: Table
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Table.__init__
+      ~Table.from_list_of_lists_of_dfs
+      ~Table.from_panel_list
+      ~Table.from_panel_name_df_dict
+      ~Table.set_begin_document_items
+      ~Table.to_pdf_and_move
+      ~Table.to_tex
+   
+   
+
+   
+   
+   

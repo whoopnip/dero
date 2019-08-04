@@ -1,0 +1,28 @@
+dero\.latex\.Document
+=====================
+
+.. currentmodule:: dero.latex
+
+.. autoclass:: Document
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Document.__init__
+      ~Document.add_data_from_content
+      ~Document.construct_packages
+      ~Document.from_ambiguous_collection
+      ~Document.init_data
+      ~Document.join
+      ~Document.to_pdf_and_move
+   
+   
+
+   
+   
+   

@@ -1,1 +1,9 @@
 build
+_modules
+_sources
+_static
+source
+!source/conf.py
+!source/index.rst
+stubs
+.buildinfo

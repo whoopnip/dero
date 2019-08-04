@@ -1,41 +1,33 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>dero.data.psm.summarize package &#8212; dero 0.15.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.15.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
   <div class="section" id="dero-data-psm-summarize-package">
@@ -47,50 +39,85 @@
 <span id="dero-data-psm-summarize-examine-module"></span><h2>dero.data.psm.summarize.examine module<a class="headerlink" href="#module-dero.data.psm.summarize.examine" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.data.psm.summarize.examine.yield_matched_scores">
-<code class="descclassname">dero.data.psm.summarize.examine.</code><code class="descname">yield_matched_scores</code><span class="sig-paren">(</span><em>treated_df: pandas.core.frame.DataFrame</em>, <em>control_df: pandas.core.frame.DataFrame</em>, <em>match_dict: dict</em>, <em>prob_treated_var: str</em>, <em>time_var: str = 'Date'</em>, <em>entity_var: str = 'id'</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/data/psm/summarize/examine.html#yield_matched_scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.examine.yield_matched_scores" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.data.psm.summarize.examine.</code><code class="sig-name descname">yield_matched_scores</code><span class="sig-paren">(</span><em class="sig-param">treated_df</em>, <em class="sig-param">control_df</em>, <em class="sig-param">match_dict</em>, <em class="sig-param">prob_treated_var</em>, <em class="sig-param">time_var='Date'</em>, <em class="sig-param">entity_var='id'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/psm/summarize/examine.html#yield_matched_scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.examine.yield_matched_scores" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-dero.data.psm.summarize.latex">
 <span id="dero-data-psm-summarize-latex-module"></span><h2>dero.data.psm.summarize.latex module<a class="headerlink" href="#module-dero.data.psm.summarize.latex" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.data.psm.summarize.latex.matching_latex_table_from_df_dict">
-<code class="descclassname">dero.data.psm.summarize.latex.</code><code class="descname">matching_latex_table_from_df_dict</code><span class="sig-paren">(</span><em>df_dict: typing.Dict[str, pandas.core.frame.DataFrame], entity_var: str, time_var: str, below_text: typing.Union[str, NoneType] = None, caption: str = 'Propensity Score Matching', min_matching_pct: typing.Union[float, NoneType] = None</em><span class="sig-paren">)</span> &#x2192; dero.latex.table.models.table.table.Table<a class="reference internal" href="_modules/dero/data/psm/summarize/latex.html#matching_latex_table_from_df_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.latex.matching_latex_table_from_df_dict" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.data.psm.summarize.latex.</code><code class="sig-name descname">matching_latex_table_from_df_dict</code><span class="sig-paren">(</span><em class="sig-param">df_dict</em>, <em class="sig-param">entity_var</em>, <em class="sig-param">time_var</em>, <em class="sig-param">below_text=None</em>, <em class="sig-param">caption='Propensity Score Matching'</em>, <em class="sig-param">min_matching_pct=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/psm/summarize/latex.html#matching_latex_table_from_df_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.latex.matching_latex_table_from_df_dict" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="dero.latex.table.models.table.html#dero.latex.table.models.table.table.Table" title="dero.latex.table.models.table.table.Table"><code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-dero.data.psm.summarize.main">
 <span id="dero-data-psm-summarize-main-module"></span><h2>dero.data.psm.summarize.main module<a class="headerlink" href="#module-dero.data.psm.summarize.main" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.data.psm.summarize.main.create_and_output_matching_summary_latex_table">
-<code class="descclassname">dero.data.psm.summarize.main.</code><code class="descname">create_and_output_matching_summary_latex_table</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, matched_df: pandas.core.frame.DataFrame, predict_df: pandas.core.frame.DataFrame, treated_var: str, xvars: typing.List[str], entity_var: str, time_var: str, fe: typing.Union[typing.List[str], NoneType] = None, prob_treated_var: typing.Union[str, NoneType] = None, control_name: str = 'Control', treated_name: str = 'Treated', below_text: typing.Union[str, NoneType] = None, outfolder: str = '.', caption: str = 'Propensity Score Matching', min_matching_pct: typing.Union[float, NoneType] = None</em><span class="sig-paren">)</span> &#x2192; dero.latex.table.models.table.table.Table<a class="reference internal" href="_modules/dero/data/psm/summarize/main.html#create_and_output_matching_summary_latex_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.main.create_and_output_matching_summary_latex_table" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.data.psm.summarize.main.</code><code class="sig-name descname">create_and_output_matching_summary_latex_table</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">matched_df</em>, <em class="sig-param">predict_df</em>, <em class="sig-param">treated_var</em>, <em class="sig-param">xvars</em>, <em class="sig-param">entity_var</em>, <em class="sig-param">time_var</em>, <em class="sig-param">fe=None</em>, <em class="sig-param">prob_treated_var=None</em>, <em class="sig-param">control_name='Control'</em>, <em class="sig-param">treated_name='Treated'</em>, <em class="sig-param">below_text=None</em>, <em class="sig-param">outfolder='.'</em>, <em class="sig-param">caption='Propensity Score Matching'</em>, <em class="sig-param">min_matching_pct=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/psm/summarize/main.html#create_and_output_matching_summary_latex_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.main.create_and_output_matching_summary_latex_table" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="dero.latex.table.models.table.html#dero.latex.table.models.table.table.Table" title="dero.latex.table.models.table.table.Table"><code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="function">
 <dt id="dero.data.psm.summarize.main.create_matching_summary_df_dict">
-<code class="descclassname">dero.data.psm.summarize.main.</code><code class="descname">create_matching_summary_df_dict</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, matched_df: pandas.core.frame.DataFrame, predict_df: pandas.core.frame.DataFrame, treated_var: str, xvars: typing.List[str], entity_var: str, fe: typing.Union[typing.List[str], NoneType] = None, prob_treated_var: typing.Union[str, NoneType] = None, control_name: str = 'Control', treated_name: str = 'Treated'</em><span class="sig-paren">)</span> &#x2192; typing.Dict[str, pandas.core.frame.DataFrame]<a class="reference internal" href="_modules/dero/data/psm/summarize/main.html#create_matching_summary_df_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.main.create_matching_summary_df_dict" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.data.psm.summarize.main.</code><code class="sig-name descname">create_matching_summary_df_dict</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">matched_df</em>, <em class="sig-param">predict_df</em>, <em class="sig-param">treated_var</em>, <em class="sig-param">xvars</em>, <em class="sig-param">entity_var</em>, <em class="sig-param">fe=None</em>, <em class="sig-param">prob_treated_var=None</em>, <em class="sig-param">control_name='Control'</em>, <em class="sig-param">treated_name='Treated'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/psm/summarize/main.html#create_matching_summary_df_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.main.create_matching_summary_df_dict" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-dero.data.psm.summarize.predictions">
 <span id="dero-data-psm-summarize-predictions-module"></span><h2>dero.data.psm.summarize.predictions module<a class="headerlink" href="#module-dero.data.psm.summarize.predictions" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.data.psm.summarize.predictions.summarize_predictions">
-<code class="descclassname">dero.data.psm.summarize.predictions.</code><code class="descname">summarize_predictions</code><span class="sig-paren">(</span><em>predict_df: pandas.core.frame.DataFrame</em>, <em>treated_var: str</em>, <em>treated_name: str = 'Treated'</em>, <em>control_name: str = 'Control'</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/data/psm/summarize/predictions.html#summarize_predictions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.predictions.summarize_predictions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.data.psm.summarize.predictions.</code><code class="sig-name descname">summarize_predictions</code><span class="sig-paren">(</span><em class="sig-param">predict_df</em>, <em class="sig-param">treated_var</em>, <em class="sig-param">treated_name='Treated'</em>, <em class="sig-param">control_name='Control'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/psm/summarize/predictions.html#summarize_predictions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.predictions.summarize_predictions" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-dero.data.psm.summarize.stats">
 <span id="dero-data-psm-summarize-stats-module"></span><h2>dero.data.psm.summarize.stats module<a class="headerlink" href="#module-dero.data.psm.summarize.stats" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="dero.data.psm.summarize.stats.matching_summary_stats">
-<code class="descclassname">dero.data.psm.summarize.stats.</code><code class="descname">matching_summary_stats</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, matched_df: pandas.core.frame.DataFrame, treated_var: str, describe_vars: typing.List[str], entity_var: str, control_name: str = 'Control', treated_name: str = 'Treated'</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/data/psm/summarize/stats.html#matching_summary_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.stats.matching_summary_stats" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.data.psm.summarize.stats.</code><code class="sig-name descname">matching_summary_stats</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">matched_df</em>, <em class="sig-param">treated_var</em>, <em class="sig-param">describe_vars</em>, <em class="sig-param">entity_var</em>, <em class="sig-param">control_name='Control'</em>, <em class="sig-param">treated_name='Treated'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/psm/summarize/stats.html#matching_summary_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.stats.matching_summary_stats" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="function">
 <dt id="dero.data.psm.summarize.stats.mean_and_diff_df_by_treatment">
-<code class="descclassname">dero.data.psm.summarize.stats.</code><code class="descname">mean_and_diff_df_by_treatment</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, treated_var: str, describe_vars: typing.List[str], entity_var: str, num_decimals: int = 2, coerce_ints: bool = True, control_name: str = 'Control', treated_name: str = 'Treated'</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/dero/data/psm/summarize/stats.html#mean_and_diff_df_by_treatment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.stats.mean_and_diff_df_by_treatment" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">dero.data.psm.summarize.stats.</code><code class="sig-name descname">mean_and_diff_df_by_treatment</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">treated_var</em>, <em class="sig-param">describe_vars</em>, <em class="sig-param">entity_var</em>, <em class="sig-param">num_decimals=2</em>, <em class="sig-param">coerce_ints=True</em>, <em class="sig-param">control_name='Control'</em>, <em class="sig-param">treated_name='Treated'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dero/data/psm/summarize/stats.html#mean_and_diff_df_by_treatment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dero.data.psm.summarize.stats.mean_and_diff_df_by_treatment" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-dero.data.psm.summarize">
@@ -100,6 +127,7 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -111,13 +139,13 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -128,8 +156,8 @@
       &copy;2019, Nick DeRobertis.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/dero.data.psm.summarize.rst.txt"

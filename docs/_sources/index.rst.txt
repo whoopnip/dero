@@ -8,10 +8,23 @@ Welcome to dero's documentation!
 
 Some intro text
 
+Latex Module
+------------
+
 .. autosummary::
      :toctree: stubs
 
-      dero.latex.figure.models.figure.Figure
+      dero.latex.figure.Figure
+      dero.latex.table.Table
+      dero.latex.Document
+
+Pipeline Manager
+----------------
+
+.. autosummary::
+     :toctree: stubs
+
+      dero.manager.PipelineManager
 
 Indices and tables
 ==================

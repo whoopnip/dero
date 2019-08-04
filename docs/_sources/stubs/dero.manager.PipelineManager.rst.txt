@@ -1,0 +1,26 @@
+dero\.manager\.PipelineManager
+==============================
+
+.. currentmodule:: dero.manager
+
+.. autoclass:: PipelineManager
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PipelineManager.__init__
+      ~PipelineManager.get
+      ~PipelineManager.load
+      ~PipelineManager.reload
+      ~PipelineManager.run
+   
+   
+
+   
+   
+   

@@ -22,6 +22,7 @@ import sys
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__name__), '..')))
 sys.path.insert(0, os.path.abspath('../..'))
 
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -31,14 +32,20 @@ sys.path.insert(0, os.path.abspath('../..'))
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
+extensions = [
+    'sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
-    'sphinx.ext.autosummary']
+    'sphinx.ext.autosummary',
+    'sphinx_autodoc_typehints'
+]
+
+# Options for sphinx_autodoc_typehints
+set_type_checking_flag = True
 
 # Options for sphinx.ext.autosummary
 autodoc_default_flags = ['members']
@@ -176,5 +183,18 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
+
+def autodoc_skip_member(app, what, name, obj, skip, options):
+    special_exclusions = (
+        'LuaLatexBuilder',  # having an issue with the data decorator on the build_pdf method in this class
+    )
+    exclusions = ('__weakref__',  # special-members
+                  '__doc__', '__module__', '__dict__',  # undoc-members
+                  )
+    exclude = name in exclusions + special_exclusions
+    return skip or exclude
+
+def setup(app):
+    app.connect('autodoc-skip-member', autodoc_skip_member)
 
 
