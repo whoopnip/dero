@@ -1,0 +1,31 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+pandas = "*"
+pandasql = "*"
+wrds = "*"
+numpy = "*"
+pdfrw = "*"
+selenium = "*"
+ipython = "*"
+sas7bdat = "*"
+statsmodels = "*"
+matplotlib = "*"
+sympy = "*"
+pandastable = "*"
+linearmodels = "*"
+astor = "*"
+sklearn = "*"
+latex = "*"
+bibtexparser = "*"
+Unidecode = "*"
+PyPDF2 = "*"
+jupyterlab = "*"
+
+[requires]
+python_version = "3.6"
