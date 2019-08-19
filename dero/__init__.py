@@ -31,7 +31,6 @@ if __dero_version__ == 'current':
     import dero.core
     import dero.data
     import dero.decorators
-    import dero.latex
     import dero.pdf
     import dero.wrds
     import dero.logtimer

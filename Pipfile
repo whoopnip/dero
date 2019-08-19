@@ -27,6 +27,7 @@ Unidecode = "*"
 PyPDF2 = "*"
 jupyterlab = "*"
 mixins = "*"
+pyexlatex = "*"
 
 [requires]
 python_version = "3.6"

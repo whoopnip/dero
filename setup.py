@@ -54,6 +54,7 @@ setup(name='Dero',
         'sklearn',
         'latex',
         'bibtexparser',
-        'mixins'
+        'mixins',
+        'pyexlatex'
        ],
      )
