@@ -53,6 +53,7 @@ setup(name='Dero',
         'PyPDF2',
         'sklearn',
         'latex',
-        'bibtexparser'
+        'bibtexparser',
+        'mixins'
        ],
      )

@@ -2,7 +2,7 @@ import itertools
 from typing import List, Tuple, Set, Dict, Any, Union
 from sympy import Idx, Eq, Expr, Symbol
 from sympy.tensor.index_methods import get_indices, IndexConformanceException
-from dero.mixins.propertycache import SimplePropertyCacheMixin
+from mixins.propertycache import SimplePropertyCacheMixin
 
 IntTuple = Tuple[int]
 IntOrIntTuple = Union[IntTuple, int]

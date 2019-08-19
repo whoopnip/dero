@@ -26,6 +26,7 @@ bibtexparser = "*"
 Unidecode = "*"
 PyPDF2 = "*"
 jupyterlab = "*"
+mixins = "*"
 
 [requires]
 python_version = "3.6"
