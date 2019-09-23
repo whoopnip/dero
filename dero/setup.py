@@ -49,5 +49,7 @@ setup(name='Dero',
         'pandastable',
         'scipy',
         'linearmodels',
-        'astor'],
+        'astor',
+        'processfiles'
+       ],
      )

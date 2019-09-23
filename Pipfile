@@ -28,6 +28,8 @@ PyPDF2 = "*"
 jupyterlab = "*"
 mixins = "*"
 pyexlatex = "*"
+pytest = "*"
+processfiles = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"
