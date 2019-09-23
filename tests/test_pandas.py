@@ -803,10 +803,12 @@ class TestLeftMergeLatest(DataFrameTest):
             ], columns = ['GVKEY', 'Date', 'Date_y'])
         
         lm = dero.pandas.left_merge_latest(self.df_gvkey_str, self.df_gvkey_str2, on='GVKEY')
+        lm_low_mem = dero.pandas.left_merge_latest(self.df_gvkey_str, self.df_gvkey_str2, on='GVKEY', low_memory=True)
         lm_sql = dero.pandas.left_merge_latest(self.df_gvkey_str, self.df_gvkey_str2,
                                                on='GVKEY', backend='sql')
         
         assert_frame_equal(expect_df, lm, check_dtype=False)
+        assert_frame_equal(expect_df.iloc[:-1], lm_low_mem, check_dtype=False)
         assert_frame_equal(expect_df, lm_sql, check_dtype=False)
 
         
