@@ -1,5 +1,5 @@
 from copy import deepcopy
-from typing import Union
+from typing import Union, Sequence
 
 from sympy import Eq, solve, Expr
 
@@ -39,34 +39,41 @@ class Model:
     def get_eq_for(self, lhs_expr: Expr) -> EquationOrNone:
         return get_equation_where_lhs_matches(lhs_expr, self.evaluated_equations)
 
-    def subs(self, *args, **kwargs):
+    def subs(self, eval_items: Sequence[tuple], **kwargs):
         new_model = deepcopy(self)
+        new_model._evaluated_definitions = [Eq(ei[0], ei[1]) for ei in eval_items]
         new_model._separate_definitions()  # without this some may become True on the first substitution
-        new_model.equations = [eq.subs(*args, **kwargs) for eq in self.equations]
-        new_model.evaluated_equations = [eq.subs(*args, **kwargs) for eq in self.evaluated_equations]
 
-        # prior_eqs = new_model.equations.copy()
-        prior_eval_eqs = new_model.evaluated_equations.copy()
-        finished = False
-        while not finished:
-            ###
-            # TEMP
-            breakpoint()
-            print('solving equations')
-            ###
+        # Initial substitution
+        for eval_item in eval_items:
+            new_model.evaluated_equations = [eq.subs(*eval_item, **kwargs) for eq in new_model.evaluated_equations]
             new_model._separate_definitions()
-            new_model._reevaluate_eqs()
-            new_model._eliminate_useless_eqs()
-            finished = (
-                # prior_eqs == new_model.equations and
-                prior_eval_eqs == new_model.evaluated_equations
-            )
-            # prior_eqs = new_model.equations.copy()
-            prior_eval_eqs = new_model.evaluated_equations.copy()
 
+        new_model._deep_substitute_equations_with_each_other(**kwargs)
         new_model._add_definitions_into_equations()
 
         return new_model
+
+    def _deep_substitute_equations_with_each_other(self, **kwargs):
+        # Keep subtituting model equations into each other until model stabilizes
+        while True:
+            prior_eval_eqs = self.evaluated_equations.copy()
+            self._substitute_equations_with_each_other(**kwargs)
+            if prior_eval_eqs == self.evaluated_equations:
+                break
+
+    def _substitute_equations_with_each_other(self, **kwargs):
+        all_eqs = self.evaluated_equations + self._evaluated_definitions
+        for i, eq in enumerate(all_eqs):
+            new_eqs = []
+            for j, model_eq in enumerate(self.evaluated_equations):
+                if i == j:
+                    # Don't substitute an equation into itself, will just evaluate as True
+                    new_eqs.append(model_eq)
+                    continue
+                new_eqs.append(model_eq.subs(eq.lhs, eq.rhs, **kwargs))
+                self._evaluated_definitions.extend(_pop_solved_equations_from_list(new_eqs))
+            self.evaluated_equations = new_eqs
 
     def _separate_definitions(self):
         """
