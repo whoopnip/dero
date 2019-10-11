@@ -1,5 +1,10 @@
 from copy import deepcopy
+from typing import Union
+
 from sympy import Eq, solve, Expr
+
+from dero.ext_sympy.indexed import IndexedEquation
+from dero.ext_sympy.solver import solved_equation
 from dero.modeler.typing import EqList, Any, List, Equation, EquationOrNone
 from dero.ext_sympy.subs import substitute_equations, substitute_equations_ordered
 from dero.ext_sympy.match import get_equation_where_lhs_matches
@@ -8,11 +13,13 @@ from dero.ext_sympy.match import get_equation_where_lhs_matches
 class Model:
 
     def __init__(self, equations: EqList):
+        self.equations = []
+        self.evaluated_equations = []
+        self._definitions = []
+        self._evaluated_definitions = []
         self.set_equations(equations)
 
     def set_equations(self, equations: EqList):
-        self.equations = []
-        self.evaluated_equations = []
         for equation in equations:
             self.equations.append(equation)
             if hasattr(equation, 'is_IndexedEquation') and equation.is_IndexedEquation:
@@ -34,29 +41,73 @@ class Model:
 
     def subs(self, *args, **kwargs):
         new_model = deepcopy(self)
+        new_model._separate_definitions()  # without this some may become True on the first substitution
         new_model.equations = [eq.subs(*args, **kwargs) for eq in self.equations]
         new_model.evaluated_equations = [eq.subs(*args, **kwargs) for eq in self.evaluated_equations]
 
-        # TODO: deep sub, run on loop, extract definitions so they don't evaluate as true. stop when equations stop changing.
-        new_model._eliminate_useless_eqs()  # need to do before reevaluating as expecting eq but have True
-        new_model._reevaluate_eqs()
-        new_model._eliminate_useless_eqs()  # need to do again after reevaluating as some are newly True
+        # prior_eqs = new_model.equations.copy()
+        prior_eval_eqs = new_model.evaluated_equations.copy()
+        finished = False
+        while not finished:
+            ###
+            # TEMP
+            breakpoint()
+            print('solving equations')
+            ###
+            new_model._separate_definitions()
+            new_model._reevaluate_eqs()
+            new_model._eliminate_useless_eqs()
+            finished = (
+                # prior_eqs == new_model.equations and
+                prior_eval_eqs == new_model.evaluated_equations
+            )
+            # prior_eqs = new_model.equations.copy()
+            prior_eval_eqs = new_model.evaluated_equations.copy()
+
+        new_model._add_definitions_into_equations()
 
         return new_model
+
+    def _separate_definitions(self):
+        """
+        Separate equations once they have only a single symbol, and store as a definition.
+        This is necessary as continued substitutions will make the equation evaluate as True
+        So a fully evaluated model without this would just be a list of True
+        """
+
+        self._definitions.extend(_pop_solved_equations_from_list(self.equations))
+        self._evaluated_definitions.extend(_pop_solved_equations_from_list(self.evaluated_equations))
+
+    def _add_definitions_into_equations(self):
+        self.equations.extend(self._definitions)
+        self.evaluated_equations.extend(self._evaluated_definitions)
+
+    def _reevaluate_eqs(self):
+        # self.equations = [
+        #     substitute_equations_ordered(eq, self.equations) for eq in self.equations
+        # ]
+        self.evaluated_equations = [
+            substitute_equations_ordered(eq, self.evaluated_equations) for eq in self.evaluated_equations
+        ]
 
     def _eliminate_useless_eqs(self):
         self.equations = [eq for eq in self.equations if not eq == True]
         self.evaluated_equations = [eq for eq in self.evaluated_equations if not eq == True]
 
-    def _reevaluate_eqs(self):
-        self.equations = [
-            substitute_equations_ordered(eq, self.equations) for eq in self.equations
-        ]
-        self.evaluated_equations = [
-            substitute_equations_ordered(eq, self.evaluated_equations) for eq in self.evaluated_equations
-        ]
 
+def _pop_solved_equations_from_list(equations: EqList):
+    extracted_equations = []
+    solved_indices = []
+    for i, eq in enumerate(equations):
+        solution = solved_equation(eq)
+        if solution is not None:
+            extracted_equations.append(solution)
+            solved_indices.append(i)
 
+    # Now actually remove the solved equations, starting from the latest in the list to avoid changing the indices
+    for ele in sorted(solved_indices, reverse=True):
+        del equations[ele]
 
+    return extracted_equations
 
 
