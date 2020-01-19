@@ -34,7 +34,6 @@ if __dero_version__ == 'current':
     import dero.pdf
     import dero.wrds
     import dero.logtimer
-    import dero.reg
     import dero.summ
     import dero.dropbox
     
