@@ -40,7 +40,6 @@ if __dero_version__ == 'current':
     import dero.ext_logging as logging
     import dero.ext_matplotlib as matplotlib
     import dero.ext_multiprocessing as multiprocessing
-    import dero.ext_pandas as pandas
     import dero.ext_selenium as selenium
     import dero.ext_sympy as sympy
     import dero.ext_time as time
@@ -49,7 +48,6 @@ if __dero_version__ == 'current':
     del dero.ext_logging
     del dero.ext_matplotlib
     del dero.ext_multiprocessing
-    del dero.ext_pandas
     del dero.ext_selenium
     del dero.ext_sympy
     del dero.ext_time
