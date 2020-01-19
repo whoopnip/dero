@@ -2,8 +2,9 @@ import datetime
 import multiprocessing as mp
 import os
 import sys
+from typing import Optional
 
-from sympy import solve
+from sympy import solve, Eq
 
 
 class EquationSolver:
@@ -95,3 +96,17 @@ class EquationSolver:
             self.log(str(result))
 
         return result
+
+
+def solved_equation(eq: Eq) -> Optional[Eq]:
+    symbols = get_symbols_from_sympy(eq)
+    if len(symbols) != 1:
+        return None
+
+    symbol = list(symbols)[0]
+    solution = solve(eq, symbol)[0]
+    return Eq(symbol, solution)
+
+
+def get_symbols_from_sympy(eq_or_expr):
+    return eq_or_expr.free_symbols.intersection(eq_or_expr.expr_free_symbols)
