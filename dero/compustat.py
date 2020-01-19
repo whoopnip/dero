@@ -1,9 +1,9 @@
 
 import os
 import pandas as pd
-from numpy import nan, float64, issubdtype, number
+from numpy import nan, issubdtype, number
 
-from .ext_pandas import convert_sas_date_to_pandas_date, load_sas, left_merge_latest
+from pd_utils import convert_sas_date_to_pandas_date, load_sas, left_merge_latest
 
 def compustat_keep_mask(df):
     return (df['indfmt'] == 'INDL') & (df['datafmt'] == 'STD') & \

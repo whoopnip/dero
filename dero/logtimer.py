@@ -1,10 +1,8 @@
 
 import re
 import pandas as pd
-import numpy as np
-import dero
 
-from .ext_pandas import groupby_merge
+from pd_utils import groupby_merge
 
 def load_log_and_produce_timing_dfs(filepath):
     """
