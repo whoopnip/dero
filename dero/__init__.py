@@ -29,7 +29,6 @@ except NameError:
 
 if __dero_version__ == 'current':
     import dero.core
-    import dero.data
     import dero.decorators
     import dero.pdf
     import dero.wrds
